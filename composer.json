@@ -1,0 +1,26 @@
+{
+    "name": "etf-unsa/spark-academics",
+    "type": "typo3-cms-extension",
+    "description": "Academic specific content types and features for Spark",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Ernedin Zajko",
+            "email": "ezajko@root.ba"
+        }
+    ],
+    "require": {
+        "typo3/cms-core": "^13.4",
+        "etf-unsa/spark-core": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "EtfUnsa\\SparkAcademics\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "spark_academics"
+        }
+    }
+}

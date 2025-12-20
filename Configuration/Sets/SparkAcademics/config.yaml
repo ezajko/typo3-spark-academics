@@ -1,0 +1,4 @@
+name: spark-design-system/spark-academics
+label: 'Spark Academics Design System'
+dependencies:
+  - spark-design-system/spark-core

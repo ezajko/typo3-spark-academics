@@ -1,0 +1,35 @@
+<f:layout name="Module" />
+
+<f:section name="Content">
+    <h1>My Academic Profiles</h1>
+    <f:if condition="{persons}">
+        <f:then>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <f:for each="{persons}" as="person">
+                        <tr>
+                            <td>{person.firstName} {person.lastName}</td>
+                            <td>
+                                <f:be.link.editRecord table="tx_spark_person" uid="{person.uid}"
+                                    returnUrl="{f:be.uri(route: 'spark-academics-person')}">
+                                    Edit Biography
+                                </f:be.link.editRecord>
+                            </td>
+                        </tr>
+                    </f:for>
+                </tbody>
+            </table>
+        </f:then>
+        <f:else>
+            <div class="alert alert-info">
+                You are not associated with any academic person profile. Please contact an administrator.
+            </div>
+        </f:else>
+    </f:if>
+</f:section>

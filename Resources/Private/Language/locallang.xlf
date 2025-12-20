@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2025-12-20T20:00:00Z" product-name="spark_academics">
+		<header/>
+		<body>
+			<trans-unit id="person">
+				<source>Person</source>
+			</trans-unit>
+			<trans-unit id="person.first_name">
+				<source>First Name</source>
+			</trans-unit>
+			<trans-unit id="person.last_name">
+				<source>Last Name</source>
+			</trans-unit>
+			<trans-unit id="person.biography">
+				<source>Biography</source>
+			</trans-unit>
+			<trans-unit id="person.be_users">
+				<source>Backend Users (Editors)</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

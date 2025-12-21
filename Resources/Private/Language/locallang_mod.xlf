@@ -3,6 +3,9 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2025-12-20T20:00:00Z" product-name="spark_academics">
 		<header/>
 		<body>
+			<trans-unit id="academic_category">
+				<source>Academic</source>
+			</trans-unit>
 			<trans-unit id="mlang_tabs_tab">
 				<source>My Person</source>
 			</trans-unit>

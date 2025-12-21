@@ -1,12 +1,16 @@
 <?php
 
 return [
+    'academic' => [
+        'labels' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf:academic_category',
+        'iconIdentifier' => 'content-user',
+    ],
     'spark_academics_person' => [
-        'parent' => 'web',
-        'position' => ['after' => 'web_info'],
+        'parent' => 'academic',
+        'position' => ['top'],
         'access' => 'user,group',
         'workspaces' => 'live',
-        'path' => '/module/web/spark-academics-person',
+        'path' => '/module/academic/spark-academics-person',
         'labels' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf',
         'extensionName' => 'SparkAcademics',
         'controllerActions' => [

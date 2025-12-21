@@ -44,6 +44,9 @@ class PersonController extends ActionController
                                 $person->getUid() => 'edit'
                             ]
                         ],
+                        'columnsOnly' => [
+                            'tx_spark_person' => 'first_name,last_name,biography'
+                        ],
                         'returnUrl' => $returnUrl
                     ]);
                     

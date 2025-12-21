@@ -37,7 +37,7 @@ class PersonController extends ActionController
             foreach ($person->getBeUsers() as $beUser) {
                 if ($beUser->getUid() === $currentBeUser['uid']) {
                     // Generate edit link
-                    $returnUrl = (string)$this->backendUriBuilder->buildUriFromRoute('spark-academics-person');
+                    $returnUrl = (string)$this->backendUriBuilder->buildUriFromRoute('spark_academics_person');
                     $editUrl = (string)$this->backendUriBuilder->buildUriFromRoute('record_edit', [
                         'edit' => [
                             'tx_spark_person' => [

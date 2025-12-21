@@ -36,16 +36,33 @@ class PersonController extends ActionController
         foreach ($persons as $person) {
             foreach ($person->getBeUsers() as $beUser) {
                 if ($beUser->getUid() === $currentBeUser['uid']) {
-                    // Generate edit link
+                    // Find all localized versions of this person
+                    // We can use the Repository or a direct query to find records 
+                    // where l10n_parent = $person->getUid()
+                    $uidsToEdit = [$person->getUid()];
+                    
+                    // Simple manual fetching of translations for the edit link
+                    // In a more robust setup, this would be part of a Service
+                    $query = $this->personRepository->createQuery();
+                    $query->getQuerySettings()->setRespectSysLanguage(false);
+                    $query->getQuerySettings()->setRespectStoragePage(false);
+                    $query->matching($query->equals('l10nParent', $person->getUid()));
+                    $translations = $query->execute();
+                    
+                    foreach ($translations as $translation) {
+                        $uidsToEdit[] = $translation->getUid();
+                    }
+
+                    // Generate edit link with multiple UIDs if translations exist
                     $returnUrl = (string)$this->backendUriBuilder->buildUriFromRoute('spark_academics_person');
                     $editUrl = (string)$this->backendUriBuilder->buildUriFromRoute('record_edit', [
                         'edit' => [
                             'tx_spark_person' => [
-                                $person->getUid() => 'edit'
+                                implode(',', $uidsToEdit) => 'edit'
                             ]
                         ],
                         'columnsOnly' => [
-                            'tx_spark_person' => 'first_name,last_name,biography'
+                            'tx_spark_person' => 'first_name,last_name,biography,office,phone,website,google_scholar,research_gate,github,orcid,linkedin,image,cv'
                         ],
                         'returnUrl' => $returnUrl
                     ]);

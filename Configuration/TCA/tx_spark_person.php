@@ -25,11 +25,17 @@ return [
     'types' => [
         '1' => [
             'showitem' => '
-                --div--;General,
+                --div--;LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.tabs.general,
                     --palette--;;name,
                     biography,
                     be_users,
-                --div--;Access,
+                --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.contact,
+                    office, phone, email, website,
+                --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.profiles,
+                    google_scholar, research_gate, github, orcid, linkedin,
+                --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.media,
+                    image, cv,
+                --div--;LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.tabs.access,
                     --palette--;;hidden,
                     --palette--;;access,
             ',
@@ -133,6 +139,97 @@ return [
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
+            ],
+        ],
+        'office' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.office',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+            ],
+        ],
+        'phone' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.phone',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+            ],
+        ],
+        'email' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.email',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim,email',
+            ],
+        ],
+        'website' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.website',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputLink',
+            ],
+        ],
+        'google_scholar' => [
+            'exclude' => true,
+            'label' => 'Google Scholar',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputLink',
+            ],
+        ],
+        'research_gate' => [
+            'exclude' => true,
+            'label' => 'ResearchGate',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputLink',
+            ],
+        ],
+        'github' => [
+            'exclude' => true,
+            'label' => 'GitHub',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputLink',
+            ],
+        ],
+        'orcid' => [
+            'exclude' => true,
+            'label' => 'ORCID',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputLink',
+            ],
+        ],
+        'linkedin' => [
+            'exclude' => true,
+            'label' => 'LinkedIn',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputLink',
+            ],
+        ],
+        'image' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.image',
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'common-image-types',
+                'maxitems' => 1,
+            ],
+        ],
+        'cv' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.cv',
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'pdf',
+                'maxitems' => 1,
             ],
         ],
         'be_users' => [

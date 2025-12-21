@@ -1,49 +1,63 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2025-12-20T20:00:00Z" product-name="spark_academics">
+	<file source-language="en" target-language="bs" datatype="plaintext" original="messages" date="2025-12-21T19:00:00Z" product-name="spark_academics">
 		<header/>
 		<body>
 			<trans-unit id="person">
 				<source>Person</source>
+				<target>Osoba</target>
 			</trans-unit>
 			<trans-unit id="person.first_name">
 				<source>First Name</source>
+				<target>Ime</target>
 			</trans-unit>
 			<trans-unit id="person.last_name">
 				<source>Last Name</source>
+				<target>Prezime</target>
 			</trans-unit>
 			<trans-unit id="person.biography">
 				<source>Biography</source>
+				<target>Biografija</target>
 			</trans-unit>
 			<trans-unit id="person.be_users">
 				<source>Backend Users (Editors)</source>
+				<target>Urednici (Backend korisnici)</target>
 			</trans-unit>
 			<trans-unit id="person.tab.contact">
 				<source>Contact</source>
+				<target>Kontakt</target>
 			</trans-unit>
 			<trans-unit id="person.tab.profiles">
 				<source>Profiles</source>
+				<target>Profili</target>
 			</trans-unit>
 			<trans-unit id="person.tab.media">
 				<source>Media</source>
+				<target>Multimedija</target>
 			</trans-unit>
 			<trans-unit id="person.office">
 				<source>Office</source>
+				<target>Kabinet</target>
 			</trans-unit>
 			<trans-unit id="person.phone">
 				<source>Phone</source>
+				<target>Telefon</target>
 			</trans-unit>
 			<trans-unit id="person.email">
 				<source>Email</source>
+				<target>Email</target>
 			</trans-unit>
 			<trans-unit id="person.website">
 				<source>Website</source>
+				<target>Web stranica</target>
 			</trans-unit>
 			<trans-unit id="person.image">
 				<source>Profile Image</source>
+				<target>Profilna slika</target>
 			</trans-unit>
 			<trans-unit id="person.cv">
 				<source>CV (PDF)</source>
+				<target>Biografija (PDF)</target>
 			</trans-unit>
 		</body>
 	</file>

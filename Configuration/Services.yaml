@@ -5,8 +5,8 @@ services:
     public: false
 
   EtfUnsa\SparkAcademics\:
-    resource: '../../Classes/*'
-    exclude: '../../Classes/Domain/Model/*'
+    resource: '../Classes/*'
+    exclude: '../Classes/Domain/Model/*'
 
   EtfUnsa\SparkAcademics\Controller\Backend\PersonController:
     public: true

@@ -15,16 +15,16 @@ class PersonController extends ActionController
 {
     protected PersonRepository $personRepository;
     protected ModuleTemplateFactory $moduleTemplateFactory;
-    protected UriBuilder $uriBuilder;
+    protected UriBuilder $backendUriBuilder;
 
     public function __construct(
         PersonRepository $personRepository,
         ModuleTemplateFactory $moduleTemplateFactory,
-        UriBuilder $uriBuilder
+        UriBuilder $backendUriBuilder
     ) {
         $this->personRepository = $personRepository;
         $this->moduleTemplateFactory = $moduleTemplateFactory;
-        $this->uriBuilder = $uriBuilder;
+        $this->backendUriBuilder = $backendUriBuilder;
     }
 
     public function listAction(): ResponseInterface
@@ -37,8 +37,8 @@ class PersonController extends ActionController
             foreach ($person->getBeUsers() as $beUser) {
                 if ($beUser->getUid() === $currentBeUser['uid']) {
                     // Generate edit link
-                    $returnUrl = (string)$this->uriBuilder->buildUriFromRoute('spark-academics-person');
-                    $editUrl = (string)$this->uriBuilder->buildUriFromRoute('record_edit', [
+                    $returnUrl = (string)$this->backendUriBuilder->buildUriFromRoute('spark-academics-person');
+                    $editUrl = (string)$this->backendUriBuilder->buildUriFromRoute('record_edit', [
                         'edit' => [
                             'tx_spark_person' => [
                                 $person->getUid() => 'edit'

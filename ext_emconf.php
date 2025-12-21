@@ -16,6 +16,7 @@ $EM_CONF[$_EXTKEY] = [
     'constraints' => [
         'depends' => [
             'typo3' => '13.4.0-13.4.99',
+            'beuser' => '13.4.0-13.4.99',
             'spark_core' => '1.0.0-1.9.9',
         ],
         'conflicts' => [],

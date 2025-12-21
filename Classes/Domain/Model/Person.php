@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace EtfUnsa\SparkAcademics\Domain\Model;
 
+use TYPO3\CMS\Beuser\Domain\Model\BackendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -28,7 +29,7 @@ class Person extends AbstractEntity
     protected string $biography = '';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Beuser\Domain\Model\BackendUser>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser>
      */
     protected $beUsers;
 
@@ -68,7 +69,7 @@ class Person extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Beuser\Domain\Model\BackendUser>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser>
      */
     public function getBeUsers(): ObjectStorage
     {
@@ -76,7 +77,7 @@ class Person extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Beuser\Domain\Model\BackendUser> $beUsers
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser> $beUsers
      */
     public function setBeUsers(ObjectStorage $beUsers): void
     {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace EtfUnsa\SparkAcademics\Controller\Backend;
 
 use EtfUnsa\SparkAcademics\Domain\Repository\PersonRepository;
+use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -14,27 +15,43 @@ class PersonController extends ActionController
 {
     protected PersonRepository $personRepository;
     protected ModuleTemplateFactory $moduleTemplateFactory;
+    protected UriBuilder $uriBuilder;
 
     public function __construct(
         PersonRepository $personRepository,
-        ModuleTemplateFactory $moduleTemplateFactory
+        ModuleTemplateFactory $moduleTemplateFactory,
+        UriBuilder $uriBuilder
     ) {
         $this->personRepository = $personRepository;
         $this->moduleTemplateFactory = $moduleTemplateFactory;
+        $this->uriBuilder = $uriBuilder;
     }
 
     public function listAction(): ResponseInterface
     {
         $currentBeUser = $this->getCurrentBeUser();
-        $persons = $this->personRepository->findAll(); // For now, we need to filter these
+        $persons = $this->personRepository->findAll();
         
-        // Filter persons where current be_user is in be_users MM relation
-        // In a real scenario, we would use a custom repository method
         $filteredPersons = [];
         foreach ($persons as $person) {
             foreach ($person->getBeUsers() as $beUser) {
                 if ($beUser->getUid() === $currentBeUser['uid']) {
-                    $filteredPersons[] = $person;
+                    // Generate edit link
+                    $returnUrl = (string)$this->uriBuilder->buildUriFromRoute('spark-academics-person');
+                    $editUrl = (string)$this->uriBuilder->buildUriFromRoute('record_edit', [
+                        'edit' => [
+                            'tx_spark_person' => [
+                                $person->getUid() => 'edit'
+                            ]
+                        ],
+                        'returnUrl' => $returnUrl
+                    ]);
+                    
+                    $filteredPersons[] = [
+                        'item' => $person,
+                        'editUrl' => $editUrl
+                    ];
+                    break;
                 }
             }
         }

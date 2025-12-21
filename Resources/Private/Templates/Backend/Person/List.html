@@ -12,14 +12,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <f:for each="{persons}" as="person">
+                    <f:for each="{persons}" as="personData">
                         <tr>
-                            <td>{person.firstName} {person.lastName}</td>
+                            <td>{personData.item.firstName} {personData.item.lastName}</td>
                             <td>
-                                <f:be.link.editRecord table="tx_spark_person" uid="{person.uid}"
-                                    returnUrl="{f:be.uri(route: 'spark-academics-person')}">
+                                <a href="{personData.editUrl}" class="btn btn-default">
+                                    <core:icon identifier="actions-open" size="small" />
                                     Edit Biography
-                                </f:be.link.editRecord>
+                                </a>
                             </td>
                         </tr>
                     </f:for>

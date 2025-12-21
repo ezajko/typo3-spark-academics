@@ -12,8 +12,19 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Person extends AbstractEntity
 {
+    /**
+     * @var string
+     */
     protected string $firstName = '';
+
+    /**
+     * @var string
+     */
     protected string $lastName = '';
+
+    /**
+     * @var string
+     */
     protected string $biography = '';
 
     /**

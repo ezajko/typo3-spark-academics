@@ -27,6 +27,10 @@
 				<source>Contact</source>
 				<target>Kontakt</target>
 			</trans-unit>
+			<trans-unit id="person.tab.affiliations">
+				<source>Affiliations</source>
+				<target>Afilijacije i Akreditivi</target>
+			</trans-unit>
 			<trans-unit id="person.tab.profiles">
 				<source>Profiles</source>
 				<target>Profili</target>

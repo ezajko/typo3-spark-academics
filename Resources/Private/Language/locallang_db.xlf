@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2023-10-27T12:00:00Z" product-name="spark_academics">
+        <header/>
+        <body>
+            <trans-unit id="tx_spark_person">
+                <source>Person</source>
+            </trans-unit>
+            <trans-unit id="tx_spark_department">
+                <source>Department</source>
+            </trans-unit>
+            <trans-unit id="tx_spark_research_lab">
+                <source>Research Lab</source>
+            </trans-unit>
+            <trans-unit id="tx_spark_research_group">
+                <source>Research Group</source>
+            </trans-unit>
+            <trans-unit id="tx_spark_scientific_field">
+                <source>Scientific Field</source>
+            </trans-unit>
+            <trans-unit id="tx_spark_academic_title">
+                <source>Academic Title</source>
+            </trans-unit>
+            <trans-unit id="tx_spark_academic_rank">
+                <source>Academic Rank</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

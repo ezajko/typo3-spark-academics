@@ -256,5 +256,86 @@ return [
                 'multiple' => 0,
             ],
         ],
+        'departments' => [
+            'exclude' => true,
+            'label' => 'Departments',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_department',
+                'MM' => 'tx_spark_person_department_mm',
+                'size' => 10,
+                'autoSizeMax' => 30,
+                'maxitems' => 9999,
+                'multiple' => 0,
+            ],
+        ],
+        'laboratories' => [
+            'exclude' => true,
+            'label' => 'Research Laboratories',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_research_lab',
+                'MM' => 'tx_spark_person_research_lab_mm',
+                'size' => 10,
+                'autoSizeMax' => 30,
+                'maxitems' => 9999,
+                'multiple' => 0,
+            ],
+        ],
+        'groups' => [
+            'exclude' => true,
+            'label' => 'Research Groups',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_research_group',
+                'MM' => 'tx_spark_person_research_group_mm',
+                'size' => 10,
+                'autoSizeMax' => 30,
+                'maxitems' => 9999,
+                'multiple' => 0,
+            ],
+        ],
+        'primary_department' => [
+            'exclude' => true,
+            'label' => 'Primary Department',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_spark_department',
+                'items' => [
+                    ['', 0],
+                ],
+                'default' => 0,
+            ],
+        ],
+        'academic_title' => [
+            'exclude' => true,
+            'label' => 'Academic Title',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_spark_academic_title',
+                'items' => [
+                    ['', 0],
+                ],
+                'default' => 0,
+            ],
+        ],
+        'academic_rank' => [
+            'exclude' => true,
+            'label' => 'Academic Rank',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_spark_academic_rank',
+                'items' => [
+                    ['', 0],
+                ],
+                'default' => 0,
+            ],
+        ],
     ],
 ];

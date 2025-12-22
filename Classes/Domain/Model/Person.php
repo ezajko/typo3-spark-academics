@@ -23,6 +23,26 @@ class Person extends AbstractEntity
     protected string $contactOffice = '';
     protected string $phoneOffice = '';
     protected string $phoneMobile = '';
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Department>
+     */
+    protected ObjectStorage $departments;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ResearchLab>
+     */
+    protected ObjectStorage $laboratories;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ResearchGroup>
+     */
+    protected ObjectStorage $groups;
+
+    protected ?Department $primaryDepartment = null;
+    protected ?AcademicTitle $academicTitle = null;
+    protected ?AcademicRank $academicRank = null;
+
     protected string $contactEmail = '';
     protected string $contactWebsite = '';
 
@@ -44,6 +64,9 @@ class Person extends AbstractEntity
 
     public function __construct() {
         $this->beUsers = new ObjectStorage();
+        $this->departments = new ObjectStorage();
+        $this->laboratories = new ObjectStorage();
+        $this->groups = new ObjectStorage();
     }
 
     public function getFirstName(): string
@@ -210,5 +233,65 @@ class Person extends AbstractEntity
     public function setBiographyFilePdf(?FileReference $biographyFilePdf): void
     {
         $this->biographyFilePdf = $biographyFilePdf;
+    }
+
+    public function getDepartments(): ObjectStorage
+    {
+        return $this->departments;
+    }
+
+    public function setDepartments(ObjectStorage $departments): void
+    {
+        $this->departments = $departments;
+    }
+
+    public function getLaboratories(): ObjectStorage
+    {
+        return $this->laboratories;
+    }
+
+    public function setLaboratories(ObjectStorage $laboratories): void
+    {
+        $this->laboratories = $laboratories;
+    }
+
+    public function getGroups(): ObjectStorage
+    {
+        return $this->groups;
+    }
+
+    public function setGroups(ObjectStorage $groups): void
+    {
+        $this->groups = $groups;
+    }
+
+    public function getPrimaryDepartment(): ?Department
+    {
+        return $this->primaryDepartment;
+    }
+
+    public function setPrimaryDepartment(?Department $primaryDepartment): void
+    {
+        $this->primaryDepartment = $primaryDepartment;
+    }
+
+    public function getAcademicTitle(): ?AcademicTitle
+    {
+        return $this->academicTitle;
+    }
+
+    public function setAcademicTitle(?AcademicTitle $academicTitle): void
+    {
+        $this->academicTitle = $academicTitle;
+    }
+
+    public function getAcademicRank(): ?AcademicRank
+    {
+        return $this->academicRank;
+    }
+
+    public function setAcademicRank(?AcademicRank $academicRank): void
+    {
+        $this->academicRank = $academicRank;
     }
 }

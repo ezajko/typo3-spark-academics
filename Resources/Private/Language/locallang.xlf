@@ -21,6 +21,9 @@
 			<trans-unit id="person.tab.contact">
 				<source>Contact</source>
 			</trans-unit>
+			<trans-unit id="person.tab.affiliations">
+				<source>Affiliations</source>
+			</trans-unit>
 			<trans-unit id="person.tab.profiles">
 				<source>Profiles</source>
 			</trans-unit>

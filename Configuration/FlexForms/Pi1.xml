@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>Settings</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.mode>
+                        <TCEforms>
+                            <label>Display Mode</label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectSingle</renderType>
+                                <items>
+                                    <numIndex index="0">
+                                        <numIndex index="0">All Records</numIndex>
+                                        <numIndex index="1">all</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1">
+                                        <numIndex index="0">Selected Records</numIndex>
+                                        <numIndex index="1">selected</numIndex>
+                                    </numIndex>
+                                </items>
+                                <default>all</default>
+                            </config>
+                        </TCEforms>
+                    </settings.mode>
+                    <settings.persons>
+                        <TCEforms>
+                            <label>Select Persons</label>
+                            <displayCond>FIELD:settings.mode:=:selected</displayCond>
+                            <config>
+                                <type>group</type>
+                                <allowed>tx_spark_person</allowed>
+                                <maxitems>99</maxitems>
+                                <minitems>0</minitems>
+                                <size>5</size>
+                            </config>
+                        </TCEforms>
+                    </settings.persons>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

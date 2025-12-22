@@ -1,0 +1,45 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+<f:section name="Main">
+    <div class="academic-profiles-list">
+        <f:if condition="{persons}">
+            <f:then>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <f:for each="{persons}" as="person">
+                        <div class="col">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body text-center">
+                                    <f:if condition="{person.mediaImage}">
+                                        <f:media file="{person.mediaImage}" width="120" height="120"
+                                            class="rounded-circle mb-3" style="object-fit:cover;" />
+                                    </f:if>
+                                    <h5 class="card-title">
+                                        <f:link.action action="show" arguments="{person: person}"
+                                            class="text-decoration-none text-dark">
+                                            {person.firstName} {person.lastName}
+                                        </f:link.action>
+                                    </h5>
+                                    <p class="card-text text-muted mb-0">{person.contactOffice}</p>
+                                    <f:if condition="{person.contactEmail}">
+                                        <p class="card-text small"><a href="mailto:{person.contactEmail}"
+                                                class="text-muted">{person.contactEmail}</a></p>
+                                    </f:if>
+                                    <f:link.action action="show" arguments="{person: person}"
+                                        class="btn btn-sm btn-outline-primary mt-3">
+                                        View Profile
+                                    </f:link.action>
+                                </div>
+                            </div>
+                        </div>
+                    </f:for>
+                </div>
+            </f:then>
+            <f:else>
+                <p>No profiles found.</p>
+            </f:else>
+        </f:if>
+    </div>
+</f:section>
+
+</html>

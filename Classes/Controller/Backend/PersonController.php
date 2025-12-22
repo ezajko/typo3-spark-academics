@@ -7,7 +7,6 @@ namespace EtfUnsa\SparkAcademics\Controller\Backend;
 use EtfUnsa\SparkAcademics\Domain\Repository\PersonRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
-use TYPO3\CMS\Backend\Template\Components\Menu\MenuRegistry;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -17,18 +16,15 @@ class PersonController extends ActionController
     protected PersonRepository $personRepository;
     protected ModuleTemplateFactory $moduleTemplateFactory;
     protected UriBuilder $backendUriBuilder;
-    protected MenuRegistry $menuRegistry;
 
     public function __construct(
         PersonRepository $personRepository,
         ModuleTemplateFactory $moduleTemplateFactory,
-        UriBuilder $backendUriBuilder,
-        MenuRegistry $menuRegistry
+        UriBuilder $backendUriBuilder
     ) {
         $this->personRepository = $personRepository;
         $this->moduleTemplateFactory = $moduleTemplateFactory;
         $this->backendUriBuilder = $backendUriBuilder;
-        $this->menuRegistry = $menuRegistry;
     }
 
     public function listAction(): ResponseInterface
@@ -91,7 +87,8 @@ class PersonController extends ActionController
 
     protected function registerDocHeaderMenu(ModuleTemplate $moduleTemplate, string $currentTab): void
     {
-        $menu = $this->menuRegistry->makeMenu();
+        $menuRegistry = $moduleTemplate->getDocHeader()->getMenuRegistry();
+        $menu = $menuRegistry->makeMenu();
         $menu->setIdentifier('spark_academics_person_menu');
 
         $actions = [

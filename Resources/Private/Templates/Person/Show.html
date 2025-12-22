@@ -14,7 +14,18 @@
                 <f:if condition="{person.mediaImage}">
                     <f:media file="{person.mediaImage}" width="300" class="img-fluid rounded mb-3" />
                 </f:if>
-                <h2 class="mb-2">{person.firstName} {person.lastName}</h2>
+                <h2 class="mb-2">
+                    <f:if condition="{person.academicTitle}">{person.academicTitle.title} </f:if>{person.firstName}
+                    {person.lastName}
+                </h2>
+                <div class="mb-3">
+                    <f:if condition="{person.academicRank}">
+                        <h4 class="text-primary">{person.academicRank.title}</h4>
+                    </f:if>
+                    <f:if condition="{person.primaryDepartment}">
+                        <p class="h5 text-muted">{person.primaryDepartment.title}</p>
+                    </f:if>
+                </div>
                 <p class="lead text-muted">{person.contactOffice}</p>
             </div>
             <div class="col-md-8">
@@ -26,6 +37,10 @@
                     <li class="nav-item">
                         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contact"
                             type="button">Contact</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#affiliations"
+                            type="button">Affiliations</button>
                     </li>
                 </ul>
                 <div class="tab-content">

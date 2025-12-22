@@ -17,9 +17,20 @@
                                     <h5 class="card-title">
                                         <f:link.action action="show" arguments="{person: person}"
                                             class="text-decoration-none text-dark">
-                                            {person.firstName} {person.lastName}
+                                            <f:if condition="{person.academicTitle}">{person.academicTitle.title}
+                                            </f:if>{person.firstName} {person.lastName}
                                         </f:link.action>
                                     </h5>
+                                    <div class="mb-2">
+                                        <f:if condition="{person.academicRank}">
+                                            <span
+                                                class="d-block fw-bold text-primary small">{person.academicRank.title}</span>
+                                        </f:if>
+                                        <f:if condition="{person.primaryDepartment}">
+                                            <span
+                                                class="d-block text-muted small">{person.primaryDepartment.title}</span>
+                                        </f:if>
+                                    </div>
                                     <p class="card-text text-muted mb-0">{person.contactOffice}</p>
                                     <f:if condition="{person.contactEmail}">
                                         <p class="card-text small"><a href="mailto:{person.contactEmail}"

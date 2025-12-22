@@ -9,88 +9,40 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-/**
- * Person
- */
 class Person extends AbstractEntity
 {
-    /**
-     * @var string
-     */
     protected string $firstName = '';
-
-    /**
-     * @var string
-     */
     protected string $lastName = '';
-
-    /**
-     * @var string
-     */
     protected string $biography = '';
-
-    /**
-     * @var string
-     */
-    protected string $office = '';
-
-    /**
-     * @var string
-     */
-    protected string $phone = '';
-
-    /**
-     * @var string
-     */
-    protected string $email = '';
-
-    /**
-     * @var string
-     */
-    protected string $website = '';
-
-    /**
-     * @var string
-     */
-    protected string $googleScholar = '';
-
-    /**
-     * @var string
-     */
-    protected string $researchGate = '';
-
-    /**
-     * @var string
-     */
-    protected string $github = '';
-
-    /**
-     * @var string
-     */
-    protected string $orcid = '';
-
-    /**
-     * @var string
-     */
-    protected string $linkedin = '';
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference|null
-     */
-    protected ?FileReference $image = null;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference|null
-     */
-    protected ?FileReference $cv = null;
-
+    
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser>
      */
-    protected $beUsers;
+    protected $beUsers = null;
 
-    public function __construct()
-    {
+    protected string $contactOffice = '';
+    protected string $phoneOffice = '';
+    protected string $phoneMobile = '';
+    protected string $contactEmail = '';
+    protected string $contactWebsite = '';
+
+    protected string $profileGoogleScholar = '';
+    protected string $profileResearchGate = '';
+    protected string $profileGithub = '';
+    protected string $profileOrcid = '';
+    protected string $profileLinkedin = '';
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference|null
+     */
+    protected ?FileReference $mediaImage = null;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference|null
+     */
+    protected ?FileReference $biographyFilePdf = null;
+
+    public function __construct() {
         $this->beUsers = new ObjectStorage();
     }
 
@@ -124,116 +76,6 @@ class Person extends AbstractEntity
         $this->biography = $biography;
     }
 
-    public function getOffice(): string
-    {
-        return $this->office;
-    }
-
-    public function setOffice(string $office): void
-    {
-        $this->office = $office;
-    }
-
-    public function getPhone(): string
-    {
-        return $this->phone;
-    }
-
-    public function setPhone(string $phone): void
-    {
-        $this->phone = $phone;
-    }
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
-    }
-
-    public function getWebsite(): string
-    {
-        return $this->website;
-    }
-
-    public function setWebsite(string $website): void
-    {
-        $this->website = $website;
-    }
-
-    public function getGoogleScholar(): string
-    {
-        return $this->googleScholar;
-    }
-
-    public function setGoogleScholar(string $googleScholar): void
-    {
-        $this->googleScholar = $googleScholar;
-    }
-
-    public function getResearchGate(): string
-    {
-        return $this->researchGate;
-    }
-
-    public function setResearchGate(string $researchGate): void
-    {
-        $this->researchGate = $researchGate;
-    }
-
-    public function getGithub(): string
-    {
-        return $this->github;
-    }
-
-    public function setGithub(string $github): void
-    {
-        $this->github = $github;
-    }
-
-    public function getOrcid(): string
-    {
-        return $this->orcid;
-    }
-
-    public function setOrcid(string $orcid): void
-    {
-        $this->orcid = $orcid;
-    }
-
-    public function getLinkedin(): string
-    {
-        return $this->linkedin;
-    }
-
-    public function setLinkedin(string $linkedin): void
-    {
-        $this->linkedin = $linkedin;
-    }
-
-    public function getImage(): ?FileReference
-    {
-        return $this->image;
-    }
-
-    public function setImage(?FileReference $image): void
-    {
-        $this->image = $image;
-    }
-
-    public function getCv(): ?FileReference
-    {
-        return $this->cv;
-    }
-
-    public function setCv(?FileReference $cv): void
-    {
-        $this->cv = $cv;
-    }
-
     /**
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser>
      */
@@ -248,5 +90,125 @@ class Person extends AbstractEntity
     public function setBeUsers(ObjectStorage $beUsers): void
     {
         $this->beUsers = $beUsers;
+    }
+
+    public function getContactOffice(): string
+    {
+        return $this->contactOffice;
+    }
+
+    public function setContactOffice(string $contactOffice): void
+    {
+        $this->contactOffice = $contactOffice;
+    }
+
+    public function getPhoneOffice(): string
+    {
+        return $this->phoneOffice;
+    }
+
+    public function setPhoneOffice(string $phoneOffice): void
+    {
+        $this->phoneOffice = $phoneOffice;
+    }
+
+    public function getPhoneMobile(): string
+    {
+        return $this->phoneMobile;
+    }
+
+    public function setPhoneMobile(string $phoneMobile): void
+    {
+        $this->phoneMobile = $phoneMobile;
+    }
+
+    public function getContactEmail(): string
+    {
+        return $this->contactEmail;
+    }
+
+    public function setContactEmail(string $contactEmail): void
+    {
+        $this->contactEmail = $contactEmail;
+    }
+
+    public function getContactWebsite(): string
+    {
+        return $this->contactWebsite;
+    }
+
+    public function setContactWebsite(string $contactWebsite): void
+    {
+        $this->contactWebsite = $contactWebsite;
+    }
+
+    public function getProfileGoogleScholar(): string
+    {
+        return $this->profileGoogleScholar;
+    }
+
+    public function setProfileGoogleScholar(string $profileGoogleScholar): void
+    {
+        $this->profileGoogleScholar = $profileGoogleScholar;
+    }
+
+    public function getProfileResearchGate(): string
+    {
+        return $this->profileResearchGate;
+    }
+
+    public function setProfileResearchGate(string $profileResearchGate): void
+    {
+        $this->profileResearchGate = $profileResearchGate;
+    }
+
+    public function getProfileGithub(): string
+    {
+        return $this->profileGithub;
+    }
+
+    public function setProfileGithub(string $profileGithub): void
+    {
+        $this->profileGithub = $profileGithub;
+    }
+
+    public function getProfileOrcid(): string
+    {
+        return $this->profileOrcid;
+    }
+
+    public function setProfileOrcid(string $profileOrcid): void
+    {
+        $this->profileOrcid = $profileOrcid;
+    }
+
+    public function getProfileLinkedin(): string
+    {
+        return $this->profileLinkedin;
+    }
+
+    public function setProfileLinkedin(string $profileLinkedin): void
+    {
+        $this->profileLinkedin = $profileLinkedin;
+    }
+
+    public function getMediaImage(): ?FileReference
+    {
+        return $this->mediaImage;
+    }
+
+    public function setMediaImage(?FileReference $mediaImage): void
+    {
+        $this->mediaImage = $mediaImage;
+    }
+
+    public function getBiographyFilePdf(): ?FileReference
+    {
+        return $this->biographyFilePdf;
+    }
+
+    public function setBiographyFilePdf(?FileReference $biographyFilePdf): void
+    {
+        $this->biographyFilePdf = $biographyFilePdf;
     }
 }

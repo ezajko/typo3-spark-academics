@@ -35,29 +35,65 @@
 				<source>Media</source>
 				<target>Multimedija</target>
 			</trans-unit>
-			<trans-unit id="person.office">
+			<trans-unit id="person.tab.general">
+				<source>General</source>
+				<target>Osnovno</target>
+			</trans-unit>
+			<trans-unit id="person.tab.biography">
+				<source>Biography</source>
+				<target>Biografija</target>
+			</trans-unit>
+			<trans-unit id="person.tab.access">
+				<source>Access</source>
+				<target>Pristup</target>
+			</trans-unit>
+			<trans-unit id="person.contact_office">
 				<source>Office</source>
 				<target>Kabinet</target>
 			</trans-unit>
-			<trans-unit id="person.phone">
+			<trans-unit id="person.phone_office">
 				<source>Phone</source>
 				<target>Telefon</target>
 			</trans-unit>
-			<trans-unit id="person.email">
+			<trans-unit id="person.phone_mobile">
+				<source>Mobile Phone</source>
+				<target>Mobilni Telefon</target>
+			</trans-unit>
+			<trans-unit id="person.contact_email">
 				<source>Email</source>
 				<target>Email</target>
 			</trans-unit>
-			<trans-unit id="person.website">
+			<trans-unit id="person.contact_website">
 				<source>Website</source>
 				<target>Web stranica</target>
 			</trans-unit>
-			<trans-unit id="person.image">
+			<trans-unit id="person.media_image">
 				<source>Profile Image</source>
 				<target>Profilna slika</target>
 			</trans-unit>
-			<trans-unit id="person.cv">
+			<trans-unit id="person.biography_file_pdf">
 				<source>CV (PDF)</source>
 				<target>Biografija (PDF)</target>
+			</trans-unit>
+			<trans-unit id="person.profile_google_scholar">
+				<source>Google Scholar</source>
+				<target>Google Scholar</target>
+			</trans-unit>
+			<trans-unit id="person.profile_research_gate">
+				<source>ResearchGate</source>
+				<target>ResearchGate</target>
+			</trans-unit>
+			<trans-unit id="person.profile_github">
+				<source>GitHub</source>
+				<target>GitHub</target>
+			</trans-unit>
+			<trans-unit id="person.profile_orcid">
+				<source>ORCID</source>
+				<target>ORCID</target>
+			</trans-unit>
+			<trans-unit id="person.profile_linkedin">
+				<source>LinkedIn</source>
+				<target>LinkedIn</target>
 			</trans-unit>
 		</body>
 	</file>

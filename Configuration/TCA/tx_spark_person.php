@@ -20,7 +20,7 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'first_name,last_name,biography',
+        'searchFields' => 'first_name,last_name',
         'iconfile' => 'EXT:core/Resources/Public/Icons/T3Icons/content/content-user.svg'
     ],
     'types' => [
@@ -30,13 +30,13 @@ return [
                     --palette--;;name,
                     be_users,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.biography,
-                    biography, cv,
+                    biography, biography_file_pdf,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.contact,
-                    office, phone, email, website,
+                    contact_office, phone_office, phone_mobile, contact_email, contact_website,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.profiles,
-                    google_scholar, research_gate, github, orcid, linkedin,
+                    profile_google_scholar, profile_research_gate, profile_github, profile_orcid, profile_linkedin,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.media,
-                    image,
+                    media_image,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.access,
                     --palette--;;hidden,
                     --palette--;;access,
@@ -143,91 +143,99 @@ return [
                 'eval' => 'trim',
             ],
         ],
-        'office' => [
+        'contact_office' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.office',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.contact_office',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
             ],
         ],
-        'phone' => [
+        'phone_office' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.phone',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.phone_office',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
             ],
         ],
-        'email' => [
+        'phone_mobile' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.email',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.phone_mobile',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+            ],
+        ],
+        'contact_email' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.contact_email',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,email',
             ],
         ],
-        'website' => [
+        'contact_website' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.website',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.contact_website',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputLink',
             ],
         ],
-        'google_scholar' => [
+        'profile_google_scholar' => [
             'exclude' => true,
-            'label' => 'Google Scholar',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.profile_google_scholar',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputLink',
             ],
         ],
-        'research_gate' => [
+        'profile_research_gate' => [
             'exclude' => true,
-            'label' => 'ResearchGate',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.profile_research_gate',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputLink',
             ],
         ],
-        'github' => [
+        'profile_github' => [
             'exclude' => true,
-            'label' => 'GitHub',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.profile_github',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputLink',
             ],
         ],
-        'orcid' => [
+        'profile_orcid' => [
             'exclude' => true,
-            'label' => 'ORCID',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.profile_orcid',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputLink',
             ],
         ],
-        'linkedin' => [
+        'profile_linkedin' => [
             'exclude' => true,
-            'label' => 'LinkedIn',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.profile_linkedin',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputLink',
             ],
         ],
-        'image' => [
+        'media_image' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.image',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.media_image',
             'config' => [
                 'type' => 'file',
                 'allowed' => 'common-image-types',
                 'maxitems' => 1,
             ],
         ],
-        'cv' => [
+        'biography_file_pdf' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.cv',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.biography_file_pdf',
             'config' => [
                 'type' => 'file',
                 'allowed' => 'pdf',

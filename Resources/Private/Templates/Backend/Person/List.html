@@ -14,22 +14,23 @@
                             <div class="card h-100 border-0 shadow-sm">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center mb-3">
-                                        <f:if condition="{personData.item.image}">
+                                        <f:if condition="{personData.item.mediaImage}">
                                             <div class="me-3">
-                                                <f:media file="{personData.item.image}" width="64" height="64"
+                                                <f:media file="{personData.item.mediaImage}" width="64" height="64"
                                                     class="rounded-circle" style="object-fit: cover;" />
                                             </div>
                                         </f:if>
                                         <div>
                                             <h5 class="card-title mb-1">{personData.item.firstName}
                                                 {personData.item.lastName}</h5>
-                                            <p class="card-text small text-muted mb-0">{personData.item.office}</p>
+                                            <p class="card-text small text-muted mb-0">{personData.item.contactOffice}
+                                            </p>
                                         </div>
                                     </div>
 
-                                    <f:if condition="{personData.item.email}">
+                                    <f:if condition="{personData.item.contactEmail}">
                                         <p class="card-text small text-muted mb-3">
-                                            <i class="bi bi-envelope me-1"></i> {personData.item.email}
+                                            <i class="bi bi-envelope me-1"></i> {personData.item.contactEmail}
                                         </p>
                                     </f:if>
 

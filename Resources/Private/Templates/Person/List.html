@@ -15,7 +15,7 @@
                                             class="rounded-circle mb-3" style="object-fit:cover;" />
                                     </f:if>
                                     <h5 class="card-title">
-                                        <f:link.action action="show" arguments="{person: person}"
+                                        <f:link.action action="show" arguments="{person: person}" pageUid="{detailPid}"
                                             class="text-decoration-none text-dark">
                                             <f:if condition="{person.academicTitle}">{person.academicTitle.title}
                                             </f:if>{person.firstName} {person.lastName}

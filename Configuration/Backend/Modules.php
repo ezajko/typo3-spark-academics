@@ -5,6 +5,7 @@ return [
         'labels' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf:academic_category',
         'iconIdentifier' => 'content-user',
         'position' => ['before' => 'site'],
+        'access' => 'user,group',
     ],
     'spark_academics_person' => [
         'parent' => 'academic',

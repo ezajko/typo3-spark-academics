@@ -4,125 +4,217 @@
     <f:if condition="{firstPerson}">
         <f:then>
             <div class="module-body">
-                <f:switch expression="{currentTab}">
-                    <f:case value="overview">
-                        <h1>{firstPerson.firstName} {firstPerson.lastName}</h1>
-                        <p class="lead">{firstPerson.office}</p>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h3>
-                                    <f:translate key="person.biography" extensionName="SparkAcademics" />
-                                </h3>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center">
+                                    <f:if condition="{firstPerson.image}">
+                                        <div class="me-4">
+                                            <f:media file="{firstPerson.image}" width="120" height="120"
+                                                class="rounded-circle shadow-sm" style="object-fit: cover;" />
+                                        </div>
+                                    </f:if>
+                                    <div>
+                                        <h1 class="mb-1">{firstPerson.firstName} {firstPerson.lastName}</h1>
+                                        <p class="text-muted mb-3">
+                                            <core:icon identifier="actions-document-info" size="small" />
+                                            {firstPerson.office}
+                                        </p>
+
+                                        <f:for each="{persons}" as="personData">
+                                            <f:if condition="{personData.item.uid} == {firstPerson.uid}">
+                                                <a href="{personData.editUrl}" class="btn btn-primary">
+                                                    <core:icon identifier="actions-open" size="small" />
+                                                    <f:translate
+                                                        key="LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.edit" />
+                                                    Profil
+                                                </a>
+                                            </f:if>
+                                        </f:for>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="nav nav-tabs mb-4" id="profileTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="bio-tab" data-bs-toggle="tab" data-bs-target="#bio"
+                            type="button" role="tab nav-link">
+                            <f:translate key="person.biography" extensionName="SparkAcademics" />
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                            type="button" role="tab nav-link">
+                            <f:translate key="person.tab.contact" extensionName="SparkAcademics" />
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profiles-tab" data-bs-toggle="tab" data-bs-target="#profiles"
+                            type="button" role="tab nav-link">
+                            <f:translate key="person.tab.profiles" extensionName="SparkAcademics" />
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="media-tab" data-bs-toggle="tab" data-bs-target="#media"
+                            type="button" role="tab nav-link">
+                            <f:translate key="person.tab.media" extensionName="SparkAcademics" />
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="profileTabsContent">
+                    <div class="tab-pane fade show active py-3" id="bio" role="tabpanel">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-4">
                                 <f:sanitize.html>{firstPerson.biography}</f:sanitize.html>
                             </div>
-                            <div class="col-md-4">
-                                <f:for each="{persons}" as="personData">
-                                    <f:if condition="{personData.item.uid} == {firstPerson.uid}">
-                                        <a href="{personData.editUrl}" class="btn btn-primary d-block mb-3">
-                                            <core:icon identifier="actions-open" size="small" />
-                                            <f:translate
-                                                key="LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.edit" />
-                                        </a>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade py-3" id="contact" role="tabpanel">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-4">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="small text-muted d-block">
+                                            <f:translate key="person.office" extensionName="SparkAcademics" />
+                                        </label>
+                                        <p class="h5">{firstPerson.office}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small text-muted d-block">
+                                            <f:translate key="person.phone" extensionName="SparkAcademics" />
+                                        </label>
+                                        <p class="h5">{firstPerson.phone}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small text-muted d-block">
+                                            <f:translate key="person.email" extensionName="SparkAcademics" />
+                                        </label>
+                                        <p class="h5">{firstPerson.email}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small text-muted d-block">
+                                            <f:translate key="person.website" extensionName="SparkAcademics" />
+                                        </label>
+                                        <p class="h5">{firstPerson.website}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade py-3" id="profiles" role="tabpanel">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-4">
+                                <div class="list-group list-group-flush">
+                                    <f:if condition="{firstPerson.googleScholar}">
+                                        <div
+                                            class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                            <span><strong>Google Scholar</strong></span>
+                                            <a href="{firstPerson.googleScholar}" target="_blank"
+                                                class="text-primary">{firstPerson.googleScholar}</a>
+                                        </div>
                                     </f:if>
-                                </f:for>
+                                    <f:if condition="{firstPerson.researchGate}">
+                                        <div
+                                            class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                            <span><strong>ResearchGate</strong></span>
+                                            <a href="{firstPerson.researchGate}" target="_blank"
+                                                class="text-primary">{firstPerson.researchGate}</a>
+                                        </div>
+                                    </f:if>
+                                    <f:if condition="{firstPerson.github}">
+                                        <div
+                                            class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                            <span><strong>GitHub</strong></span>
+                                            <a href="{firstPerson.github}" target="_blank"
+                                                class="text-primary">{firstPerson.github}</a>
+                                        </div>
+                                    </f:if>
+                                    <f:if condition="{firstPerson.orcid}">
+                                        <div
+                                            class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                            <span><strong>ORCID</strong></span>
+                                            <a href="{firstPerson.orcid}" target="_blank"
+                                                class="text-primary">{firstPerson.orcid}</a>
+                                        </div>
+                                    </f:if>
+                                    <f:if condition="{firstPerson.linkedin}">
+                                        <div
+                                            class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                            <span><strong>LinkedIn</strong></span>
+                                            <a href="{firstPerson.linkedin}" target="_blank"
+                                                class="text-primary">{firstPerson.linkedin}</a>
+                                        </div>
+                                    </f:if>
+                                </div>
                             </div>
                         </div>
-                    </f:case>
+                    </div>
 
-                    <f:case value="biography">
-                        <h1>
-                            <f:translate key="person.biography" extensionName="SparkAcademics" />
-                        </h1>
-                        <f:sanitize.html>{firstPerson.biography}</f:sanitize.html>
-                    </f:case>
-
-                    <f:case value="contact">
-                        <h1>
-                            <f:translate key="person.tab.contact" extensionName="SparkAcademics" />
-                        </h1>
-                        <dl class="row">
-                            <dt class="col-sm-3">
-                                <f:translate key="person.office" extensionName="SparkAcademics" />
-                            </dt>
-                            <dd class="col-sm-9">{firstPerson.office}</dd>
-
-                            <dt class="col-sm-3">
-                                <f:translate key="person.phone" extensionName="SparkAcademics" />
-                            </dt>
-                            <dd class="col-sm-9">{firstPerson.phone}</dd>
-
-                            <dt class="col-sm-3">
-                                <f:translate key="person.email" extensionName="SparkAcademics" />
-                            </dt>
-                            <dd class="col-sm-9">{firstPerson.email}</dd>
-
-                            <dt class="col-sm-3">
-                                <f:translate key="person.website" extensionName="SparkAcademics" />
-                            </dt>
-                            <dd class="col-sm-9">{firstPerson.website}</dd>
-                        </dl>
-                    </f:case>
-
-                    <f:case value="profiles">
-                        <h1>
-                            <f:translate key="person.tab.profiles" extensionName="SparkAcademics" />
-                        </h1>
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Google Scholar:</strong> {firstPerson.googleScholar}
-                            </li>
-                            <li class="list-group-item"><strong>ResearchGate:</strong> {firstPerson.researchGate}</li>
-                            <li class="list-group-item"><strong>GitHub:</strong> {firstPerson.github}</li>
-                            <li class="list-group-item"><strong>ORCID:</strong> {firstPerson.orcid}</li>
-                            <li class="list-group-item"><strong>LinkedIn:</strong> {firstPerson.linkedin}</li>
-                        </ul>
-                    </f:case>
-
-                    <f:case value="media">
-                        <h1>
-                            <f:translate key="person.tab.media" extensionName="SparkAcademics" />
-                        </h1>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h3>
-                                    <f:translate key="person.image" extensionName="SparkAcademics" />
-                                </h3>
-                                <f:if condition="{firstPerson.image}">
-                                    <f:media file="{firstPerson.image}" width="200" />
-                                </f:if>
-                            </div>
-                            <div class="col-md-6">
-                                <h3>
-                                    <f:translate key="person.cv" extensionName="SparkAcademics" />
-                                </h3>
-                                <f:if condition="{firstPerson.cv}">
-                                    <a href="{firstPerson.cv.originalResource.publicUrl}" target="_blank"
-                                        class="btn btn-default">
-                                        <core:icon identifier="mimetypes-pdf" size="small" />
-                                        Download CV
-                                    </a>
-                                </f:if>
+                    <div class="tab-pane fade py-3" id="media" role="tabpanel">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <f:if condition="{firstPerson.image}">
+                                        <div class="col-md-6 mb-3">
+                                            <h6>
+                                                <f:translate key="person.image" extensionName="SparkAcademics" />
+                                            </h6>
+                                            <f:media file="{firstPerson.image}" width="300"
+                                                class="img-fluid rounded shadow-sm" />
+                                        </div>
+                                    </f:if>
+                                    <f:if condition="{firstPerson.cv}">
+                                        <div class="col-md-6">
+                                            <h6>
+                                                <f:translate key="person.cv" extensionName="SparkAcademics" />
+                                            </h6>
+                                            <a href="{firstPerson.cv.originalResource.publicUrl}" target="_blank"
+                                                class="btn btn-outline-secondary">
+                                                <core:icon identifier="mimetypes-pdf" size="small" />
+                                                Download CV
+                                            </a>
+                                        </div>
+                                    </f:if>
+                                </div>
                             </div>
                         </div>
-                    </f:case>
-                </f:switch>
-
-                <hr />
-                <div class="mt-4">
-                    <h3>Uređivanje</h3>
-                    <f:for each="{persons}" as="personData">
-                        <div class="mb-2">
-                            <a href="{personData.editUrl}" class="btn btn-default">
-                                <core:icon identifier="actions-open" size="small" />
-                                Edit {personData.item.firstName} {personData.item.lastName} (All Languages)
-                            </a>
-                        </div>
-                    </f:for>
+                    </div>
                 </div>
+
+                <f:if condition="{f:count(subject: persons)} > 1">
+                    <div class="mt-5 pt-4 border-top">
+                        <h4 class="mb-4">Svi profili povezani sa vašim nalogom</h4>
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            <f:for each="{persons}" as="personData">
+                                <div class="col">
+                                    <div class="card h-100 border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{personData.item.firstName}
+                                                {personData.item.lastName}</h5>
+                                            <p class="card-text small text-muted">{personData.item.office}</p>
+                                            <a href="{personData.editUrl}"
+                                                class="btn btn-sm btn-outline-primary">Uredi</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </f:for>
+                        </div>
+                    </div>
+                </f:if>
             </div>
         </f:then>
         <f:else>
-            <div class="alert alert-info">
-                You are not associated with any academic person profile. Please contact an administrator.
+            <div class="alert alert-info shadow-sm p-4 text-center">
+                <i class="bi bi-info-circle h2 d-block mb-3"></i>
+                <p class="lead mb-0">Niste povezani ni sa jednim akademskim profilom. Molimo kontaktirajte
+                    administratora.</p>
             </div>
         </f:else>
     </f:if>

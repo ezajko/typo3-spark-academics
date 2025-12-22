@@ -107,7 +107,7 @@ class PersonController extends ActionController
             $menu->addMenuItem($item);
         }
 
-        $moduleTemplate->getDocHeader()->getMenuRegistry()->addMenu($menu);
+        $menuRegistry->addMenu($menu);
     }
 
     protected function getCurrentBeUser(): array

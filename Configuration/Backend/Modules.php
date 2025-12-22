@@ -6,6 +6,7 @@ return [
         'iconIdentifier' => 'content-user',
         'position' => ['before' => 'site'],
         'access' => 'user,group',
+        'workspaces' => 'live',
     ],
     'spark_academics_person' => [
         'parent' => 'academic',

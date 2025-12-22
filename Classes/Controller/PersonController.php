@@ -21,29 +21,36 @@ class PersonController extends ActionController
 
     public function listAction(): ResponseInterface
     {
-        $mode = $this->settings['mode'] ?? 'all';
+        $primaryDepartmentUid = (int)($this->settings['filter']['primary_department'] ?? 0);
+        $academicRankUid = (int)($this->settings['filter']['academic_rank'] ?? 0);
+        $academicTitleUid = (int)($this->settings['filter']['academic_title'] ?? 0);
+
         $persons = null;
 
-        if ($mode === 'selected') {
-            $uids = $this->settings['persons'] ?? '';
-            if (!empty($uids)) {
-                $uidList = GeneralUtility::intExplode(',', $uids, true);
-                if (!empty($uidList)) {
-                    // Quick way to fetch by UIDs. 
-                    // Assuming generic query matching.
-                    $query = $this->personRepository->createQuery();
-                    $query->matching($query->in('uid', $uidList));
-                    // Maintain order if needed? Not critical for now.
-                    $persons = $query->execute();
-                }
-            }
+        if ($primaryDepartmentUid > 0 || $academicRankUid > 0 || $academicTitleUid > 0) {
+            $persons = $this->personRepository->findByFilters(
+                $primaryDepartmentUid,
+                $academicRankUid,
+                $academicTitleUid
+            );
         } else {
-            $persons = $this->personRepository->findAll();
+            $mode = $this->settings['mode'] ?? 'all';
+            if ($mode === 'selected') {
+                $uids = $this->settings['persons'] ?? '';
+                if (!empty($uids)) {
+                    $uidList = GeneralUtility::intExplode(',', $uids, true);
+                    if (!empty($uidList)) {
+                        $query = $this->personRepository->createQuery();
+                        $query->matching($query->in('uid', $uidList));
+                        $persons = $query->execute();
+                    }
+                }
+            } else {
+                $persons = $this->personRepository->findAll();
+            }
         }
 
         $this->view->assign('persons', $persons);
-        $this->view->assign('mode', $mode);
-
         return $this->htmlResponse();
     }
 

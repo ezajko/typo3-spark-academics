@@ -6,6 +6,7 @@ namespace EtfUnsa\SparkAcademics\Controller;
 
 use EtfUnsa\SparkAcademics\Domain\Model\Person;
 use EtfUnsa\SparkAcademics\Domain\Repository\PersonRepository;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -18,7 +19,7 @@ class PersonController extends ActionController
         $this->personRepository = $personRepository;
     }
 
-    public function listAction(): void
+    public function listAction(): ResponseInterface
     {
         $mode = $this->settings['mode'] ?? 'all';
         $persons = null;
@@ -42,10 +43,13 @@ class PersonController extends ActionController
 
         $this->view->assign('persons', $persons);
         $this->view->assign('mode', $mode);
+
+        return $this->htmlResponse();
     }
 
-    public function showAction(Person $person): void
+    public function showAction(Person $person): ResponseInterface
     {
         $this->view->assign('person', $person);
+        return $this->htmlResponse();
     }
 }

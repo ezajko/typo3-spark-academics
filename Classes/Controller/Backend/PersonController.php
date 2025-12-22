@@ -87,7 +87,7 @@ class PersonController extends ActionController
 
     protected function registerDocHeaderMenu(ModuleTemplate $moduleTemplate, string $currentTab): void
     {
-        $menuRegistry = $moduleTemplate->getDocHeader()->getMenuRegistry();
+        $menuRegistry = $moduleTemplate->getDocHeaderComponent()->getMenuRegistry();
         $menu = $menuRegistry->makeMenu();
         $menu->setIdentifier('spark_academics_person_menu');
 

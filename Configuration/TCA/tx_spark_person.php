@@ -26,7 +26,7 @@ return [
     'types' => [
         '1' => [
             'showitem' => '
-                --div--;LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.general,
+                --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:tab.general,
                     --palette--;;name,
                     biography,
                     be_users,
@@ -36,7 +36,7 @@ return [
                     google_scholar, research_gate, github, orcid, linkedin,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.media,
                     image, cv,
-                --div--;LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.access,
+                --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:tab.access,
                     --palette--;;hidden,
                     --palette--;;access,
             ',

@@ -10,15 +10,18 @@
                         <p class="lead">{firstPerson.office}</p>
                         <div class="row">
                             <div class="col-md-8">
-                                <h3><f:translate key="person.biography" extensionName="SparkAcademics" /></h3>
-                                <f:format.html>{firstPerson.biography}</f:format.html>
+                                <h3>
+                                    <f:translate key="person.biography" extensionName="SparkAcademics" />
+                                </h3>
+                                <f:sanitize.html>{firstPerson.biography}</f:sanitize.html>
                             </div>
                             <div class="col-md-4">
                                 <f:for each="{persons}" as="personData">
                                     <f:if condition="{personData.item.uid} == {firstPerson.uid}">
                                         <a href="{personData.editUrl}" class="btn btn-primary d-block mb-3">
                                             <core:icon identifier="actions-open" size="small" />
-                                            <f:translate key="LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.edit" />
+                                            <f:translate
+                                                key="LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.edit" />
                                         </a>
                                     </f:if>
                                 </f:for>
@@ -27,31 +30,46 @@
                     </f:case>
 
                     <f:case value="biography">
-                        <h1><f:translate key="person.biography" extensionName="SparkAcademics" /></h1>
-                        <f:format.html>{firstPerson.biography}</f:format.html>
+                        <h1>
+                            <f:translate key="person.biography" extensionName="SparkAcademics" />
+                        </h1>
+                        <f:sanitize.html>{firstPerson.biography}</f:sanitize.html>
                     </f:case>
 
                     <f:case value="contact">
-                        <h1><f:translate key="person.tab.contact" extensionName="SparkAcademics" /></h1>
+                        <h1>
+                            <f:translate key="person.tab.contact" extensionName="SparkAcademics" />
+                        </h1>
                         <dl class="row">
-                            <dt class="col-sm-3"><f:translate key="person.office" extensionName="SparkAcademics" /></dt>
+                            <dt class="col-sm-3">
+                                <f:translate key="person.office" extensionName="SparkAcademics" />
+                            </dt>
                             <dd class="col-sm-9">{firstPerson.office}</dd>
 
-                            <dt class="col-sm-3"><f:translate key="person.phone" extensionName="SparkAcademics" /></dt>
+                            <dt class="col-sm-3">
+                                <f:translate key="person.phone" extensionName="SparkAcademics" />
+                            </dt>
                             <dd class="col-sm-9">{firstPerson.phone}</dd>
 
-                            <dt class="col-sm-3"><f:translate key="person.email" extensionName="SparkAcademics" /></dt>
+                            <dt class="col-sm-3">
+                                <f:translate key="person.email" extensionName="SparkAcademics" />
+                            </dt>
                             <dd class="col-sm-9">{firstPerson.email}</dd>
 
-                            <dt class="col-sm-3"><f:translate key="person.website" extensionName="SparkAcademics" /></dt>
+                            <dt class="col-sm-3">
+                                <f:translate key="person.website" extensionName="SparkAcademics" />
+                            </dt>
                             <dd class="col-sm-9">{firstPerson.website}</dd>
                         </dl>
                     </f:case>
 
                     <f:case value="profiles">
-                        <h1><f:translate key="person.tab.profiles" extensionName="SparkAcademics" /></h1>
+                        <h1>
+                            <f:translate key="person.tab.profiles" extensionName="SparkAcademics" />
+                        </h1>
                         <ul class="list-group">
-                            <li class="list-group-item"><strong>Google Scholar:</strong> {firstPerson.googleScholar}</li>
+                            <li class="list-group-item"><strong>Google Scholar:</strong> {firstPerson.googleScholar}
+                            </li>
                             <li class="list-group-item"><strong>ResearchGate:</strong> {firstPerson.researchGate}</li>
                             <li class="list-group-item"><strong>GitHub:</strong> {firstPerson.github}</li>
                             <li class="list-group-item"><strong>ORCID:</strong> {firstPerson.orcid}</li>
@@ -60,18 +78,25 @@
                     </f:case>
 
                     <f:case value="media">
-                        <h1><f:translate key="person.tab.media" extensionName="SparkAcademics" /></h1>
+                        <h1>
+                            <f:translate key="person.tab.media" extensionName="SparkAcademics" />
+                        </h1>
                         <div class="row">
                             <div class="col-md-6">
-                                <h3><f:translate key="person.image" extensionName="SparkAcademics" /></h3>
+                                <h3>
+                                    <f:translate key="person.image" extensionName="SparkAcademics" />
+                                </h3>
                                 <f:if condition="{firstPerson.image}">
                                     <f:media file="{firstPerson.image}" width="200" />
                                 </f:if>
                             </div>
                             <div class="col-md-6">
-                                <h3><f:translate key="person.cv" extensionName="SparkAcademics" /></h3>
+                                <h3>
+                                    <f:translate key="person.cv" extensionName="SparkAcademics" />
+                                </h3>
                                 <f:if condition="{firstPerson.cv}">
-                                    <a href="{firstPerson.cv.originalResource.publicUrl}" target="_blank" class="btn btn-default">
+                                    <a href="{firstPerson.cv.originalResource.publicUrl}" target="_blank"
+                                        class="btn btn-default">
                                         <core:icon identifier="mimetypes-pdf" size="small" />
                                         Download CV
                                     </a>

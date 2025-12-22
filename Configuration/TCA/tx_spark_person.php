@@ -6,6 +6,7 @@ return [
         'label' => 'last_name',
         'label_alt' => 'first_name',
         'label_alt_force' => true,
+        'label_userFunc' => \EtfUnsa\SparkAcademics\UserFunc\UserLabelService::class . '->getPersonLabel',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',

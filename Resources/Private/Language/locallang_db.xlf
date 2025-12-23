@@ -9,6 +9,9 @@
             <trans-unit id="tx_spark_department">
                 <source>Department</source>
             </trans-unit>
+            <trans-unit id="tx_spark_department_primary">
+                <source>Primary Department</source>
+            </trans-unit>
             <trans-unit id="tx_spark_research_lab">
                 <source>Research Lab</source>
             </trans-unit>

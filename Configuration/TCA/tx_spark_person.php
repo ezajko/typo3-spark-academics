@@ -28,11 +28,13 @@ return [
             'showitem' => '
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.general,
                     --palette--;;name,
-                    be_users,
+                    primary_department, academic_title, academic_rank, be_users,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.biography,
                     biography, biography_file_pdf,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.contact,
                     contact_office, phone_office, phone_mobile, contact_email, contact_website,
+                --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.affiliations,
+                    departments, laboratories, groups,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.profiles,
                     profile_google_scholar, profile_research_gate, profile_github, profile_orcid, profile_linkedin,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.media,
@@ -258,7 +260,7 @@ return [
         ],
         'departments' => [
             'exclude' => true,
-            'label' => 'Departments',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_department',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
@@ -272,7 +274,7 @@ return [
         ],
         'laboratories' => [
             'exclude' => true,
-            'label' => 'Research Laboratories',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_research_lab',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
@@ -286,7 +288,7 @@ return [
         ],
         'groups' => [
             'exclude' => true,
-            'label' => 'Research Groups',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_research_group',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
@@ -300,7 +302,7 @@ return [
         ],
         'primary_department' => [
             'exclude' => true,
-            'label' => 'Primary Department',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_department_primary',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -313,7 +315,7 @@ return [
         ],
         'academic_title' => [
             'exclude' => true,
-            'label' => 'Academic Title',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_academic_title',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -326,7 +328,7 @@ return [
         ],
         'academic_rank' => [
             'exclude' => true,
-            'label' => 'Academic Rank',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_academic_rank',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',

@@ -25,7 +25,7 @@
                         <config>
                             <type>select</type>
                             <renderType>selectSingle</renderType>
-                            <foreign_table>tx_spark_person_academic_rank</foreign_table>
+                            <foreign_table>tx_spark_academic_rank</foreign_table>
                             <items>
                                 <numIndex index="0">
                                     <label>-- All Ranks --</label>
@@ -40,7 +40,7 @@
                         <config>
                             <type>select</type>
                             <renderType>selectSingle</renderType>
-                            <foreign_table>tx_spark_person_academic_title</foreign_table>
+                            <foreign_table>tx_spark_academic_title</foreign_table>
                             <items>
                                 <numIndex index="0">
                                     <label>-- All Titles --</label>

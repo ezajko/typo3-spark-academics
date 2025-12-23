@@ -1,0 +1,36 @@
+<table>
+    <tr>
+        <th>UID:</th>
+        <td>{item.uid}</td>
+    </tr>
+    <tr>
+        <th>Title:</th>
+        <td>{item.title}</td>
+    </tr>
+    <tr>
+        <th>Acronym:</th>
+        <td>{item.acronym}</td>
+    </tr>
+    <tr>
+        <th>UUID:</th>
+        <td>{item.uuid}</td>
+    </tr>
+    <tr>
+        <th>Description:</th>
+        <td>
+            <f:format.html>{item.description}</f:format.html>
+        </td>
+    </tr>
+    <tr>
+        <th>Members:</th>
+        <td>
+            <f:for each="{item.persons}" as="person" iteration="i">
+                <f:link.action action="show" arguments="{person: person}" pageUid="{detailPid}">{person.firstName}
+                    {person.lastName}</f:link.action>
+                <f:if condition="{i.isLast}">
+                    <f:else>, </f:else>
+                </f:if>
+            </f:for>
+        </td>
+    </tr>
+</table>

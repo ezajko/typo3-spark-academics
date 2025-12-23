@@ -1,0 +1,20 @@
+<table>
+    <thead>
+        <tr>
+            <th>UID</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <f:for each="{persons}" as="person">
+            <tr>
+                <td>{person.uid}</td>
+                <td>{person.firstName} {person.lastName}</td>
+                <td>
+                    <f:link.action action="show" arguments="{person: person}" pageUid="{detailPid}">Show</f:link.action>
+                </td>
+            </tr>
+        </f:for>
+    </tbody>
+</table>

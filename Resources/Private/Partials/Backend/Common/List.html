@@ -1,0 +1,77 @@
+<div class="module-body">
+    <h1>{title}</h1>
+
+    <f:if condition="{items}">
+        <f:then>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mt-1">
+                <f:for each="{items}" as="itemData">
+                    <div class="col">
+                        <div class="card h-100 border-0 shadow-sm transition-hover">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <f:if condition="{itemData.item.mediaImage}">
+                                        <div class="me-3">
+                                            <f:media file="{itemData.item.mediaImage}" width="48" height="48"
+                                                class="rounded" style="object-fit: cover;" />
+                                        </div>
+                                    </f:if>
+                                    <div class="overflow-hidden">
+                                        <f:if condition="{itemData.item.acronym}">
+                                            <span
+                                                class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill small mb-1">{itemData.item.acronym}</span>
+                                        </f:if>
+                                        <h5 class="card-title mb-0 text-truncate" title="{itemData.item.title}">
+                                            <f:if condition="{itemData.item.firstName}">
+                                                <f:then>{itemData.item.firstName} {itemData.item.lastName}</f:then>
+                                                <f:else>{itemData.item.title}</f:else>
+                                            </f:if>
+                                        </h5>
+                                    </div>
+                                </div>
+
+                                <f:if condition="{itemData.item.description}">
+                                    <div class="card-text small text-muted mb-3 line-clamp-2">
+                                        <f:format.stripTags>{itemData.item.description}</f:format.stripTags>
+                                    </div>
+                                </f:if>
+
+                                <a href="{itemData.editUrl}" class="btn btn-outline-primary btn-sm w-100 rounded-pill">
+                                    <core:icon identifier="actions-open" size="small" />
+                                    <f:translate
+                                        key="LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.edit" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </f:for>
+            </div>
+        </f:then>
+        <f:else>
+            <div class="alert alert-info shadow-sm p-4 text-center rounded-4 mt-4">
+                <i class="bi bi-info-circle h2 d-block mb-3 opacity-25"></i>
+                <h4 class="fw-bold">Nema rezultata</h4>
+                <p class="text-muted mb-0">Niste povezani ni sa jednim zapisom u ovoj kategoriji. Molimo kontaktirajte
+                    administratora.</p>
+            </div>
+        </f:else>
+    </f:if>
+</div>
+
+<style>
+    .transition-hover {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    .transition-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        line-clamp: 2;
+        overflow: hidden;
+    }
+</style>

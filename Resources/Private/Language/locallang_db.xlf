@@ -27,6 +27,33 @@
             <trans-unit id="tx_spark_academic_rank">
                 <source>Academic Rank</source>
             </trans-unit>
+            <trans-unit id="site.configuration.academicPids">
+                <source>Academic Detail Pages</source>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_person_detail">
+                <source>Person Detail Page</source>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_dept_detail">
+                <source>Department Detail Page</source>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_lab_detail">
+                <source>Research Lab Detail Page</source>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_group_detail">
+                <source>Research Group Detail Page</source>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_chair_detail">
+                <source>Chair Detail Page</source>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_course_detail">
+                <source>Course Detail Page</source>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_program_detail">
+                <source>Study Program Detail Page</source>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_project_detail">
+                <source>Project Detail Page</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

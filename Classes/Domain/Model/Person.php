@@ -21,38 +21,57 @@ class Person extends AbstractEntity
     protected $beUsers = null;
 
     protected string $contactOffice = '';
+    protected string $contactEmail = '';
+    protected string $contactWebsite = '';
     protected string $phoneOffice = '';
     protected string $phoneMobile = '';
+    protected string $profileGoogleScholar = '';
+    protected string $profileResearchGate = '';
+    protected string $profileGithub = '';
+    protected string $profileOrcid = '';
+    protected string $profileLinkedin = '';
+
+    protected ?FileReference $mediaImage = null;
+    protected ?FileReference $biographyFilePdf = null;
+
+    protected ?Department $primaryDepartment = null;
+    protected ?AcademicTitle $academicTitle = null;
+    protected ?AcademicRank $academicRank = null;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Department>
      */
-    protected ObjectStorage $departments;
+    protected ?ObjectStorage $departments = null;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ResearchLab>
      */
-    protected ObjectStorage $laboratories;
+    protected ?ObjectStorage $laboratories = null;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ResearchGroup>
+     */
+    protected ?ObjectStorage $groups = null;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Chair>
      */
-    protected ObjectStorage $chairs;
+    protected ?ObjectStorage $chairs = null;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Course>
      */
-    protected ObjectStorage $courses;
+    protected ?ObjectStorage $courses = null;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\StudyProgram>
      */
-    protected ObjectStorage $studyPrograms;
+    protected ?ObjectStorage $studyPrograms = null;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Project>
      */
-    protected ObjectStorage $projects;
+    protected ?ObjectStorage $projects = null;
 
     public function __construct() {
         $this->beUsers = new ObjectStorage();
@@ -231,7 +250,7 @@ class Person extends AbstractEntity
         $this->biographyFilePdf = $biographyFilePdf;
     }
 
-    public function getDepartments(): ObjectStorage
+    public function getDepartments(): ?ObjectStorage
     {
         return $this->departments;
     }
@@ -241,7 +260,7 @@ class Person extends AbstractEntity
         $this->departments = $departments;
     }
 
-    public function getLaboratories(): ObjectStorage
+    public function getLaboratories(): ?ObjectStorage
     {
         return $this->laboratories;
     }
@@ -251,7 +270,7 @@ class Person extends AbstractEntity
         $this->laboratories = $laboratories;
     }
 
-    public function getGroups(): ObjectStorage
+    public function getGroups(): ?ObjectStorage
     {
         return $this->groups;
     }
@@ -291,7 +310,7 @@ class Person extends AbstractEntity
         $this->academicRank = $academicRank;
     }
 
-    public function getChairs(): ObjectStorage
+    public function getChairs(): ?ObjectStorage
     {
         return $this->chairs;
     }
@@ -301,7 +320,7 @@ class Person extends AbstractEntity
         $this->chairs = $chairs;
     }
 
-    public function getCourses(): ObjectStorage
+    public function getCourses(): ?ObjectStorage
     {
         return $this->courses;
     }
@@ -311,7 +330,7 @@ class Person extends AbstractEntity
         $this->courses = $courses;
     }
 
-    public function getStudyPrograms(): ObjectStorage
+    public function getStudyPrograms(): ?ObjectStorage
     {
         return $this->studyPrograms;
     }
@@ -321,7 +340,7 @@ class Person extends AbstractEntity
         $this->studyPrograms = $studyPrograms;
     }
 
-    public function getProjects(): ObjectStorage
+    public function getProjects(): ?ObjectStorage
     {
         return $this->projects;
     }

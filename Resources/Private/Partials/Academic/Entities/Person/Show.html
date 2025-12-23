@@ -1,0 +1,140 @@
+<table>
+    <tr>
+        <th>UID:</th>
+        <td>{person.uid}</td>
+    </tr>
+    <tr>
+        <th>First Name:</th>
+        <td>{person.firstName}</td>
+    </tr>
+    <tr>
+        <th>Last Name:</th>
+        <td>{person.lastName}</td>
+    </tr>
+    <tr>
+        <th>Biography:</th>
+        <td>
+            <f:format.html>{person.biography}</f:format.html>
+        </td>
+    </tr>
+    <tr>
+        <th>Email:</th>
+        <td>{person.contactEmail}</td>
+    </tr>
+    <tr>
+        <th>Office:</th>
+        <td>{person.contactOffice}</td>
+    </tr>
+    <tr>
+        <th>Phone Office:</th>
+        <td>{person.phoneOffice}</td>
+    </tr>
+    <tr>
+        <th>Phone Mobile:</th>
+        <td>{person.phoneMobile}</td>
+    </tr>
+    <tr>
+        <th>Website:</th>
+        <td>{person.contactWebsite}</td>
+    </tr>
+    <tr>
+        <th>Primary Department:</th>
+        <td>
+            <f:if condition="{person.primaryDepartment}">
+                <f:link.action action="show" arguments="{department: person.primaryDepartment}" pageUid="{detailPid}">
+                    {person.primaryDepartment.title}</f:link.action>
+            </f:if>
+        </td>
+    </tr>
+    <tr>
+        <th>Academic Title:</th>
+        <td>{person.academicTitle.title}</td>
+    </tr>
+    <tr>
+        <th>Academic Rank:</th>
+        <td>{person.academicRank.title}</td>
+    </tr>
+    <tr>
+        <th>Departments:</th>
+        <td>
+            <f:for each="{person.departments}" as="dept" iteration="i">
+                <f:link.action action="show" arguments="{department: dept}" pageUid="{detailPid}">{dept.title}
+                </f:link.action>
+                <f:if condition="{i.isLast}">
+                    <f:else>, </f:else>
+                </f:if>
+            </f:for>
+        </td>
+    </tr>
+    <tr>
+        <th>Labs:</th>
+        <td>
+            <f:for each="{person.laboratories}" as="lab" iteration="i">
+                <f:link.action action="show" arguments="{lab: lab}" pageUid="{detailPid}">{lab.title}</f:link.action>
+                <f:if condition="{i.isLast}">
+                    <f:else>, </f:else>
+                </f:if>
+            </f:for>
+        </td>
+    </tr>
+    <tr>
+        <th>Groups:</th>
+        <td>
+            <f:for each="{person.groups}" as="group" iteration="i">
+                <f:link.action action="show" arguments="{group: group}" pageUid="{detailPid}">{group.title}
+                </f:link.action>
+                <f:if condition="{i.isLast}">
+                    <f:else>, </f:else>
+                </f:if>
+            </f:for>
+        </td>
+    </tr>
+    <tr>
+        <th>Chairs:</th>
+        <td>
+            <f:for each="{person.chairs}" as="chair" iteration="i">
+                <f:link.action action="show" arguments="{chair: chair}" pageUid="{detailPid}">{chair.title}
+                </f:link.action>
+                <f:if condition="{i.isLast}">
+                    <f:else>, </f:else>
+                </f:if>
+            </f:for>
+        </td>
+    </tr>
+    <tr>
+        <th>Courses:</th>
+        <td>
+            <f:for each="{person.courses}" as="course" iteration="i">
+                <f:link.action action="show" arguments="{course: course}" pageUid="{detailPid}">{course.title}
+                </f:link.action>
+                <f:if condition="{i.isLast}">
+                    <f:else>, </f:else>
+                </f:if>
+            </f:for>
+        </td>
+    </tr>
+    <tr>
+        <th>Programs:</th>
+        <td>
+            <f:for each="{person.studyPrograms}" as="prog" iteration="i">
+                <f:link.action action="show" arguments="{program: prog}" pageUid="{detailPid}">{prog.title}
+                </f:link.action>
+                <f:if condition="{i.isLast}">
+                    <f:else>, </f:else>
+                </f:if>
+            </f:for>
+        </td>
+    </tr>
+    <tr>
+        <th>Projects:</th>
+        <td>
+            <f:for each="{person.projects}" as="proj" iteration="i">
+                <f:link.action action="show" arguments="{project: proj}" pageUid="{detailPid}">{proj.title}
+                </f:link.action>
+                <f:if condition="{i.isLast}">
+                    <f:else>, </f:else>
+                </f:if>
+            </f:for>
+        </td>
+    </tr>
+</table>

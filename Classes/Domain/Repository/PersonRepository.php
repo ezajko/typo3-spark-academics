@@ -4,45 +4,25 @@ declare(strict_types=1);
 
 namespace EtfUnsa\SparkAcademics\Domain\Repository;
 
-use TYPO3\CMS\Extbase\Persistence\Repository;
-
 /**
  * Repository for Person
  */
-class PersonRepository extends Repository
+class PersonRepository extends AbstractRepository
 {
-    public function initializeObject(): void
-    {
-        $querySettings = $this->createQuery()->getQuerySettings();
-        $querySettings->setRespectStoragePage(false);
-        $this->setDefaultQuerySettings($querySettings);
-    }
-
-    /**
-     * @param int $primaryDepartmentUid
-     * @param int $academicRankUid
-     * @param int $academicTitleUid
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
     public function findByFilters(int $primaryDepartmentUid, int $academicRankUid, int $academicTitleUid)
     {
-        $query = $this->createQuery();
-        $constraints = [];
-
+        $demand = new \EtfUnsa\SparkAcademics\Domain\Model\Dto\Demand();
+        
         if ($primaryDepartmentUid > 0) {
-            $constraints[] = $query->equals('primaryDepartment', $primaryDepartmentUid);
+            $demand->addFilter('primaryDepartment', $primaryDepartmentUid);
         }
         if ($academicRankUid > 0) {
-            $constraints[] = $query->equals('academicRank', $academicRankUid);
+            $demand->addFilter('academicRank', $academicRankUid);
         }
         if ($academicTitleUid > 0) {
-            $constraints[] = $query->equals('academicTitle', $academicTitleUid);
+            $demand->addFilter('academicTitle', $academicTitleUid);
         }
 
-        if (!empty($constraints)) {
-            $query->matching($query->logicalAnd(...$constraints));
-        }
-
-        return $query->execute();
+        return $this->findByDemand($demand);
     }
 }

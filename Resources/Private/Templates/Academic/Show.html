@@ -1,68 +1,46 @@
 <f:layout name="Default" />
 
 <f:section name="Main">
-    <div class="academic-entity-detail py-5">
-        <div class="container">
-            <f:if condition="{item}">
+    <f:if condition="{item}">
+        <f:then>
+            <f:if condition="{entityType} == 'person'">
                 <f:then>
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <h1 class="display-4 mb-3">{item.title}</h1>
-                            <f:if condition="{item.acronym}">
-                                <p class="lead text-muted mb-4">{item.acronym}</p>
-                            </f:if>
-
-                            <div class="description mb-5">
-                                <f:format.html>{item.description}</f:format.html>
-                            </div>
-
-                            <f:if condition="{item.persons}">
-                                <h3 class="mb-4">Members</h3>
-                                <div class="row row-cols-1 row-cols-md-2 g-4">
-                                    <f:for each="{item.persons}" as="person">
-                                        <div class="col">
-                                            <div class="card h-100 border-0 shadow-sm p-3">
-                                                <div class="d-flex align-items-center">
-                                                    <f:if condition="{person.mediaImage}">
-                                                        <div class="flex-shrink-0 me-3">
-                                                            <f:media file="{person.mediaImage}" width="50" height="50"
-                                                                class="rounded-circle" />
-                                                        </div>
-                                                    </f:if>
-                                                    <div>
-                                                        <h5 class="mb-0">
-                                                            <f:link.action action="show" controller="Person"
-                                                                arguments="{person: person}">
-                                                                {person.firstName} {person.lastName}
-                                                            </f:link.action>
-                                                        </h5>
-                                                        <p class="small text-muted mb-0">{person.academicTitle.title}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </f:for>
-                                </div>
-                            </f:if>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <f:if condition="{item.uuid}">
-                                <div class="card border-0 bg-light p-4 mb-4">
-                                    <h6>Identification</h6>
-                                    <p class="small text-monospace mb-0">{item.uuid}</p>
-                                </div>
-                            </f:if>
-                        </div>
-                    </div>
+                    <f:render partial="Academic/Entities/Person/Show"
+                        arguments="{person: item, detailPid: detailPid}" />
                 </f:then>
                 <f:else>
-                    <div class="alert alert-warning">
-                        Entity not found.
-                    </div>
+                    <f:if condition="{entityType} == 'lab'">
+                        <f:then>
+                            <f:render partial="Academic/Entities/ResearchLab/Show"
+                                arguments="{item: item, detailPid: detailPid}" />
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{entityType} == 'group'">
+                                <f:then>
+                                    <f:render partial="Academic/Entities/ResearchGroup/Show"
+                                        arguments="{item: item, detailPid: detailPid}" />
+                                </f:then>
+                                <f:else>
+                                    <f:if condition="{entityType} == 'program'">
+                                        <f:then>
+                                            <f:render partial="Academic/Entities/StudyProgram/Show"
+                                                arguments="{item: item, detailPid: detailPid}" />
+                                        </f:then>
+                                        <f:else>
+                                            <f:render
+                                                partial="Academic/Entities/{entityType -> f:format.case(mode: 'capital')}/Show"
+                                                arguments="{item: item, detailPid: detailPid}" />
+                                        </f:else>
+                                    </f:if>
+                                </f:else>
+                            </f:if>
+                        </f:else>
+                    </f:if>
                 </f:else>
             </f:if>
-        </div>
-    </div>
+        </f:then>
+        <f:else>
+            <p>Item not found.</p>
+        </f:else>
+    </f:if>
 </f:section>

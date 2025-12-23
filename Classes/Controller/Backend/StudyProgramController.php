@@ -10,8 +10,6 @@ use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 
 class StudyProgramController extends AbstractBackendController
 {
-    protected string $tableName = 'tx_spark_study_program';
-
     public function __construct(
         StudyProgramRepository $studyProgramRepository,
         ModuleTemplateFactory $moduleTemplateFactory,
@@ -19,6 +17,7 @@ class StudyProgramController extends AbstractBackendController
     ) {
         parent::__construct($moduleTemplateFactory, $backendUriBuilder);
         $this->repository = $studyProgramRepository;
+        $this->tableName = 'tx_spark_study_program';
     }
 
     protected function getTemplatePath(): string

@@ -8,5 +8,20 @@ services:
     resource: '../Classes/*'
     exclude: '../Classes/Domain/Model/*'
 
+  # Backend Controllers must be public
   EtfUnsa\SparkAcademics\Controller\Backend\PersonController:
+    public: true
+  EtfUnsa\SparkAcademics\Controller\Backend\DepartmentController:
+    public: true
+  EtfUnsa\SparkAcademics\Controller\Backend\ResearchLabController:
+    public: true
+  EtfUnsa\SparkAcademics\Controller\Backend\ResearchGroupController:
+    public: true
+  EtfUnsa\SparkAcademics\Controller\Backend\ChairController:
+    public: true
+  EtfUnsa\SparkAcademics\Controller\Backend\CourseController:
+    public: true
+  EtfUnsa\SparkAcademics\Controller\Backend\StudyProgramController:
+    public: true
+  EtfUnsa\SparkAcademics\Controller\Backend\ProjectController:
     public: true

@@ -1,58 +1,5 @@
 <f:layout name="Module" />
 
 <f:section name="Content">
-    <div class="module-body">
-        <h1>
-            <f:translate key="LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person" />
-        </h1>
-
-        <f:if condition="{persons}">
-            <f:then>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
-                    <f:for each="{persons}" as="personData">
-                        <div class="col">
-                            <div class="card h-100 border-0 shadow-sm">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <f:if condition="{personData.item.mediaImage}">
-                                            <div class="me-3">
-                                                <f:media file="{personData.item.mediaImage}" width="64" height="64"
-                                                    class="rounded-circle" style="object-fit: cover;" />
-                                            </div>
-                                        </f:if>
-                                        <div>
-                                            <h5 class="card-title mb-1">{personData.item.firstName}
-                                                {personData.item.lastName}</h5>
-                                            <p class="card-text small text-muted mb-0">{personData.item.contactOffice}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <f:if condition="{personData.item.contactEmail}">
-                                        <p class="card-text small text-muted mb-3">
-                                            <i class="bi bi-envelope me-1"></i> {personData.item.contactEmail}
-                                        </p>
-                                    </f:if>
-
-                                    <a href="{personData.editUrl}" class="btn btn-primary w-100">
-                                        <core:icon identifier="actions-open" size="small" />
-                                        <f:translate
-                                            key="LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.edit" />
-                                        Profil
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </f:for>
-                </div>
-            </f:then>
-            <f:else>
-                <div class="alert alert-info shadow-sm p-4 text-center">
-                    <i class="bi bi-info-circle h2 d-block mb-3"></i>
-                    <p class="lead mb-0">Niste povezani ni sa jednim akademskim profilom. Molimo kontaktirajte
-                        administratora.</p>
-                </div>
-            </f:else>
-        </f:if>
-    </div>
+    <f:render partial="Backend/Common/List" arguments="{items: items, title: 'Moji Akademski Profili'}" />
 </f:section>

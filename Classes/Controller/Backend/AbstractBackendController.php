@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace EtfUnsa\SparkAcademics\Controller\Backend;
 
+use EtfUnsa\SparkAcademics\Domain\Repository\AbstractRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Persistence\RepositoryInterface;
 
 abstract class AbstractBackendController extends ActionController
 {
     protected ModuleTemplateFactory $moduleTemplateFactory;
     protected UriBuilder $backendUriBuilder;
-    protected RepositoryInterface $repository;
+    protected AbstractRepository $repository;
     protected string $tableName = '';
 
     public function __construct(
@@ -29,55 +29,64 @@ abstract class AbstractBackendController extends ActionController
     {
         $currentBeUser = $this->getCurrentBeUser();
         
-        // Use createQuery to bypass storage PID check if needed, 
-        // but generally we want to find records assigned to this user.
-        $items = $this->repository->findAll();
+        // Use the new abstract repository method
+        $items = $this->repository->findByBackendUser((int)$currentBeUser['uid']);
         
         $userItems = [];
         $firstItem = null;
 
         foreach ($items as $item) {
-            $editors = $item->getBeUsers();
-            if ($editors === null) continue;
-
-            foreach ($editors as $beUser) {
-                if ($beUser->getUid() === $currentBeUser['uid']) {
-                    if ($firstItem === null) {
-                        $firstItem = $item;
-                    }
-
-                    $uidsToEdit = [$item->getUid()];
-                    
-                    // Basic translation support (Extbase doesn't easily expose l10nParent in models by default)
-                    // In a production environment, we might want to fetch all translations of this record.
-                    // For now, we allow editing the specific record the user is assigned to.
-                    
-                    $returnUrl = (string)$this->backendUriBuilder->buildUriFromRoute($this->request->getAttribute('module')->getIdentifier());
-                    $editUrl = (string)$this->backendUriBuilder->buildUriFromRoute('record_edit', [
-                        'edit' => [
-                            $this->tableName => [
-                                implode(',', $uidsToEdit) => 'edit'
-                            ]
-                        ],
-                        'returnUrl' => $returnUrl
-                    ]);
-                    
-                    $userItems[] = [
-                        'item' => $item,
-                        'editUrl' => $editUrl
-                    ];
-                    break;
-                }
+            if ($firstItem === null) {
+                $firstItem = $item;
             }
+
+            $userItems[] = [
+                'item' => $item,
+                'editUrl' => $this->getEditUrl($item)
+            ];
         }
 
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $moduleTemplate->assign('items', $userItems);
         $moduleTemplate->assign('firstItem', $firstItem);
 
-        // Render generic template if specific one doesn't exist? 
-        // Better to have individual templates for clarity.
         return $moduleTemplate->renderResponse($this->getTemplatePath());
+    }
+
+    /**
+     * Build an edit URL that targets both the record and its translations.
+     */
+    protected function getEditUrl($item): string
+    {
+        $uidsToEdit = [$item->getUid()];
+        
+        // Multi-edit for translations (if l10nParent is available)
+        // Note: Models need l10nParent property for this to work via Extbase.
+        // For simplicity, we can also use a raw query if needed, 
+        // but here we demonstrate the logic for the repository to handle it.
+        $query = $this->repository->createQuery();
+        $query->getQuerySettings()->setRespectSysLanguage(false);
+        $query->getQuerySettings()->setRespectStoragePage(false);
+        
+        // We match translations pointing to this record
+        $query->matching($query->equals('l10nParent', $item->getUid()));
+        $translations = $query->execute();
+        foreach ($translations as $translation) {
+            $uidsToEdit[] = $translation->getUid();
+        }
+        
+        $uidsToEdit = array_unique($uidsToEdit);
+        sort($uidsToEdit);
+
+        $returnUrl = (string)$this->backendUriBuilder->buildUriFromRoute($this->request->getAttribute('module')->getIdentifier());
+        return (string)$this->backendUriBuilder->buildUriFromRoute('record_edit', [
+            'edit' => [
+                $this->tableName => [
+                    implode(',', $uidsToEdit) => 'edit'
+                ]
+            ],
+            'returnUrl' => $returnUrl
+        ]);
     }
 
     protected function getCurrentBeUser(): array

@@ -10,8 +10,6 @@ use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 
 class ChairController extends AbstractBackendController
 {
-    protected string $tableName = 'tx_spark_chair';
-
     public function __construct(
         ChairRepository $chairRepository,
         ModuleTemplateFactory $moduleTemplateFactory,
@@ -19,6 +17,7 @@ class ChairController extends AbstractBackendController
     ) {
         parent::__construct($moduleTemplateFactory, $backendUriBuilder);
         $this->repository = $chairRepository;
+        $this->tableName = 'tx_spark_chair';
     }
 
     protected function getTemplatePath(): string

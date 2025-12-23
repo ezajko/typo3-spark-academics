@@ -1,0 +1,72 @@
+routeEnhancers:
+  SparkAcademicsDept:
+    type: Extbase
+    extension: SparkAcademics
+    plugin: DeptShow
+    routes:
+      - { routePath: '/department/{title}', _controller: 'Academic::show', _arguments: { title: department } }
+    aspects:
+      title: { type: PersistedAliasMapper, tableName: tx_spark_department, routeFieldName: title }
+
+  SparkAcademicsLab:
+    type: Extbase
+    extension: SparkAcademics
+    plugin: LabShow
+    routes:
+      - { routePath: '/lab/{title}', _controller: 'Academic::show', _arguments: { title: lab } }
+    aspects:
+      title: { type: PersistedAliasMapper, tableName: tx_spark_research_lab, routeFieldName: title }
+
+  SparkAcademicsGroup:
+    type: Extbase
+    extension: SparkAcademics
+    plugin: GroupShow
+    routes:
+      - { routePath: '/group/{title}', _controller: 'Academic::show', _arguments: { title: group } }
+    aspects:
+      title: { type: PersistedAliasMapper, tableName: tx_spark_research_group, routeFieldName: title }
+
+  SparkAcademicsChair:
+    type: Extbase
+    extension: SparkAcademics
+    plugin: ChairShow
+    routes:
+      - { routePath: '/chair/{title}', _controller: 'Academic::show', _arguments: { title: chair } }
+    aspects:
+      title: { type: PersistedAliasMapper, tableName: tx_spark_chair, routeFieldName: title }
+
+  SparkAcademicsCourse:
+    type: Extbase
+    extension: SparkAcademics
+    plugin: CourseShow
+    routes:
+      - { routePath: '/course/{title}', _controller: 'Academic::show', _arguments: { title: course } }
+    aspects:
+      title: { type: PersistedAliasMapper, tableName: tx_spark_course, routeFieldName: title }
+
+  SparkAcademicsProgram:
+    type: Extbase
+    extension: SparkAcademics
+    plugin: ProgramShow
+    routes:
+      - { routePath: '/program/{title}', _controller: 'Academic::show', _arguments: { title: program } }
+    aspects:
+      title: { type: PersistedAliasMapper, tableName: tx_spark_study_program, routeFieldName: title }
+
+  SparkAcademicsProject:
+    type: Extbase
+    extension: SparkAcademics
+    plugin: ProjectShow
+    routes:
+      - { routePath: '/project/{title}', _controller: 'Academic::show', _arguments: { title: project } }
+    aspects:
+      title: { type: PersistedAliasMapper, tableName: tx_spark_project, routeFieldName: title }
+
+  SparkAcademicsPerson:
+    type: Extbase
+    extension: SparkAcademics
+    plugin: PersonShow
+    routes:
+      - { routePath: '/person/{title}', _controller: 'Academic::show', _arguments: { title: person } }
+    aspects:
+      title: { type: PersistedAliasMapper, tableName: tx_spark_person, routeFieldName: slug }

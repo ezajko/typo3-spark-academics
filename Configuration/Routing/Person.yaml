@@ -15,7 +15,5 @@ routeEnhancers:
       person_name:
         type: PersistedPatternMapper
         tableName: tx_spark_person
-        routeFieldPattern: '{first_name}.{last_name}'
-        routeFieldDefaultValues:
-          first_name: 'no'
-          last_name: 'name'
+        routeFieldPattern: '^(?P<first_name>.+)\.(?P<last_name>.+)$'
+        routeFieldResult: '{first_name}.{last_name}'

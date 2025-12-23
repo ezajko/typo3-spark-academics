@@ -5,56 +5,51 @@
                 <sheetTitle>Filter Settings</sheetTitle>
                 <type>array</type>
                 <el>
-                    <settings.filter>
-                        <type>array</type>
-                        <el>
-                            <primary_department>
-                                <label>Primary Department</label>
-                                <config>
-                                    <type>select</type>
-                                    <renderType>selectSingle</renderType>
-                                    <foreign_table>tx_spark_department</foreign_table>
-                                    <items>
-                                        <numIndex index="0">
-                                            <label>-- All Departments --</label>
-                                            <value>0</value>
-                                        </numIndex>
-                                    </items>
-                                    <minitems>0</minitems>
-                                </config>
-                            </primary_department>
-                            <academic_rank>
-                                <label>Academic Rank</label>
-                                <config>
-                                    <type>select</type>
-                                    <renderType>selectSingle</renderType>
-                                    <foreign_table>tx_spark_person_academic_rank</foreign_table>
-                                    <items>
-                                        <numIndex index="0">
-                                            <label>-- All Ranks --</label>
-                                            <value>0</value>
-                                        </numIndex>
-                                    </items>
-                                    <minitems>0</minitems>
-                                </config>
-                            </academic_rank>
-                            <academic_title>
-                                <label>Academic Title</label>
-                                <config>
-                                    <type>select</type>
-                                    <renderType>selectSingle</renderType>
-                                    <foreign_table>tx_spark_person_academic_title</foreign_table>
-                                    <items>
-                                        <numIndex index="0">
-                                            <label>-- All Titles --</label>
-                                            <value>0</value>
-                                        </numIndex>
-                                    </items>
-                                    <minitems>0</minitems>
-                                </config>
-                            </academic_title>
-                        </el>
-                    </settings.filter>
+                    <settings.filter.primary_department>
+                        <label>Primary Department</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <foreign_table>tx_spark_department</foreign_table>
+                            <items>
+                                <numIndex index="0">
+                                    <label>-- All Departments --</label>
+                                    <value>0</value>
+                                </numIndex>
+                            </items>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.filter.primary_department>
+                    <settings.filter.academic_rank>
+                        <label>Academic Rank</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <foreign_table>tx_spark_person_academic_rank</foreign_table>
+                            <items>
+                                <numIndex index="0">
+                                    <label>-- All Ranks --</label>
+                                    <value>0</value>
+                                </numIndex>
+                            </items>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.filter.academic_rank>
+                    <settings.filter.academic_title>
+                        <label>Academic Title</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <foreign_table>tx_spark_person_academic_title</foreign_table>
+                            <items>
+                                <numIndex index="0">
+                                    <label>-- All Titles --</label>
+                                    <value>0</value>
+                                </numIndex>
+                            </items>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.filter.academic_title>
                     <settings.detailPid>
                         <label>Detail Page</label>
                         <config>

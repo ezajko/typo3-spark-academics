@@ -9,11 +9,13 @@ routeEnhancers:
         _controller: 'Person::show'
         _arguments:
           person_name: person
+    requirements:
+      person_name: '^[a-zA-Z0-9\.\-]+$'
     aspects:
       person_name:
         type: PersistedPatternMapper
         tableName: tx_spark_person
         routeFieldPattern: '{first_name}.{last_name}'
         routeFieldDefaultValues:
-          first_name: ''
-          last_name: ''
+          first_name: 'no'
+          last_name: 'name'

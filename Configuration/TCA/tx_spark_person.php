@@ -33,7 +33,7 @@ return [
                     biography, biography_file_pdf,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.contact,
                     contact_office, phone_office, phone_mobile, contact_email, contact_website,
-                --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.affiliations,
+                --div--;LLL:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.affiliations,
                     departments, laboratories, groups,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.profiles,
                     profile_google_scholar, profile_research_gate, profile_github, profile_orcid, profile_linkedin,

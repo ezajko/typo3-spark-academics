@@ -106,8 +106,11 @@ class PersonController extends ActionController
         return $this->htmlResponse();
     }
 
-    public function showAction(Person $person): ResponseInterface
+    public function showAction(?Person $person = null): ResponseInterface
     {
+        if ($person === null) {
+            return $this->htmlResponse('Please select a person.');
+        }
         $this->view->assign('person', $person);
         return $this->htmlResponse();
     }

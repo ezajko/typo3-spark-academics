@@ -11,30 +11,45 @@
                             <primary_department>
                                 <label>Primary Department</label>
                                 <config>
-                                    <type>group</type>
-                                    <allowed>tx_spark_department</allowed>
-                                    <size>1</size>
-                                    <maxitems>1</maxitems>
+                                    <type>select</type>
+                                    <renderType>selectSingle</renderType>
+                                    <foreign_table>tx_spark_department</foreign_table>
+                                    <items>
+                                        <numIndex index="0">
+                                            <label>-- All Departments --</label>
+                                            <value>0</value>
+                                        </numIndex>
+                                    </items>
                                     <minitems>0</minitems>
                                 </config>
                             </primary_department>
                             <academic_rank>
                                 <label>Academic Rank</label>
                                 <config>
-                                    <type>group</type>
-                                    <allowed>tx_spark_person_academic_rank</allowed>
-                                    <size>1</size>
-                                    <maxitems>1</maxitems>
+                                    <type>select</type>
+                                    <renderType>selectSingle</renderType>
+                                    <foreign_table>tx_spark_person_academic_rank</foreign_table>
+                                    <items>
+                                        <numIndex index="0">
+                                            <label>-- All Ranks --</label>
+                                            <value>0</value>
+                                        </numIndex>
+                                    </items>
                                     <minitems>0</minitems>
                                 </config>
                             </academic_rank>
                             <academic_title>
                                 <label>Academic Title</label>
                                 <config>
-                                    <type>group</type>
-                                    <allowed>tx_spark_person_academic_title</allowed>
-                                    <size>1</size>
-                                    <maxitems>1</maxitems>
+                                    <type>select</type>
+                                    <renderType>selectSingle</renderType>
+                                    <foreign_table>tx_spark_person_academic_title</foreign_table>
+                                    <items>
+                                        <numIndex index="0">
+                                            <label>-- All Titles --</label>
+                                            <value>0</value>
+                                        </numIndex>
+                                    </items>
                                     <minitems>0</minitems>
                                 </config>
                             </academic_title>

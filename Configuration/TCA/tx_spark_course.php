@@ -4,7 +4,7 @@ defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_research_group',
+        'title' => 'Course',
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -19,7 +19,7 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'title,description',
+        'searchFields' => 'title,acronym,uuid',
         'iconfile' => 'EXT:spark_academics/Resources/Public/Icons/Extension.svg',
     ],
     'types' => [
@@ -53,8 +53,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_spark_research_group',
-                'foreign_table_where' => 'AND {#tx_spark_research_group}.{#pid}=###CURRENT_PID### AND {#tx_spark_research_group}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_spark_course',
+                'foreign_table_where' => 'AND {#tx_spark_course}.{#pid}=###CURRENT_PID### AND {#tx_spark_course}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -116,17 +116,6 @@ return [
                 'eval' => 'trim,required'
             ],
         ],
-        'description' => [
-            'exclude' => true,
-            'label' => 'Description',
-            'config' => [
-                'type' => 'text',
-                'cols' => 40,
-                'rows' => 15,
-                'eval' => 'trim',
-                'enableRichtext' => true,
-            ],
-        ],
         'acronym' => [
             'exclude' => true,
             'label' => 'Acronym',
@@ -145,6 +134,17 @@ return [
                 'eval' => 'trim'
             ],
         ],
+        'description' => [
+            'exclude' => true,
+            'label' => 'Description',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim',
+                'enableRichtext' => true,
+            ],
+        ],
         'be_users' => [
             'exclude' => true,
             'label' => 'Editors',
@@ -152,7 +152,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'be_users',
-                'MM' => 'tx_spark_research_group_beuser_mm',
+                'MM' => 'tx_spark_course_beuser_mm',
                 'size' => 5,
                 'maxitems' => 99,
             ],
@@ -164,8 +164,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_spark_person',
-                'MM' => 'tx_spark_person_research_group_mm',
-                'MM_opposite_field' => 'groups',
+                'MM' => 'tx_spark_person_course_mm',
                 'size' => 10,
                 'maxitems' => 9999,
             ],

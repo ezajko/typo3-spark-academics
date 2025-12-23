@@ -4,12 +4,32 @@ declare(strict_types=1);
 
 namespace EtfUnsa\SparkAcademics\Domain\Model;
 
+use TYPO3\CMS\Beuser\Domain\Model\BackendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class ResearchLab extends AbstractEntity
 {
     protected string $title = '';
+    protected string $acronym = '';
+    protected string $uuid = '';
     protected string $description = '';
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser>
+     */
+    protected ?ObjectStorage $beUsers = null;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Person>
+     */
+    protected ?ObjectStorage $persons = null;
+
+    public function __construct()
+    {
+        $this->beUsers = new ObjectStorage();
+        $this->persons = new ObjectStorage();
+    }
 
     public function getTitle(): string
     {
@@ -21,6 +41,26 @@ class ResearchLab extends AbstractEntity
         $this->title = $title;
     }
 
+    public function getAcronym(): string
+    {
+        return $this->acronym;
+    }
+
+    public function setAcronym(string $acronym): void
+    {
+        $this->acronym = $acronym;
+    }
+
+    public function getUuid(): string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(string $uuid): void
+    {
+        $this->uuid = $uuid;
+    }
+
     public function getDescription(): string
     {
         return $this->description;
@@ -29,5 +69,37 @@ class ResearchLab extends AbstractEntity
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser>
+     */
+    public function getBeUsers(): ?ObjectStorage
+    {
+        return $this->beUsers;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser> $beUsers
+     */
+    public function setBeUsers(ObjectStorage $beUsers): void
+    {
+        $this->beUsers = $beUsers;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Person>
+     */
+    public function getPersons(): ?ObjectStorage
+    {
+        return $this->persons;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Person> $persons
+     */
+    public function setPersons(ObjectStorage $persons): void
+    {
+        $this->persons = $persons;
     }
 }

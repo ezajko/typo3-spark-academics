@@ -6,11 +6,29 @@
 			<trans-unit id="academic_category">
 				<source>Academic</source>
 			</trans-unit>
-			<trans-unit id="mlang_tabs_tab">
+			<trans-unit id="person">
 				<source>My Person</source>
 			</trans-unit>
-			<trans-unit id="mlang_labels_tabdescr">
-				<source>Manage your academic person profile</source>
+			<trans-unit id="department">
+				<source>My Departments</source>
+			</trans-unit>
+			<trans-unit id="lab">
+				<source>My Labs</source>
+			</trans-unit>
+			<trans-unit id="group">
+				<source>My Groups</source>
+			</trans-unit>
+			<trans-unit id="chair">
+				<source>My Chairs</source>
+			</trans-unit>
+			<trans-unit id="course">
+				<source>My Courses</source>
+			</trans-unit>
+			<trans-unit id="program">
+				<source>My Study Programs</source>
+			</trans-unit>
+			<trans-unit id="project">
+				<source>My Projects</source>
 			</trans-unit>
 		</body>
 	</file>

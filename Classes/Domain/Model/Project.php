@@ -8,7 +8,7 @@ use TYPO3\CMS\Beuser\Domain\Model\BackendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class ResearchGroup extends AbstractEntity
+class Project extends AbstractEntity
 {
     protected string $title = '';
     protected string $acronym = '';

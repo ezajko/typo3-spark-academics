@@ -23,7 +23,18 @@ return [
         'iconfile' => 'EXT:spark_academics/Resources/Public/Icons/Extension.svg',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => [
+            'showitem' => '
+                --div--;General,
+                    hidden, title, acronym, uuid, description,
+                --div--;Editors,
+                    be_users,
+                --div--;People,
+                    persons,
+                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
+                    starttime, endtime
+            '
+        ],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -114,6 +125,49 @@ return [
                 'rows' => 15,
                 'eval' => 'trim',
                 'enableRichtext' => true,
+            ],
+        ],
+        'acronym' => [
+            'exclude' => true,
+            'label' => 'Acronym',
+            'config' => [
+                'type' => 'input',
+                'size' => 10,
+                'eval' => 'trim'
+            ],
+        ],
+        'uuid' => [
+            'exclude' => true,
+            'label' => 'UUID',
+            'config' => [
+                'type' => 'input',
+                'size' => 36,
+                'eval' => 'trim'
+            ],
+        ],
+        'be_users' => [
+            'exclude' => true,
+            'label' => 'Editors',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'be_users',
+                'MM' => 'tx_spark_research_lab_beuser_mm',
+                'size' => 5,
+                'maxitems' => 99,
+            ],
+        ],
+        'persons' => [
+            'exclude' => true,
+            'label' => 'Members',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_person',
+                'MM' => 'tx_spark_person_research_lab_mm',
+                'MM_opposite_field' => 'laboratories',
+                'size' => 10,
+                'maxitems' => 9999,
             ],
         ],
     ],

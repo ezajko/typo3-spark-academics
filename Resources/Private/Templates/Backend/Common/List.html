@@ -1,0 +1,50 @@
+<f:layout name="Module" />
+
+<f:section name="Content">
+    <div class="module-body">
+        <h1>
+            {title}
+        </h1>
+
+        <f:if condition="{items}">
+            <f:then>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+                    <f:for each="{items}" as="itemData">
+                        <div class="col">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div>
+                                            <h5 class="card-title mb-1">{itemData.item.title}</h5>
+                                            <f:if condition="{itemData.item.acronym}">
+                                                <p class="card-text small text-muted mb-0">({itemData.item.acronym})</p>
+                                            </f:if>
+                                        </div>
+                                    </div>
+
+                                    <f:if condition="{itemData.item.uuid}">
+                                        <p class="card-text small text-muted mb-3">
+                                            ID: {itemData.item.uuid}
+                                        </p>
+                                    </f:if>
+
+                                    <a href="{itemData.editUrl}" class="btn btn-primary w-100">
+                                        <core:icon identifier="actions-open" size="small" />
+                                        <f:translate
+                                            key="LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.edit" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </f:for>
+                </div>
+            </f:then>
+            <f:else>
+                <div class="alert alert-info shadow-sm p-4 text-center">
+                    <i class="bi bi-info-circle h2 d-block mb-3"></i>
+                    <p class="lead mb-0">Niste povezani ni sa jednim zapisom. Molimo kontaktirajte administratora.</p>
+                </div>
+            </f:else>
+        </f:if>
+    </div>
+</f:section>

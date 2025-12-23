@@ -35,38 +35,34 @@ class Person extends AbstractEntity
     protected ObjectStorage $laboratories;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ResearchGroup>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Chair>
      */
-    protected ObjectStorage $groups;
-
-    protected ?Department $primaryDepartment = null;
-    protected ?AcademicTitle $academicTitle = null;
-    protected ?AcademicRank $academicRank = null;
-
-    protected string $contactEmail = '';
-    protected string $contactWebsite = '';
-
-    protected string $profileGoogleScholar = '';
-    protected string $profileResearchGate = '';
-    protected string $profileGithub = '';
-    protected string $profileOrcid = '';
-    protected string $profileLinkedin = '';
+    protected ObjectStorage $chairs;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference|null
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Course>
      */
-    protected ?FileReference $mediaImage = null;
+    protected ObjectStorage $courses;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference|null
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\StudyProgram>
      */
-    protected ?FileReference $biographyFilePdf = null;
+    protected ObjectStorage $studyPrograms;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Project>
+     */
+    protected ObjectStorage $projects;
 
     public function __construct() {
         $this->beUsers = new ObjectStorage();
         $this->departments = new ObjectStorage();
         $this->laboratories = new ObjectStorage();
         $this->groups = new ObjectStorage();
+        $this->chairs = new ObjectStorage();
+        $this->courses = new ObjectStorage();
+        $this->studyPrograms = new ObjectStorage();
+        $this->projects = new ObjectStorage();
     }
 
     public function getFirstName(): string
@@ -293,5 +289,45 @@ class Person extends AbstractEntity
     public function setAcademicRank(?AcademicRank $academicRank): void
     {
         $this->academicRank = $academicRank;
+    }
+
+    public function getChairs(): ObjectStorage
+    {
+        return $this->chairs;
+    }
+
+    public function setChairs(ObjectStorage $chairs): void
+    {
+        $this->chairs = $chairs;
+    }
+
+    public function getCourses(): ObjectStorage
+    {
+        return $this->courses;
+    }
+
+    public function setCourses(ObjectStorage $courses): void
+    {
+        $this->courses = $courses;
+    }
+
+    public function getStudyPrograms(): ObjectStorage
+    {
+        return $this->studyPrograms;
+    }
+
+    public function setStudyPrograms(ObjectStorage $studyPrograms): void
+    {
+        $this->studyPrograms = $studyPrograms;
+    }
+
+    public function getProjects(): ObjectStorage
+    {
+        return $this->projects;
+    }
+
+    public function setProjects(ObjectStorage $projects): void
+    {
+        $this->projects = $projects;
     }
 }

@@ -40,7 +40,7 @@ class PersonRepository extends Repository
         }
 
         if (!empty($constraints)) {
-            $query->matching($query->and(...$constraints));
+            $query->matching($query->logicalAnd(...$constraints));
         }
 
         return $query->execute();

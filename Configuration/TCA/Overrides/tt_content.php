@@ -57,3 +57,14 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sparkacademi
     'sparkacademics_pi5',
     'FILE:EXT:spark_academics/Configuration/FlexForms/Person/ListFiltered.xml'
 );
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'SparkAcademics',
+    'PiTest',
+    'DEBUG: FlexForm Test',
+    'content-user'
+);
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sparkacademics_pitest'] = 'pi_flexform';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    'sparkacademics_pitest',
+    'FILE:EXT:spark_academics/Configuration/FlexForms/Test.xml'
+);

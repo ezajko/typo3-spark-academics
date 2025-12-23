@@ -1,0 +1,45 @@
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <sheetTitle>Debug Test</sheetTitle>
+                <type>array</type>
+                <el>
+                    <settings.test.input>
+                        <label>1. Simple Input (No TCEforms)</label>
+                        <config>
+                            <type>input</type>
+                            <size>30</size>
+                        </config>
+                    </settings.test.input>
+                    <settings.test.select>
+                        <label>2. Static Select (No TCEforms)</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <label>Option A</label>
+                                    <value>a</value>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <label>Option B</label>
+                                    <value>b</value>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </settings.test.select>
+                    <settings.test.pages>
+                        <label>3. Pages (Group)</label>
+                        <config>
+                            <type>group</type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                        </config>
+                    </settings.test.pages>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

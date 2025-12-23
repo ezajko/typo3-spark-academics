@@ -60,3 +60,11 @@ defined('TYPO3') or die();
         \EtfUnsa\SparkAcademics\Controller\PersonController::class => 'listFiltered',
     ]
 );
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'SparkAcademics',
+    'PiTest',
+    [
+        \EtfUnsa\SparkAcademics\Controller\PersonController::class => 'listAll',
+    ],
+    []
+);

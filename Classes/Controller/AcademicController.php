@@ -68,8 +68,21 @@ class AcademicController extends AbstractFrontendController
     public function listAllAction(): ResponseInterface
     {
         $entityType = $this->settings['entityType'] ?? 'department';
+
+        // DEBUG: Temporary logging to Frontend
+        // \TYPO3\CMS\Core\Utility\DebugUtility::debug($this->settings, 'Settings');
+        // \TYPO3\CMS\Core\Utility\DebugUtility::debug($entityType, 'Entity Type (Raw)');
+
         $repoField = $this->getRepositoryFieldName($entityType);
         
+        // \TYPO3\CMS\Core\Utility\DebugUtility::debug($repoField, 'Resolved Repository Field');
+
+        if (!property_exists($this, $repoField)) {
+             // Debug why it failed
+             // \TYPO3\CMS\Core\Utility\DebugUtility::debug(get_object_vars($this), 'Controller Properties');
+             $repoField = 'departmentRepository'; // Force fallback
+        }
+
         $items = $this->$repoField->findAll();
 
         $this->view->assign('items', $items);
@@ -124,8 +137,39 @@ class AcademicController extends AbstractFrontendController
         ?Project $project = null,
         ?Person $person = null
     ): ResponseInterface {
-        $item = $department ?? $lab ?? $group ?? $chair ?? $course ?? $program ?? $project ?? $person;
+        if ($department) {
+            $item = $department;
+            $entityType = 'department';
+        } elseif ($lab) {
+            $item = $lab;
+            $entityType = 'lab';
+        } elseif ($group) {
+            $item = $group;
+            $entityType = 'group';
+        } elseif ($chair) {
+            $item = $chair;
+            $entityType = 'chair';
+        } elseif ($course) {
+            $item = $course;
+            $entityType = 'course';
+        } elseif ($program) {
+            $item = $program;
+            $entityType = 'program';
+        } elseif ($project) {
+            $item = $project;
+            $entityType = 'project';
+        } elseif ($person) {
+            $item = $person;
+            $entityType = 'person';
+        } else {
+            // Fallback or error handling if needed, though routing usually ensures one is set
+            $item = null;
+            $entityType = 'unknown'; // This will likely still cause the template error, but safer than empty
+        }
+
         $this->view->assign('item', $item);
+        $this->view->assign('entityType', $entityType);
+        $this->view->assign('detailPid', $this->resolveDetailPid($entityType));
 
         return $this->htmlResponse();
     }
@@ -160,11 +204,32 @@ class AcademicController extends AbstractFrontendController
 
     protected function getRepositoryFieldName(string $entityType): string
     {
-        $repoField = $entityType . 'Repository';
-        if ($entityType === 'lab') $repoField = 'labRepository'; 
-        if ($entityType === 'group') $repoField = 'groupRepository';
-        if ($entityType === 'program') $repoField = 'programRepository';
-        if ($entityType === 'person') $repoField = 'personRepository';
-        return $repoField;
+        // Normalize input basics (remove spaces, etc if needed)
+        $normalizedType = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase(trim($entityType));
+        
+        // Explicit mapping to Controller properties
+        switch ($normalizedType) {
+            case 'ResearchLab':
+            case 'Lab':
+                return 'labRepository';
+            case 'ResearchGroup':
+            case 'Group':
+                return 'groupRepository';
+            case 'Chair':
+                return 'chairRepository';
+            case 'Course':
+                return 'courseRepository';
+            case 'StudyProgram':
+            case 'Program':
+                return 'programRepository';
+            case 'Project':
+                return 'projectRepository';
+            case 'Person':
+                return 'personRepository';
+            case 'Department':
+            case 'Dept':
+            default:
+                return 'departmentRepository';
+        }
     }
 }

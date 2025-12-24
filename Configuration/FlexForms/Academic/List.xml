@@ -7,69 +7,98 @@
                 </TCEforms>
                 <type>array</type>
                 <el>
-                    <settings.detailPid>
-                        <TCEforms>
-                            <label>Detail Page (overrides global site setting)</label>
-                            <config>
-                                <type>group</type>
-                                <internal_type>db</internal_type>
-                                <allowed>pages</allowed>
-                                <size>1</size>
-                                <maxitems>1</maxitems>
-                                <minitems>0</minitems>
-                                <show_thumbs>1</show_thumbs>
-                                <suggestOptions>
-                                    <default>
-                                        <searchWholePhrase>1</searchWholePhrase>
-                                    </default>
-                                </suggestOptions>
-                            </config>
-                        </TCEforms>
-                    </settings.detailPid>
-                    
+                    <!-- View Type Selection -->
+                    <settings.viewType>
+                        <label>View Type</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <numIndex index="0">Default (List)</numIndex>
+                                    <numIndex index="1">List</numIndex>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <numIndex index="0">Cards</numIndex>
+                                    <numIndex index="1">Card</numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </settings.viewType>
+
+                    <!-- Entity Type (Triggers Reload) -->
                     <settings.entityType>
-                        <TCEforms>
-                            <label>Entity Type (managed by system)</label>
-                            <config>
-                                <type>select</type>
-                                <renderType>selectSingle</renderType>
-                                <items>
-                                    <numIndex index="0">
-                                        <numIndex index="0">Department</numIndex>
-                                        <numIndex index="1">department</numIndex>
-                                    </numIndex>
-                                    <numIndex index="1">
-                                        <numIndex index="0">Research Lab</numIndex>
-                                        <numIndex index="1">lab</numIndex>
-                                    </numIndex>
-                                    <numIndex index="2">
-                                        <numIndex index="0">Research Group</numIndex>
-                                        <numIndex index="1">group</numIndex>
-                                    </numIndex>
-                                    <numIndex index="3">
-                                        <numIndex index="0">Chair</numIndex>
-                                        <numIndex index="1">chair</numIndex>
-                                    </numIndex>
-                                    <numIndex index="4">
-                                        <numIndex index="0">Course</numIndex>
-                                        <numIndex index="1">course</numIndex>
-                                    </numIndex>
-                                    <numIndex index="5">
-                                        <numIndex index="0">Study Program</numIndex>
-                                        <numIndex index="1">program</numIndex>
-                                    </numIndex>
-                                    <numIndex index="6">
-                                        <numIndex index="0">Project</numIndex>
-                                        <numIndex index="1">project</numIndex>
-                                    </numIndex>
-                                    <numIndex index="7">
-                                        <numIndex index="0">Person</numIndex>
-                                        <numIndex index="1">person</numIndex>
-                                    </numIndex>
-                                </items>
-                            </config>
-                        </TCEforms>
+                        <label>Entity Type</label>
+                        <onChange>reload</onChange>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <numIndex index="0">Department</numIndex>
+                                    <numIndex index="1">Department</numIndex>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <numIndex index="0">Research Lab</numIndex>
+                                    <numIndex index="1">ResearchLab</numIndex>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <numIndex index="0">Research Group</numIndex>
+                                    <numIndex index="1">ResearchGroup</numIndex>
+                                </numIndex>
+                                <numIndex index="3">
+                                    <numIndex index="0">Chair</numIndex>
+                                    <numIndex index="1">Chair</numIndex>
+                                </numIndex>
+                                <numIndex index="4">
+                                    <numIndex index="0">Course</numIndex>
+                                    <numIndex index="1">Course</numIndex>
+                                </numIndex>
+                                <numIndex index="5">
+                                    <numIndex index="0">Study Program</numIndex>
+                                    <numIndex index="1">StudyProgram</numIndex>
+                                </numIndex>
+                                <numIndex index="6">
+                                    <numIndex index="0">Project</numIndex>
+                                    <numIndex index="1">Project</numIndex>
+                                </numIndex>
+                                <numIndex index="7">
+                                    <numIndex index="0">Person</numIndex>
+                                    <numIndex index="1">Person</numIndex>
+                                </numIndex>
+                            </items>
+                        </config>
                     </settings.entityType>
+
+                    <!-- Person Specific Filters (displayCond) -->
+                    <settings.filter.academic_rank>
+                        <label>Filter by Academic Rank</label>
+                        <displayCond>FIELD:settings.entityType:=:Person</displayCond>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <numIndex index="0">All Ranks</numIndex>
+                                    <numIndex index="1">0</numIndex>
+                                </numIndex>
+                            </items>
+                            <foreign_table>tx_spark_academic_rank</foreign_table>
+                        </config>
+                    </settings.filter.academic_rank>
+
+                    <settings.detailPid>
+                        <label>Detail Page (overrides global site setting)</label>
+                        <config>
+                            <type>group</type>
+                            <internal_type>db</internal_type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                            <show_thumbs>1</show_thumbs>
+                        </config>
+                    </settings.detailPid>
                 </el>
             </ROOT>
         </sDEF>

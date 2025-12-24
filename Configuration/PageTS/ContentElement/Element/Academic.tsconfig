@@ -1,0 +1,6 @@
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sDEF.settings\.viewType {
+    addItems {
+        # potentially add items here via other extensions or site packages
+        # portfolio = Portfolio
+    }
+}

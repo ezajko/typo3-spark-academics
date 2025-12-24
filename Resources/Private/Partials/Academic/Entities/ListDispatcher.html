@@ -1,34 +1,17 @@
-<f:if condition="{entityType} == 'person'">
-    <f:then>
-        <f:render partial="Academic/Entities/Person/List" arguments="{persons: items, detailPid: detailPid}" />
-    </f:then>
-    <f:else>
-        <f:if condition="{entityType} == 'lab'">
-            <f:then>
-                <f:render partial="Academic/Entities/ResearchLab/List"
-                    arguments="{items: items, detailPid: detailPid}" />
-            </f:then>
-            <f:else>
-                <f:if condition="{entityType} == 'group'">
-                    <f:then>
-                        <f:render partial="Academic/Entities/ResearchGroup/List"
-                            arguments="{items: items, detailPid: detailPid}" />
-                    </f:then>
-                    <f:else>
-                        <f:if condition="{entityType} == 'program'">
-                            <f:then>
-                                <f:render partial="Academic/Entities/StudyProgram/List"
-                                    arguments="{items: items, detailPid: detailPid}" />
-                            </f:then>
-                            <f:else>
-                                <f:render
-                                    partial="Academic/Entities/{entityType -> f:format.case(mode: 'capital')}/List"
-                                    arguments="{items: items, detailPid: detailPid}" />
-                            </f:else>
-                        </f:if>
-                    </f:else>
-                </f:if>
-            </f:else>
-        </f:if>
-    </f:else>
-</f:if>
+<!-- Dynamic Template Dispatcher -->
+<!-- Renders: Academic/Entities/{EntityType}/{ViewType} -->
+<!-- Default ViewType is 'List' -->
+
+<f:variable name="viewType" value="{settings.viewType -> f:or(alternative: 'List')}" />
+<f:variable name="entity" value="{entityType -> f:format.case(mode: 'capital')}" />
+
+<f:render partial="Academic/Entities/{entity}/{viewType}"
+    arguments="{items: items, settings: settings, detailPid: detailPid}" optional="true">
+    <!-- Fallback if specific view type doesn't exist (e.g. Card), try List -->
+    <f:render partial="Academic/Entities/{entity}/List"
+        arguments="{items: items, settings: settings, detailPid: detailPid}" optional="true">
+        <div class="alert alert-warning">
+            Template partial "Partials/Academic/Entities/{entity}/{viewType}.html" (or fallback List.html) not found.
+        </div>
+    </f:render>
+</f:render>

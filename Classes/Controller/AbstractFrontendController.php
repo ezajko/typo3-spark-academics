@@ -21,19 +21,51 @@ abstract class AbstractFrontendController extends ActionController
             return (int)$this->settings['detailPid'];
         }
 
-        // 2. Site Configuration fallback
+        // 2. Site Configuration / Settings fallback
         /** @var Site $site */
         $site = $this->request->getAttribute('site');
-        $siteSettings = $site->getConfiguration();
-        $fieldName = 'academic_pid_' . $entityType . '_detail';
         
-        // Site configuration stores links as string codes like "t3://page?uid=123"
-        $pidValue = $siteSettings[$fieldName] ?? '';
-        if (strpos($pidValue, 't3://page?uid=') === 0) {
-            return (int)str_replace('t3://page?uid=', '', $pidValue);
+        // Normalize entity type to config key suffix
+        $keyMap = [
+            'researchlab' => 'lab',
+            'lab' => 'lab',
+            'researchgroup' => 'group',
+            'group' => 'group',
+            'department' => 'dept',
+            'dept' => 'dept',
+            'studyprogram' => 'program',
+            'program' => 'program',
+        ];
+        
+        $normalizedType = strtolower($entityType);
+        $configSuffix = $keyMap[$normalizedType] ?? $normalizedType;
+
+        $fieldName = 'academic_pid_' . $configSuffix . '_detail';
+        $pidValue = null;
+
+        // Check Site Configuration (config.yaml)
+        $siteConfig = $site->getConfiguration();
+        if (isset($siteConfig[$fieldName])) {
+            $pidValue = $siteConfig[$fieldName];
         }
 
-        return (int)$pidValue;
+        // Check Site Settings (settings.yaml - TYPO3 v12+)
+        if (!$pidValue && method_exists($site, 'getSettings')) {
+            $siteSettings = $site->getSettings();
+            if (isset($siteSettings[$fieldName])) {
+                $pidValue = $siteSettings[$fieldName];
+            }
+        }
+
+        if ($pidValue) {
+            // Handle t3:// link syntax
+            if (is_string($pidValue) && strpos($pidValue, 't3://page?uid=') === 0) {
+                return (int)str_replace('t3://page?uid=', '', $pidValue);
+            }
+            return (int)$pidValue;
+        }
+
+        return 0;
     }
 
     /**

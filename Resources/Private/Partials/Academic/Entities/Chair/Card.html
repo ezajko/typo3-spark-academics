@@ -5,10 +5,19 @@
             <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title">{item.title}</h5>
-                    <f:link.action action="show" arguments="{chair: item}" pageUid="{detailPid}"
-                        class="btn btn-primary btn-sm mt-3">
-                        Read more
-                    </f:link.action>
+                    <f:if condition="{item.landingPage}">
+                        <f:then>
+                            <f:link.page pageUid="{item.landingPage}" class="btn btn-primary btn-sm mt-3">
+                                Read more
+                            </f:link.page>
+                        </f:then>
+                        <f:else>
+                            <f:link.action action="show" arguments="{chair: item}" pageUid="{detailPid}"
+                                class="btn btn-primary btn-sm mt-3">
+                                Read more
+                            </f:link.action>
+                        </f:else>
+                    </f:if>
                 </div>
             </div>
         </div>

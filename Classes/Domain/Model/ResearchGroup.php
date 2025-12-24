@@ -14,6 +14,7 @@ class ResearchGroup extends AbstractEntity
     protected string $acronym = '';
     protected string $uuid = '';
     protected string $description = '';
+    protected int $landingPage = 0;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser>
@@ -101,5 +102,14 @@ class ResearchGroup extends AbstractEntity
     public function setPersons(ObjectStorage $persons): void
     {
         $this->persons = $persons;
+    }
+    public function getLandingPage(): int
+    {
+        return $this->landingPage;
+    }
+
+    public function setLandingPage(int $landingPage): void
+    {
+        $this->landingPage = $landingPage;
     }
 }

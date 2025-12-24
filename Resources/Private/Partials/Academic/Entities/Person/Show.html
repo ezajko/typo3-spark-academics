@@ -41,8 +41,17 @@
         <th>Primary Department:</th>
         <td>
             <f:if condition="{person.primaryDepartment}">
-                <f:link.action action="show" arguments="{department: person.primaryDepartment}" pageUid="{detailPid}">
-                    {person.primaryDepartment.title}</f:link.action>
+                <f:if condition="{person.primaryDepartment.landingPage}">
+                    <f:then>
+                        <f:link.page pageUid="{person.primaryDepartment.landingPage}">{person.primaryDepartment.title}
+                        </f:link.page>
+                    </f:then>
+                    <f:else>
+                        <f:link.action action="show" arguments="{department: person.primaryDepartment}"
+                            pageUid="{detailPid}">
+                            {person.primaryDepartment.title}</f:link.action>
+                    </f:else>
+                </f:if>
             </f:if>
         </td>
     </tr>
@@ -58,8 +67,15 @@
         <th>Departments:</th>
         <td>
             <f:for each="{person.departments}" as="dept" iteration="i">
-                <f:link.action action="show" arguments="{department: dept}" pageUid="{detailPid}">{dept.title}
-                </f:link.action>
+                <f:if condition="{dept.landingPage}">
+                    <f:then>
+                        <f:link.page pageUid="{dept.landingPage}">{dept.title}</f:link.page>
+                    </f:then>
+                    <f:else>
+                        <f:link.action action="show" arguments="{department: dept}" pageUid="{detailPid}">{dept.title}
+                        </f:link.action>
+                    </f:else>
+                </f:if>
                 <f:if condition="{i.isLast}">
                     <f:else>, </f:else>
                 </f:if>
@@ -70,7 +86,15 @@
         <th>Labs:</th>
         <td>
             <f:for each="{person.laboratories}" as="lab" iteration="i">
-                <f:link.action action="show" arguments="{lab: lab}" pageUid="{detailPid}">{lab.title}</f:link.action>
+                <f:if condition="{lab.landingPage}">
+                    <f:then>
+                        <f:link.page pageUid="{lab.landingPage}">{lab.title}</f:link.page>
+                    </f:then>
+                    <f:else>
+                        <f:link.action action="show" arguments="{lab: lab}" pageUid="{detailPid}">{lab.title}
+                        </f:link.action>
+                    </f:else>
+                </f:if>
                 <f:if condition="{i.isLast}">
                     <f:else>, </f:else>
                 </f:if>
@@ -81,8 +105,15 @@
         <th>Groups:</th>
         <td>
             <f:for each="{person.groups}" as="group" iteration="i">
-                <f:link.action action="show" arguments="{group: group}" pageUid="{detailPid}">{group.title}
-                </f:link.action>
+                <f:if condition="{group.landingPage}">
+                    <f:then>
+                        <f:link.page pageUid="{group.landingPage}">{group.title}</f:link.page>
+                    </f:then>
+                    <f:else>
+                        <f:link.action action="show" arguments="{group: group}" pageUid="{detailPid}">{group.title}
+                        </f:link.action>
+                    </f:else>
+                </f:if>
                 <f:if condition="{i.isLast}">
                     <f:else>, </f:else>
                 </f:if>
@@ -93,8 +124,15 @@
         <th>Chairs:</th>
         <td>
             <f:for each="{person.chairs}" as="chair" iteration="i">
-                <f:link.action action="show" arguments="{chair: chair}" pageUid="{detailPid}">{chair.title}
-                </f:link.action>
+                <f:if condition="{chair.landingPage}">
+                    <f:then>
+                        <f:link.page pageUid="{chair.landingPage}">{chair.title}</f:link.page>
+                    </f:then>
+                    <f:else>
+                        <f:link.action action="show" arguments="{chair: chair}" pageUid="{detailPid}">{chair.title}
+                        </f:link.action>
+                    </f:else>
+                </f:if>
                 <f:if condition="{i.isLast}">
                     <f:else>, </f:else>
                 </f:if>
@@ -105,8 +143,15 @@
         <th>Courses:</th>
         <td>
             <f:for each="{person.courses}" as="course" iteration="i">
-                <f:link.action action="show" arguments="{course: course}" pageUid="{detailPid}">{course.title}
-                </f:link.action>
+                <f:if condition="{course.landingPage}">
+                    <f:then>
+                        <f:link.page pageUid="{course.landingPage}">{course.title}</f:link.page>
+                    </f:then>
+                    <f:else>
+                        <f:link.action action="show" arguments="{course: course}" pageUid="{detailPid}">{course.title}
+                        </f:link.action>
+                    </f:else>
+                </f:if>
                 <f:if condition="{i.isLast}">
                     <f:else>, </f:else>
                 </f:if>
@@ -117,8 +162,15 @@
         <th>Programs:</th>
         <td>
             <f:for each="{person.studyPrograms}" as="prog" iteration="i">
-                <f:link.action action="show" arguments="{program: prog}" pageUid="{detailPid}">{prog.title}
-                </f:link.action>
+                <f:if condition="{prog.landingPage}">
+                    <f:then>
+                        <f:link.page pageUid="{prog.landingPage}">{prog.title}</f:link.page>
+                    </f:then>
+                    <f:else>
+                        <f:link.action action="show" arguments="{program: prog}" pageUid="{detailPid}">{prog.title}
+                        </f:link.action>
+                    </f:else>
+                </f:if>
                 <f:if condition="{i.isLast}">
                     <f:else>, </f:else>
                 </f:if>
@@ -129,8 +181,15 @@
         <th>Projects:</th>
         <td>
             <f:for each="{person.projects}" as="proj" iteration="i">
-                <f:link.action action="show" arguments="{project: proj}" pageUid="{detailPid}">{proj.title}
-                </f:link.action>
+                <f:if condition="{proj.landingPage}">
+                    <f:then>
+                        <f:link.page pageUid="{proj.landingPage}">{proj.title}</f:link.page>
+                    </f:then>
+                    <f:else>
+                        <f:link.action action="show" arguments="{project: proj}" pageUid="{detailPid}">{proj.title}
+                        </f:link.action>
+                    </f:else>
+                </f:if>
                 <f:if condition="{i.isLast}">
                     <f:else>, </f:else>
                 </f:if>

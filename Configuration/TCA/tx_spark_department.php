@@ -26,7 +26,7 @@ return [
         '1' => [
             'showitem' => '
                 --div--;General,
-                    hidden, title, acronym, uuid, description,
+                    hidden, landing_page, title, acronym, uuid, description,
                 --div--;Editors,
                     be_users,
                 --div--;People,
@@ -105,6 +105,18 @@ return [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
                 ]
+            ],
+        ],
+        'landing_page' => [
+            'exclude' => true,
+            'label' => 'Landing Page',
+            'config' => [
+                'type' => 'group',
+                'allowed' => 'pages',
+                'maxitems' => 1,
+                'minitems' => 0,
+                'size' => 1,
+                'default' => 0,
             ],
         ],
         'title' => [

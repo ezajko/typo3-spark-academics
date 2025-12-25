@@ -1,17 +1,14 @@
-<!-- Dynamic Template Dispatcher -->
-<!-- Renders: Academic/Entities/{EntityType}/{ViewType} -->
-<!-- Default ViewType is 'List' -->
-
 <f:variable name="viewType" value="{settings.viewType -> f:or(alternative: 'List')}" />
 <f:variable name="entity" value="{entityType -> f:format.case(mode: 'capital')}" />
 
-<f:render partial="Academic/Entities/{entity}/{viewType}"
+<f:render partial="Academic/Entities/{entity}/List/{viewType}"
     arguments="{items: items, settings: settings, detailPid: detailPid}" optional="true">
-    <!-- Fallback if specific view type doesn't exist (e.g. Card), try List -->
-    <f:render partial="Academic/Entities/{entity}/List"
+    <!-- Fallback if specific view type doesn't exist -->
+    <f:render partial="Academic/Entities/{entity}/List/List"
         arguments="{items: items, settings: settings, detailPid: detailPid}" optional="true">
         <div class="alert alert-warning">
-            Template partial "Partials/Academic/Entities/{entity}/{viewType}.html" (or fallback List.html) not found.
+            Template partial "Partials/Academic/Entities/{entity}/List/{viewType}.html" (or fallback List/List.html) not
+            found.
         </div>
     </f:render>
 </f:render>

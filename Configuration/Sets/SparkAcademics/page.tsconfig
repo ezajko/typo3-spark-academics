@@ -1,3 +1,5 @@
 #
 # PageTS for spark_academics
 #
+
+@import 'EXT:spark_academics/Configuration/PageTS/ContentElement/Element/Academic.tsconfig'

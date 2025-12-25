@@ -3,41 +3,9 @@
 <f:section name="Main">
     <f:if condition="{item}">
         <f:then>
-            <f:if condition="{entityType} == 'person'">
-                <f:then>
-                    <f:render partial="Academic/Entities/Person/Show"
-                        arguments="{person: item, detailPid: detailPid}" />
-                </f:then>
-                <f:else>
-                    <f:if condition="{entityType} == 'lab'">
-                        <f:then>
-                            <f:render partial="Academic/Entities/ResearchLab/Show"
-                                arguments="{item: item, detailPid: detailPid}" />
-                        </f:then>
-                        <f:else>
-                            <f:if condition="{entityType} == 'group'">
-                                <f:then>
-                                    <f:render partial="Academic/Entities/ResearchGroup/Show"
-                                        arguments="{item: item, detailPid: detailPid}" />
-                                </f:then>
-                                <f:else>
-                                    <f:if condition="{entityType} == 'program'">
-                                        <f:then>
-                                            <f:render partial="Academic/Entities/StudyProgram/Show"
-                                                arguments="{item: item, detailPid: detailPid}" />
-                                        </f:then>
-                                        <f:else>
-                                            <f:render
-                                                partial="Academic/Entities/{entityType -> f:format.case(mode: 'capital')}/Show"
-                                                arguments="{item: item, detailPid: detailPid}" />
-                                        </f:else>
-                                    </f:if>
-                                </f:else>
-                            </f:if>
-                        </f:else>
-                    </f:if>
-                </f:else>
-            </f:if>
+            <f:variable name="viewType" value="{settings.viewType -> f:or(alternative: 'Default')}" />
+            <f:render partial="Academic/Entities/{entityType}/Show/{viewType}"
+                arguments="{item: item, detailPid: detailPid}" />
         </f:then>
         <f:else>
             <p>Item not found.</p>

@@ -1,55 +1,55 @@
 <table>
     <tr>
         <th>UID:</th>
-        <td>{person.uid}</td>
+        <td>{item.uid}</td>
     </tr>
     <tr>
         <th>First Name:</th>
-        <td>{person.firstName}</td>
+        <td>{item.firstName}</td>
     </tr>
     <tr>
         <th>Last Name:</th>
-        <td>{person.lastName}</td>
+        <td>{item.lastName}</td>
     </tr>
     <tr>
         <th>Biography:</th>
         <td>
-            <f:format.html>{person.biography}</f:format.html>
+            <f:format.html>{item.biography}</f:format.html>
         </td>
     </tr>
     <tr>
         <th>Email:</th>
-        <td>{person.contactEmail}</td>
+        <td>{item.contactEmail}</td>
     </tr>
     <tr>
         <th>Office:</th>
-        <td>{person.contactOffice}</td>
+        <td>{item.contactOffice}</td>
     </tr>
     <tr>
         <th>Phone Office:</th>
-        <td>{person.phoneOffice}</td>
+        <td>{item.phoneOffice}</td>
     </tr>
     <tr>
         <th>Phone Mobile:</th>
-        <td>{person.phoneMobile}</td>
+        <td>{item.phoneMobile}</td>
     </tr>
     <tr>
         <th>Website:</th>
-        <td>{person.contactWebsite}</td>
+        <td>{item.contactWebsite}</td>
     </tr>
     <tr>
         <th>Primary Department:</th>
         <td>
-            <f:if condition="{person.primaryDepartment}">
-                <f:if condition="{person.primaryDepartment.landingPage}">
+            <f:if condition="{item.primaryDepartment}">
+                <f:if condition="{item.primaryDepartment.landingPage}">
                     <f:then>
-                        <f:link.page pageUid="{person.primaryDepartment.landingPage}">{person.primaryDepartment.title}
+                        <f:link.page pageUid="{item.primaryDepartment.landingPage}">{item.primaryDepartment.title}
                         </f:link.page>
                     </f:then>
                     <f:else>
                         <f:link.action action="show" arguments="{department: person.primaryDepartment}"
                             pageUid="{detailPid}">
-                            {person.primaryDepartment.title}</f:link.action>
+                            {item.primaryDepartment.title}</f:link.action>
                     </f:else>
                 </f:if>
             </f:if>
@@ -57,16 +57,16 @@
     </tr>
     <tr>
         <th>Academic Title:</th>
-        <td>{person.academicTitle.title}</td>
+        <td>{item.academicTitle.title}</td>
     </tr>
     <tr>
         <th>Academic Rank:</th>
-        <td>{person.academicRank.title}</td>
+        <td>{item.academicRank.title}</td>
     </tr>
     <tr>
         <th>Departments:</th>
         <td>
-            <f:for each="{person.departments}" as="dept" iteration="i">
+            <f:for each="{item.departments}" as="dept" iteration="i">
                 <f:if condition="{dept.landingPage}">
                     <f:then>
                         <f:link.page pageUid="{dept.landingPage}">{dept.title}</f:link.page>
@@ -85,7 +85,7 @@
     <tr>
         <th>Labs:</th>
         <td>
-            <f:for each="{person.laboratories}" as="lab" iteration="i">
+            <f:for each="{item.laboratories}" as="lab" iteration="i">
                 <f:if condition="{lab.landingPage}">
                     <f:then>
                         <f:link.page pageUid="{lab.landingPage}">{lab.title}</f:link.page>
@@ -104,7 +104,7 @@
     <tr>
         <th>Groups:</th>
         <td>
-            <f:for each="{person.groups}" as="group" iteration="i">
+            <f:for each="{item.groups}" as="group" iteration="i">
                 <f:if condition="{group.landingPage}">
                     <f:then>
                         <f:link.page pageUid="{group.landingPage}">{group.title}</f:link.page>
@@ -123,7 +123,7 @@
     <tr>
         <th>Chairs:</th>
         <td>
-            <f:for each="{person.chairs}" as="chair" iteration="i">
+            <f:for each="{item.chairs}" as="chair" iteration="i">
                 <f:if condition="{chair.landingPage}">
                     <f:then>
                         <f:link.page pageUid="{chair.landingPage}">{chair.title}</f:link.page>
@@ -142,7 +142,7 @@
     <tr>
         <th>Courses:</th>
         <td>
-            <f:for each="{person.courses}" as="course" iteration="i">
+            <f:for each="{item.courses}" as="course" iteration="i">
                 <f:if condition="{course.landingPage}">
                     <f:then>
                         <f:link.page pageUid="{course.landingPage}">{course.title}</f:link.page>
@@ -161,7 +161,7 @@
     <tr>
         <th>Programs:</th>
         <td>
-            <f:for each="{person.studyPrograms}" as="prog" iteration="i">
+            <f:for each="{item.studyPrograms}" as="prog" iteration="i">
                 <f:if condition="{prog.landingPage}">
                     <f:then>
                         <f:link.page pageUid="{prog.landingPage}">{prog.title}</f:link.page>
@@ -180,7 +180,7 @@
     <tr>
         <th>Projects:</th>
         <td>
-            <f:for each="{person.projects}" as="proj" iteration="i">
+            <f:for each="{item.projects}" as="proj" iteration="i">
                 <f:if condition="{proj.landingPage}">
                     <f:then>
                         <f:link.page pageUid="{proj.landingPage}">{proj.title}</f:link.page>

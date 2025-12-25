@@ -21,37 +21,44 @@ use EtfUnsa\SparkAcademics\Domain\Repository\ProjectRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\ResearchGroupRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\ResearchLabRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\StudyProgramRepository;
+use TYPO3\CMS\Core\Site\Entity\Site;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use Psr\Http\Message\ResponseInterface;
+use EtfUnsa\SparkAcademics\Service\DemandService;
 
-class AcademicController extends AbstractFrontendController
+class AcademicController extends ActionController
 {
     protected DepartmentRepository $departmentRepository;
-    protected ResearchLabRepository $labRepository;
-    protected ResearchGroupRepository $groupRepository;
+    protected ResearchLabRepository $researchLabRepository;
+    protected ResearchGroupRepository $researchGroupRepository;
     protected ChairRepository $chairRepository;
     protected CourseRepository $courseRepository;
-    protected StudyProgramRepository $programRepository;
+    protected StudyProgramRepository $studyProgramRepository;
     protected ProjectRepository $projectRepository;
     protected PersonRepository $personRepository;
+    protected DemandService $demandService;
 
     public function __construct(
         DepartmentRepository $departmentRepository,
-        ResearchLabRepository $labRepository,
-        ResearchGroupRepository $groupRepository,
+        ResearchLabRepository $researchLabRepository,
+        ResearchGroupRepository $researchGroupRepository,
         ChairRepository $chairRepository,
         CourseRepository $courseRepository,
-        StudyProgramRepository $programRepository,
+        StudyProgramRepository $studyProgramRepository,
         ProjectRepository $projectRepository,
-        PersonRepository $personRepository
+        PersonRepository $personRepository,
+        DemandService $demandService
     ) {
         $this->departmentRepository = $departmentRepository;
-        $this->labRepository = $labRepository;
-        $this->groupRepository = $groupRepository;
+        $this->researchLabRepository = $researchLabRepository;
+        $this->researchGroupRepository = $researchGroupRepository;
         $this->chairRepository = $chairRepository;
         $this->courseRepository = $courseRepository;
-        $this->programRepository = $programRepository;
+        $this->studyProgramRepository = $studyProgramRepository;
         $this->projectRepository = $projectRepository;
         $this->personRepository = $personRepository;
+        $this->demandService = $demandService;
     }
 
     /**
@@ -59,65 +66,39 @@ class AcademicController extends AbstractFrontendController
      */
     public function listAction(): ResponseInterface
     {
-        return $this->listAllAction();
+        return $this->dispatchListAction($this->settings);
     }
 
-    /**
-     * Generic list all action
-     */
     public function listAllAction(): ResponseInterface
     {
-        $entityType = $this->settings['entityType'] ?? 'department';
-
-        // DEBUG: Temporary logging to Frontend
-        // \TYPO3\CMS\Core\Utility\DebugUtility::debug($this->settings, 'Settings');
-        // \TYPO3\CMS\Core\Utility\DebugUtility::debug($entityType, 'Entity Type (Raw)');
-
-        $repoField = $this->getRepositoryFieldName($entityType);
-        
-        // \TYPO3\CMS\Core\Utility\DebugUtility::debug($repoField, 'Resolved Repository Field');
-
-        if (!property_exists($this, $repoField)) {
-             // Debug why it failed
-             // \TYPO3\CMS\Core\Utility\DebugUtility::debug(get_object_vars($this), 'Controller Properties');
-             $repoField = 'departmentRepository'; // Force fallback
-        }
-
-        $items = $this->$repoField->findAll();
-
-        $this->view->assign('items', $items);
-        $this->view->assign('entityType', $entityType);
-        $this->view->assign('detailPid', $this->resolveDetailPid($entityType));
-
-        return $this->htmlResponse();
+        return $this->dispatchListAction($this->settings);
     }
 
-    /**
-     * Generic list selected action (using group selector in FlexForm)
-     */
     public function listSelectedAction(): ResponseInterface
     {
-        $entityType = $this->settings['entityType'] ?? 'department';
-        $selectionField = $this->settings['selectionField'] ?? strtolower($entityType) . 's'; // e.g. 'persons', 'departments'
-        
-        $items = $this->getItemsFromSelection($selectionField);
-
-        $this->view->assign('items', $items);
-        $this->view->assign('entityType', $entityType);
-        $this->view->assign('detailPid', $this->resolveDetailPid($entityType));
-
-        return $this->htmlResponse();
+        return $this->dispatchListAction($this->settings);
     }
 
-    /**
-     * Generic filtered list action
-     */
     public function listFilteredAction(): ResponseInterface
     {
-        $entityType = $this->settings['entityType'] ?? 'department';
+        return $this->dispatchListAction($this->settings);
+    }
+
+    protected function dispatchListAction(array $settings): ResponseInterface
+    {
+        $entityType = $settings['entityType'] ?? 'department';
+        
+        // Resolve uids from generic "settings.select.{type}" if not already set
+        if (empty($settings['uids'])) {
+            $suffix = strtolower($entityType);
+            $settings['uids'] = $settings['select'][$suffix] 
+                                ?? $settings['select.' . $suffix] 
+                                ?? '';
+        }
+
         $repoField = $this->getRepositoryFieldName($entityType);
         
-        $demand = $this->createDemandFromSettings();
+        $demand = $this->demandService->createFromSettings($settings);
         $items = $this->$repoField->findByDemand($demand);
 
         $this->view->assign('items', $items);
@@ -137,34 +118,36 @@ class AcademicController extends AbstractFrontendController
         ?Project $project = null,
         ?Person $person = null
     ): ResponseInterface {
-        if ($department) {
-            $item = $department;
-            $entityType = 'department';
-        } elseif ($lab) {
-            $item = $lab;
-            $entityType = 'lab';
-        } elseif ($group) {
-            $item = $group;
-            $entityType = 'group';
-        } elseif ($chair) {
-            $item = $chair;
-            $entityType = 'chair';
-        } elseif ($course) {
-            $item = $course;
-            $entityType = 'course';
-        } elseif ($program) {
-            $item = $program;
-            $entityType = 'program';
-        } elseif ($project) {
-            $item = $project;
-            $entityType = 'project';
-        } elseif ($person) {
-            $item = $person;
-            $entityType = 'person';
-        } else {
-            // Fallback or error handling if needed, though routing usually ensures one is set
-            $item = null;
-            $entityType = 'unknown'; // This will likely still cause the template error, but safer than empty
+        $args = array_filter(get_defined_vars());
+        $item = reset($args); // Get first non-null argument
+        $entityType = ucfirst(key($args));
+
+        if (!$item) {
+             // Try to resolve from settings (Static Selection)
+             $entityType = $this->settings['entityType'] ?? '';
+             if ($entityType) {
+                 $suffix = strtolower($entityType);
+                 $uid = $this->settings['select'][$suffix] ?? $this->settings['select.' . $suffix] ?? 0;
+                 
+                 if ($uid) {
+                     $repoField = $this->getRepositoryFieldName($entityType);
+                     if (property_exists($this, $repoField)) {
+                         $item = $this->$repoField->findByUid((int)$uid);
+                     }
+                 }
+                 // If item found, update entityType to Clean Class Name for consistency
+                 if ($item) {
+                     $entityType = (new \ReflectionClass($item))->getShortName();
+                 }
+             }
+        }
+        
+        if (!$item) { 
+             $item = null;
+             $entityType = 'unknown';
+        } else if (!isset($entityType) || $entityType === 'unknown') {
+             // Fallback if entityType wasn't set above (though it should be)
+             $entityType = (new \ReflectionClass($item))->getShortName();
         }
 
         $this->view->assign('item', $item);
@@ -174,62 +157,51 @@ class AcademicController extends AbstractFrontendController
         return $this->htmlResponse();
     }
 
-    /**
-     * Specialized Demand creation for filters (shared logic)
-     */
-    protected function createDemandFromSettings(): Demand
-    {
-        $demand = parent::createDemandFromSettings();
-        $entityType = $this->settings['entityType'] ?? '';
-
-        // Person-specific filters
-        if ($entityType === 'person') {
-            $primaryDepartmentUid = (int)($this->settings['filter']['primary_department'] ?? $this->settings['filter_primary_department'] ?? 0);
-            $academicRankUid = (int)($this->settings['filter']['academic_rank'] ?? $this->settings['filter_academic_rank'] ?? 0);
-            $academicTitleUid = (int)($this->settings['filter']['academic_title'] ?? $this->settings['filter_academic_title'] ?? 0);
-
-            if ($primaryDepartmentUid > 0) {
-                $demand->addFilter('primaryDepartment', $primaryDepartmentUid);
-            }
-            if ($academicRankUid > 0) {
-                $demand->addFilter('academicRank', $academicRankUid);
-            }
-            if ($academicTitleUid > 0) {
-                $demand->addFilter('academicTitle', $academicTitleUid);
-            }
-        }
-
-        return $demand;
-    }
-
     protected function getRepositoryFieldName(string $entityType): string
     {
-        // Normalize input basics (remove spaces, etc if needed)
-        $normalizedType = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase(trim($entityType));
-        
-        // Explicit mapping to Controller properties
-        switch ($normalizedType) {
-            case 'ResearchLab':
-            case 'Lab':
-                return 'labRepository';
-            case 'ResearchGroup':
-            case 'Group':
-                return 'groupRepository';
-            case 'Chair':
-                return 'chairRepository';
-            case 'Course':
-                return 'courseRepository';
-            case 'StudyProgram':
-            case 'Program':
-                return 'programRepository';
-            case 'Project':
-                return 'projectRepository';
-            case 'Person':
-                return 'personRepository';
-            case 'Department':
-            case 'Dept':
-            default:
-                return 'departmentRepository';
-        }
+        return lcfirst($entityType) . 'Repository';
     }
+
+    protected function resolveDetailPid(string $entityType): int
+    {
+        // 1. FlexForm override
+        if (!empty($this->settings['detailPid'])) {
+            return (int)$this->settings['detailPid'];
+        }
+
+        // 2. Site Configuration / Settings fallback
+        /** @var Site $site */
+        $site = $this->request->getAttribute('site');
+        
+        $configSuffix = strtolower($entityType);
+
+        $fieldName = 'academic_pid_' . $configSuffix . '_detail';
+        $pidValue = null;
+
+        // Check Site Configuration (config.yaml)
+        $siteConfig = $site->getConfiguration();
+        if (isset($siteConfig[$fieldName])) {
+            $pidValue = $siteConfig[$fieldName];
+        }
+
+        // Check Site Settings (settings.yaml - TYPO3 v12+)
+        if (!$pidValue && method_exists($site, 'getSettings')) {
+            $siteSettings = $site->getSettings();
+            if (isset($siteSettings[$fieldName])) {
+                $pidValue = $siteSettings[$fieldName];
+            }
+        }
+
+        if ($pidValue) {
+            // Handle t3:// link syntax
+            if (is_string($pidValue) && strpos($pidValue, 't3://page?uid=') === 0) {
+                return (int)str_replace('t3://page?uid=', '', $pidValue);
+            }
+            return (int)$pidValue;
+        }
+
+        return 0;
+    }
+
+
 }

@@ -1,6 +1,49 @@
+# Configuration for Spark Academics View Types
+# This file controls the available options in the "View Type" dropdown
+# for both the List (Pi1) and Detail (Pi2) plugins.
+
+# Documentation:
+# Use 'addItems' to add new view types to the dropdown.
+# Syntax: Key = Label
+# - Key:   Used in file paths (e.g., Partials/Academic/Entities/Person/List/Key.html)
+# - Label: Visible in the backend dropdown
+#
+# IMPORTANT: The field name "settings.viewType" contains a dot, 
+# so it MUST be escaped as "settings\.viewType" in TSConfig.
+
+# --------------------------------------------------------------------------
+# List Plugin (Pi1)
+# --------------------------------------------------------------------------
 TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sDEF.settings\.viewType {
     addItems {
-        # potentially add items here via other extensions or site packages
-        # portfolio = Portfolio
+        # Existing types (can be renamed here)
+        List = Default (List)
+        Card = Cards
+        Debug = Debug
+        
+        # EXAMPLE: Adding a completely new view type
+        # 1. Add the line below:
+        # portfolio = Portfolio Gallery
+        #
+        # 2. Create the corresponding templates:
+        #    Partials/Academic/Entities/{Entity}/List/Portfolio.html
+    }
+}
+
+# --------------------------------------------------------------------------
+# Detail Plugin (Pi2)
+# --------------------------------------------------------------------------
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi2.sDEF.settings\.viewType {
+    addItems {
+        # Existing types
+        Default = Default
+        Card = Card
+        Debug = Debug
+        
+        # EXAMPLE: Adding a "Mini" view for sidebars
+        # mini = Mini Profile (Sidebar)
+        #
+        # Requires template:
+        # Partials/Academic/Entities/{Entity}/Show/Mini.html
     }
 }

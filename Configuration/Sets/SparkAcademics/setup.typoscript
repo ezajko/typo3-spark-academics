@@ -1,3 +1,7 @@
 #
 # Setup for spark_academics
 #
+# Unify namespace so Pi2 (Detail) can read Pi1 (List) arguments
+plugin.tx_sparkacademics_pi2 {
+    view.pluginNamespace = tx_sparkacademics_pi1
+}

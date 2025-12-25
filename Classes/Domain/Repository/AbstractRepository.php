@@ -23,18 +23,6 @@ abstract class AbstractRepository extends Repository
         $this->setDefaultQuerySettings($querySettings);
     }
 
-    public function findByBackendUser(int $beUserUid)
-    {
-        $querySettings = $this->createQuery()->getQuerySettings();
-        $querySettings->setRespectStoragePage(false);
-        $querySettings->setRespectSysLanguage(false);
-        
-        $demand = new \EtfUnsa\SparkAcademics\Domain\Model\Dto\Demand();
-        $demand->addFilter('beUsers', $beUserUid, 'contains');
-        
-        return $this->findByDemand($demand);
-    }
-
     /**
      * @param \EtfUnsa\SparkAcademics\Domain\Model\Dto\Demand $demand
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
@@ -52,40 +40,22 @@ abstract class AbstractRepository extends Repository
             $val = $filter['value'];
             $op = $filter['operator'];
 
-            // Skip empty values if they are not specifically requested
-            if (empty($val) && $val !== 0 && $val !== '0') {
+            // Skip empty values (including 0 which usually means 'All' in frontend filters)
+            if (empty($val)) {
                 continue;
             }
 
-            switch ($op) {
-                case 'contains':
-                    $constraints[] = $query->contains($prop, $val);
-                    break;
-                case 'like':
-                    $constraints[] = $query->like($prop, '%' . $val . '%');
-                    break;
-                case 'greaterThan':
-                    $constraints[] = $query->greaterThan($prop, $val);
-                    break;
-                case 'lessThan':
-                    $constraints[] = $query->lessThan($prop, $val);
-                    break;
-                case 'in':
-                    $constraints[] = $query->in($prop, (array)$val);
-                    break;
-                case 'equals':
-                default:
-                    $constraints[] = $query->equals($prop, $val);
-                    break;
+            // Dynamic constraint creation (e.g. $query->equals(), $query->contains())
+            if (method_exists($query, $op)) {
+                $constraints[] = $query->{$op}($prop, $val);
+            } else {
+                // Fallback to equals if invalid operator is provided
+                $constraints[] = $query->equals($prop, $val);
             }
         }
 
         if (!empty($constraints)) {
-            if ($demand->getLogicalOperator() === 'OR') {
-                $query->matching($query->logicalOr(...$constraints));
-            } else {
-                $query->matching($query->logicalAnd(...$constraints));
-            }
+            $query->matching($query->logicalAnd(...$constraints));
         }
 
         return $query->execute();

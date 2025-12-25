@@ -3,6 +3,7 @@
         <tr>
             <th>UID</th>
             <th>Name</th>
+            <th>Primary Department</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -11,6 +12,7 @@
             <tr>
                 <td>{person.uid}</td>
                 <td>{person.firstName} {person.lastName}</td>
+                <td>{person.primaryDepartment.title}</td>
                 <td>
                     <f:link.action action="show" arguments="{person: person}" pageUid="{detailPid}">Show</f:link.action>
                 </td>

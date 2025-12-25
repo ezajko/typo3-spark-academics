@@ -5,20 +5,7 @@ defined('TYPO3') or die();
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'SparkAcademics',
     'Pi1',
-    'Academic Profiles: Universal (Legacy)',
-    'content-user'
-);
-$pluginSignature = 'sparkacademics_pi1';
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    $pluginSignature,
-    'FILE:EXT:spark_academics/Configuration/FlexForms/Person/Universal.xml'
-);
-
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'SparkAcademics',
-    'Pi1',
-    'Academic Profiles: List',
+    'Academic Profiles',
     'content-user'
 );
 $pluginSignature = 'sparkacademics_pi1';
@@ -33,4 +20,10 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignat
     'Pi2',
     'Academic Profiles: Detail',
     'content-user'
+);
+$pluginSignature = 'sparkacademics_pi2';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    $pluginSignature,
+    'FILE:EXT:spark_academics/Configuration/FlexForms/Academic/Detail.xml'
 );

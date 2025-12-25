@@ -1,72 +1,28 @@
 routeEnhancers:
-  SparkAcademicsDept:
+  SparkAcademics:
     type: Extbase
     extension: SparkAcademics
-    plugin: DeptShow
+    plugin: Pi1
     routes:
-      - { routePath: '/department/{title}', _controller: 'Academic::show', _arguments: { title: department } }
+      - { routePath: '/department/{department}', _controller: 'Academic::show', _arguments: { department: department } }
+      - { routePath: '/lab/{lab}', _controller: 'Academic::show', _arguments: { lab: lab } }
+      - { routePath: '/group/{group}', _controller: 'Academic::show', _arguments: { group: group } }
+      - { routePath: '/chair/{chair}', _controller: 'Academic::show', _arguments: { chair: chair } }
+      - { routePath: '/course/{course}', _controller: 'Academic::show', _arguments: { course: course } }
+      - { routePath: '/program/{program}', _controller: 'Academic::show', _arguments: { program: program } }
+      - { routePath: '/project/{project}', _controller: 'Academic::show', _arguments: { project: project } }
+      - { routePath: '/person/{person}', _controller: 'Academic::show', _arguments: { person: person } }
+      # Backward compatibility or nice URLs for list filtering? (Optional)
     aspects:
-      title: { type: PersistedAliasMapper, tableName: tx_spark_department, routeFieldName: title }
-
-  SparkAcademicsLab:
-    type: Extbase
-    extension: SparkAcademics
-    plugin: LabShow
-    routes:
-      - { routePath: '/lab/{title}', _controller: 'Academic::show', _arguments: { title: lab } }
-    aspects:
-      title: { type: PersistedAliasMapper, tableName: tx_spark_research_lab, routeFieldName: title }
-
-  SparkAcademicsGroup:
-    type: Extbase
-    extension: SparkAcademics
-    plugin: GroupShow
-    routes:
-      - { routePath: '/group/{title}', _controller: 'Academic::show', _arguments: { title: group } }
-    aspects:
-      title: { type: PersistedAliasMapper, tableName: tx_spark_research_group, routeFieldName: title }
-
-  SparkAcademicsChair:
-    type: Extbase
-    extension: SparkAcademics
-    plugin: ChairShow
-    routes:
-      - { routePath: '/chair/{title}', _controller: 'Academic::show', _arguments: { title: chair } }
-    aspects:
-      title: { type: PersistedAliasMapper, tableName: tx_spark_chair, routeFieldName: title }
-
-  SparkAcademicsCourse:
-    type: Extbase
-    extension: SparkAcademics
-    plugin: CourseShow
-    routes:
-      - { routePath: '/course/{title}', _controller: 'Academic::show', _arguments: { title: course } }
-    aspects:
-      title: { type: PersistedAliasMapper, tableName: tx_spark_course, routeFieldName: title }
-
-  SparkAcademicsProgram:
-    type: Extbase
-    extension: SparkAcademics
-    plugin: ProgramShow
-    routes:
-      - { routePath: '/program/{title}', _controller: 'Academic::show', _arguments: { title: program } }
-    aspects:
-      title: { type: PersistedAliasMapper, tableName: tx_spark_study_program, routeFieldName: title }
-
-  SparkAcademicsProject:
-    type: Extbase
-    extension: SparkAcademics
-    plugin: ProjectShow
-    routes:
-      - { routePath: '/project/{title}', _controller: 'Academic::show', _arguments: { title: project } }
-    aspects:
-      title: { type: PersistedAliasMapper, tableName: tx_spark_project, routeFieldName: title }
-
-  SparkAcademicsPerson:
-    type: Extbase
-    extension: SparkAcademics
-    plugin: PersonShow
-    routes:
-      - { routePath: '/person/{title}', _controller: 'Academic::show', _arguments: { title: person } }
-    aspects:
-      title: { type: PersistedAliasMapper, tableName: tx_spark_person, routeFieldName: slug }
+      department: { type: PersistedAliasMapper, tableName: tx_spark_department, routeFieldName: title }
+      lab: { type: PersistedAliasMapper, tableName: tx_spark_research_lab, routeFieldName: title }
+      group: { type: PersistedAliasMapper, tableName: tx_spark_research_group, routeFieldName: title }
+      chair: { type: PersistedAliasMapper, tableName: tx_spark_chair, routeFieldName: title }
+      course: { type: PersistedAliasMapper, tableName: tx_spark_course, routeFieldName: title }
+      program: { type: PersistedAliasMapper, tableName: tx_spark_study_program, routeFieldName: title }
+      project: { type: PersistedAliasMapper, tableName: tx_spark_project, routeFieldName: title }
+      person:
+        type: PersistedPatternMapper
+        tableName: tx_spark_person
+        routeFieldPattern: '^(?P<first_name>.+)\.(?P<last_name>.+)$'
+        routeFieldResult: '{first_name}.{last_name}'

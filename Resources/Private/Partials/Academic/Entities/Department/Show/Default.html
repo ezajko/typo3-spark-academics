@@ -25,7 +25,7 @@
         <th>Members:</th>
         <td>
             <f:for each="{item.persons}" as="person" iteration="i">
-                <f:link.action action="show" arguments="{person: person}" pageUid="{detailPid}">{person.firstName}
+                <f:link.action action="show" items="{person: person}" pageUid="{detailPid}">{person.firstName}
                     {person.lastName}</f:link.action>
                 <f:if condition="{i.isLast}">
                     <f:else>, </f:else>

@@ -20,6 +20,21 @@
                             <minitems>0</minitems>
                         </config>
                     </settings.filter.primary_department>
+                    <settings.filter.department>
+                        <label>Department (Any)</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <foreign_table>tx_spark_department</foreign_table>
+                            <items>
+                                <numIndex index="0">
+                                    <label>-- All Departments --</label>
+                                    <value>0</value>
+                                </numIndex>
+                            </items>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.filter.department>
                     <settings.filter.academic_rank>
                         <label>Academic Rank</label>
                         <config>

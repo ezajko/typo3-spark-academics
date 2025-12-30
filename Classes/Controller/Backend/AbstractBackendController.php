@@ -30,7 +30,7 @@ abstract class AbstractBackendController extends ActionController
         $currentBeUser = $this->getCurrentBeUser();
         
         // Use the new abstract repository method
-        $items = $this->repository->findByBackendUser((int)$currentBeUser['uid']);
+        $items = $this->repository->findByBeUsers((int)$currentBeUser['uid']);
         
         $userItems = [];
         $firstItem = null;

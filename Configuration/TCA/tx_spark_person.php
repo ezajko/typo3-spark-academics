@@ -27,7 +27,7 @@ return [
         '1' => [
             'showitem' => '
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.general,
-                    --palette--;;name,
+                    --palette--;;name, path,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.biography,
                     biography, biography_file_pdf,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.contact,
@@ -57,6 +57,14 @@ return [
         ],
     ],
     'columns' => [
+        'path' => [
+            'exclude' => true,
+            'label' => 'Path',
+            'config' => [
+                'type' => 'input',
+                'eval' => 'trim',
+            ],
+        ],
         'sys_language_uid' => [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
@@ -270,6 +278,7 @@ return [
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,
                 'multiple' => 0,
+                'readOnly' => 1,
             ],
         ],
         'laboratories' => [
@@ -284,6 +293,7 @@ return [
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,
                 'multiple' => 0,
+                'readOnly' => 1,
             ],
         ],
         'groups' => [
@@ -298,6 +308,7 @@ return [
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,
                 'multiple' => 0,
+                'readOnly' => 1,
             ],
         ],
         'primary_department' => [
@@ -350,6 +361,7 @@ return [
                 'MM_opposite_field' => 'persons',
                 'size' => 10,
                 'maxitems' => 99,
+                'readOnly' => 1,
             ],
         ],
         'courses' => [
@@ -363,6 +375,7 @@ return [
                 'MM_opposite_field' => 'persons',
                 'size' => 10,
                 'maxitems' => 99,
+                'readOnly' => 1,
             ],
         ],
         'study_programs' => [
@@ -376,6 +389,7 @@ return [
                 'MM_opposite_field' => 'persons',
                 'size' => 10,
                 'maxitems' => 99,
+                'readOnly' => 1,
             ],
         ],
         'projects' => [
@@ -389,6 +403,7 @@ return [
                 'MM_opposite_field' => 'persons',
                 'size' => 10,
                 'maxitems' => 99,
+                'readOnly' => 1,
             ],
         ],
     ],

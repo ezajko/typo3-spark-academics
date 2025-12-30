@@ -21,7 +21,7 @@ return [
         'iconfile' => 'EXT:spark_academics/Resources/Public/Icons/Extension.svg',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, uuid'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -82,6 +82,13 @@ return [
                 'rows' => 15,
                 'eval' => 'trim',
                 'enableRichtext' => true,
+            ],
+        ],
+        'uuid' => [
+            'exclude' => true,
+            'label' => 'UUID',
+            'config' => [
+                'type' => 'uuid',
             ],
         ],
     ],

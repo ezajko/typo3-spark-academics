@@ -141,9 +141,7 @@ return [
             'exclude' => true,
             'label' => 'UUID',
             'config' => [
-                'type' => 'input',
-                'size' => 36,
-                'eval' => 'trim'
+                'type' => 'uuid',
             ],
         ],
         'description' => [

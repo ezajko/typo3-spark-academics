@@ -13,6 +13,7 @@ class Person extends AbstractEntity
 {
     protected string $firstName = '';
     protected string $lastName = '';
+    protected string $path = '';
     protected string $biography = '';
     
     /**
@@ -112,6 +113,16 @@ class Person extends AbstractEntity
     public function setBiography(string $biography): void
     {
         $this->biography = $biography;
+    }
+
+    public function getPath(): string
+    {
+        return $this->path;
+    }
+
+    public function setPath(string $path): void
+    {
+        $this->path = $path;
     }
 
     /**

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="bs" datatype="plaintext" original="messages" date="2025-12-30T12:00:00Z" product-name="spark_academics">
+		<header/>
+		<body>
+			<trans-unit id="academic_category">
+				<source>Academic</source>
+				<target>Akademski</target>
+			</trans-unit>
+			<trans-unit id="person">
+				<source>People</source>
+				<target>Osobe</target>
+			</trans-unit>
+			<trans-unit id="department">
+				<source>Departments</source>
+				<target>Odsjeci</target>
+			</trans-unit>
+			<trans-unit id="lab">
+				<source>Labs</source>
+				<target>Laboratorije</target>
+			</trans-unit>
+			<trans-unit id="group">
+				<source>Groups</source>
+				<target>Grupe</target>
+			</trans-unit>
+			<trans-unit id="chair">
+				<source>Chairs</source>
+				<target>Katedre</target>
+			</trans-unit>
+			<trans-unit id="course">
+				<source>Courses</source>
+				<target>Predmeti</target>
+			</trans-unit>
+			<trans-unit id="program">
+				<source>Study Programs</source>
+				<target>Studijski programi</target>
+			</trans-unit>
+			<trans-unit id="project">
+				<source>Projects</source>
+				<target>Projekti</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

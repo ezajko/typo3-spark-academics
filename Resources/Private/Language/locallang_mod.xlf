@@ -7,28 +7,28 @@
 				<source>Academic</source>
 			</trans-unit>
 			<trans-unit id="person">
-				<source>My Person</source>
+				<source>People</source>
 			</trans-unit>
 			<trans-unit id="department">
-				<source>My Departments</source>
+				<source>Departments</source>
 			</trans-unit>
 			<trans-unit id="lab">
-				<source>My Labs</source>
+				<source>Labs</source>
 			</trans-unit>
 			<trans-unit id="group">
-				<source>My Groups</source>
+				<source>Groups</source>
 			</trans-unit>
 			<trans-unit id="chair">
-				<source>My Chairs</source>
+				<source>Chairs</source>
 			</trans-unit>
 			<trans-unit id="course">
-				<source>My Courses</source>
+				<source>Courses</source>
 			</trans-unit>
 			<trans-unit id="program">
-				<source>My Study Programs</source>
+				<source>Study Programs</source>
 			</trans-unit>
 			<trans-unit id="project">
-				<source>My Projects</source>
+				<source>Projects</source>
 			</trans-unit>
 		</body>
 	</file>

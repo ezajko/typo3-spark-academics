@@ -32,3 +32,9 @@ services:
       - name: console.command
         command: 'academics:seed'
         description: 'Seed lookup tables with initial data'
+
+  EtfUnsa\SparkAcademics\Command\GenerateTestProjectsCommand:
+    tags:
+      - name: console.command
+        command: 'academics:generate-projects'
+        description: 'Generate test projects with faker data'

@@ -1,4 +1,9 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<!--
+    Project List Simple Template
+    Card layout with image, status badge, dates, budget, and funding program
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
 <f:for each="{items}" as="item">
     <div class="card mb-3 shadow-sm border-0">
         <div class="row g-0">
@@ -11,7 +16,7 @@
                     </f:then>
                     <f:else>
                         <div class="bg-light h-100 d-flex align-items-center justify-content-center"
-                            style="min-height: 150px;">
+                            style="min-height: 180px;">
                             <i class="bi bi-kanban fs-1 text-muted"></i>
                         </div>
                     </f:else>
@@ -21,39 +26,72 @@
             <!-- Content (Right) -->
             <div class="col-md-9">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h5 class="card-title mb-1">
-                            <f:link.action action="show" arguments="{project: item}" pageUid="{detailPid}"
-                                pluginName="Pi2" class="text-decoration-none text-dark">
-                                {item.title}
-                            </f:link.action>
-                        </h5>
+                    <!-- Title and Status -->
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div>
+                            <h5 class="card-title mb-0">
+                                <f:link.action action="show" arguments="{project: item}" pageUid="{detailPid}"
+                                    pluginName="Pi2" class="text-decoration-none text-dark">{item.title}</f:link.action>
+                            </h5>
+                            <f:if condition="{item.acronym}">
+                                <span class="text-muted fw-bold">({item.acronym})</span>
+                            </f:if>
+                        </div>
                         <f:if condition="{item.status}">
-                            <span class="badge align-self-start"
-                                style="background-color: {item.status.color};">{item.status.title}</span>
+                            <span class="badge bg-secondary">{item.status.title}</span>
                         </f:if>
                     </div>
-                    <f:if condition="{item.acronym}">
-                        <h6 class="card-subtitle text-muted mb-2">{item.acronym}</h6>
-                    </f:if>
 
-                    <p class="card-text">
-                        <f:format.crop maxCharacters="200" append="...">
+                    <!-- Badges: Type, Funding Program -->
+                    <div class="mb-2">
+                        <f:if condition="{item.projectType}">
+                            <span class="badge bg-primary me-1"><i
+                                    class="bi bi-tag me-1"></i>{item.projectType.title}</span>
+                        </f:if>
+                        <f:if condition="{item.fundingProgram}">
+                            <span class="badge bg-info text-dark me-1"><i
+                                    class="bi bi-bank me-1"></i>{item.fundingProgram.title}</span>
+                        </f:if>
+                    </div>
+
+                    <!-- Description -->
+                    <p class="card-text small mb-2">
+                        <f:format.crop maxCharacters="180" append="...">
                             <f:format.stripTags>{item.description}</f:format.stripTags>
                         </f:format.crop>
                     </p>
-                    <p class="card-text"><small class="text-muted">
-                            <i class="bi bi-calendar3"></i>
-                            <f:format.date format="d.m.Y">{item.startDate}</f:format.date> - <f:format.date
-                                format="d.m.Y">{item.endDate}</f:format.date>
-                        </small></p>
 
-                    <div class="mt-2">
-                        <f:link.action action="show" arguments="{project: item}" pageUid="{detailPid}" pluginName="Pi2"
-                            class="btn btn-sm btn-outline-primary">
-                            View Details
-                        </f:link.action>
+                    <!-- Meta: Dates, Budget -->
+                    <div class="d-flex flex-wrap gap-3 small text-muted mb-2">
+                        <f:if condition="{item.startDate}">
+                            <span><i class="bi bi-calendar3 me-1"></i>
+                                <f:format.date format="M Y">{item.startDate}</f:format.date> - <f:format.date
+                                    format="M Y">{item.endDate}</f:format.date>
+                            </span>
+                        </f:if>
+                        <f:if condition="{item.totalBudget}">
+                            <span><i class="bi bi-currency-euro me-1"></i>
+                                <f:format.number decimals="0" thousandsSeparator=",">{item.totalBudget}
+                                </f:format.number>
+                            </span>
+                        </f:if>
+                        <f:if condition="{item.grantAgreementNumber}">
+                            <span><i class="bi bi-file-earmark-text me-1"></i>{item.grantAgreementNumber}</span>
+                        </f:if>
                     </div>
+
+                    <!-- Scientific Fields -->
+                    <f:if condition="{item.scientificFields}">
+                        <div class="mb-2">
+                            <f:for each="{item.scientificFields}" as="field">
+                                <span class="badge bg-light text-dark border me-1">{field.title}</span>
+                            </f:for>
+                        </div>
+                    </f:if>
+
+                    <!-- View Details Button -->
+                    <f:link.action action="show" arguments="{project: item}" pageUid="{detailPid}" pluginName="Pi2"
+                        class="btn btn-sm btn-outline-primary">View Details</f:link.action>
                 </div>
             </div>
         </div>

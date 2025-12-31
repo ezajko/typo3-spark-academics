@@ -12,7 +12,15 @@ routeEnhancers:
       - { routePath: '/program/{program}', _controller: 'Academic::show', _arguments: { program: program } }
       - { routePath: '/project/{project}', _controller: 'Academic::show', _arguments: { project: project } }
       - { routePath: '/person/{person}', _controller: 'Academic::show', _arguments: { person: person } }
-      # Backward compatibility or nice URLs for list filtering? (Optional)
+      - { routePath: '/page-{currentPage}', _controller: 'Academic::list', _arguments: { currentPage: currentPage } }
+      # Filtered List Routing
+      - { routePath: '/filtered', _controller: 'Academic::listFiltered' }
+      - { routePath: '/filtered/page-{currentPage}', _controller: 'Academic::listFiltered', _arguments: { currentPage: currentPage } }
+    defaultController: 'Academic::list'
+    requirements:
+      currentPage: \d+
+    defaults:
+      currentPage: 1
     aspects:
       department: { type: PersistedAliasMapper, tableName: tx_spark_department, routeFieldName: title }
       lab: { type: PersistedAliasMapper, tableName: tx_spark_research_lab, routeFieldName: title }
@@ -26,3 +34,7 @@ routeEnhancers:
         tableName: tx_spark_person
         routeFieldPattern: '^(?P<first_name>.+)\.(?P<last_name>.+)$'
         routeFieldResult: '{first_name}.{last_name}'
+      currentPage:
+        type: StaticRangeMapper
+        start: '1'
+        end: '100'

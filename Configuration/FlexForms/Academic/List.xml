@@ -61,6 +61,17 @@
                         </config>
                     </settings.entityType>
 
+                    <!-- Pagination -->
+                    <settings.view.itemsPerPage>
+                        <label>Items Per Page (0 = unlimited)</label>
+                        <config>
+                            <type>input</type>
+                            <size>5</size>
+                            <eval>int</eval>
+                            <default>10</default>
+                        </config>
+                    </settings.view.itemsPerPage>
+
                     <!-- Person Specific Filters (displayCond) -->
                     <settings.filter.primary_department>
                         <label>Primary Department</label>
@@ -81,7 +92,12 @@
 
                     <settings.filter.department>
                         <label>Department (Any)</label>
-                        <displayCond>FIELD:settings.entityType:=:Person</displayCond>
+                        <displayCond>
+                            <OR>
+                                <numIndex index="0">FIELD:settings.entityType:=:Person</numIndex>
+                                <numIndex index="1">FIELD:settings.entityType:=:Project</numIndex>
+                            </OR>
+                        </displayCond>
                         <config>
                             <type>select</type>
                             <renderType>selectSingle</renderType>
@@ -95,6 +111,7 @@
                             <minitems>0</minitems>
                         </config>
                     </settings.filter.department>
+
                     <settings.filter.academic_rank>
                         <label>Filter by Academic Rank</label>
                         <displayCond>FIELD:settings.entityType:=:Person</displayCond>
@@ -113,7 +130,12 @@
 
                     <settings.filter.research_group>
                         <label>Filter by Research Group</label>
-                        <displayCond>FIELD:settings.entityType:=:Person</displayCond>
+                        <displayCond>
+                            <OR>
+                                <numIndex index="0">FIELD:settings.entityType:=:Person</numIndex>
+                                <numIndex index="1">FIELD:settings.entityType:=:Project</numIndex>
+                            </OR>
+                        </displayCond>
                         <config>
                             <type>select</type>
                             <renderType>selectSingle</renderType>
@@ -130,7 +152,12 @@
 
                     <settings.filter.research_lab>
                         <label>Filter by Research Lab</label>
-                        <displayCond>FIELD:settings.entityType:=:Person</displayCond>
+                        <displayCond>
+                            <OR>
+                                <numIndex index="0">FIELD:settings.entityType:=:Person</numIndex>
+                                <numIndex index="1">FIELD:settings.entityType:=:Project</numIndex>
+                            </OR>
+                        </displayCond>
                         <config>
                             <type>select</type>
                             <renderType>selectSingle</renderType>
@@ -147,7 +174,12 @@
 
                     <settings.filter.chair>
                         <label>Filter by Chair</label>
-                        <displayCond>FIELD:settings.entityType:=:Person</displayCond>
+                        <displayCond>
+                            <OR>
+                                <numIndex index="0">FIELD:settings.entityType:=:Person</numIndex>
+                                <numIndex index="1">FIELD:settings.entityType:=:Project</numIndex>
+                            </OR>
+                        </displayCond>
                         <config>
                             <type>select</type>
                             <renderType>selectSingle</renderType>
@@ -161,6 +193,55 @@
                             <minitems>0</minitems>
                         </config>
                     </settings.filter.chair>
+
+                    <!-- Project Specific Filters -->
+                    <settings.filter.project_status>
+                        <label>Filter by Status</label>
+                        <displayCond>FIELD:settings.entityType:=:Project</displayCond>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <foreign_table>tx_spark_project_status</foreign_table>
+                            <items>
+                                <numIndex index="0">
+                                    <label>-- All Statuses --</label>
+                                    <value>0</value>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </settings.filter.project_status>
+
+                    <settings.filter.project_type>
+                        <label>Filter by Type</label>
+                        <displayCond>FIELD:settings.entityType:=:Project</displayCond>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <foreign_table>tx_spark_project_type</foreign_table>
+                            <items>
+                                <numIndex index="0">
+                                    <label>-- All Types --</label>
+                                    <value>0</value>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </settings.filter.project_type>
+
+                    <settings.filter.funding_program>
+                        <label>Filter by Funding Program</label>
+                        <displayCond>FIELD:settings.entityType:=:Project</displayCond>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <foreign_table>tx_spark_funding_program</foreign_table>
+                            <items>
+                                <numIndex index="0">
+                                    <label>-- All Programs --</label>
+                                    <value>0</value>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </settings.filter.funding_program>
 
                     <!-- Selection Fields -->
                     <settings.select.department>

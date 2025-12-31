@@ -75,6 +75,15 @@
 			<trans-unit id="person.profile_linkedin">
 				<source>LinkedIn</source>
 			</trans-unit>
+			<trans-unit id="pagination.previous">
+				<source>Previous</source>
+			</trans-unit>
+			<trans-unit id="pagination.next">
+				<source>Next</source>
+			</trans-unit>
+			<trans-unit id="pagination.info">
+				<source>Records {0} - {1}</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

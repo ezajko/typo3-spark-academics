@@ -27,4 +27,10 @@ defined('TYPO3') or die();
     ]
 );
 
+// Configure excluded parameters for cHash calculation to allow GET filters without 404
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1[__referrer]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1[__trustedProperties]';
 
+// Disable 404 on cHash error to allow Filter GET requests with unmapped Route arguments
+$GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFoundOnCHashError'] = false;

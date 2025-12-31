@@ -18,6 +18,10 @@ use EtfUnsa\SparkAcademics\Domain\Repository\CourseRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\DepartmentRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\PersonRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\ProjectRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\ProjectStatusRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\ProjectTypeRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\FundingProgramRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\ScientificFieldRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\ResearchGroupRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\ResearchLabRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\StudyProgramRepository;
@@ -26,6 +30,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use Psr\Http\Message\ResponseInterface;
 use EtfUnsa\SparkAcademics\Service\DemandService;
+use EtfUnsa\SparkAcademics\Domain\Model\Dto\ProjectDemand;
+use TYPO3\CMS\Core\Pagination\SlidingWindowPagination;
+use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
 class AcademicController extends ActionController
 {
@@ -36,6 +43,10 @@ class AcademicController extends ActionController
     protected CourseRepository $courseRepository;
     protected StudyProgramRepository $studyProgramRepository;
     protected ProjectRepository $projectRepository;
+    protected ProjectStatusRepository $projectStatusRepository;
+    protected ProjectTypeRepository $projectTypeRepository;
+    protected FundingProgramRepository $fundingProgramRepository;
+    protected ScientificFieldRepository $scientificFieldRepository;
     protected PersonRepository $personRepository;
     protected DemandService $demandService;
 
@@ -47,6 +58,10 @@ class AcademicController extends ActionController
         CourseRepository $courseRepository,
         StudyProgramRepository $studyProgramRepository,
         ProjectRepository $projectRepository,
+        ProjectStatusRepository $projectStatusRepository,
+        ProjectTypeRepository $projectTypeRepository,
+        FundingProgramRepository $fundingProgramRepository,
+        ScientificFieldRepository $scientificFieldRepository,
         PersonRepository $personRepository,
         DemandService $demandService
     ) {
@@ -57,6 +72,10 @@ class AcademicController extends ActionController
         $this->courseRepository = $courseRepository;
         $this->studyProgramRepository = $studyProgramRepository;
         $this->projectRepository = $projectRepository;
+        $this->projectStatusRepository = $projectStatusRepository;
+        $this->projectTypeRepository = $projectTypeRepository;
+        $this->fundingProgramRepository = $fundingProgramRepository;
+        $this->scientificFieldRepository = $scientificFieldRepository;
         $this->personRepository = $personRepository;
         $this->demandService = $demandService;
     }
@@ -64,27 +83,27 @@ class AcademicController extends ActionController
     /**
      * Generic list action (usually findAll)
      */
-    public function listAction(): ResponseInterface
+    public function listAction(int $currentPage = 1): ResponseInterface
     {
-        return $this->dispatchListAction($this->settings);
+        return $this->dispatchListAction($this->settings, $currentPage);
     }
 
-    public function listAllAction(): ResponseInterface
+    public function listAllAction(int $currentPage = 1): ResponseInterface
     {
-        return $this->dispatchListAction($this->settings);
+        return $this->dispatchListAction($this->settings, $currentPage);
     }
 
-    public function listSelectedAction(): ResponseInterface
+    public function listSelectedAction(int $currentPage = 1): ResponseInterface
     {
-        return $this->dispatchListAction($this->settings);
+        return $this->dispatchListAction($this->settings, $currentPage);
     }
 
-    public function listFilteredAction(): ResponseInterface
+    public function listFilteredAction(int $currentPage = 1): ResponseInterface
     {
-        return $this->dispatchListAction($this->settings);
+        return $this->dispatchListAction($this->settings, $currentPage);
     }
 
-    protected function dispatchListAction(array $settings): ResponseInterface
+    protected function dispatchListAction(array $settings, int $currentPage = 1): ResponseInterface
     {
         $entityType = $settings['entityType'] ?? 'department';
         
@@ -98,10 +117,77 @@ class AcademicController extends ActionController
 
         $repoField = $this->getRepositoryFieldName($entityType);
         
-        $demand = $this->demandService->createFromSettings($settings);
-        $items = $this->$repoField->findByDemand($demand);
+        // Special handling for Project entity filtering
+        if ($entityType === 'Project') {
+            $filter = $this->request->hasArgument('filter') ? $this->request->getArgument('filter') : [];
+            $settingsFilter = $settings['filter'] ?? [];
 
-        $this->view->assign('items', $items);
+            $demand = new ProjectDemand();
+            
+            // 1. Map Frontend Filters (Priority)
+            if (!empty($filter['search'])) {
+                $demand->setSearch($filter['search']);
+            }
+            // 2. Map Settings (Backend Filters) - overridden by Frontend if set, or just set if empty
+            // Logic: Use Frontend if present, else use Backend setting
+            
+            // Status
+            $status = !empty($filter['status']) ? (int)$filter['status'] : (int)($settingsFilter['project_status'] ?? 0);
+            if ($status > 0) $demand->setProjectStatus($status);
+
+            // Type
+            $type = !empty($filter['type']) ? (int)$filter['type'] : (int)($settingsFilter['project_type'] ?? 0);
+            if ($type > 0) $demand->setProjectType($type);
+
+            // Program
+            $program = !empty($filter['program']) ? (int)$filter['program'] : (int)($settingsFilter['funding_program'] ?? 0);
+            if ($program > 0) $demand->setFundingProgram($program);
+
+            // Field
+            $field = !empty($filter['field']) ? (int)$filter['field'] : 0; // Field not in generic settings yet?
+            if ($field > 0) $demand->setScientificField($field);
+
+            // Organizational Filters (From Backend Settings Only for now, unless extended in frontend)
+            $dept = (int)($settingsFilter['department'] ?? 0);
+            if ($dept > 0) $demand->setDepartment($dept);
+
+            $lab = (int)($settingsFilter['research_lab'] ?? 0);
+            if ($lab > 0) $demand->setResearchLab($lab);
+
+            $group = (int)($settingsFilter['research_group'] ?? 0);
+            if ($group > 0) $demand->setResearchGroup($group);
+
+            $chair = (int)($settingsFilter['chair'] ?? 0);
+            if ($chair > 0) $demand->setChair($chair);
+
+
+            $items = $this->projectRepository->findByProjectDemand($demand);
+            
+            // Assign lookup data for the filter form
+            $this->view->assignMultiple([
+                'filter' => $filter,
+                'availableStatuses' => $this->projectStatusRepository->findAll(),
+                'availableTypes' => $this->projectTypeRepository->findAll(),
+                'availablePrograms' => $this->fundingProgramRepository->findAll(),
+                'availableFields' => $this->scientificFieldRepository->findBy(['level' => 2]), // Only show minor fields
+            ]);
+        } else {
+            // Default generic behavior for other entities
+            $demand = $this->demandService->createFromSettings($settings);
+            $items = $this->$repoField->findByDemand($demand);
+        }
+
+        // Pagination
+        $itemsPerPage = (int)($settings['view']['itemsPerPage'] ?? 10);
+        if ($itemsPerPage < 1) $itemsPerPage = 10;
+        
+        $paginator = new QueryResultPaginator($items, $currentPage, $itemsPerPage);
+        $pagination = new SlidingWindowPagination($paginator, 5);
+
+        $this->view->assign('pagination', $pagination);
+        $this->view->assign('paginator', $paginator);
+        $this->view->assign('items', $paginator->getPaginatedItems());
+
         $this->view->assign('entityType', $entityType);
         $this->view->assign('detailPid', $this->resolveDetailPid($entityType));
 

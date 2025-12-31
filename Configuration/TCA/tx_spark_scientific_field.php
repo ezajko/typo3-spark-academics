@@ -1,11 +1,21 @@
 <?php
 
+/**
+ * TCA Configuration for ScientificField
+ * OECD FOS (Fields of Science) compatible structure
+ * CERIF: cfClass (semantic layer for research domain classification)
+ * 
+ * @author Ernedin Zajko <ezajko@root.ba>
+ */
+
 defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_scientific_field',
+        'title' => 'Scientific Field',
         'label' => 'title',
+        'label_alt' => 'code',
+        'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'sortby' => 'sorting',
@@ -17,11 +27,22 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,description',
+        'searchFields' => 'title,code,description',
         'iconfile' => 'EXT:spark_academics/Resources/Public/Icons/Extension.svg',
+        'default_sortby' => 'code ASC, title ASC',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, uuid'],
+        '1' => [
+            'showitem' => '
+                --div--;General,
+                    sys_language_uid, l10n_parent, l10n_diffsource, hidden,
+                    title, code, level, parent,
+                --div--;Details,
+                    description, uuid,
+                --div--;Sub-fields,
+                    children,
+            ',
+        ],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -65,12 +86,74 @@ return [
             ],
         ],
         'title' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'Title',
             'config' => [
                 'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim,required'
+                'size' => 50,
+                'max' => 255,
+                'eval' => 'trim',
+                'required' => true,
+            ],
+        ],
+        'code' => [
+            'exclude' => true,
+            'label' => 'OECD FOS Code',
+            'description' => 'Classification code (e.g., "1" for Natural Sciences, "1.2" for Computer Sciences)',
+            'config' => [
+                'type' => 'input',
+                'size' => 10,
+                'max' => 20,
+                'eval' => 'trim',
+            ],
+        ],
+        'level' => [
+            'exclude' => true,
+            'label' => 'Hierarchy Level',
+            'description' => '1 = Major field, 2 = Minor/Sub-field',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['Major Field (Level 1)', 1],
+                    ['Minor Field (Level 2)', 2],
+                    ['Sub-field (Level 3)', 3],
+                ],
+                'default' => 1,
+            ],
+        ],
+        'parent' => [
+            'exclude' => true,
+            'label' => 'Parent Field',
+            'description' => 'Select parent field for hierarchical structure',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_spark_scientific_field',
+                'foreign_table_where' => 'AND {#tx_spark_scientific_field}.{#level} < ###REC_FIELD_level### ORDER BY code, title',
+                'items' => [
+                    ['-- No parent (Top level) --', 0],
+                ],
+                'default' => 0,
+            ],
+        ],
+        'children' => [
+            'exclude' => true,
+            'label' => 'Sub-fields',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_spark_scientific_field',
+                'foreign_field' => 'parent',
+                'maxitems' => 9999,
+                'appearance' => [
+                    'collapseAll' => true,
+                    'expandSingle' => true,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => false,
+                    'showPossibleLocalizationRecords' => true,
+                    'showAllLocalizationLink' => true,
+                    'useSortable' => true,
+                ],
             ],
         ],
         'description' => [
@@ -79,7 +162,7 @@ return [
             'config' => [
                 'type' => 'text',
                 'cols' => 40,
-                'rows' => 15,
+                'rows' => 10,
                 'eval' => 'trim',
                 'enableRichtext' => true,
             ],

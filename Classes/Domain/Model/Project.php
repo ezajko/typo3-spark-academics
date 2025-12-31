@@ -28,6 +28,36 @@ class Project extends AbstractEntity
     protected ?FileReference $logo = null;
     protected ?FileReference $mainImage = null;
 
+    // CERIF-compatible attributes
+    /**
+     * Local institution budget (in EUR)
+     */
+    protected float $localBudget = 0.0;
+
+    /**
+     * Total project budget (in EUR)
+     */
+    protected float $totalBudget = 0.0;
+
+    /**
+     * Keywords (comma-separated)
+     * CERIF: cfProjKeyw
+     */
+    protected string $keywords = '';
+
+    /**
+     * Project type classification
+     * CERIF: cfProj_Class (semantic layer)
+     */
+    protected ?ProjectType $projectType = null;
+
+    /**
+     * Scientific fields / areas of research
+     * CERIF: cfProj_Class (semantic layer)
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ScientificField>
+     */
+    protected ?ObjectStorage $scientificFields = null;
+
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser>
      */
@@ -72,6 +102,7 @@ class Project extends AbstractEntity
         $this->chairs = new ObjectStorage();
         $this->researchLabs = new ObjectStorage();
         $this->researchGroups = new ObjectStorage();
+        $this->scientificFields = new ObjectStorage();
     }
 
     public function getTitle(): string
@@ -344,5 +375,85 @@ class Project extends AbstractEntity
     public function setResearchGroups(ObjectStorage $researchGroups): void
     {
         $this->researchGroups = $researchGroups;
+    }
+
+    // CERIF-compatible attribute getters/setters
+
+    public function getLocalBudget(): float
+    {
+        return $this->localBudget;
+    }
+
+    public function setLocalBudget(float $localBudget): void
+    {
+        $this->localBudget = $localBudget;
+    }
+
+    public function getTotalBudget(): float
+    {
+        return $this->totalBudget;
+    }
+
+    public function setTotalBudget(float $totalBudget): void
+    {
+        $this->totalBudget = $totalBudget;
+    }
+
+    public function getKeywords(): string
+    {
+        return $this->keywords;
+    }
+
+    public function setKeywords(string $keywords): void
+    {
+        $this->keywords = $keywords;
+    }
+
+    /**
+     * Returns keywords as array
+     * @return array<string>
+     */
+    public function getKeywordsArray(): array
+    {
+        if (empty($this->keywords)) {
+            return [];
+        }
+        return array_map('trim', explode(',', $this->keywords));
+    }
+
+    public function getProjectType(): ?ProjectType
+    {
+        return $this->projectType;
+    }
+
+    public function setProjectType(?ProjectType $projectType): void
+    {
+        $this->projectType = $projectType;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ScientificField>
+     */
+    public function getScientificFields(): ?ObjectStorage
+    {
+        return $this->scientificFields;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ScientificField> $scientificFields
+     */
+    public function setScientificFields(ObjectStorage $scientificFields): void
+    {
+        $this->scientificFields = $scientificFields;
+    }
+
+    public function addScientificField(ScientificField $scientificField): void
+    {
+        $this->scientificFields->attach($scientificField);
+    }
+
+    public function removeScientificField(ScientificField $scientificField): void
+    {
+        $this->scientificFields->detach($scientificField);
     }
 }

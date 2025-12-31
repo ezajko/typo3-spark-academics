@@ -25,9 +25,11 @@ return [
     'types' => [
         '1' => [
             'showitem' => '
-                --div--;General, sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, acronym, uuid, description, start_date, end_date, status, funding_program, grant_agreement_number, website, landing_page,
+                --div--;General, sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, acronym, uuid, description, start_date, end_date, status, project_type, keywords, landing_page,
+                --div--;Budget, funding_program, grant_agreement_number, total_budget, local_budget,
                 --div--;People, coordinator, persons, partners,
-                --div--;Details, objectives, outcomes,
+                --div--;Classification, scientific_fields,
+                --div--;Details, objectives, outcomes, website,
                 --div--;Media, logo, main_image,
                 --div--;Relations, be_users, departments, chairs, research_labs, research_groups,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime
@@ -335,6 +337,63 @@ return [
                 'foreign_table' => 'tx_spark_research_group',
                 'MM' => 'tx_spark_project_research_group_mm',
                 'size' => 10,
+                'maxitems' => 9999,
+            ],
+        ],
+        // CERIF-compatible fields
+        'local_budget' => [
+            'exclude' => true,
+            'label' => 'Local Budget (EUR)',
+            'description' => 'Budget allocated to local institution',
+            'config' => [
+                'type' => 'number',
+                'format' => 'decimal',
+                'default' => 0,
+            ],
+        ],
+        'total_budget' => [
+            'exclude' => true,
+            'label' => 'Total Budget (EUR)',
+            'description' => 'Total project budget',
+            'config' => [
+                'type' => 'number',
+                'format' => 'decimal',
+                'default' => 0,
+            ],
+        ],
+        'keywords' => [
+            'exclude' => true,
+            'label' => 'Keywords',
+            'description' => 'Comma-separated keywords (CERIF: cfProjKeyw)',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 3,
+                'eval' => 'trim',
+            ],
+        ],
+        'project_type' => [
+            'exclude' => true,
+            'label' => 'Project Type',
+            'description' => 'Classification type (Research, Development, etc.)',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_spark_project_type',
+                'items' => [['-- Select Type --', 0]],
+                'default' => 0,
+            ],
+        ],
+        'scientific_fields' => [
+            'exclude' => true,
+            'label' => 'Scientific Fields',
+            'description' => 'OECD FOS classification (CERIF: cfProj_Class)',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_scientific_field',
+                'MM' => 'tx_spark_project_scientific_field_mm',
+                'size' => 5,
                 'maxitems' => 9999,
             ],
         ],

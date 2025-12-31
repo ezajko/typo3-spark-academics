@@ -1,11 +1,19 @@
 <?php
 
+/**
+ * TCA Configuration for ProjectStatus
+ * 
+ * @author Ernedin Zajko <ezajko@root.ba>
+ */
+
 defined('TYPO3') or die();
 
 return [
     'ctrl' => [
         'title' => 'Project Status',
         'label' => 'title',
+        'label_alt' => 'abbreviation',
+        'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'sortby' => 'sorting',
@@ -16,18 +24,18 @@ return [
         'delete' => 'deleted',
         'enablecolumns' => [
             'disabled' => 'hidden',
-            'starttime' => 'starttime',
-            'endtime' => 'endtime',
         ],
-        'searchFields' => 'title',
+        'searchFields' => 'title,abbreviation,description',
         'iconfile' => 'EXT:spark_academics/Resources/Public/Icons/Extension.svg',
+        'default_sortby' => 'sorting ASC',
     ],
     'types' => [
         '1' => [
             'showitem' => '
-                --div--;General, sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, color,
-                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime
-            '
+                --div--;General,
+                    sys_language_uid, l10n_parent, l10n_diffsource, hidden,
+                    title, abbreviation, description,
+            ',
         ],
     ],
     'columns' => [
@@ -72,50 +80,35 @@ return [
                 ],
             ],
         ],
-        'starttime' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
-            'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'eval' => 'datetime,int',
-                'default' => 0,
-                'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
-            ],
-        ],
-        'endtime' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
-            'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'eval' => 'datetime,int',
-                'default' => 0,
-                'range' => [
-                    'upper' => 2147483647,
-                ],
-                'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
-            ],
-        ],
         'title' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'Title',
             'config' => [
                 'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim,required'
+                'size' => 50,
+                'max' => 255,
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
-        'color' => [
+        'abbreviation' => [
             'exclude' => true,
-            'label' => 'Color',
+            'label' => 'Abbreviation',
             'config' => [
                 'type' => 'input',
-                'renderType' => 'colorpicker',
+                'size' => 20,
+                'max' => 50,
+                'eval' => 'trim',
+            ],
+        ],
+        'description' => [
+            'exclude' => true,
+            'label' => 'Description',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 5,
+                'eval' => 'trim',
             ],
         ],
     ],

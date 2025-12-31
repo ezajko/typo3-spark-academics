@@ -269,13 +269,13 @@ class SeedCommand extends Command
         $io->section('Seeding Project Status');
         
         $data = [
-            ['title' => 'In Preparation', 'color' => '#6c757d', 'description' => 'Project is being prepared'],
-            ['title' => 'Submitted', 'color' => '#17a2b8', 'description' => 'Application submitted'],
-            ['title' => 'Approved', 'color' => '#28a745', 'description' => 'Project approved'],
-            ['title' => 'Active', 'color' => '#007bff', 'description' => 'Project is active/running'],
-            ['title' => 'Completed', 'color' => '#6f42c1', 'description' => 'Project completed'],
-            ['title' => 'Rejected', 'color' => '#dc3545', 'description' => 'Application rejected'],
-            ['title' => 'Suspended', 'color' => '#fd7e14', 'description' => 'Project suspended'],
+            ['title' => 'In Preparation', 'description' => 'Project is being prepared'],
+            ['title' => 'Submitted', 'description' => 'Application submitted'],
+            ['title' => 'Approved', 'description' => 'Project approved'],
+            ['title' => 'Active', 'description' => 'Project is active/running'],
+            ['title' => 'Completed', 'description' => 'Project completed'],
+            ['title' => 'Rejected', 'description' => 'Application rejected'],
+            ['title' => 'Suspended', 'description' => 'Project suspended'],
         ];
         
         return $this->insertRecords($io, 'tx_spark_project_status', $data, $pid, $force, 'title');
@@ -289,13 +289,13 @@ class SeedCommand extends Command
         $io->section('Seeding Project Types');
         
         $data = [
-            ['title' => 'Research Project', 'color' => '#007bff', 'description' => 'Research-focused project'],
-            ['title' => 'Development Project', 'color' => '#28a745', 'description' => 'Development project'],
-            ['title' => 'Infrastructure Project', 'color' => '#6c757d', 'description' => 'Infrastructure project'],
-            ['title' => 'Educational Project', 'color' => '#17a2b8', 'description' => 'Educational/training project'],
-            ['title' => 'Mobility', 'color' => '#fd7e14', 'description' => 'Mobility/exchange project'],
-            ['title' => 'Capacity Building', 'color' => '#6f42c1', 'description' => 'Capacity building project'],
-            ['title' => 'Innovation Project', 'color' => '#20c997', 'description' => 'Innovation project'],
+            ['title' => 'Research Project', 'description' => 'Research-focused project'],
+            ['title' => 'Development Project', 'description' => 'Development project'],
+            ['title' => 'Infrastructure Project', 'description' => 'Infrastructure project'],
+            ['title' => 'Educational Project', 'description' => 'Educational/training project'],
+            ['title' => 'Mobility', 'description' => 'Mobility/exchange project'],
+            ['title' => 'Capacity Building', 'description' => 'Capacity building project'],
+            ['title' => 'Innovation Project', 'description' => 'Innovation project'],
         ];
         
         return $this->insertRecords($io, 'tx_spark_project_type', $data, $pid, $force, 'title');

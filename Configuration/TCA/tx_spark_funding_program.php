@@ -1,11 +1,19 @@
 <?php
 
+/**
+ * TCA Configuration for FundingProgram
+ * 
+ * @author Ernedin Zajko <ezajko@root.ba>
+ */
+
 defined('TYPO3') or die();
 
 return [
     'ctrl' => [
         'title' => 'Funding Program',
         'label' => 'title',
+        'label_alt' => 'abbreviation',
+        'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'sortby' => 'sorting',
@@ -16,19 +24,20 @@ return [
         'delete' => 'deleted',
         'enablecolumns' => [
             'disabled' => 'hidden',
-            'starttime' => 'starttime',
-            'endtime' => 'endtime',
         ],
-        'searchFields' => 'title',
+        'searchFields' => 'title,abbreviation,description',
         'iconfile' => 'EXT:spark_academics/Resources/Public/Icons/Extension.svg',
+        'default_sortby' => 'sorting ASC',
     ],
     'types' => [
         '1' => [
             'showitem' => '
-                --div--;General, sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, website,
-                --div--;Media, logo,
-                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime
-            '
+                --div--;General,
+                    sys_language_uid, l10n_parent, l10n_diffsource, hidden,
+                    title, abbreviation, description, website,
+                --div--;Media,
+                    logo,
+            ',
         ],
     ],
     'columns' => [
@@ -73,42 +82,36 @@ return [
                 ],
             ],
         ],
-        'starttime' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
-            'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'eval' => 'datetime,int',
-                'default' => 0,
-                'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
-            ],
-        ],
-        'endtime' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
-            'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'eval' => 'datetime,int',
-                'default' => 0,
-                'range' => [
-                    'upper' => 2147483647,
-                ],
-                'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
-            ],
-        ],
         'title' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'Title',
             'config' => [
                 'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim,required'
+                'size' => 50,
+                'max' => 255,
+                'eval' => 'trim',
+                'required' => true,
+            ],
+        ],
+        'abbreviation' => [
+            'exclude' => true,
+            'label' => 'Abbreviation',
+            'description' => 'Short form (e.g., "HE" for Horizon Europe)',
+            'config' => [
+                'type' => 'input',
+                'size' => 20,
+                'max' => 50,
+                'eval' => 'trim',
+            ],
+        ],
+        'description' => [
+            'exclude' => true,
+            'label' => 'Description',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 5,
+                'eval' => 'trim',
             ],
         ],
         'website' => [

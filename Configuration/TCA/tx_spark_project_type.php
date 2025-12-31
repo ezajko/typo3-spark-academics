@@ -7,27 +7,30 @@
  * @author Ernedin Zajko <ezajko@root.ba>
  */
 
+defined('TYPO3') or die();
+
 return [
     'ctrl' => [
         'title' => 'Project Type',
         'label' => 'title',
+        'label_alt' => 'abbreviation',
+        'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
+        'sortby' => 'sorting',
         'delete' => 'deleted',
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,description',
-        'iconfile' => 'EXT:spark_academics/Resources/Public/Icons/project_type.svg',
-        'default_sortby' => 'title ASC',
+        'searchFields' => 'title,abbreviation,description',
+        'iconfile' => 'EXT:spark_academics/Resources/Public/Icons/Extension.svg',
+        'default_sortby' => 'sorting ASC',
     ],
     'types' => [
         '1' => [
             'showitem' => '
                 --div--;General,
-                    title, description, color,
-                --div--;Access,
-                    hidden,
+                    hidden, title, abbreviation, description,
             ',
         ],
     ],
@@ -45,10 +48,20 @@ return [
             'label' => 'Title',
             'config' => [
                 'type' => 'input',
-                'size' => 40,
+                'size' => 50,
                 'max' => 255,
                 'eval' => 'trim',
                 'required' => true,
+            ],
+        ],
+        'abbreviation' => [
+            'exclude' => true,
+            'label' => 'Abbreviation',
+            'config' => [
+                'type' => 'input',
+                'size' => 20,
+                'max' => 50,
+                'eval' => 'trim',
             ],
         ],
         'description' => [
@@ -58,13 +71,7 @@ return [
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 5,
-            ],
-        ],
-        'color' => [
-            'exclude' => true,
-            'label' => 'Color',
-            'config' => [
-                'type' => 'color',
+                'eval' => 'trim',
             ],
         ],
     ],

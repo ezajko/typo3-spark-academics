@@ -1,199 +1,177 @@
-<table>
-    <tr>
-        <th>UID:</th>
-        <td>{item.uid}</td>
-    </tr>
-    <tr>
-        <th>First Name:</th>
-        <td>{item.firstName}</td>
-    </tr>
-    <tr>
-        <th>Last Name:</th>
-        <td>{item.lastName}</td>
-    </tr>
-    <tr>
-        <th>Biography:</th>
-        <td>
-            <f:format.html>{item.biography}</f:format.html>
-        </td>
-    </tr>
-    <tr>
-        <th>Email:</th>
-        <td>{item.contactEmail}</td>
-    </tr>
-    <tr>
-        <th>Office:</th>
-        <td>{item.contactOffice}</td>
-    </tr>
-    <tr>
-        <th>Phone Office:</th>
-        <td>{item.phoneOffice}</td>
-    </tr>
-    <tr>
-        <th>Phone Mobile:</th>
-        <td>{item.phoneMobile}</td>
-    </tr>
-    <tr>
-        <th>Website:</th>
-        <td>{item.contactWebsite}</td>
-    </tr>
-    <tr>
-        <th>Primary Department:</th>
-        <td>
-            <f:if condition="{item.primaryDepartment}">
-                <f:if condition="{item.primaryDepartment.landingPage}">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<div class="person-detail">
+    <!-- Header -->
+    <div class="row align-items-center mb-5">
+        <div class="col-md-3 text-center text-md-start">
+            <div class="d-inline-block position-relative">
+                <f:if condition="{item.mediaImage}">
                     <f:then>
-                        <f:link.page pageUid="{item.primaryDepartment.landingPage}">{item.primaryDepartment.title}
-                        </f:link.page>
+                        <f:media file="{item.mediaImage}" class="rounded shadow-sm"
+                            style="width: 200px; height: 200px; object-fit: cover;"
+                            alt="{item.firstName} {item.lastName}" />
                     </f:then>
                     <f:else>
-                        <f:link.action action="show" arguments="{department: person.primaryDepartment}"
-                            pageUid="{detailPid}">
-                            {item.primaryDepartment.title}</f:link.action>
+                        <div class="rounded bg-light d-flex align-items-center justify-content-center shadow-sm"
+                            style="width: 200px; height: 200px;">
+                            <i class="bi bi-person fs-1 text-muted"></i>
+                        </div>
                     </f:else>
                 </f:if>
+            </div>
+        </div>
+        <div class="col-md-9 mt-3 mt-md-0">
+            <h1 class="display-4 fw-bold mb-1">{item.academicTitle.title} {item.firstName} {item.lastName}</h1>
+            <h4 class="text-muted mb-3">{item.academicRank.title}</h4>
+
+            <div class="d-flex flex-wrap gap-3">
+                <f:if condition="{item.contactEmail}">
+                    <a href="mailto:{item.contactEmail}" class="btn btn-outline-primary"><i
+                            class="bi bi-envelope me-2"></i>Email</a>
+                </f:if>
+                <f:if condition="{item.phoneOffice}">
+                    <a href="tel:{item.phoneOffice}" class="btn btn-outline-secondary"><i
+                            class="bi bi-telephone me-2"></i>Call</a>
+                </f:if>
+
+                <f:if condition="{item.profileGoogleScholar}">
+                    <a href="{item.profileGoogleScholar}" target="_blank" class="btn btn-sm btn-light border"><i
+                            class="bi bi-mortarboard me-1"></i> Google Scholar</a>
+                </f:if>
+                <f:if condition="{item.profileResearchGate}">
+                    <a href="{item.profileResearchGate}" target="_blank" class="btn btn-sm btn-light border"><i
+                            class="bi bi-journal-text me-1"></i> ResearchGate</a>
+                </f:if>
+                <f:if condition="{item.profileLinkedin}">
+                    <a href="{item.profileLinkedin}" target="_blank" class="btn btn-sm btn-light border"><i
+                            class="bi bi-linkedin me-1"></i> LinkedIn</a>
+                </f:if>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            <f:if condition="{item.biography}">
+                <div class="mb-5">
+                    <h3>Biography</h3>
+                    <div class="lead">
+                        <f:format.html>{item.biography}</f:format.html>
+                    </div>
+                </div>
             </f:if>
-        </td>
-    </tr>
-    <tr>
-        <th>Academic Title:</th>
-        <td>{item.academicTitle.title}</td>
-    </tr>
-    <tr>
-        <th>Academic Rank:</th>
-        <td>{item.academicRank.title}</td>
-    </tr>
-    <tr>
-        <th>Departments:</th>
-        <td>
-            <f:for each="{item.departments}" as="dept" iteration="i">
-                <f:if condition="{dept.landingPage}">
-                    <f:then>
-                        <f:link.page pageUid="{dept.landingPage}">{dept.title}</f:link.page>
-                    </f:then>
-                    <f:else>
-                        <f:link.action action="show" arguments="{department: dept}" pageUid="{detailPid}">{dept.title}
-                        </f:link.action>
-                    </f:else>
-                </f:if>
-                <f:if condition="{i.isLast}">
-                    <f:else>, </f:else>
-                </f:if>
-            </f:for>
-        </td>
-    </tr>
-    <tr>
-        <th>Labs:</th>
-        <td>
-            <f:for each="{item.laboratories}" as="lab" iteration="i">
-                <f:if condition="{lab.landingPage}">
-                    <f:then>
-                        <f:link.page pageUid="{lab.landingPage}">{lab.title}</f:link.page>
-                    </f:then>
-                    <f:else>
-                        <f:link.action action="show" arguments="{lab: lab}" pageUid="{detailPid}">{lab.title}
-                        </f:link.action>
-                    </f:else>
-                </f:if>
-                <f:if condition="{i.isLast}">
-                    <f:else>, </f:else>
-                </f:if>
-            </f:for>
-        </td>
-    </tr>
-    <tr>
-        <th>Groups:</th>
-        <td>
-            <f:for each="{item.groups}" as="group" iteration="i">
-                <f:if condition="{group.landingPage}">
-                    <f:then>
-                        <f:link.page pageUid="{group.landingPage}">{group.title}</f:link.page>
-                    </f:then>
-                    <f:else>
-                        <f:link.action action="show" arguments="{group: group}" pageUid="{detailPid}">{group.title}
-                        </f:link.action>
-                    </f:else>
-                </f:if>
-                <f:if condition="{i.isLast}">
-                    <f:else>, </f:else>
-                </f:if>
-            </f:for>
-        </td>
-    </tr>
-    <tr>
-        <th>Chairs:</th>
-        <td>
-            <f:for each="{item.chairs}" as="chair" iteration="i">
-                <f:if condition="{chair.landingPage}">
-                    <f:then>
-                        <f:link.page pageUid="{chair.landingPage}">{chair.title}</f:link.page>
-                    </f:then>
-                    <f:else>
-                        <f:link.action action="show" arguments="{chair: chair}" pageUid="{detailPid}">{chair.title}
-                        </f:link.action>
-                    </f:else>
-                </f:if>
-                <f:if condition="{i.isLast}">
-                    <f:else>, </f:else>
-                </f:if>
-            </f:for>
-        </td>
-    </tr>
-    <tr>
-        <th>Courses:</th>
-        <td>
-            <f:for each="{item.courses}" as="course" iteration="i">
-                <f:if condition="{course.landingPage}">
-                    <f:then>
-                        <f:link.page pageUid="{course.landingPage}">{course.title}</f:link.page>
-                    </f:then>
-                    <f:else>
-                        <f:link.action action="show" arguments="{course: course}" pageUid="{detailPid}">{course.title}
-                        </f:link.action>
-                    </f:else>
-                </f:if>
-                <f:if condition="{i.isLast}">
-                    <f:else>, </f:else>
-                </f:if>
-            </f:for>
-        </td>
-    </tr>
-    <tr>
-        <th>Programs:</th>
-        <td>
-            <f:for each="{item.studyPrograms}" as="prog" iteration="i">
-                <f:if condition="{prog.landingPage}">
-                    <f:then>
-                        <f:link.page pageUid="{prog.landingPage}">{prog.title}</f:link.page>
-                    </f:then>
-                    <f:else>
-                        <f:link.action action="show" arguments="{program: prog}" pageUid="{detailPid}">{prog.title}
-                        </f:link.action>
-                    </f:else>
-                </f:if>
-                <f:if condition="{i.isLast}">
-                    <f:else>, </f:else>
-                </f:if>
-            </f:for>
-        </td>
-    </tr>
-    <tr>
-        <th>Projects:</th>
-        <td>
-            <f:for each="{item.projects}" as="proj" iteration="i">
-                <f:if condition="{proj.landingPage}">
-                    <f:then>
-                        <f:link.page pageUid="{proj.landingPage}">{proj.title}</f:link.page>
-                    </f:then>
-                    <f:else>
-                        <f:link.action action="show" arguments="{project: proj}" pageUid="{detailPid}">{proj.title}
-                        </f:link.action>
-                    </f:else>
-                </f:if>
-                <f:if condition="{i.isLast}">
-                    <f:else>, </f:else>
-                </f:if>
-            </f:for>
-        </td>
-    </tr>
-</table>
+
+            <!-- Tabs -->
+            <div class="mt-4">
+                <ul class="nav nav-tabs mb-3" id="personTabs" role="tablist">
+                    <f:if condition="{item.projects}">
+                        <li class="nav-item">
+                            <button class="nav-link active" id="projects-tab" data-bs-toggle="tab"
+                                data-bs-target="#projects" type="button">Projects ({item.projects ->
+                                f:count()})</button>
+                        </li>
+                    </f:if>
+                    <f:if condition="{item.courses}">
+                        <li class="nav-item">
+                            <button class="nav-link {f:if(condition: '!{item.projects}', then: 'active')}"
+                                id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+                                type="button">Courses</button>
+                        </li>
+                    </f:if>
+                </ul>
+                <div class="tab-content" id="personTabContent">
+                    <f:if condition="{item.projects}">
+                        <div class="tab-pane fade show active" id="projects" role="tabpanel">
+                            <div class="list-group">
+                                <f:for each="{item.projects}" as="project">
+                                    <f:link.action action="show" arguments="{project: project}" pluginName="Pi2"
+                                        class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">{project.title}</h5>
+                                            <small class="text-muted">
+                                                <f:format.date format="Y">{project.startDate}</f:format.date>
+                                            </small>
+                                        </div>
+                                        <f:if condition="{project.acronym}">
+                                            <p class="mb-1 text-muted">{project.acronym}</p>
+                                        </f:if>
+                                    </f:link.action>
+                                </f:for>
+                            </div>
+                        </div>
+                    </f:if>
+                    <f:if condition="{item.courses}">
+                        <div class="tab-pane fade {f:if(condition: '!{item.projects}', then: 'show active')}"
+                            id="courses" role="tabpanel">
+                            <ul class="list-group">
+                                <f:for each="{item.courses}" as="course">
+                                    <li class="list-group-item">
+                                        <span class="fw-bold">{course.title}</span>
+                                        <f:if condition="{course.courseCode}">
+                                            <span class="text-muted ms-2">({course.courseCode})</span>
+                                        </f:if>
+                                    </li>
+                                </f:for>
+                            </ul>
+                        </div>
+                    </f:if>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <div class="card mb-4 border-0 bg-light">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Contact Information</h5>
+                    <ul class="list-unstyled mb-0">
+                        <f:if condition="{item.contactEmail}">
+                            <li class="mb-2"><i class="bi bi-envelope me-2 text-primary"></i> <a
+                                    href="mailto:{item.contactEmail}">{item.contactEmail}</a></li>
+                        </f:if>
+                        <f:if condition="{item.phoneOffice}">
+                            <li class="mb-2"><i class="bi bi-telephone me-2 text-primary"></i> {item.phoneOffice}</li>
+                        </f:if>
+                        <f:if condition="{item.contactOffice}">
+                            <li class="mb-2"><i class="bi bi-geo-alt me-2 text-primary"></i> {item.contactOffice}</li>
+                        </f:if>
+                        <f:if condition="{item.contactWebsite}">
+                            <li class="mb-2"><i class="bi bi-globe me-2 text-primary"></i> <a
+                                    href="{item.contactWebsite}" target="_blank">Personal Website</a></li>
+                        </f:if>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mb-4 border-0">
+                <div class="card-header bg-white fw-bold">Affiliations</div>
+                <ul class="list-group list-group-flush">
+                    <f:if condition="{item.primaryDepartment}">
+                        <li class="list-group-item">
+                            <small class="text-muted d-block">Department</small>
+                            <f:link.action action="show" arguments="{department: item.primaryDepartment}"
+                                pluginName="Pi2">{item.primaryDepartment.title}</f:link.action>
+                        </li>
+                    </f:if>
+                    <f:for each="{item.researchLabs}" as="lab">
+                        <li class="list-group-item">
+                            <small class="text-muted d-block">Lab</small>
+                            <f:link.action action="show" arguments="{lab: lab}" pluginName="Pi2">{lab.title}
+                            </f:link.action>
+                        </li>
+                    </f:for>
+                    <f:for each="{item.groups}" as="group">
+                        <li class="list-group-item">
+                            <small class="text-muted d-block">Group</small>
+                            <f:link.action action="show" arguments="{group: group}" pluginName="Pi2">{group.title}
+                            </f:link.action>
+                        </li>
+                    </f:for>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</html>

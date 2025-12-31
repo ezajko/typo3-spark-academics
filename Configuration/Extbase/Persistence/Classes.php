@@ -36,4 +36,13 @@ return [
     'EtfUnsa\SparkAcademics\Domain\Model\Project' => [
         'tableName' => 'tx_spark_project',
     ],
+    'EtfUnsa\SparkAcademics\Domain\Model\FundingProgram' => [
+        'tableName' => 'tx_spark_funding_program',
+    ],
+    'EtfUnsa\SparkAcademics\Domain\Model\Partner' => [
+        'tableName' => 'tx_spark_partner',
+    ],
+    'EtfUnsa\SparkAcademics\Domain\Model\ProjectStatus' => [
+        'tableName' => 'tx_spark_project_status',
+    ],
 ];

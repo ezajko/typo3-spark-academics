@@ -1,0 +1,36 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<div class="card mb-3 border-0 shadow-sm p-4">
+    <div class="card-body">
+        <h2 class="display-6 fw-bold mb-3">{item.title}</h2>
+        <div class="mb-4">
+            <f:format.html>{item.description}</f:format.html>
+        </div>
+        <f:if condition="{item.lead}">
+            <div class="d-flex align-items-center bg-light p-3 rounded">
+                <div class="me-3">
+                    <f:if condition="{item.lead.mediaImage}">
+                        <f:then>
+                            <f:media file="{item.lead.mediaImage}" class="rounded-circle"
+                                style="width: 50px; height: 50px; object-fit: cover;" />
+                        </f:then>
+                        <f:else>
+                            <div class="rounded-circle bg-white d-flex align-items-center justify-content-center"
+                                style="width: 50px; height: 50px;">
+                                <i class="bi bi-person text-muted"></i>
+                            </div>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div>
+                    <small class="text-muted d-block">Head of Department</small>
+                    <strong>
+                        <f:link.action action="show" arguments="{person: item.lead}" pluginName="Pi2">
+                            {item.lead.academicTitle.title} {item.lead.firstName} {item.lead.lastName}</f:link.action>
+                    </strong>
+                </div>
+            </div>
+        </f:if>
+    </div>
+</div>
+
+</html>

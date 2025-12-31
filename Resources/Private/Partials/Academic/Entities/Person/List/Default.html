@@ -1,0 +1,50 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+    <f:for each="{items}" as="item">
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0 text-center p-3">
+                <div class="mx-auto mb-3" style="width: 120px; height: 120px;">
+                    <f:if condition="{item.mediaImage}">
+                        <f:then>
+                            <f:media file="{item.mediaImage}" class="rounded-circle w-100 h-100 shadow-sm"
+                                alt="{item.firstName} {item.lastName}" style="object-fit: cover;" />
+                        </f:then>
+                        <f:else>
+                            <div
+                                class="rounded-circle w-100 h-100 bg-light d-flex align-items-center justify-content-center shadow-sm">
+                                <i class="bi bi-person fs-1 text-muted"></i>
+                            </div>
+                        </f:else>
+                    </f:if>
+                </div>
+
+                <div class="card-body p-0">
+                    <h5 class="card-title">
+                        <f:link.action action="show" arguments="{person: item}" pageUid="{detailPid}" pluginName="Pi2"
+                            class="text-decoration-none text-dark stretched-link">
+                            {item.academicTitle.title} {item.firstName} {item.lastName}
+                        </f:link.action>
+                    </h5>
+
+                    <f:if condition="{item.academicRank}">
+                        <p class="card-text text-muted small mb-2">{item.academicRank.title}</p>
+                    </f:if>
+                    <f:if condition="{item.primaryDepartment}">
+                        <p class="card-text text-muted smaller mb-2">{item.primaryDepartment.title}</p>
+                    </f:if>
+                </div>
+
+                <div class="card-footer bg-white border-0 p-0 mt-3 pt-3 border-top">
+                    <f:if condition="{item.contactEmail}">
+                        <a href="mailto:{item.contactEmail}"
+                            class="text-muted text-decoration-none small position-relative" style="z-index: 2;">
+                            <i class="bi bi-envelope me-1"></i> {item.contactEmail}
+                        </a>
+                    </f:if>
+                </div>
+            </div>
+        </div>
+    </f:for>
+</div>
+
+</html>

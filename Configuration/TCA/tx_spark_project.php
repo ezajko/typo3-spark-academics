@@ -25,14 +25,12 @@ return [
     'types' => [
         '1' => [
             'showitem' => '
-                --div--;General,
-                    hidden, landing_page, title, acronym, uuid, description,
-                --div--;Editors,
-                    be_users,
-                --div--;People,
-                    persons,
-                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
-                    starttime, endtime
+                --div--;General, sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, acronym, uuid, description, start_date, end_date, status, funding_program, grant_agreement_number, website, landing_page,
+                --div--;People, coordinator, persons, partners,
+                --div--;Details, objectives, outcomes,
+                --div--;Media, logo, main_image,
+                --div--;Relations, be_users, departments, chairs, research_labs, research_groups,
+                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime
             '
         ],
     ],
@@ -167,14 +165,175 @@ return [
                 'maxitems' => 99,
             ],
         ],
+        'start_date' => [
+            'exclude' => true,
+            'label' => 'Start Date',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputDateTime',
+                'eval' => 'date',
+                'default' => 0,
+            ],
+        ],
+        'end_date' => [
+            'exclude' => true,
+            'label' => 'End Date',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputDateTime',
+                'eval' => 'date',
+                'default' => 0,
+            ],
+        ],
+        'status' => [
+            'exclude' => true,
+            'label' => 'Status',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_spark_project_status',
+                'items' => [['', 0]],
+                'default' => 0,
+            ],
+        ],
+        'funding_program' => [
+            'exclude' => true,
+            'label' => 'Funding Program',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_spark_funding_program',
+                'items' => [['', 0]],
+                'default' => 0,
+            ],
+        ],
+        'grant_agreement_number' => [
+            'exclude' => true,
+            'label' => 'Grant Agreement Number',
+            'config' => ['type' => 'input', 'eval' => 'trim'],
+        ],
+        'website' => [
+            'exclude' => true,
+            'label' => 'Website',
+            'config' => ['type' => 'input', 'eval' => 'trim', 'renderType' => 'inputLink'],
+        ],
+        'coordinator' => [
+            'exclude' => true,
+            'label' => 'Project Coordinator',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_spark_person',
+                'items' => [['', 0]],
+                'default' => 0,
+            ],
+        ],
         'persons' => [
             'exclude' => true,
-            'label' => 'Members',
+            'label' => 'Team Members',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_spark_person',
                 'MM' => 'tx_spark_person_project_mm',
+                'size' => 10,
+                'maxitems' => 9999,
+            ],
+        ],
+        'partners' => [
+            'exclude' => true,
+            'label' => 'Partners',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_partner',
+                'MM' => 'tx_spark_project_partner_mm',
+                'size' => 10,
+                'maxitems' => 9999,
+            ],
+        ],
+        'objectives' => [
+            'exclude' => true,
+            'label' => 'Objectives',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 10,
+                'enableRichtext' => true,
+            ],
+        ],
+        'outcomes' => [
+            'exclude' => true,
+            'label' => 'Outcomes',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 10,
+                'enableRichtext' => true,
+            ],
+        ],
+        'logo' => [
+            'exclude' => true,
+            'label' => 'Logo',
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'common-image-types',
+                'maxitems' => 1,
+            ],
+        ],
+        'main_image' => [
+            'exclude' => true,
+            'label' => 'Main Image',
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'common-image-types',
+                'maxitems' => 1,
+            ],
+        ],
+        'departments' => [
+            'exclude' => true,
+            'label' => 'Departments',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_department',
+                'MM' => 'tx_spark_project_department_mm',
+                'size' => 10,
+                'maxitems' => 9999,
+            ],
+        ],
+        'chairs' => [
+            'exclude' => true,
+            'label' => 'Chairs',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_chair',
+                'MM' => 'tx_spark_project_chair_mm',
+                'size' => 10,
+                'maxitems' => 9999,
+            ],
+        ],
+        'research_labs' => [
+            'exclude' => true,
+            'label' => 'Research Labs',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_research_lab',
+                'MM' => 'tx_spark_project_research_lab_mm',
+                'size' => 10,
+                'maxitems' => 9999,
+            ],
+        ],
+        'research_groups' => [
+            'exclude' => true,
+            'label' => 'Research Groups',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_research_group',
+                'MM' => 'tx_spark_project_research_group_mm',
                 'size' => 10,
                 'maxitems' => 9999,
             ],

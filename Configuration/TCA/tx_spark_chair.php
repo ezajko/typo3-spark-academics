@@ -22,17 +22,18 @@ return [
         'searchFields' => 'title,acronym,uuid',
         'iconfile' => 'EXT:spark_academics/Resources/Public/Icons/Extension.svg',
     ],
+    'palettes' => [
+        'social' => ['showitem' => 'facebook, twitter, linkedin, instagram'],
+    ],
     'types' => [
         '1' => [
             'showitem' => '
-                --div--;General,
-                    hidden, landing_page, title, acronym, uuid, description,
-                --div--;Editors,
-                    be_users,
-                --div--;People,
-                    persons,
-                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
-                    starttime, endtime
+                --div--;General, sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, acronym, uuid, description, landing_page, head_person,
+                --div--;Contact & Social, email, phone, website, address, room, --palette--;Social;social,
+                --div--;Details, research_focus, mission, vision,
+                --div--;Media, logo, main_image,
+                --div--;Relations, be_users, persons, departments, research_labs, research_groups,
+                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime
             '
         ],
     ],
@@ -117,6 +118,141 @@ return [
                 'minitems' => 0,
                 'size' => 1,
                 'default' => 0,
+            ],
+        ],
+        'email' => [
+            'exclude' => true,
+            'label' => 'Email',
+            'config' => ['type' => 'input', 'eval' => 'trim,email'],
+        ],
+        'phone' => [
+            'exclude' => true,
+            'label' => 'Phone',
+            'config' => ['type' => 'input', 'eval' => 'trim'],
+        ],
+        'website' => [
+            'exclude' => true,
+            'label' => 'Website',
+            'config' => ['type' => 'input', 'eval' => 'trim', 'renderType' => 'inputLink'],
+        ],
+        'address' => [
+            'exclude' => true,
+            'label' => 'Address',
+            'config' => ['type' => 'text', 'cols' => 40, 'rows' => 3, 'eval' => 'trim'],
+        ],
+        'room' => [
+            'exclude' => true,
+            'label' => 'Room',
+            'config' => ['type' => 'input', 'eval' => 'trim'],
+        ],
+        'facebook' => [
+            'exclude' => true,
+            'label' => 'Facebook',
+            'config' => ['type' => 'input', 'eval' => 'trim'],
+        ],
+        'twitter' => [
+            'exclude' => true,
+            'label' => 'Twitter/X',
+            'config' => ['type' => 'input', 'eval' => 'trim'],
+        ],
+        'linkedin' => [
+            'exclude' => true,
+            'label' => 'LinkedIn',
+            'config' => ['type' => 'input', 'eval' => 'trim'],
+        ],
+        'instagram' => [
+            'exclude' => true,
+            'label' => 'Instagram',
+            'config' => ['type' => 'input', 'eval' => 'trim'],
+        ],
+        'head_person' => [
+            'exclude' => true,
+            'label' => 'Head of Chair',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_spark_person',
+                'items' => [['', 0]],
+                'default' => 0,
+            ],
+        ],
+        'departments' => [
+            'exclude' => true,
+            'label' => 'Departments',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_department',
+                'MM' => 'tx_spark_department_chair_mm',
+                'MM_opposite_field' => 'chairs',
+                'size' => 10,
+                'maxitems' => 9999,
+            ],
+        ],
+        'research_labs' => [
+            'exclude' => true,
+            'label' => 'Research Labs',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_research_lab',
+                'MM' => 'tx_spark_chair_research_lab_mm',
+                'size' => 10,
+                'maxitems' => 9999,
+            ],
+        ],
+        'research_groups' => [
+            'exclude' => true,
+            'label' => 'Research Groups',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_research_group',
+                'MM' => 'tx_spark_chair_research_group_mm',
+                'size' => 10,
+                'maxitems' => 9999,
+            ],
+        ],
+        'logo' => [
+            'exclude' => true,
+            'label' => 'Logo',
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'common-image-types',
+                'maxitems' => 1,
+            ],
+        ],
+        'main_image' => [
+            'exclude' => true,
+            'label' => 'Main Image',
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'common-image-types',
+                'maxitems' => 1,
+            ],
+        ],
+        'research_focus' => [
+            'exclude' => true,
+            'label' => 'Research Focus',
+            'config' => [
+                'type' => 'text',
+                'enableRichtext' => true,
+            ],
+        ],
+        'mission' => [
+            'exclude' => true,
+            'label' => 'Mission',
+            'config' => [
+                'type' => 'text',
+                'enableRichtext' => true,
+            ],
+        ],
+        'vision' => [
+            'exclude' => true,
+            'label' => 'Vision',
+            'config' => [
+                'type' => 'text',
+                'enableRichtext' => true,
             ],
         ],
         'title' => [

@@ -120,7 +120,14 @@ class AcademicController extends ActionController
     ): ResponseInterface {
         $args = array_filter(get_defined_vars());
         $item = reset($args); // Get first non-null argument
-        $entityType = ucfirst(key($args));
+        $entityType = '';
+        
+        if ($item) {
+            $key = key($args);
+            if ($key) {
+                $entityType = ucfirst($key);
+            }
+        }
 
         if (!$item) {
              // Try to resolve from settings (Static Selection)
@@ -141,6 +148,7 @@ class AcademicController extends ActionController
                  }
              }
         }
+
         
         if (!$item) { 
              $item = null;
@@ -187,8 +195,8 @@ class AcademicController extends ActionController
         // Check Site Settings (settings.yaml - TYPO3 v12+)
         if (!$pidValue && method_exists($site, 'getSettings')) {
             $siteSettings = $site->getSettings();
-            if (isset($siteSettings[$fieldName])) {
-                $pidValue = $siteSettings[$fieldName];
+            if ($siteSettings->has($fieldName)) {
+                $pidValue = $siteSettings->get($fieldName);
             }
         }
 

@@ -1,4 +1,4 @@
-<f:variable name="viewType" value="{settings.viewType -> f:or(alternative: 'List')}" />
+<f:variable name="viewType" value="{settings.viewType -> f:or(alternative: 'Default')}" />
 <f:variable name="entity" value="{entityType -> f:format.case(mode: 'capital')}" />
 
 <f:render partial="Academic/Entities/{entity}/List/{viewType}"

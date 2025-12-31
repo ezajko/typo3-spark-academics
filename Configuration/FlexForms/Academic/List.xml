@@ -13,8 +13,7 @@
                         <config>
                             <type>select</type>
                             <renderType>selectSingle</renderType>
-                            <items>
-                            </items>
+                            <items></items>
                         </config>
                     </settings.viewType>
 

@@ -1,227 +1,154 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-
+<!--
+    Project Show Default Template
+    Simple attribute-value layout for debugging and basic display
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
 <div class="project-detail">
-    <!-- Header -->
-    <div class="row mb-4 align-items-center">
-        <div class="col-md-9">
-            <f:if condition="{item.status}">
-                <span class="badge mb-2" style="background-color: {item.status.color};">{item.status.title}</span>
-            </f:if>
-            <h1 class="display-4 fw-bold">{item.title}</h1>
-            <f:if condition="{item.acronym}">
-                <h3 class="text-muted">{item.acronym}</h3>
-            </f:if>
-            <div class="text-muted mt-2">
-                <i class="bi bi-calendar3 me-1"></i>
-                <f:format.date format="d.m.Y">{item.startDate}</f:format.date> - <f:format.date format="d.m.Y">
-                    {item.endDate}</f:format.date>
-            </div>
-        </div>
-        <div class="col-md-3 text-end">
-            <f:if condition="{item.logo}">
-                <f:media file="{item.logo}" class="img-fluid" style="max-height: 100px;" alt="{item.title} Logo" />
-            </f:if>
-        </div>
-    </div>
+    <h1>{item.title}</h1>
 
-    <div class="row">
-        <!-- Main Content -->
-        <div class="col-lg-8">
-            <f:if condition="{item.mainImage}">
-                <div class="mb-4">
-                    <f:media file="{item.mainImage}" class="img-fluid rounded shadow-sm w-100" alt="{item.title}" />
-                </div>
-            </f:if>
+    <!-- Local Attributes -->
+    <h3>Attributes</h3>
+    <dl class="row">
+        <f:if condition="{item.acronym}">
+            <dt class="col-sm-3">Acronym</dt>
+            <dd class="col-sm-9">{item.acronym}</dd>
+        </f:if>
 
-            <div class="mb-5 lead">
+        <f:if condition="{item.status}">
+            <dt class="col-sm-3">Status</dt>
+            <dd class="col-sm-9">{item.status.title}</dd>
+        </f:if>
+
+        <f:if condition="{item.startDate}">
+            <dt class="col-sm-3">Start Date</dt>
+            <dd class="col-sm-9">
+                <f:format.date format="d.m.Y">{item.startDate}</f:format.date>
+            </dd>
+        </f:if>
+
+        <f:if condition="{item.endDate}">
+            <dt class="col-sm-3">End Date</dt>
+            <dd class="col-sm-9">
+                <f:format.date format="d.m.Y">{item.endDate}</f:format.date>
+            </dd>
+        </f:if>
+
+        <f:if condition="{item.grantAgreementNumber}">
+            <dt class="col-sm-3">Grant Agreement</dt>
+            <dd class="col-sm-9">{item.grantAgreementNumber}</dd>
+        </f:if>
+
+        <f:if condition="{item.fundingProgram}">
+            <dt class="col-sm-3">Funding Program</dt>
+            <dd class="col-sm-9">{item.fundingProgram.title}</dd>
+        </f:if>
+
+        <f:if condition="{item.website}">
+            <dt class="col-sm-3">Website</dt>
+            <dd class="col-sm-9"><a href="{item.website}" target="_blank">{item.website}</a></dd>
+        </f:if>
+
+        <f:if condition="{item.description}">
+            <dt class="col-sm-3">Description</dt>
+            <dd class="col-sm-9">
                 <f:format.html>{item.description}</f:format.html>
-            </div>
+            </dd>
+        </f:if>
 
-            <f:if condition="{item.objectives}">
-                <div class="mb-4">
-                    <h3>Objectives</h3>
-                    <f:format.html>{item.objectives}</f:format.html>
-                </div>
-            </f:if>
+        <f:if condition="{item.objectives}">
+            <dt class="col-sm-3">Objectives</dt>
+            <dd class="col-sm-9">
+                <f:format.html>{item.objectives}</f:format.html>
+            </dd>
+        </f:if>
 
-            <f:if condition="{item.outcomes}">
-                <div class="mb-4">
-                    <h3>Expected Outcomes</h3>
-                    <f:format.html>{item.outcomes}</f:format.html>
-                </div>
-            </f:if>
+        <f:if condition="{item.outcomes}">
+            <dt class="col-sm-3">Outcomes</dt>
+            <dd class="col-sm-9">
+                <f:format.html>{item.outcomes}</f:format.html>
+            </dd>
+        </f:if>
+    </dl>
 
-            <f:if condition="{item.content}">
-                <div class="mb-4">
-                    <f:format.html>{item.content}</f:format.html>
-                </div>
-            </f:if>
+    <!-- External Relations -->
+    <h3>Relations</h3>
+    <dl class="row">
+        <f:if condition="{item.coordinator}">
+            <dt class="col-sm-3">Coordinator</dt>
+            <dd class="col-sm-9">
+                <f:link.action action="show" arguments="{person: item.coordinator}" pluginName="Pi2">
+                    {item.coordinator.firstName} {item.coordinator.lastName}</f:link.action>
+            </dd>
+        </f:if>
 
-            <!-- Relations Tabs -->
-            <div class="mt-5">
-                <ul class="nav nav-tabs mb-3" id="projectTabs" role="tablist">
-                    <f:if condition="{item.persons}">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="team-tab" data-bs-toggle="tab" data-bs-target="#team"
-                                type="button" role="tab">Team ({item.persons -> f:count()})</button>
+        <f:if condition="{item.persons}">
+            <dt class="col-sm-3">Team Members</dt>
+            <dd class="col-sm-9">
+                <ul class="list-unstyled mb-0">
+                    <f:for each="{item.persons}" as="person">
+                        <li>
+                            <f:link.action action="show" arguments="{person: person}" pluginName="Pi2">
+                                {person.firstName} {person.lastName}</f:link.action>
                         </li>
-                    </f:if>
-                    <f:if condition="{item.partners}">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link {f:if(condition: '!{item.persons}', then: 'active')}"
-                                id="partners-tab" data-bs-toggle="tab" data-bs-target="#partners" type="button"
-                                role="tab">Partners</button>
-                        </li>
-                    </f:if>
-                    <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link {f:if(condition: '!{item.persons} && !{item.partners}', then: 'active')}"
-                            id="orgs-tab" data-bs-toggle="tab" data-bs-target="#orgs" type="button"
-                            role="tab">Organizations</button>
-                    </li>
+                    </f:for>
                 </ul>
-                <div class="tab-content" id="projectTabContent">
-                    <f:if condition="{item.persons}">
-                        <div class="tab-pane fade show active" id="team" role="tabpanel">
-                            <div class="row row-cols-2 row-cols-md-4 g-3">
-                                <f:for each="{item.persons}" as="person">
-                                    <div class="col">
-                                        <div class="card h-100 border-0 shadow-sm text-center p-3">
-                                            <div class="mx-auto mb-2" style="width: 80px; height: 80px;">
-                                                <f:if condition="{person.mediaImage}">
-                                                    <f:then>
-                                                        <f:media file="{person.mediaImage}"
-                                                            class="rounded-circle w-100 h-100"
-                                                            style="object-fit: cover;" />
-                                                    </f:then>
-                                                    <f:else>
-                                                        <div
-                                                            class="rounded-circle w-100 h-100 bg-light d-flex align-items-center justify-content-center">
-                                                            <i class="bi bi-person fs-3 text-muted"></i>
-                                                        </div>
-                                                    </f:else>
-                                                </f:if>
-                                            </div>
-                                            <h6 class="mb-1">
-                                                <f:link.action action="show" arguments="{person: person}"
-                                                    pluginName="Pi2"
-                                                    class="text-decoration-none text-dark text-truncate d-block">
-                                                    {person.academicTitle.title} {person.firstName} {person.lastName}
-                                                </f:link.action>
-                                            </h6>
-                                            <small
-                                                class="text-muted d-block text-truncate">{person.academicRank.title}</small>
-                                        </div>
-                                    </div>
-                                </f:for>
-                            </div>
-                        </div>
-                    </f:if>
-                    <f:if condition="{item.partners}">
-                        <div class="tab-pane fade {f:if(condition: '!{item.persons}', then: 'show active')}"
-                            id="partners" role="tabpanel">
-                            <div class="row g-3">
-                                <f:for each="{item.partners}" as="partner">
-                                    <div class="col-md-4 col-6">
-                                        <div
-                                            class="card h-100 text-center p-3 border-0 shadow-sm align-items-center justify-content-center">
-                                            <f:if condition="{partner.logo}">
-                                                <f:media file="{partner.logo}" class="img-fluid mb-2"
-                                                    style="max-height: 60px;" />
-                                            </f:if>
-                                            <h6 class="mb-0">{partner.title}</h6>
-                                            <f:if condition="{partner.country}">
-                                                <small class="text-muted">{partner.city}, {partner.country}</small>
-                                            </f:if>
-                                        </div>
-                                    </div>
-                                </f:for>
-                            </div>
-                        </div>
-                    </f:if>
-                    <div class="tab-pane fade {f:if(condition: '!{item.persons} && !{item.partners}', then: 'show active')}"
-                        id="orgs" role="tabpanel">
-                        <ul class="list-group list-group-flush">
-                            <f:for each="{item.departments}" as="dept">
-                                <li class="list-group-item"><i class="bi bi-building me-2"></i>
-                                    <f:link.action action="show" arguments="{department: dept}">{dept.title}
-                                    </f:link.action>
-                                </li>
-                            </f:for>
-                            <f:for each="{item.researchLabs}" as="lab">
-                                <li class="list-group-item"><i class="bi bi-eyedropper me-2"></i>
-                                    <f:link.action action="show" arguments="{lab: lab}">{lab.title}</f:link.action>
-                                </li>
-                            </f:for>
-                            <f:for each="{item.researchGroups}" as="group">
-                                <li class="list-group-item"><i class="bi bi-people me-2"></i>
-                                    <f:link.action action="show" arguments="{group: group}">{group.title}
-                                    </f:link.action>
-                                </li>
-                            </f:for>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            </dd>
+        </f:if>
 
-        </div>
-
-        <!-- Sidebar -->
-        <div class="col-lg-4">
-            <!-- Key Info Card -->
-            <div class="card mb-4 border-primary">
-                <div class="card-header bg-primary text-white">Project Info</div>
-                <ul class="list-group list-group-flush">
-                    <f:if condition="{item.grantAgreementNumber}">
-                        <li class="list-group-item"><strong>Grant Agreement:</strong><br>{item.grantAgreementNumber}
-                        </li>
-                    </f:if>
-                    <f:if condition="{item.fundingProgram}">
-                        <li class="list-group-item">
-                            <strong>Funding Program:</strong><br>
-                            {item.fundingProgram.title}
-                            <f:if condition="{item.fundingProgram.logo}">
-                                <div class="mt-2">
-                                    <f:media file="{item.fundingProgram.logo}" class="img-fluid"
-                                        style="max-height: 40px;" />
-                                </div>
-                            </f:if>
-                        </li>
-                    </f:if>
-                    <f:if condition="{item.website}">
-                        <li class="list-group-item">
-                            <i class="bi bi-globe me-2"></i> <a href="{item.website}" target="_blank">Project
-                                Website</a>
-                        </li>
-                    </f:if>
+        <f:if condition="{item.partners}">
+            <dt class="col-sm-3">Partners</dt>
+            <dd class="col-sm-9">
+                <ul class="list-unstyled mb-0">
+                    <f:for each="{item.partners}" as="partner">
+                        <li>{partner.title}</li>
+                    </f:for>
                 </ul>
-            </div>
+            </dd>
+        </f:if>
 
-            <!-- Coordinator -->
-            <f:if condition="{item.coordinator}">
-                <div class="card mb-4">
-                    <div class="card-header">Coordinator</div>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <f:if condition="{item.coordinator.image}">
-                                <f:media file="{item.coordinator.image}" class="rounded-circle me-3"
-                                    style="width: 50px; height: 50px; object-fit: cover;" />
-                            </f:if>
-                            <div>
-                                <h6 class="mb-0">{item.coordinator.firstName} {item.coordinator.lastName}</h6>
-                                <f:if condition="{item.coordinator.email}">
-                                    <a href="mailto:{item.coordinator.email}" class="small">Contact</a>
-                                </f:if>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </f:if>
+        <f:if condition="{item.departments}">
+            <dt class="col-sm-3">Departments</dt>
+            <dd class="col-sm-9">
+                <ul class="list-unstyled mb-0">
+                    <f:for each="{item.departments}" as="dept">
+                        <li>
+                            <f:link.action action="show" arguments="{department: dept}" pluginName="Pi2">{dept.title}
+                            </f:link.action>
+                        </li>
+                    </f:for>
+                </ul>
+            </dd>
+        </f:if>
 
-            <f:render partial="Academic/SocialLinks" arguments="{item: item}" optional="true" />
+        <f:if condition="{item.researchLabs}">
+            <dt class="col-sm-3">Research Labs</dt>
+            <dd class="col-sm-9">
+                <ul class="list-unstyled mb-0">
+                    <f:for each="{item.researchLabs}" as="lab">
+                        <li>
+                            <f:link.action action="show" arguments="{lab: lab}" pluginName="Pi2">{lab.title}
+                            </f:link.action>
+                        </li>
+                    </f:for>
+                </ul>
+            </dd>
+        </f:if>
 
-        </div>
-    </div>
+        <f:if condition="{item.researchGroups}">
+            <dt class="col-sm-3">Research Groups</dt>
+            <dd class="col-sm-9">
+                <ul class="list-unstyled mb-0">
+                    <f:for each="{item.researchGroups}" as="group">
+                        <li>
+                            <f:link.action action="show" arguments="{group: group}" pluginName="Pi2">{group.title}
+                            </f:link.action>
+                        </li>
+                    </f:for>
+                </ul>
+            </dd>
+        </f:if>
+    </dl>
 </div>
 
 </html>

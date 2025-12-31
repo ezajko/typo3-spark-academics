@@ -25,3 +25,10 @@ services:
     public: true
   EtfUnsa\SparkAcademics\Controller\Backend\ProjectController:
     public: true
+
+  # Console Commands
+  EtfUnsa\SparkAcademics\Command\SeedCommand:
+    tags:
+      - name: console.command
+        command: 'academics:seed'
+        description: 'Seed lookup tables with initial data'

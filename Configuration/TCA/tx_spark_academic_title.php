@@ -1,11 +1,20 @@
 <?php
 
+/**
+ * TCA Configuration for AcademicTitle
+ * Represents academic titles/degrees (Dr., Prof., Mr., BSc, MSc, PhD)
+ * 
+ * @author Ernedin Zajko <ezajko@root.ba>
+ */
+
 defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_academic_title',
+        'title' => 'Academic Title',
         'label' => 'title',
+        'label_alt' => 'abbreviation',
+        'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'sortby' => 'sorting',
@@ -17,11 +26,20 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,description',
+        'searchFields' => 'title,abbreviation,abbreviation_after,title_en,description',
         'iconfile' => 'EXT:spark_academics/Resources/Public/Icons/Extension.svg',
+        'default_sortby' => 'sorting ASC',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, uuid'],
+        '1' => [
+            'showitem' => '
+                --div--;General,
+                    sys_language_uid, l10n_parent, l10n_diffsource, hidden,
+                    title, abbreviation, abbreviation_after, title_en,
+                --div--;Details,
+                    description,
+            ',
+        ],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -65,12 +83,48 @@ return [
             ],
         ],
         'title' => [
-            'exclude' => true,
-            'label' => 'Title',
+            'exclude' => false,
+            'label' => 'Title (Local)',
+            'description' => 'Full title in local language (e.g., "Doktor nauka")',
             'config' => [
                 'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim,required'
+                'size' => 50,
+                'max' => 255,
+                'eval' => 'trim',
+                'required' => true,
+            ],
+        ],
+        'abbreviation' => [
+            'exclude' => true,
+            'label' => 'Abbreviation (Before Name)',
+            'description' => 'Prefix placed before name (e.g., "Dr.", "Prof. dr.")',
+            'config' => [
+                'type' => 'input',
+                'size' => 20,
+                'max' => 50,
+                'eval' => 'trim',
+            ],
+        ],
+        'abbreviation_after' => [
+            'exclude' => true,
+            'label' => 'Abbreviation (After Name)',
+            'description' => 'Suffix placed after name (e.g., "PhD", "MSc", "BSc")',
+            'config' => [
+                'type' => 'input',
+                'size' => 20,
+                'max' => 50,
+                'eval' => 'trim',
+            ],
+        ],
+        'title_en' => [
+            'exclude' => true,
+            'label' => 'Title (English)',
+            'description' => 'English title (e.g., "Doctor of Philosophy")',
+            'config' => [
+                'type' => 'input',
+                'size' => 50,
+                'max' => 255,
+                'eval' => 'trim',
             ],
         ],
         'description' => [
@@ -79,16 +133,8 @@ return [
             'config' => [
                 'type' => 'text',
                 'cols' => 40,
-                'rows' => 15,
+                'rows' => 5,
                 'eval' => 'trim',
-                'enableRichtext' => true,
-            ],
-        ],
-        'uuid' => [
-            'exclude' => true,
-            'label' => 'UUID',
-            'config' => [
-                'type' => 'uuid',
             ],
         ],
     ],

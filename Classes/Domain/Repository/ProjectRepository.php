@@ -11,7 +11,7 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 class ProjectRepository extends AbstractRepository
 {
-    public function findByProjectDemand(ProjectDemand $demand): QueryResultInterface
+    public function findByProjectDemand(ProjectDemand $demand, array $orderings = []): QueryResultInterface
     {
         $query = $this->createQuery();
         $constraints = [];
@@ -76,13 +76,22 @@ class ProjectRepository extends AbstractRepository
             $constraints[] = $query->equals('chairs.uid', $demand->getChair());
         }
 
+        // 8. Backend User Permission (Permissions)
+        if ($demand->getBackendUser()) {
+             $constraints[] = $query->equals('beUsers.uid', $demand->getBackendUser());
+        }
+
         if (!empty($constraints)) {
             $query->matching($query->logicalAnd(...$constraints));
         }
 
         // Order by sorting by default, or define specific ordering
-        $query->setOrderings(['sorting' => QueryInterface::ORDER_ASCENDING]);
-
+        if (!empty($orderings)) {
+            $query->setOrderings($orderings);
+        } else {
+            $query->setOrderings(['sorting' => QueryInterface::ORDER_ASCENDING]);
+        }
+        
         return $query->execute();
     }
 }

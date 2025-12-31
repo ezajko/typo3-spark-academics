@@ -1,0 +1,175 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<div class="table-fit">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <f:link.action action="list"
+                        arguments="{filter: filter, sort: 'title', direction: '{f:if(condition:\" {sort}==\'title\'\",
+                        then:\"{f:if(condition:\"{direction}==\'asc\'\", then:\"desc\", else:\"asc\")}\",
+                        else:\"asc\")}'}">
+                        Title / UUID
+                        <f:if condition="{sort} == 'title'">
+                            <core:icon
+                                identifier="{f:if(condition: '{direction} == \'asc\'', then: 'actions-sort-amount-up', else: 'actions-sort-amount-down')}"
+                                size="small" />
+                        </f:if>
+                    </f:link.action>
+                </th>
+                <th>
+                    <f:link.action action="list"
+                        arguments="{filter: filter, sort: 'acronym', direction: '{f:if(condition:\"
+                        {sort}==\'acronym\'\", then:\"{f:if(condition:\"{direction}==\'asc\'\", then:\"desc\",
+                        else:\"asc\")}\", else:\"asc\")}'}">
+                        Abbr
+                        <f:if condition="{sort} == 'acronym'">
+                            <core:icon
+                                identifier="{f:if(condition: '{direction} == \'asc\'', then: 'actions-sort-amount-up', else: 'actions-sort-amount-down')}"
+                                size="small" />
+                        </f:if>
+                    </f:link.action>
+                </th>
+                <th>
+                    <f:link.action action="list"
+                        arguments="{filter: filter, sort: 'status', direction: '{f:if(condition:\" {sort}==\'status\'\",
+                        then:\"{f:if(condition:\"{direction}==\'asc\'\", then:\"desc\", else:\"asc\")}\",
+                        else:\"asc\")}'}">
+                        Status
+                        <f:if condition="{sort} == 'status'">
+                            <core:icon
+                                identifier="{f:if(condition: '{direction} == \'asc\'', then: 'actions-sort-amount-up', else: 'actions-sort-amount-down')}"
+                                size="small" />
+                        </f:if>
+                    </f:link.action>
+                </th>
+                <th>Type</th>
+                <th>Program</th>
+                <th>
+                    <f:link.action action="list"
+                        arguments="{filter: filter, sort: 'startDate', direction: '{f:if(condition:\"
+                        {sort}==\'startDate\'\", then:\"{f:if(condition:\"{direction}==\'asc\'\", then:\"desc\",
+                        else:\"asc\")}\", else:\"asc\")}'}">
+                        Dates
+                        <f:if condition="{sort} == 'startDate'">
+                            <core:icon
+                                identifier="{f:if(condition: '{direction} == \'asc\'', then: 'actions-sort-amount-up', else: 'actions-sort-amount-down')}"
+                                size="small" />
+                        </f:if>
+                    </f:link.action>
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <f:for each="{items}" as="row">
+                <tr>
+                    <td>
+                        <b>{row.item.title}</b><br>
+                        <small class="text-muted font-monospace">{row.item.uuid}</small>
+                    </td>
+                    <td>
+                        <code>{row.item.acronym}</code>
+                    </td>
+                    <td>
+                        <f:if condition="{row.item.status}">
+                            <span class="badge bg-secondary">{row.item.status.title}</span>
+                        </f:if>
+                    </td>
+                    <td>
+                        <f:if condition="{row.item.projectType}">
+                            <span class="badge bg-info">{row.item.projectType.title}</span>
+                        </f:if>
+                    </td>
+                    <td>
+                        <f:if condition="{row.item.fundingProgram}">
+                            <span class="badge bg-light text-dark border">{row.item.fundingProgram.title}</span>
+                        </f:if>
+                    </td>
+                    <td>
+                        <f:if condition="{row.item.startDate}">
+                            <f:format.date format="d.m.Y">{row.item.startDate}</f:format.date>
+                        </f:if>
+                        <f:if condition="{row.item.endDate}">
+                            - <f:format.date format="d.m.Y">{row.item.endDate}</f:format.date>
+                        </f:if>
+                    </td>
+                    <td>
+                        <be:link.editRecord table="tx_spark_project" uid="{row.item.uid}"
+                            class="btn btn-default btn-sm">
+                            <core:icon identifier="actions-open" size="small" /> Edit
+                        </be:link.editRecord>
+                    </td>
+                </tr>
+            </f:for>
+            <f:if condition="{items -> f:count()} == 0">
+                <tr>
+                    <td colspan="7" class="text-center text-muted py-4">
+                        <core:icon identifier="actions-search" size="medium" /><br>
+                        No projects found matching your criteria.
+                    </td>
+                </tr>
+            </f:if>
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination -->
+<f:if condition="{paginator.numberOfPages} > 1">
+    <nav class="mb-4" aria-label="Project pagination">
+        <ul class="pagination pagination-sm justify-content-center">
+            <f:comment><!-- Previous --></f:comment>
+            <f:if condition="{pagination.previousPageNumber}">
+                <li class="page-item">
+                    <f:link.action action="list"
+                        arguments="{filter: filter, sort: sort, direction: direction, page: pagination.previousPageNumber}"
+                        class="page-link">
+                        <core:icon identifier="actions-chevron-left" size="small" /> Prev
+                    </f:link.action>
+                </li>
+            </f:if>
+
+            <f:comment><!-- Page Numbers --></f:comment>
+            <f:for each="{pagination.allPageNumbers}" as="pageNumber">
+                <f:if condition="{pageNumber} == {currentPage}">
+                    <f:then>
+                        <li class="page-item active">
+                            <span class="page-link">{pageNumber}</span>
+                        </li>
+                    </f:then>
+                    <f:else>
+                        <li class="page-item">
+                            <f:link.action action="list"
+                                arguments="{filter: filter, sort: sort, direction: direction, page: pageNumber}"
+                                class="page-link">
+                                {pageNumber}
+                            </f:link.action>
+                        </li>
+                    </f:else>
+                </f:if>
+            </f:for>
+
+            <f:comment><!-- Next --></f:comment>
+            <f:if condition="{pagination.nextPageNumber}">
+                <li class="page-item">
+                    <f:link.action action="list"
+                        arguments="{filter: filter, sort: sort, direction: direction, page: pagination.nextPageNumber}"
+                        class="page-link">
+                        Next
+                        <core:icon identifier="actions-chevron-right" size="small" />
+                    </f:link.action>
+                </li>
+            </f:if>
+        </ul>
+    </nav>
+    <p class="text-muted text-center">
+        <small>
+            Showing {items -> f:count()} of {paginator.count} projects
+            (Page {currentPage} of {paginator.numberOfPages})
+        </small>
+    </p>
+</f:if>
+
+</html>

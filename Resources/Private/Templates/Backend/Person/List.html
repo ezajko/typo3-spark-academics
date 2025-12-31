@@ -1,6 +1,7 @@
 <f:layout name="Module" />
 
 <f:section name="Content">
-    <f:render partial="Backend/Common/List"
-        arguments="{items: items, title: '{f:translate(key: \'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf:person\')}'}" />
+    <f:render partial="Backend/Person/Filter" arguments="{_all}" />
+    <f:render partial="Backend/Person/ListTable"
+        arguments="{items: items, paginator: paginator, pagination: pagination, currentPage: currentPage, filter: filter, sort: sort, direction: direction}" />
 </f:section>

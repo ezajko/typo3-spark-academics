@@ -5,23 +5,192 @@ declare(strict_types=1);
 namespace EtfUnsa\SparkAcademics\Controller\Backend;
 
 use EtfUnsa\SparkAcademics\Domain\Repository\PersonRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\AcademicRankRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\AcademicTitleRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\DepartmentRepository;
+use EtfUnsa\SparkAcademics\Domain\Model\Dto\PersonDemand;
+use EtfUnsa\SparkAcademics\Service\BackendPermissionService;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+use TYPO3\CMS\Core\Imaging\Icon;
+use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Pagination\SlidingWindowPagination;
+use TYPO3\CMS\Core\Site\SiteFinder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 class PersonController extends AbstractBackendController
 {
+    protected AcademicRankRepository $academicRankRepository;
+    protected AcademicTitleRepository $academicTitleRepository;
+    protected DepartmentRepository $departmentRepository;
+    protected BackendPermissionService $backendPermissionService;
+    protected IconFactory $iconFactory;
+    protected SiteFinder $siteFinder;
+
     public function __construct(
         PersonRepository $personRepository,
+        AcademicRankRepository $academicRankRepository,
+        AcademicTitleRepository $academicTitleRepository,
+        DepartmentRepository $departmentRepository,
+        BackendPermissionService $backendPermissionService,
         ModuleTemplateFactory $moduleTemplateFactory,
-        UriBuilder $backendUriBuilder
+        UriBuilder $backendUriBuilder,
+        IconFactory $iconFactory,
+        SiteFinder $siteFinder
     ) {
         parent::__construct($moduleTemplateFactory, $backendUriBuilder);
         $this->repository = $personRepository;
+        $this->academicRankRepository = $academicRankRepository;
+        $this->academicTitleRepository = $academicTitleRepository;
+        $this->departmentRepository = $departmentRepository;
+        $this->backendPermissionService = $backendPermissionService;
+        $this->iconFactory = $iconFactory;
+        $this->siteFinder = $siteFinder;
         $this->tableName = 'tx_spark_person';
     }
 
     protected function getTemplatePath(): string
     {
         return 'Backend/Person/List';
+    }
+
+    /**
+     * Get storage PID from Site Settings
+     */
+    protected function getStoragePid(): int
+    {
+        try {
+            $sites = $this->siteFinder->getAllSites();
+            foreach ($sites as $site) {
+                $config = $site->getConfiguration();
+                $storagePid = (int)($config['academic_pid_person_storage'] ?? 0);
+                if ($storagePid > 0) {
+                    return $storagePid;
+                }
+            }
+        } catch (\Exception $e) {
+            // Ignore
+        }
+        return 0;
+    }
+
+    public function listAction(): ResponseInterface
+    {
+        $currentBeUser = $this->getCurrentBeUser();
+        
+        $currentPage = $this->request->hasArgument('page') ? (int)$this->request->getArgument('page') : 1;
+        $sort = $this->request->hasArgument('sort') ? $this->request->getArgument('sort') : 'lastName'; // Default sort by Last Name
+        $direction = $this->request->hasArgument('direction') ? $this->request->getArgument('direction') : 'asc';
+        $filter = $this->request->hasArgument('filter') ? $this->request->getArgument('filter') : [];
+
+        $demand = new PersonDemand();
+        if (!empty($filter['search'])) {
+            $demand->setSearch($filter['search']);
+        }
+        if (!empty($filter['department'])) {
+            $demand->setDepartment((int)$filter['department']);
+        }
+        if (!empty($filter['rank'])) {
+            $demand->setAcademicRank((int)$filter['rank']);
+        }
+        if (!empty($filter['title'])) {
+            $demand->setAcademicTitle((int)$filter['title']);
+        }
+
+        // Check Permissions
+        $canManage = $this->backendPermissionService->canViewAllRecords('spark_perm_person_groups');
+
+        if (!$canManage) {
+             $demand->setBackendUser((int)$currentBeUser['uid']);
+        }
+
+        $orderings = [$sort => $direction === 'asc' ? \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING : \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING];
+
+        $items = $this->repository->findByPersonDemand($demand, $orderings);
+
+        $userItems = [];
+        foreach ($items as $item) {
+             $userItems[] = [
+                'item' => $item,
+                'editUrl' => $this->getEditUrl($item)
+            ];
+        }
+
+        $paginator = new \TYPO3\CMS\Extbase\Pagination\QueryResultPaginator($items, $currentPage, 20);
+        $pagination = new SlidingWindowPagination($paginator, 5);
+
+        $this->additionalViewVariables = [
+            'paginator' => $paginator,
+            'pagination' => $pagination,
+            'items' => $userItems,
+            'filter' => $filter,
+            'sort' => $sort,
+            'direction' => $direction,
+        ];
+        
+        $this->additionalViewVariables['availableDepartments'] = $this->getDepartments();
+        $this->additionalViewVariables['availableRanks'] = $this->getRanks();
+        $this->additionalViewVariables['availableTitles'] = $this->getTitles();
+
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        
+        if ($canManage) {
+            $this->addDocHeaderButtons($moduleTemplate);
+        }
+
+        $moduleTemplate->assign('items', $userItems);
+        $moduleTemplate->assignMultiple($this->additionalViewVariables);
+
+        return $moduleTemplate->renderResponse($this->getTemplatePath());
+    }
+
+    protected function addDocHeaderButtons(\TYPO3\CMS\Backend\Template\ModuleTemplate $moduleTemplate): void
+    {
+        $buttonBar = $moduleTemplate->getDocHeaderComponent()->getButtonBar();
+        
+        $storagePid = $this->getStoragePid();
+        if ($storagePid === 0) {
+             $storagePid = (int)($this->request->getQueryParams()['id'] ?? 0);
+        }
+        
+        $newIcon = $this->iconFactory->getIcon('actions-add', Icon::SIZE_SMALL);
+        
+        $newLink = $this->backendUriBuilder->buildUriFromRoute('record_edit', [
+            'edit' => [
+                'tx_spark_person' => [
+                    $storagePid => 'new'
+                ]
+            ],
+            'returnUrl' => (string)$this->backendUriBuilder->buildUriFromRoute($this->request->getAttribute('module')->getIdentifier())
+        ]);
+        
+        $newButton = $buttonBar->makeLinkButton()
+            ->setHref($newLink)
+            ->setTitle('Create New Person')
+            ->setIcon($newIcon);
+        
+        $buttonBar->addButton($newButton, ButtonBar::BUTTON_POSITION_LEFT);
+    }
+
+    protected function getDepartments(): array
+    {
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_spark_department');
+        return $q->select('uid', 'title')->from('tx_spark_department')->orderBy('title')->executeQuery()->fetchAllAssociative();
+    }
+
+    protected function getRanks(): array
+    {
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_spark_academic_rank');
+        return $q->select('uid', 'title')->from('tx_spark_academic_rank')->orderBy('sorting')->executeQuery()->fetchAllAssociative();
+    }
+
+    protected function getTitles(): array
+    {
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_spark_academic_title');
+        return $q->select('uid', 'title')->from('tx_spark_academic_title')->orderBy('sorting')->executeQuery()->fetchAllAssociative();
     }
 }

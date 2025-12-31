@@ -22,6 +22,8 @@ defined('TYPO3') || die();
         'academic_pid_course_detail',
         'academic_pid_program_detail',
         'academic_pid_project_detail',
+        'academic_pid_project_storage',
+        'academic_pid_person_storage',
     ];
 
     foreach ($academicPidFields as $field) {
@@ -56,5 +58,33 @@ defined('TYPO3') || die();
         '--palette--;;sparkPidsLocalized, --palette--;;sparkAcademicPidsLocalized',
         $GLOBALS['SiteConfiguration']['site_language']['types']['1']['showitem']
     );
+
+    // Entity Permission Groups
+    $permissionFields = [
+        'spark_perm_project_groups' => 'Project',
+        'spark_perm_person_groups' => 'Person',
+        'spark_perm_org_groups' => 'Organizational Units (Dept, Chair, Lab, Group)',
+    ];
+
+    $permissionPaletteItems = [];
+
+    foreach ($permissionFields as $field => $label) {
+        $GLOBALS['SiteConfiguration']['site']['columns'][$field] = [
+            'label' => $label . ' Editor Groups (User Group UIDs)',
+            'description' => 'Users in these groups can view ALL ' . $label . ' records.',
+            'config' => [
+                'type' => 'input',
+                'eval' => 'trim',
+            ],
+        ];
+        $permissionPaletteItems[] = $field;
+    }
+
+    $GLOBALS['SiteConfiguration']['site']['palettes']['sparkPermissions'] = [
+        'showitem' => implode(', ', $permissionPaletteItems),
+    ];
+
+    // Add to existing PIDS tab using palette
+    $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] .= ', --div--;Spark Permissions, --palette--;;sparkPermissions';
 
 })();

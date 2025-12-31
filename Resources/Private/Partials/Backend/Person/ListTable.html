@@ -1,0 +1,135 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<div class="table-fit">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <f:link.action action="list"
+                        arguments="{filter: filter, sort: 'lastName', direction: '{f:if(condition:\"
+                        {sort}==\'lastName\'\", then:\"{f:if(condition:\"{direction}==\'asc\'\", then:\"desc\",
+                        else:\"asc\")}\", else:\"asc\")}'}">
+                        Name
+                        <f:if condition="{sort} == 'lastName'">
+                            <core:icon
+                                identifier="{f:if(condition: '{direction} == \'asc\'', then: 'actions-sort-amount-up', else: 'actions-sort-amount-down')}"
+                                size="small" />
+                        </f:if>
+                    </f:link.action>
+                </th>
+                <th>Academic Title</th>
+                <th>Academic Rank</th>
+                <th>Primary Dept</th>
+                <th>Contact</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <f:for each="{items}" as="row">
+                <tr>
+                    <td>
+                        <b>{row.item.lastName}</b>, {row.item.firstName}
+                    </td>
+                    <td>
+                        <f:if condition="{row.item.academicTitle}">
+                            {row.item.academicTitle.title}
+                        </f:if>
+                    </td>
+                    <td>
+                        <f:if condition="{row.item.academicRank}">
+                            <span class="badge bg-info">{row.item.academicRank.title}</span>
+                        </f:if>
+                    </td>
+                    <td>
+                        <f:if condition="{row.item.primaryDepartment}">
+                            {row.item.primaryDepartment.title}
+                        </f:if>
+                    </td>
+                    <td>
+                        <f:if condition="{row.item.contactEmail}">
+                            <a href="mailto:{row.item.contactEmail}">{row.item.contactEmail}</a><br>
+                        </f:if>
+                        <f:if condition="{row.item.phoneOffice}">
+                            <small class="text-muted">
+                                <core:icon identifier="actions-phone" size="small" /> {row.item.phoneOffice}
+                            </small>
+                        </f:if>
+                    </td>
+                    <td>
+                        <be:link.editRecord table="tx_spark_person" uid="{row.item.uid}" class="btn btn-default btn-sm">
+                            <core:icon identifier="actions-open" size="small" /> Edit
+                        </be:link.editRecord>
+                    </td>
+                </tr>
+            </f:for>
+            <f:if condition="{items -> f:count()} == 0">
+                <tr>
+                    <td colspan="6" class="text-center text-muted py-4">
+                        <core:icon identifier="actions-search" size="medium" /><br>
+                        No people found matching your criteria.
+                    </td>
+                </tr>
+            </f:if>
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination -->
+<f:if condition="{paginator.numberOfPages} > 1">
+    <nav class="mb-4" aria-label="Person pagination">
+        <ul class="pagination pagination-sm justify-content-center">
+            <f:comment><!-- Previous --></f:comment>
+            <f:if condition="{pagination.previousPageNumber}">
+                <li class="page-item">
+                    <f:link.action action="list"
+                        arguments="{filter: filter, sort: sort, direction: direction, page: pagination.previousPageNumber}"
+                        class="page-link">
+                        <core:icon identifier="actions-chevron-left" size="small" /> Prev
+                    </f:link.action>
+                </li>
+            </f:if>
+
+            <f:comment><!-- Page Numbers --></f:comment>
+            <f:for each="{pagination.allPageNumbers}" as="pageNumber">
+                <f:if condition="{pageNumber} == {currentPage}">
+                    <f:then>
+                        <li class="page-item active">
+                            <span class="page-link">{pageNumber}</span>
+                        </li>
+                    </f:then>
+                    <f:else>
+                        <li class="page-item">
+                            <f:link.action action="list"
+                                arguments="{filter: filter, sort: sort, direction: direction, page: pageNumber}"
+                                class="page-link">
+                                {pageNumber}
+                            </f:link.action>
+                        </li>
+                    </f:else>
+                </f:if>
+            </f:for>
+
+            <f:comment><!-- Next --></f:comment>
+            <f:if condition="{pagination.nextPageNumber}">
+                <li class="page-item">
+                    <f:link.action action="list"
+                        arguments="{filter: filter, sort: sort, direction: direction, page: pagination.nextPageNumber}"
+                        class="page-link">
+                        Next
+                        <core:icon identifier="actions-chevron-right" size="small" />
+                    </f:link.action>
+                </li>
+            </f:if>
+        </ul>
+    </nav>
+    <p class="text-muted text-center">
+        <small>
+            Showing {items -> f:count()} of {paginator.count} people
+            (Page {currentPage} of {paginator.numberOfPages})
+        </small>
+    </p>
+</f:if>
+
+</html>

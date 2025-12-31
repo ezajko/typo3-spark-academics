@@ -1,0 +1,54 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+<div class="card card-default mb-4">
+    <div class="card-body">
+        <f:form action="list" method="get" class="row g-3 align-items-end">
+            <!-- Search -->
+            <div class="col-md-3">
+                <label class="form-label" for="filter-search">Search</label>
+                <f:form.textfield id="filter-search" name="filter[search]" value="{filter.search}"
+                    placeholder="Name, Email..." class="form-control form-control-sm" />
+            </div>
+
+            <!-- Department -->
+            <div class="col-md-3">
+                <label class="form-label" for="filter-department">Department</label>
+                <f:form.select id="filter-department" name="filter[department]" options="{availableDepartments}"
+                    optionValueField="uid" optionLabelField="title" prependOptionLabel="All Departments"
+                    prependOptionValue="" value="{filter.department}" class="form-select form-select-sm" />
+            </div>
+
+            <!-- Rank -->
+            <div class="col-md-2">
+                <label class="form-label" for="filter-rank">Rank</label>
+                <f:form.select id="filter-rank" name="filter[rank]" options="{availableRanks}" optionValueField="uid"
+                    optionLabelField="title" prependOptionLabel="All Ranks" prependOptionValue="" value="{filter.rank}"
+                    class="form-select form-select-sm" />
+            </div>
+
+            <!-- Title -->
+            <div class="col-md-2">
+                <label class="form-label" for="filter-title">Title</label>
+                <f:form.select id="filter-title" name="filter[title]" options="{availableTitles}" optionValueField="uid"
+                    optionLabelField="title" prependOptionLabel="All Titles" prependOptionValue=""
+                    value="{filter.title}" class="form-select form-select-sm" />
+            </div>
+
+            <!-- Buttons -->
+            <div class="col-md-2 d-grid">
+                <f:form.submit value="Filter" class="btn btn-primary btn-sm" />
+            </div>
+        </f:form>
+
+        <!-- Reset Link -->
+        <f:if condition="{filter.search} || {filter.department} || {filter.rank} || {filter.title}">
+            <div class="mt-2 text-end">
+                <f:link.action action="list" class="btn btn-sm btn-link text-secondary text-decoration-none">
+                    <core:icon identifier="actions-close" size="small" /> Reset Filters
+                </f:link.action>
+            </div>
+        </f:if>
+    </div>
+</div>
+
+</html>

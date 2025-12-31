@@ -16,6 +16,7 @@ abstract class AbstractBackendController extends ActionController
     protected UriBuilder $backendUriBuilder;
     protected AbstractRepository $repository;
     protected string $tableName = '';
+    protected array $additionalViewVariables = [];
 
     public function __construct(
         ModuleTemplateFactory $moduleTemplateFactory,
@@ -29,8 +30,8 @@ abstract class AbstractBackendController extends ActionController
     {
         $currentBeUser = $this->getCurrentBeUser();
         
-        // Use the new abstract repository method
-        $items = $this->repository->findByBeUsers((int)$currentBeUser['uid']);
+        // Use the overridable findItems method
+        $items = $this->findItems($currentBeUser);
         
         $userItems = [];
         $firstItem = null;
@@ -49,6 +50,7 @@ abstract class AbstractBackendController extends ActionController
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $moduleTemplate->assign('items', $userItems);
         $moduleTemplate->assign('firstItem', $firstItem);
+        $moduleTemplate->assignMultiple($this->additionalViewVariables);
 
         return $moduleTemplate->renderResponse($this->getTemplatePath());
     }
@@ -95,4 +97,8 @@ abstract class AbstractBackendController extends ActionController
     }
 
     abstract protected function getTemplatePath(): string;
+    protected function findItems(array $currentBeUser)
+    {
+        return $this->repository->findByBeUsers((int)$currentBeUser['uid']);
+    }
 }

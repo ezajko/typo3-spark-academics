@@ -127,4 +127,16 @@ class ProjectDemand extends Demand
     {
         $this->chair = $chair;
     }
+
+    protected ?int $backendUser = null;
+
+    public function getBackendUser(): ?int
+    {
+        return $this->backendUser;
+    }
+
+    public function setBackendUser(?int $backendUser): void
+    {
+        $this->backendUser = $backendUser;
+    }
 }

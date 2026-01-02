@@ -144,6 +144,55 @@
 			<trans-unit id="pagination.info">
 				<source>Records {0} - {1}</source>
 			</trans-unit>
+			<!-- Mentoring Section -->
+			<trans-unit id="person.mentoring">
+				<source>Mentored Students</source>
+			</trans-unit>
+			<trans-unit id="person.tab.mentoring">
+				<source>Mentoring</source>
+			</trans-unit>
+			<trans-unit id="mentoring.add_new">
+				<source>Add Mentored Student</source>
+			</trans-unit>
+			<trans-unit id="mentoring.student_name">
+				<source>Student Name</source>
+			</trans-unit>
+			<trans-unit id="mentoring.thesis_type">
+				<source>Thesis Type</source>
+			</trans-unit>
+			<trans-unit id="mentoring.thesis_type.bachelor">
+				<source>Bachelor Thesis</source>
+			</trans-unit>
+			<trans-unit id="mentoring.thesis_type.master">
+				<source>Master Thesis</source>
+			</trans-unit>
+			<trans-unit id="mentoring.thesis_type.phd">
+				<source>PhD Dissertation</source>
+			</trans-unit>
+			<trans-unit id="mentoring.thesis_type.other">
+				<source>Other</source>
+			</trans-unit>
+			<trans-unit id="mentoring.thesis_title">
+				<source>Thesis Title</source>
+			</trans-unit>
+			<trans-unit id="mentoring.year">
+				<source>Year</source>
+			</trans-unit>
+			<trans-unit id="mentoring.role">
+				<source>Role</source>
+			</trans-unit>
+			<trans-unit id="mentoring.role.mentor">
+				<source>Mentor</source>
+			</trans-unit>
+			<trans-unit id="mentoring.role.comentor">
+				<source>Co-Mentor</source>
+			</trans-unit>
+			<trans-unit id="mentoring.role.committee">
+				<source>Committee Member</source>
+			</trans-unit>
+			<trans-unit id="mentoring.notes">
+				<source>Notes</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

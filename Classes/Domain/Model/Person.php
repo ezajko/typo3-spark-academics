@@ -89,6 +89,16 @@ class Person extends AbstractEntity
     protected ?ObjectStorage $education = null;
 
     // =========================================================================
+    // Mentoring (IRRE relation)
+    // =========================================================================
+    
+    /**
+     * Mentored students - IRRE relation to PersonMentoring
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\PersonMentoring>
+     */
+    protected ?ObjectStorage $mentoring = null;
+
+    // =========================================================================
     // Research & Teaching
     // =========================================================================
     
@@ -187,6 +197,7 @@ class Person extends AbstractEntity
     {
         $this->beUsers = new ObjectStorage();
         $this->education = new ObjectStorage();
+        $this->mentoring = new ObjectStorage();
         $this->departments = new ObjectStorage();
         $this->laboratories = new ObjectStorage();
         $this->groups = new ObjectStorage();
@@ -380,6 +391,26 @@ class Person extends AbstractEntity
     public function setEducation(ObjectStorage $education): void
     {
         $this->education = $education;
+    }
+
+    // =========================================================================
+    // Mentoring Getters/Setters
+    // =========================================================================
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\PersonMentoring>
+     */
+    public function getMentoring(): ?ObjectStorage
+    {
+        return $this->mentoring;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\PersonMentoring> $mentoring
+     */
+    public function setMentoring(ObjectStorage $mentoring): void
+    {
+        $this->mentoring = $mentoring;
     }
 
     // =========================================================================

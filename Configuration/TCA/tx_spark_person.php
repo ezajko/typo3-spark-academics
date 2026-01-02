@@ -42,6 +42,8 @@ return [
                     contact_office, phone_office, phone_mobile, contact_email, contact_website,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.education,
                     education,
+                --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.mentoring,
+                    mentoring,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.research,
                     research_interests,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.teaching,
@@ -318,6 +320,24 @@ return [
                 'appearance' => [
                     'collapseAll' => true,
                     'expandSingle' => true,
+                ],
+            ],
+        ],
+
+        // =====================================================================
+        // Mentoring (IRRE)
+        // =====================================================================
+        'mentoring' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.mentoring',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_spark_person_mentoring',
+                'foreign_field' => 'person',
+                'appearance' => [
+                    'collapseAll' => true,
+                    'expandSingle' => true,
+                    'newRecordLinkTitle' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:mentoring.add_new',
                 ],
             ],
         ],

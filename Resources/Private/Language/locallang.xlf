@@ -123,6 +123,30 @@
 			<trans-unit id="education.institution">
 				<source>Institution</source>
 			</trans-unit>
+			<trans-unit id="education.degree_type">
+				<source>Degree Type</source>
+			</trans-unit>
+			<trans-unit id="education.degree_type.bachelor">
+				<source>Bachelor's Degree</source>
+			</trans-unit>
+			<trans-unit id="education.degree_type.master">
+				<source>Master's Degree</source>
+			</trans-unit>
+			<trans-unit id="education.degree_type.phd">
+				<source>PhD / Doctorate</source>
+			</trans-unit>
+			<trans-unit id="education.degree_type.postdoc">
+				<source>Post-Doctoral</source>
+			</trans-unit>
+			<trans-unit id="education.degree_type.other">
+				<source>Other</source>
+			</trans-unit>
+			<trans-unit id="education.field_of_study">
+				<source>Field of Study</source>
+			</trans-unit>
+			<trans-unit id="education.thesis_title">
+				<source>Thesis Title</source>
+			</trans-unit>
 			<trans-unit id="person.work_experience">
 				<source>Work Experience</source>
 			</trans-unit>

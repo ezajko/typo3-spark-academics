@@ -1,88 +1,89 @@
 <?php
 
+/**
+ * TCA configuration for tx_spark_person_education table
+ * IRRE child table for Person education records (degrees, qualifications)
+ *
+ * @author Ernedin Zajko <ezajko@root.ba>
+ */
+
 return [
     'ctrl' => [
-        'title' => 'Education',
+        'title' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.education',
         'label' => 'qualification',
         'label_alt' => 'institution, year',
         'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
-        'versioningWS' => true,
-        'languageField' => 'sys_language_uid',
-        'transOrigPointerField' => 'l10n_parent',
-        'transOrigDiffSourceField' => 'l10n_diffsource',
         'delete' => 'deleted',
+        'hideTable' => true,
         'enablecolumns' => [
             'disabled' => 'hidden',
-            'starttime' => 'starttime',
-            'endtime' => 'endtime',
         ],
         'searchFields' => 'qualification,institution,year',
         'iconfile' => 'EXT:core/Resources/Public/Icons/T3Icons/content/content-special-menu.svg',
-        'hideTable' => true,
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'types' => [
         '1' => [
-            'showitem' => 'year, qualification, institution, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime',
+            'showitem' => '
+                degree_type, qualification, field_of_study,
+                --linebreak--, institution, year,
+                --linebreak--, thesis_title,
+                hidden
+            ',
         ],
     ],
     'columns' => [
-        'sys_language_uid' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => [
-                'type' => 'language',
-            ],
-        ],
-        'l10n_parent' => [
-            'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'items' => [
-                    ['label' => '', 'value' => 0],
-                ],
-                'foreign_table' => 'tx_spark_person_education',
-                'foreign_table_where' => 'AND tx_spark_person_education.pid=###CURRENT_PID### AND tx_spark_person_education.sys_language_uid IN (-1,0)',
-            ],
-        ],
-        'l10n_diffsource' => [
-            'config' => [
-                'type' => 'passthrough',
-            ],
-        ],
         'hidden' => [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
+                'default' => 0,
+            ],
+        ],
+        'person' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
+        'degree_type' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.degree_type',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => [
-                    '1' => [
-                        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.enabled',
-                    ],
+                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.degree_type.bachelor', 'bachelor'],
+                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.degree_type.master', 'master'],
+                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.degree_type.phd', 'phd'],
+                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.degree_type.postdoc', 'postdoc'],
+                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.degree_type.other', 'other'],
                 ],
+                'default' => 'bachelor',
             ],
         ],
-        'starttime' => [
+        'qualification' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.qualification',
             'config' => [
-                'type' => 'datetime',
-                'default' => 0,
+                'type' => 'input',
+                'size' => 50,
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
-        'endtime' => [
+        'institution' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.institution',
             'config' => [
-                'type' => 'datetime',
-                'default' => 0,
-                'range' => [
-                    'upper' => 2147483647,
-                ],
+                'type' => 'input',
+                'size' => 50,
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'year' => [
@@ -91,25 +92,25 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 10,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
             ],
         ],
-        'qualification' => [
+        'field_of_study' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.qualification',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.field_of_study',
             'config' => [
                 'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim,required',
+                'size' => 50,
+                'eval' => 'trim',
             ],
         ],
-        'institution' => [
+        'thesis_title' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.institution',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.thesis_title',
             'config' => [
                 'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim,required',
+                'size' => 50,
+                'eval' => 'trim',
             ],
         ],
     ],

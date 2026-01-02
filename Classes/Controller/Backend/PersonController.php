@@ -112,16 +112,16 @@ class PersonController extends AbstractBackendController
 
         $items = $this->repository->findByPersonDemand($demand, $orderings);
 
+        $paginator = new \TYPO3\CMS\Extbase\Pagination\QueryResultPaginator($items, $currentPage, 20);
+        $pagination = new SlidingWindowPagination($paginator, 5);
+
         $userItems = [];
-        foreach ($items as $item) {
+        foreach ($paginator->getPaginatedItems() as $item) {
              $userItems[] = [
                 'item' => $item,
                 'editUrl' => $this->getEditUrl($item)
             ];
         }
-
-        $paginator = new \TYPO3\CMS\Extbase\Pagination\QueryResultPaginator($items, $currentPage, 20);
-        $pagination = new SlidingWindowPagination($paginator, 5);
 
         $this->additionalViewVariables = [
             'paginator' => $paginator,

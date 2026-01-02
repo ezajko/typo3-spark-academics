@@ -81,6 +81,66 @@
 			<trans-unit id="pagination.next">
 				<source>Next</source>
 			</trans-unit>
+			<trans-unit id="person.scopus_id">
+				<source>Scopus Author ID</source>
+			</trans-unit>
+			<trans-unit id="person.researcher_id">
+				<source>ResearcherID (WoS)</source>
+			</trans-unit>
+			<trans-unit id="person.gender">
+				<source>Gender</source>
+			</trans-unit>
+			<trans-unit id="person.gender.0">
+				<source>Not known</source>
+			</trans-unit>
+			<trans-unit id="person.gender.1">
+				<source>Male</source>
+			</trans-unit>
+			<trans-unit id="person.gender.2">
+				<source>Female</source>
+			</trans-unit>
+			<trans-unit id="person.gender.9">
+				<source>Not applicable</source>
+			</trans-unit>
+			<trans-unit id="person.birth_date">
+				<source>Date of Birth</source>
+			</trans-unit>
+			<trans-unit id="person.research_interests">
+				<source>Research Interests</source>
+			</trans-unit>
+			<trans-unit id="person.education">
+				<source>Education</source>
+			</trans-unit>
+			<trans-unit id="person.tab.education">
+				<source>Education</source>
+			</trans-unit>
+			<trans-unit id="education.year">
+				<source>Year</source>
+			</trans-unit>
+			<trans-unit id="education.qualification">
+				<source>Qualification / Degree</source>
+			</trans-unit>
+			<trans-unit id="education.institution">
+				<source>Institution</source>
+			</trans-unit>
+			<trans-unit id="person.work_experience">
+				<source>Work Experience</source>
+			</trans-unit>
+			<trans-unit id="person.skills">
+				<source>Skills</source>
+			</trans-unit>
+			<trans-unit id="person.consultation_hours">
+				<source>Consultation Hours</source>
+			</trans-unit>
+			<trans-unit id="person.tab.cv">
+				<source>Curriculum Vitae</source>
+			</trans-unit>
+			<trans-unit id="person.tab.research">
+				<source>Research</source>
+			</trans-unit>
+			<trans-unit id="person.tab.teaching">
+				<source>Teaching</source>
+			</trans-unit>
 			<trans-unit id="pagination.info">
 				<source>Records {0} - {1}</source>
 			</trans-unit>

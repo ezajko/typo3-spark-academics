@@ -9,73 +9,184 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
+/**
+ * Person domain model
+ * Represents an academic person (staff member, researcher, etc.)
+ *
+ * @author Ernedin Zajko <ezajko@root.ba>
+ */
 class Person extends AbstractEntity
 {
+    // =========================================================================
+    // Basic Information
+    // =========================================================================
+    
+    /** @var string First name of the person */
     protected string $firstName = '';
+    
+    /** @var string Last name of the person */
     protected string $lastName = '';
+    
+    /** @var string URL path/slug for the person */
     protected string $path = '';
+    
+    /** @var int Gender (0=not specified, 1=male, 2=female, 9=other) */
+    protected int $gender = 0;
+
+    // =========================================================================
+    // Academic Affiliation
+    // =========================================================================
+    
+    /** @var Department|null Primary department affiliation */
+    protected ?Department $primaryDepartment = null;
+    
+    /** @var AcademicTitle|null Academic title (e.g., Dr., Prof.) */
+    protected ?AcademicTitle $academicTitle = null;
+    
+    /** @var AcademicRank|null Academic rank (e.g., Full Professor, Associate Professor) */
+    protected ?AcademicRank $academicRank = null;
+
+    // =========================================================================
+    // Biography & Media
+    // =========================================================================
+    
+    /** @var string Biography text (RTE content) */
     protected string $biography = '';
     
+    /** @var FileReference|null Profile image */
+    protected ?FileReference $mediaImage = null;
+    
+    /** @var FileReference|null Biography PDF file */
+    protected ?FileReference $biographyFilePdf = null;
+
+    // =========================================================================
+    // Contact Information
+    // =========================================================================
+    
+    /** @var string Office location */
+    protected string $contactOffice = '';
+    
+    /** @var string Office phone number */
+    protected string $phoneOffice = '';
+    
+    /** @var string Mobile phone number */
+    protected string $phoneMobile = '';
+    
+    /** @var string Email address */
+    protected string $contactEmail = '';
+    
+    /** @var string Personal website URL */
+    protected string $contactWebsite = '';
+
+    // =========================================================================
+    // Education (IRRE relation)
+    // =========================================================================
+    
     /**
+     * Education entries - IRRE relation to PersonEducation
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\PersonEducation>
+     */
+    protected ?ObjectStorage $education = null;
+
+    // =========================================================================
+    // Research & Teaching
+    // =========================================================================
+    
+    /** @var string Research interests description */
+    protected string $researchInterests = '';
+    
+    /** @var string Consultation hours (RTE content) */
+    protected string $consultationHours = '';
+
+    // =========================================================================
+    // Academic Profiles & Identifiers
+    // =========================================================================
+    
+    /** @var string Google Scholar profile ID */
+    protected string $profileGoogleScholar = '';
+    
+    /** @var string ResearchGate profile ID */
+    protected string $profileResearchGate = '';
+    
+    /** @var string GitHub username */
+    protected string $profileGithub = '';
+    
+    /** @var string ORCID identifier */
+    protected string $profileOrcid = '';
+    
+    /** @var string LinkedIn profile ID */
+    protected string $profileLinkedin = '';
+    
+    /** @var string Scopus Author ID */
+    protected string $scopusId = '';
+    
+    /** @var string Web of Science Researcher ID */
+    protected string $researcherId = '';
+
+    // =========================================================================
+    // Backend User Association
+    // =========================================================================
+    
+    /**
+     * Associated backend users (M:N relation)
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser>
      */
     protected $beUsers = null;
 
-    protected string $contactOffice = '';
-    protected string $contactEmail = '';
-    protected string $contactWebsite = '';
-    protected string $phoneOffice = '';
-    protected string $phoneMobile = '';
-    protected string $profileGoogleScholar = '';
-    protected string $profileResearchGate = '';
-    protected string $profileGithub = '';
-    protected string $profileOrcid = '';
-    protected string $profileLinkedin = '';
-
-    protected ?FileReference $mediaImage = null;
-    protected ?FileReference $biographyFilePdf = null;
-
-    protected ?Department $primaryDepartment = null;
-    protected ?AcademicTitle $academicTitle = null;
-    protected ?AcademicRank $academicRank = null;
-
+    // =========================================================================
+    // Organizational Relations (read-only, managed from other entities)
+    // =========================================================================
+    
     /**
+     * Departments this person belongs to
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Department>
      */
     protected ?ObjectStorage $departments = null;
 
     /**
+     * Research laboratories
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ResearchLab>
      */
     protected ?ObjectStorage $laboratories = null;
 
     /**
+     * Research groups
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ResearchGroup>
      */
     protected ?ObjectStorage $groups = null;
 
     /**
+     * Chairs (Katedre)
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Chair>
      */
     protected ?ObjectStorage $chairs = null;
 
     /**
+     * Courses taught
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Course>
      */
     protected ?ObjectStorage $courses = null;
 
     /**
+     * Study programs
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\StudyProgram>
      */
     protected ?ObjectStorage $studyPrograms = null;
 
     /**
+     * Projects
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Project>
      */
     protected ?ObjectStorage $projects = null;
 
-    public function __construct() {
+    // =========================================================================
+    // Constructor
+    // =========================================================================
+
+    public function __construct()
+    {
         $this->beUsers = new ObjectStorage();
+        $this->education = new ObjectStorage();
         $this->departments = new ObjectStorage();
         $this->laboratories = new ObjectStorage();
         $this->groups = new ObjectStorage();
@@ -84,6 +195,10 @@ class Person extends AbstractEntity
         $this->studyPrograms = new ObjectStorage();
         $this->projects = new ObjectStorage();
     }
+
+    // =========================================================================
+    // Basic Information Getters/Setters
+    // =========================================================================
 
     public function getFirstName(): string
     {
@@ -105,16 +220,6 @@ class Person extends AbstractEntity
         $this->lastName = $lastName;
     }
 
-    public function getBiography(): string
-    {
-        return $this->biography;
-    }
-
-    public function setBiography(string $biography): void
-    {
-        $this->biography = $biography;
-    }
-
     public function getPath(): string
     {
         return $this->path;
@@ -125,21 +230,87 @@ class Person extends AbstractEntity
         $this->path = $path;
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser>
-     */
-    public function getBeUsers(): ObjectStorage
+    public function getGender(): int
     {
-        return $this->beUsers;
+        return $this->gender;
     }
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser> $beUsers
-     */
-    public function setBeUsers(ObjectStorage $beUsers): void
+    public function setGender(int $gender): void
     {
-        $this->beUsers = $beUsers;
+        $this->gender = $gender;
     }
+
+    // =========================================================================
+    // Academic Affiliation Getters/Setters
+    // =========================================================================
+
+    public function getPrimaryDepartment(): ?Department
+    {
+        return $this->primaryDepartment;
+    }
+
+    public function setPrimaryDepartment(?Department $primaryDepartment): void
+    {
+        $this->primaryDepartment = $primaryDepartment;
+    }
+
+    public function getAcademicTitle(): ?AcademicTitle
+    {
+        return $this->academicTitle;
+    }
+
+    public function setAcademicTitle(?AcademicTitle $academicTitle): void
+    {
+        $this->academicTitle = $academicTitle;
+    }
+
+    public function getAcademicRank(): ?AcademicRank
+    {
+        return $this->academicRank;
+    }
+
+    public function setAcademicRank(?AcademicRank $academicRank): void
+    {
+        $this->academicRank = $academicRank;
+    }
+
+    // =========================================================================
+    // Biography & Media Getters/Setters
+    // =========================================================================
+
+    public function getBiography(): string
+    {
+        return $this->biography;
+    }
+
+    public function setBiography(string $biography): void
+    {
+        $this->biography = $biography;
+    }
+
+    public function getMediaImage(): ?FileReference
+    {
+        return $this->mediaImage;
+    }
+
+    public function setMediaImage(?FileReference $mediaImage): void
+    {
+        $this->mediaImage = $mediaImage;
+    }
+
+    public function getBiographyFilePdf(): ?FileReference
+    {
+        return $this->biographyFilePdf;
+    }
+
+    public function setBiographyFilePdf(?FileReference $biographyFilePdf): void
+    {
+        $this->biographyFilePdf = $biographyFilePdf;
+    }
+
+    // =========================================================================
+    // Contact Information Getters/Setters
+    // =========================================================================
 
     public function getContactOffice(): string
     {
@@ -191,6 +362,54 @@ class Person extends AbstractEntity
         $this->contactWebsite = $contactWebsite;
     }
 
+    // =========================================================================
+    // Education Getters/Setters
+    // =========================================================================
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\PersonEducation>
+     */
+    public function getEducation(): ?ObjectStorage
+    {
+        return $this->education;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\PersonEducation> $education
+     */
+    public function setEducation(ObjectStorage $education): void
+    {
+        $this->education = $education;
+    }
+
+    // =========================================================================
+    // Research & Teaching Getters/Setters
+    // =========================================================================
+
+    public function getResearchInterests(): string
+    {
+        return $this->researchInterests;
+    }
+
+    public function setResearchInterests(string $researchInterests): void
+    {
+        $this->researchInterests = $researchInterests;
+    }
+
+    public function getConsultationHours(): string
+    {
+        return $this->consultationHours;
+    }
+
+    public function setConsultationHours(string $consultationHours): void
+    {
+        $this->consultationHours = $consultationHours;
+    }
+
+    // =========================================================================
+    // Academic Profiles Getters/Setters
+    // =========================================================================
+
     public function getProfileGoogleScholar(): string
     {
         return $this->profileGoogleScholar;
@@ -241,25 +460,49 @@ class Person extends AbstractEntity
         $this->profileLinkedin = $profileLinkedin;
     }
 
-    public function getMediaImage(): ?FileReference
+    public function getScopusId(): string
     {
-        return $this->mediaImage;
+        return $this->scopusId;
     }
 
-    public function setMediaImage(?FileReference $mediaImage): void
+    public function setScopusId(string $scopusId): void
     {
-        $this->mediaImage = $mediaImage;
+        $this->scopusId = $scopusId;
     }
 
-    public function getBiographyFilePdf(): ?FileReference
+    public function getResearcherId(): string
     {
-        return $this->biographyFilePdf;
+        return $this->researcherId;
     }
 
-    public function setBiographyFilePdf(?FileReference $biographyFilePdf): void
+    public function setResearcherId(string $researcherId): void
     {
-        $this->biographyFilePdf = $biographyFilePdf;
+        $this->researcherId = $researcherId;
     }
+
+    // =========================================================================
+    // Backend User Getters/Setters
+    // =========================================================================
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser>
+     */
+    public function getBeUsers(): ObjectStorage
+    {
+        return $this->beUsers;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser> $beUsers
+     */
+    public function setBeUsers(ObjectStorage $beUsers): void
+    {
+        $this->beUsers = $beUsers;
+    }
+
+    // =========================================================================
+    // Organizational Relations Getters/Setters
+    // =========================================================================
 
     public function getDepartments(): ?ObjectStorage
     {
@@ -289,36 +532,6 @@ class Person extends AbstractEntity
     public function setGroups(ObjectStorage $groups): void
     {
         $this->groups = $groups;
-    }
-
-    public function getPrimaryDepartment(): ?Department
-    {
-        return $this->primaryDepartment;
-    }
-
-    public function setPrimaryDepartment(?Department $primaryDepartment): void
-    {
-        $this->primaryDepartment = $primaryDepartment;
-    }
-
-    public function getAcademicTitle(): ?AcademicTitle
-    {
-        return $this->academicTitle;
-    }
-
-    public function setAcademicTitle(?AcademicTitle $academicTitle): void
-    {
-        $this->academicTitle = $academicTitle;
-    }
-
-    public function getAcademicRank(): ?AcademicRank
-    {
-        return $this->academicRank;
-    }
-
-    public function setAcademicRank(?AcademicRank $academicRank): void
-    {
-        $this->academicRank = $academicRank;
     }
 
     public function getChairs(): ?ObjectStorage

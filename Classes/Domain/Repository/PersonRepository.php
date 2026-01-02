@@ -9,7 +9,7 @@ namespace EtfUnsa\SparkAcademics\Domain\Repository;
  */
 class PersonRepository extends AbstractRepository
 {
-    public function findByPersonDemand(\EtfUnsa\SparkAcademics\Domain\Model\Dto\PersonDemand $demand, array $orderings = []): array
+    public function findByPersonDemand(\EtfUnsa\SparkAcademics\Domain\Model\Dto\PersonDemand $demand, array $orderings = []): \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
     {
         $query = $this->createQuery();
         $constraints = [];
@@ -46,6 +46,6 @@ class PersonRepository extends AbstractRepository
             $query->setOrderings($orderings);
         }
 
-        return $query->execute()->toArray();
+        return $query->execute();
     }
 }

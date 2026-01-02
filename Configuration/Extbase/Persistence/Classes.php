@@ -6,6 +6,9 @@ return [
     'EtfUnsa\SparkAcademics\Domain\Model\Person' => [
         'tableName' => 'tx_spark_person',
     ],
+    'EtfUnsa\SparkAcademics\Domain\Model\PersonEducation' => [
+        'tableName' => 'tx_spark_person_education',
+    ],
     'EtfUnsa\SparkAcademics\Domain\Model\Department' => [
         'tableName' => 'tx_spark_department',
     ],

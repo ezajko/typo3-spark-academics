@@ -1,7 +1,67 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<div class="alert alert-info">
-    <h5>Debug: Person List</h5>
-    <f:debug>{items}</f:debug>
+<!--
+    Person List/Debug Template
+    Debug view for Person list - shows all items in table format
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
+<div class="person-list-debug bg-light p-4 rounded">
+    <h3 class="text-danger mb-4"><i class="bi bi-bug me-2"></i>Debug: Person List ({items -> f:count()} items)</h3>
+
+    <f:if condition="{items}">
+        <f:then>
+            <div class="table-responsive">
+                <table class="table table-sm table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>UID</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Title</th>
+                            <th>Rank</th>
+                            <th>Department</th>
+                            <th>Email</th>
+                            <th>Education</th>
+                            <th>Mentoring</th>
+                            <th>Projects</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <f:for each="{items}" as="item">
+                            <tr>
+                                <td><code>{item.uid}</code></td>
+                                <td>
+                                    <f:if condition="{item.mediaImage}">
+                                        <span class="badge bg-success">✓</span>
+                                    </f:if>
+                                    <f:else>
+                                        <span class="badge bg-secondary">—</span>
+                                    </f:else>
+                                </td>
+                                <td>
+                                    <f:link.action action="show" arguments="{person: item}" pageUid="{detailPid}"
+                                        pluginName="Pi2">
+                                        {item.firstName} {item.lastName}
+                                    </f:link.action>
+                                </td>
+                                <td>{item.academicTitle.title}</td>
+                                <td>{item.academicRank.title}</td>
+                                <td>{item.primaryDepartment.title}</td>
+                                <td><small>{item.contactEmail}</small></td>
+                                <td><span class="badge bg-info">{item.education -> f:count()}</span></td>
+                                <td><span class="badge bg-warning text-dark">{item.mentoring -> f:count()}</span></td>
+                                <td><span class="badge bg-primary">{item.projects -> f:count()}</span></td>
+                            </tr>
+                        </f:for>
+                    </tbody>
+                </table>
+            </div>
+        </f:then>
+        <f:else>
+            <div class="alert alert-warning">
+                <i class="bi bi-exclamation-triangle me-2"></i>No items in collection
+            </div>
+        </f:else>
+    </f:if>
 </div>
 
 </html>

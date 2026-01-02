@@ -1,57 +1,52 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:for each="{items}" as="item">
-    <div class="card mb-3 shadow-sm border-0">
-        <div class="row g-0 align-items-center">
-            <div class="col-md-2 text-center p-3">
-                <div class="mx-auto" style="width: 80px; height: 80px;">
-                    <f:if condition="{item.mediaImage}">
-                        <f:then>
-                            <f:media file="{item.mediaImage}" class="rounded-circle w-100 h-100"
-                                alt="{item.firstName} {item.lastName}" style="object-fit: cover;" />
-                        </f:then>
-                        <f:else>
-                            <div
-                                class="rounded-circle w-100 h-100 bg-light d-flex align-items-center justify-content-center">
-                                <i class="bi bi-person fs-2 text-muted"></i>
-                            </div>
-                        </f:else>
-                    </f:if>
-                </div>
-            </div>
-            <div class="col-md-10">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5 class="card-title mb-1">
-                                <f:link.action action="show" arguments="{person: item}" pageUid="{detailPid}"
-                                    pluginName="Pi2" class="text-decoration-none text-dark">
-                                    {item.academicTitle.title} {item.firstName} {item.lastName}
-                                </f:link.action>
-                            </h5>
-                            <p class="card-text text-muted mb-0">
-                                <f:if condition="{item.academicRank}">
-                                    {item.academicRank.title}
-                                </f:if>
-                                <f:if condition="{item.primaryDepartment}">
-                                    &bull; {item.primaryDepartment.title}
-                                </f:if>
-                            </p>
-                        </div>
-                        <div class="text-end d-none d-md-block">
-                            <f:if condition="{item.contactEmail}">
-                                <div><a href="mailto:{item.contactEmail}" class="text-decoration-none text-muted"><i
-                                            class="bi bi-envelope me-1"></i> {item.contactEmail}</a></div>
-                            </f:if>
-                            <f:if condition="{item.phoneOffice}">
-                                <small class="text-muted"><i class="bi bi-telephone me-1"></i>
-                                    {item.phoneOffice}</small>
-                            </f:if>
-                        </div>
+<!--
+    Person List/Simple Template
+    Compact list layout for Person list - horizontal rows with minimal info
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
+<f:if condition="{items}">
+    <f:then>
+        <div class="list-group">
+            <f:for each="{items}" as="item">
+                <f:link.action action="show" arguments="{person: item}" pageUid="{detailPid}" pluginName="Pi2"
+                    class="list-group-item list-group-item-action d-flex align-items-center">
+                    <!-- Avatar -->
+                    <div class="flex-shrink-0 me-3">
+                        <f:if condition="{item.mediaImage}">
+                            <f:then>
+                                <f:media file="{item.mediaImage}" class="rounded-circle"
+                                    style="width: 48px; height: 48px; object-fit: cover;"
+                                    alt="{item.firstName} {item.lastName}" />
+                            </f:then>
+                            <f:else>
+                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                                    style="width: 48px; height: 48px;">
+                                    <i class="bi bi-person text-muted"></i>
+                                </div>
+                            </f:else>
+                        </f:if>
                     </div>
-                </div>
-            </div>
+                    <!-- Content -->
+                    <div class="flex-grow-1">
+                        <h6 class="mb-0">{item.academicTitle.title} {item.firstName} {item.lastName}</h6>
+                        <small class="text-muted">{item.academicRank.title}</small>
+                    </div>
+                    <!-- Email (optional) -->
+                    <f:if condition="{item.contactEmail}">
+                        <div class="flex-shrink-0">
+                            <span class="badge bg-light text-muted">{item.contactEmail}</span>
+                        </div>
+                    </f:if>
+                </f:link.action>
+            </f:for>
         </div>
-    </div>
-</f:for>
+    </f:then>
+    <f:else>
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i>
+            <f:translate key="fe.no_results" extensionName="spark_academics" />
+        </div>
+    </f:else>
+</f:if>
 
 </html>

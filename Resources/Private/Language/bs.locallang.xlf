@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="bs" datatype="plaintext" original="messages" date="2025-12-21T19:00:00Z" product-name="spark_academics">
+	<file source-language="en" target-language="bs" datatype="plaintext" original="messages" date="2026-01-02T20:00:00Z" product-name="spark_academics">
 		<header/>
 		<body>
+			<!-- ================================================================== -->
+			<!-- Person Entity -->
+			<!-- ================================================================== -->
 			<trans-unit id="person">
 				<source>Person</source>
 				<target>Osoba</target>
@@ -23,34 +26,6 @@
 				<source>Backend Users (Editors)</source>
 				<target>Urednici (Backend korisnici)</target>
 			</trans-unit>
-			<trans-unit id="person.tab.contact">
-				<source>Contact</source>
-				<target>Kontakt</target>
-			</trans-unit>
-			<trans-unit id="person.tab.affiliations">
-				<source>Affiliations</source>
-				<target>Afilijacije i Akreditivi</target>
-			</trans-unit>
-			<trans-unit id="person.tab.profiles">
-				<source>Profiles</source>
-				<target>Profili</target>
-			</trans-unit>
-			<trans-unit id="person.tab.media">
-				<source>Media</source>
-				<target>Multimedija</target>
-			</trans-unit>
-			<trans-unit id="person.tab.general">
-				<source>General</source>
-				<target>Osnovno</target>
-			</trans-unit>
-			<trans-unit id="person.tab.biography">
-				<source>Biography</source>
-				<target>Biografija</target>
-			</trans-unit>
-			<trans-unit id="person.tab.access">
-				<source>Access</source>
-				<target>Pristup</target>
-			</trans-unit>
 			<trans-unit id="person.contact_office">
 				<source>Office</source>
 				<target>Kabinet</target>
@@ -61,7 +36,7 @@
 			</trans-unit>
 			<trans-unit id="person.phone_mobile">
 				<source>Mobile Phone</source>
-				<target>Mobilni Telefon</target>
+				<target>Mobilni telefon</target>
 			</trans-unit>
 			<trans-unit id="person.contact_email">
 				<source>Email</source>
@@ -98,6 +73,284 @@
 			<trans-unit id="person.profile_linkedin">
 				<source>LinkedIn</source>
 				<target>LinkedIn</target>
+			</trans-unit>
+			<trans-unit id="person.scopus_id">
+				<source>Scopus Author ID</source>
+				<target>Scopus Author ID</target>
+			</trans-unit>
+			<trans-unit id="person.researcher_id">
+				<source>ResearcherID (WoS)</source>
+				<target>ResearcherID (WoS)</target>
+			</trans-unit>
+			<trans-unit id="person.gender">
+				<source>Gender</source>
+				<target>Spol</target>
+			</trans-unit>
+			<trans-unit id="person.gender.0">
+				<source>Not known</source>
+				<target>Nepoznato</target>
+			</trans-unit>
+			<trans-unit id="person.gender.1">
+				<source>Male</source>
+				<target>Muški</target>
+			</trans-unit>
+			<trans-unit id="person.gender.2">
+				<source>Female</source>
+				<target>Ženski</target>
+			</trans-unit>
+			<trans-unit id="person.gender.9">
+				<source>Not applicable</source>
+				<target>Nije primjenjivo</target>
+			</trans-unit>
+			<trans-unit id="person.research_interests">
+				<source>Research Interests</source>
+				<target>Istraživački interesi</target>
+			</trans-unit>
+			<trans-unit id="person.consultation_hours">
+				<source>Consultation Hours</source>
+				<target>Termin konsultacija</target>
+			</trans-unit>
+
+			<!-- Person Tabs -->
+			<trans-unit id="person.tab.general">
+				<source>General</source>
+				<target>Osnovno</target>
+			</trans-unit>
+			<trans-unit id="person.tab.biography">
+				<source>Biography</source>
+				<target>Biografija</target>
+			</trans-unit>
+			<trans-unit id="person.tab.contact">
+				<source>Contact</source>
+				<target>Kontakt</target>
+			</trans-unit>
+			<trans-unit id="person.tab.affiliations">
+				<source>Affiliations</source>
+				<target>Afilijacije</target>
+			</trans-unit>
+			<trans-unit id="person.tab.profiles">
+				<source>Profiles</source>
+				<target>Profili</target>
+			</trans-unit>
+			<trans-unit id="person.tab.media">
+				<source>Media</source>
+				<target>Multimedija</target>
+			</trans-unit>
+			<trans-unit id="person.tab.access">
+				<source>Access</source>
+				<target>Pristup</target>
+			</trans-unit>
+			<trans-unit id="person.tab.research">
+				<source>Research</source>
+				<target>Istraživanje</target>
+			</trans-unit>
+			<trans-unit id="person.tab.teaching">
+				<source>Teaching</source>
+				<target>Nastava</target>
+			</trans-unit>
+			<trans-unit id="person.tab.cv">
+				<source>Curriculum Vitae</source>
+				<target>Curriculum Vitae</target>
+			</trans-unit>
+
+			<!-- ================================================================== -->
+			<!-- Education Section -->
+			<!-- ================================================================== -->
+			<trans-unit id="person.education">
+				<source>Education</source>
+				<target>Obrazovanje</target>
+			</trans-unit>
+			<trans-unit id="person.tab.education">
+				<source>Education</source>
+				<target>Obrazovanje</target>
+			</trans-unit>
+			<trans-unit id="education.year">
+				<source>Year</source>
+				<target>Godina</target>
+			</trans-unit>
+			<trans-unit id="education.qualification">
+				<source>Qualification / Degree</source>
+				<target>Kvalifikacija / Diploma</target>
+			</trans-unit>
+			<trans-unit id="education.institution">
+				<source>Institution</source>
+				<target>Institucija</target>
+			</trans-unit>
+			<trans-unit id="education.degree_type">
+				<source>Degree Type</source>
+				<target>Vrsta diplome</target>
+			</trans-unit>
+			<trans-unit id="education.degree_type.bachelor">
+				<source>Bachelor's Degree</source>
+				<target>Bachelor / Dodiplomski</target>
+			</trans-unit>
+			<trans-unit id="education.degree_type.master">
+				<source>Master's Degree</source>
+				<target>Master / Magistar</target>
+			</trans-unit>
+			<trans-unit id="education.degree_type.phd">
+				<source>PhD / Doctorate</source>
+				<target>Doktorat</target>
+			</trans-unit>
+			<trans-unit id="education.degree_type.postdoc">
+				<source>Post-Doctoral</source>
+				<target>Postdoktorat</target>
+			</trans-unit>
+			<trans-unit id="education.degree_type.other">
+				<source>Other</source>
+				<target>Ostalo</target>
+			</trans-unit>
+			<trans-unit id="education.field_of_study">
+				<source>Field of Study</source>
+				<target>Oblast studija</target>
+			</trans-unit>
+			<trans-unit id="education.thesis_title">
+				<source>Thesis Title</source>
+				<target>Naslov rada</target>
+			</trans-unit>
+
+			<!-- ================================================================== -->
+			<!-- Mentoring Section -->
+			<!-- ================================================================== -->
+			<trans-unit id="person.mentoring">
+				<source>Mentored Students</source>
+				<target>Mentorirani studenti</target>
+			</trans-unit>
+			<trans-unit id="person.tab.mentoring">
+				<source>Mentoring</source>
+				<target>Mentorstvo</target>
+			</trans-unit>
+			<trans-unit id="mentoring.add_new">
+				<source>Add Mentored Student</source>
+				<target>Dodaj mentoriranog studenta</target>
+			</trans-unit>
+			<trans-unit id="mentoring.student_name">
+				<source>Student Name</source>
+				<target>Ime studenta</target>
+			</trans-unit>
+			<trans-unit id="mentoring.thesis_type">
+				<source>Thesis Type</source>
+				<target>Vrsta rada</target>
+			</trans-unit>
+			<trans-unit id="mentoring.thesis_type.bachelor">
+				<source>Bachelor Thesis</source>
+				<target>Završni rad</target>
+			</trans-unit>
+			<trans-unit id="mentoring.thesis_type.master">
+				<source>Master Thesis</source>
+				<target>Magistarski rad</target>
+			</trans-unit>
+			<trans-unit id="mentoring.thesis_type.phd">
+				<source>PhD Dissertation</source>
+				<target>Doktorska disertacija</target>
+			</trans-unit>
+			<trans-unit id="mentoring.thesis_type.other">
+				<source>Other</source>
+				<target>Ostalo</target>
+			</trans-unit>
+			<trans-unit id="mentoring.thesis_title">
+				<source>Thesis Title</source>
+				<target>Naslov rada</target>
+			</trans-unit>
+			<trans-unit id="mentoring.year">
+				<source>Year</source>
+				<target>Godina</target>
+			</trans-unit>
+			<trans-unit id="mentoring.role">
+				<source>Role</source>
+				<target>Uloga</target>
+			</trans-unit>
+			<trans-unit id="mentoring.role.mentor">
+				<source>Mentor</source>
+				<target>Mentor</target>
+			</trans-unit>
+			<trans-unit id="mentoring.role.comentor">
+				<source>Co-Mentor</source>
+				<target>Komentor</target>
+			</trans-unit>
+			<trans-unit id="mentoring.role.committee">
+				<source>Committee Member</source>
+				<target>Član komisije</target>
+			</trans-unit>
+			<trans-unit id="mentoring.notes">
+				<source>Notes</source>
+				<target>Napomene</target>
+			</trans-unit>
+
+			<!-- ================================================================== -->
+			<!-- Frontend Labels -->
+			<!-- ================================================================== -->
+			<trans-unit id="fe.contact_information">
+				<source>Contact Information</source>
+				<target>Kontakt informacije</target>
+			</trans-unit>
+			<trans-unit id="fe.affiliations">
+				<source>Affiliations</source>
+				<target>Afilijacije</target>
+			</trans-unit>
+			<trans-unit id="fe.department">
+				<source>Department</source>
+				<target>Odsjek</target>
+			</trans-unit>
+			<trans-unit id="fe.lab">
+				<source>Lab</source>
+				<target>Laboratorij</target>
+			</trans-unit>
+			<trans-unit id="fe.group">
+				<source>Group</source>
+				<target>Grupa</target>
+			</trans-unit>
+			<trans-unit id="fe.projects">
+				<source>Projects</source>
+				<target>Projekti</target>
+			</trans-unit>
+			<trans-unit id="fe.courses">
+				<source>Courses</source>
+				<target>Predmeti</target>
+			</trans-unit>
+			<trans-unit id="fe.personal_website">
+				<source>Personal Website</source>
+				<target>Lična web stranica</target>
+			</trans-unit>
+			<trans-unit id="fe.email">
+				<source>Email</source>
+				<target>Email</target>
+			</trans-unit>
+			<trans-unit id="fe.call">
+				<source>Call</source>
+				<target>Pozovi</target>
+			</trans-unit>
+			<trans-unit id="fe.download_cv">
+				<source>Download CV</source>
+				<target>Preuzmi CV</target>
+			</trans-unit>
+			<trans-unit id="fe.read_more">
+				<source>Read More</source>
+				<target>Pročitaj više</target>
+			</trans-unit>
+			<trans-unit id="fe.back_to_list">
+				<source>Back to List</source>
+				<target>Nazad na listu</target>
+			</trans-unit>
+			<trans-unit id="fe.no_results">
+				<source>No results found</source>
+				<target>Nema rezultata</target>
+			</trans-unit>
+
+			<!-- ================================================================== -->
+			<!-- Pagination -->
+			<!-- ================================================================== -->
+			<trans-unit id="pagination.previous">
+				<source>Previous</source>
+				<target>Prethodna</target>
+			</trans-unit>
+			<trans-unit id="pagination.next">
+				<source>Next</source>
+				<target>Sljedeća</target>
+			</trans-unit>
+			<trans-unit id="pagination.info">
+				<source>Records {0} - {1}</source>
+				<target>Zapisi {0} - {1}</target>
 			</trans-unit>
 		</body>
 	</file>

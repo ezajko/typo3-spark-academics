@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2025-12-20T20:00:00Z" product-name="spark_academics">
+	<file source-language="en" datatype="plaintext" original="messages" date="2026-01-02T20:00:00Z" product-name="spark_academics">
 		<header/>
 		<body>
+			<!-- ================================================================== -->
+			<!-- Person Entity -->
+			<!-- ================================================================== -->
 			<trans-unit id="person">
 				<source>Person</source>
 			</trans-unit>
@@ -17,27 +20,6 @@
 			</trans-unit>
 			<trans-unit id="person.be_users">
 				<source>Backend Users (Editors)</source>
-			</trans-unit>
-			<trans-unit id="person.tab.contact">
-				<source>Contact</source>
-			</trans-unit>
-			<trans-unit id="person.tab.affiliations">
-				<source>Affiliations</source>
-			</trans-unit>
-			<trans-unit id="person.tab.profiles">
-				<source>Profiles</source>
-			</trans-unit>
-			<trans-unit id="person.tab.media">
-				<source>Media</source>
-			</trans-unit>
-			<trans-unit id="person.tab.general">
-				<source>General</source>
-			</trans-unit>
-			<trans-unit id="person.tab.biography">
-				<source>Biography</source>
-			</trans-unit>
-			<trans-unit id="person.tab.access">
-				<source>Access</source>
 			</trans-unit>
 			<trans-unit id="person.contact_office">
 				<source>Office</source>
@@ -75,12 +57,6 @@
 			<trans-unit id="person.profile_linkedin">
 				<source>LinkedIn</source>
 			</trans-unit>
-			<trans-unit id="pagination.previous">
-				<source>Previous</source>
-			</trans-unit>
-			<trans-unit id="pagination.next">
-				<source>Next</source>
-			</trans-unit>
 			<trans-unit id="person.scopus_id">
 				<source>Scopus Author ID</source>
 			</trans-unit>
@@ -102,12 +78,48 @@
 			<trans-unit id="person.gender.9">
 				<source>Not applicable</source>
 			</trans-unit>
-			<trans-unit id="person.birth_date">
-				<source>Date of Birth</source>
-			</trans-unit>
 			<trans-unit id="person.research_interests">
 				<source>Research Interests</source>
 			</trans-unit>
+			<trans-unit id="person.consultation_hours">
+				<source>Consultation Hours</source>
+			</trans-unit>
+
+			<!-- Person Tabs -->
+			<trans-unit id="person.tab.general">
+				<source>General</source>
+			</trans-unit>
+			<trans-unit id="person.tab.biography">
+				<source>Biography</source>
+			</trans-unit>
+			<trans-unit id="person.tab.contact">
+				<source>Contact</source>
+			</trans-unit>
+			<trans-unit id="person.tab.affiliations">
+				<source>Affiliations</source>
+			</trans-unit>
+			<trans-unit id="person.tab.profiles">
+				<source>Profiles</source>
+			</trans-unit>
+			<trans-unit id="person.tab.media">
+				<source>Media</source>
+			</trans-unit>
+			<trans-unit id="person.tab.access">
+				<source>Access</source>
+			</trans-unit>
+			<trans-unit id="person.tab.research">
+				<source>Research</source>
+			</trans-unit>
+			<trans-unit id="person.tab.teaching">
+				<source>Teaching</source>
+			</trans-unit>
+			<trans-unit id="person.tab.cv">
+				<source>Curriculum Vitae</source>
+			</trans-unit>
+
+			<!-- ================================================================== -->
+			<!-- Education Section -->
+			<!-- ================================================================== -->
 			<trans-unit id="person.education">
 				<source>Education</source>
 			</trans-unit>
@@ -147,28 +159,10 @@
 			<trans-unit id="education.thesis_title">
 				<source>Thesis Title</source>
 			</trans-unit>
-			<trans-unit id="person.work_experience">
-				<source>Work Experience</source>
-			</trans-unit>
-			<trans-unit id="person.skills">
-				<source>Skills</source>
-			</trans-unit>
-			<trans-unit id="person.consultation_hours">
-				<source>Consultation Hours</source>
-			</trans-unit>
-			<trans-unit id="person.tab.cv">
-				<source>Curriculum Vitae</source>
-			</trans-unit>
-			<trans-unit id="person.tab.research">
-				<source>Research</source>
-			</trans-unit>
-			<trans-unit id="person.tab.teaching">
-				<source>Teaching</source>
-			</trans-unit>
-			<trans-unit id="pagination.info">
-				<source>Records {0} - {1}</source>
-			</trans-unit>
+
+			<!-- ================================================================== -->
 			<!-- Mentoring Section -->
+			<!-- ================================================================== -->
 			<trans-unit id="person.mentoring">
 				<source>Mentored Students</source>
 			</trans-unit>
@@ -216,6 +210,65 @@
 			</trans-unit>
 			<trans-unit id="mentoring.notes">
 				<source>Notes</source>
+			</trans-unit>
+
+			<!-- ================================================================== -->
+			<!-- Frontend Labels -->
+			<!-- ================================================================== -->
+			<trans-unit id="fe.contact_information">
+				<source>Contact Information</source>
+			</trans-unit>
+			<trans-unit id="fe.affiliations">
+				<source>Affiliations</source>
+			</trans-unit>
+			<trans-unit id="fe.department">
+				<source>Department</source>
+			</trans-unit>
+			<trans-unit id="fe.lab">
+				<source>Lab</source>
+			</trans-unit>
+			<trans-unit id="fe.group">
+				<source>Group</source>
+			</trans-unit>
+			<trans-unit id="fe.projects">
+				<source>Projects</source>
+			</trans-unit>
+			<trans-unit id="fe.courses">
+				<source>Courses</source>
+			</trans-unit>
+			<trans-unit id="fe.personal_website">
+				<source>Personal Website</source>
+			</trans-unit>
+			<trans-unit id="fe.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="fe.call">
+				<source>Call</source>
+			</trans-unit>
+			<trans-unit id="fe.download_cv">
+				<source>Download CV</source>
+			</trans-unit>
+			<trans-unit id="fe.read_more">
+				<source>Read More</source>
+			</trans-unit>
+			<trans-unit id="fe.back_to_list">
+				<source>Back to List</source>
+			</trans-unit>
+			<trans-unit id="fe.no_results">
+				<source>No results found</source>
+			</trans-unit>
+
+			<!-- ================================================================== -->
+			<!-- Pagination -->
+			<!-- ================================================================== -->
+			<trans-unit id="pagination.previous">
+				<source>Previous</source>
+			</trans-unit>
+			<trans-unit id="pagination.next">
+				<source>Next</source>
+			</trans-unit>
+			<trans-unit id="pagination.info">
+				<source>Records {0} - {1}</source>
 			</trans-unit>
 		</body>
 	</file>

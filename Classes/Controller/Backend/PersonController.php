@@ -82,10 +82,18 @@ class PersonController extends AbstractBackendController
     {
         $currentBeUser = $this->getCurrentBeUser();
         
-        $currentPage = $this->request->hasArgument('page') ? (int)$this->request->getArgument('page') : 1;
-        $sort = $this->request->hasArgument('sort') ? $this->request->getArgument('sort') : 'lastName'; // Default sort by Last Name
-        $direction = $this->request->hasArgument('direction') ? $this->request->getArgument('direction') : 'asc';
-        $filter = $this->request->hasArgument('filter') ? $this->request->getArgument('filter') : [];
+        // Get filter, sort, and pagination from request (POST for form, GET for links)
+        $queryParams = $this->request->getQueryParams();
+        $postParams = $this->request->getParsedBody() ?? [];
+        
+        // Filter can come from POST (form submit) or GET (sort/pagination links)
+        $filter = $postParams['filter'] ?? $queryParams['filter'] ?? [];
+        $sort = $queryParams['sort'] ?? 'lastName';
+        $direction = $queryParams['direction'] ?? 'asc';
+        $currentPage = (int)($queryParams['page'] ?? 1);
+        if ($currentPage < 1) {
+            $currentPage = 1;
+        }
 
         $demand = new PersonDemand();
         if (!empty($filter['search'])) {

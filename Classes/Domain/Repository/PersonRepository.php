@@ -23,7 +23,7 @@ class PersonRepository extends AbstractRepository
         }
 
         if ($demand->getDepartment() > 0) {
-            $constraints[] = $query->contains('departments', $demand->getDepartment());
+            $constraints[] = $query->equals('primaryDepartment', $demand->getDepartment());
         }
 
         if ($demand->getAcademicRank() > 0) {

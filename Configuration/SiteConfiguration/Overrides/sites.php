@@ -64,6 +64,7 @@ defined('TYPO3') || die();
         'spark_perm_project_groups' => 'Project',
         'spark_perm_person_groups' => 'Person',
         'spark_perm_org_groups' => 'Organizational Units (Dept, Chair, Lab, Group)',
+        'spark_perm_study_groups' => 'Study (Course, StudyProgram)',
     ];
 
     $permissionPaletteItems = [];

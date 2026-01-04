@@ -143,6 +143,7 @@ return [
         // =====================================================================
         'first_name' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.first_name',
             'config' => [
                 'type' => 'input',
@@ -153,6 +154,7 @@ return [
         ],
         'last_name' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.last_name',
             'config' => [
                 'type' => 'input',
@@ -163,6 +165,7 @@ return [
         ],
         'path' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Path',
             'config' => [
                 'type' => 'input',
@@ -171,6 +174,7 @@ return [
         ],
         'gender' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.gender',
             'config' => [
                 'type' => 'select',
@@ -190,6 +194,7 @@ return [
         // =====================================================================
         'primary_department' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_department_primary',
             'config' => [
                 'type' => 'select',
@@ -203,6 +208,7 @@ return [
         ],
         'academic_title' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_academic_title',
             'config' => [
                 'type' => 'select',
@@ -216,6 +222,7 @@ return [
         ],
         'academic_rank' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_academic_rank',
             'config' => [
                 'type' => 'select',
@@ -245,6 +252,7 @@ return [
         ],
         'media_image' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.media_image',
             'config' => [
                 'type' => 'file',
@@ -267,6 +275,7 @@ return [
         // =====================================================================
         'contact_office' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.contact_office',
             'config' => [
                 'type' => 'input',
@@ -275,6 +284,7 @@ return [
         ],
         'phone_office' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.phone_office',
             'config' => [
                 'type' => 'input',
@@ -283,6 +293,7 @@ return [
         ],
         'phone_mobile' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.phone_mobile',
             'config' => [
                 'type' => 'input',
@@ -291,6 +302,7 @@ return [
         ],
         'contact_email' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.contact_email',
             'config' => [
                 'type' => 'input',
@@ -300,6 +312,7 @@ return [
         ],
         'contact_website' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.contact_website',
             'config' => [
                 'type' => 'input',
@@ -373,6 +386,7 @@ return [
         // =====================================================================
         'profile_google_scholar' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.profile_google_scholar',
             'config' => [
                 'type' => 'input',
@@ -382,6 +396,7 @@ return [
         ],
         'profile_research_gate' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.profile_research_gate',
             'config' => [
                 'type' => 'input',
@@ -391,6 +406,7 @@ return [
         ],
         'profile_github' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.profile_github',
             'config' => [
                 'type' => 'input',
@@ -400,6 +416,7 @@ return [
         ],
         'profile_orcid' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.profile_orcid',
             'config' => [
                 'type' => 'input',
@@ -409,6 +426,7 @@ return [
         ],
         'profile_linkedin' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.profile_linkedin',
             'config' => [
                 'type' => 'input',
@@ -418,6 +436,7 @@ return [
         ],
         'scopus_id' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.scopus_id',
             'config' => [
                 'type' => 'input',
@@ -427,6 +446,7 @@ return [
         ],
         'researcher_id' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.researcher_id',
             'config' => [
                 'type' => 'input',

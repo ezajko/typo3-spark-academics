@@ -178,15 +178,24 @@ class AcademicController extends ActionController
         }
 
         // Pagination
+        // When itemsPerPage is 0, show all items without pagination
         $itemsPerPage = (int)($settings['view']['itemsPerPage'] ?? 10);
-        if ($itemsPerPage < 1) $itemsPerPage = 10;
+        if ($itemsPerPage < 0) $itemsPerPage = 10; // Only reset negative values to default
         
-        $paginator = new QueryResultPaginator($items, $currentPage, $itemsPerPage);
-        $pagination = new SlidingWindowPagination($paginator, 5);
+        if ($itemsPerPage === 0) {
+            // Show all items without pagination
+            $this->view->assign('pagination', null);
+            $this->view->assign('paginator', null);
+            $this->view->assign('items', $items);
+        } else {
+            // Normal pagination
+            $paginator = new QueryResultPaginator($items, $currentPage, $itemsPerPage);
+            $pagination = new SlidingWindowPagination($paginator, 5);
 
-        $this->view->assign('pagination', $pagination);
-        $this->view->assign('paginator', $paginator);
-        $this->view->assign('items', $paginator->getPaginatedItems());
+            $this->view->assign('pagination', $pagination);
+            $this->view->assign('paginator', $paginator);
+            $this->view->assign('items', $paginator->getPaginatedItems());
+        }
 
         $this->view->assign('entityType', $entityType);
         $this->view->assign('detailPid', $this->resolveDetailPid($entityType));

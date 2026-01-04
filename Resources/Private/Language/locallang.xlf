@@ -268,7 +268,7 @@
 				<source>Next</source>
 			</trans-unit>
 			<trans-unit id="pagination.info">
-				<source>Records {0} - {1} of {2}</source>
+				<source>Showing records %1$s - %2$s</source>
 			</trans-unit>
 		</body>
 	</file>

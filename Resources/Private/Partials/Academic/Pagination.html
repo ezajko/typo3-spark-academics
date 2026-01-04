@@ -52,8 +52,8 @@
         </ul>
 
         <div class="text-center text-muted small mt-2">
-            <f:translate key="pagination.info" default="Records {0} - {1}"
-                arguments="{0: pagination.startRecordNumber, 1: pagination.endRecordNumber}" />
+            <f:translate key="pagination.info" default="Records {0} - {1} of {2}"
+                arguments="{0: pagination.startRecordNumber, 1: pagination.endRecordNumber, 2: paginator.totalAmountOfItems}" />
         </div>
     </nav>
 </f:if>

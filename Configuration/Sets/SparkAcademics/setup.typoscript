@@ -1,7 +1,61 @@
 #
 # Setup for spark_academics
 #
-# Unify namespace so Pi2 (Detail) can read Pi1 (List) arguments
+# Author: Ernedin Zajko <ezajko@root.ba>
+
+# =============================================================================
+# Pi1 - List Plugin
+# =============================================================================
+plugin.tx_sparkacademics_pi1 {
+    # Settings structure for FlexForm override
+    # Defines expected hierarchy - FlexForm values will be merged here
+    settings {
+        # Entity type selection (Department, ResearchLab, etc.)
+        entityType = Department
+        
+        # View settings
+        view {
+            viewType = Default
+            detailPid = 
+            pagination {
+                # Maximum total items to display (0 = unlimited)
+                limit = 0
+                # Items per page (0 = show all without pagination)
+                itemsPerPage = 10
+            }
+        }
+        
+        # Filter settings (populated by FlexForm)
+        filter {
+            primary_department = 0
+            department = 0
+            academic_rank = 0
+            research_group = 0
+            research_lab = 0
+            chair = 0
+            project_status = 0
+            project_type = 0
+            funding_program = 0
+        }
+        
+        # Selection settings (populated by FlexForm)
+        select {
+            department =
+            researchlab =
+            researchgroup =
+            chair =
+            course =
+            studyprogram =
+            project =
+            person =
+        }
+    }
+}
+
+# =============================================================================
+# Pi2 - Detail Plugin
+# =============================================================================
 plugin.tx_sparkacademics_pi2 {
+    # Unify namespace so Pi2 (Detail) can read Pi1 (List) arguments
     view.pluginNamespace = tx_sparkacademics_pi1
 }

@@ -177,10 +177,20 @@ class AcademicController extends ActionController
             $items = $this->$repoField->findByDemand($demand);
         }
 
-        // Pagination
-        // When itemsPerPage is 0, show all items without pagination
-        $itemsPerPage = (int)($settings['view']['itemsPerPage'] ?? 10);
-        if ($itemsPerPage < 0) $itemsPerPage = 10; // Only reset negative values to default
+        // Pagination Settings
+        // Read from settings.view.pagination.* (aligned with DMS structure)
+        $viewSettings = $settings['view'] ?? [];
+        $paginationSettings = $viewSettings['pagination'] ?? [];
+        
+        // Items per page (0 = show all without pagination)
+        $itemsPerPage = (int)($paginationSettings['itemsPerPage'] ?? 10);
+        if ($itemsPerPage < 0) {
+            $itemsPerPage = 10; // Reset negative values to default
+        }
+        
+        // Optional: Apply total limit from settings
+        // $limit = (int)($paginationSettings['limit'] ?? 0);
+        // if ($limit > 0) { /* apply limit to $items if needed */ }
         
         if ($itemsPerPage === 0) {
             // Show all items without pagination

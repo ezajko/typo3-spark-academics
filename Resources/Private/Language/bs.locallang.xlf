@@ -352,6 +352,18 @@
 				<source>Showing records %1$s - %2$s</source>
 				<target>Prikaz zapisa %1$s - %2$s</target>
 			</trans-unit>
+
+			<!-- ================================================================== -->
+			<!-- FlexForm Labels -->
+			<!-- ================================================================== -->
+			<trans-unit id="flexform.pagination.limit">
+				<source>Max Items (total limit, 0 = unlimited)</source>
+				<target>Maksimalan broj stavki (0 = neograničeno)</target>
+			</trans-unit>
+			<trans-unit id="flexform.pagination.itemsPerPage">
+				<source>Items Per Page (0 = show all)</source>
+				<target>Stavki po stranici (0 = prikaži sve)</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

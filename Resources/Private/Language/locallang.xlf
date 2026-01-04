@@ -270,6 +270,16 @@
 			<trans-unit id="pagination.info">
 				<source>Showing records %1$s - %2$s</source>
 			</trans-unit>
+
+			<!-- ================================================================== -->
+			<!-- FlexForm Labels -->
+			<!-- ================================================================== -->
+			<trans-unit id="flexform.pagination.limit">
+				<source>Max Items (total limit, 0 = unlimited)</source>
+			</trans-unit>
+			<trans-unit id="flexform.pagination.itemsPerPage">
+				<source>Items Per Page (0 = show all)</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

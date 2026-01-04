@@ -61,16 +61,28 @@
                         </config>
                     </settings.entityType>
 
-                    <!-- Pagination -->
-                    <settings.view.itemsPerPage>
-                        <label>Items Per Page (0 = unlimited)</label>
+                    <!-- Pagination Settings -->
+                    <settings.view.pagination.limit>
+                        <label>LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:flexform.pagination.limit</label>
                         <config>
-                            <type>input</type>
-                            <size>5</size>
-                            <eval>int</eval>
-                            <default>10</default>
+                            <type>number</type>
+                            <default>0</default>
+                            <range>
+                                <lower>0</lower>
+                            </range>
                         </config>
-                    </settings.view.itemsPerPage>
+                    </settings.view.pagination.limit>
+
+                    <settings.view.pagination.itemsPerPage>
+                        <label>LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:flexform.pagination.itemsPerPage</label>
+                        <config>
+                            <type>number</type>
+                            <default>10</default>
+                            <range>
+                                <lower>0</lower>
+                            </range>
+                        </config>
+                    </settings.view.pagination.itemsPerPage>
 
                     <!-- Person Specific Filters (displayCond) -->
                     <settings.filter.primary_department>

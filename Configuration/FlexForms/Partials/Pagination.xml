@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Shared Pagination FlexForm Partial
+    
+    This file contains reusable pagination settings that can be imported
+    into any plugin's FlexForm using XInclude.
+    
+    Usage in FlexForm:
+    <xi:include href="EXT:spark_academics/Configuration/FlexForms/Partials/Pagination.xml"
+                xmlns:xi="http://www.w3.org/2001/XInclude" />
+    
+    Settings mapped:
+    - settings.view.pagination.limit (int: max total items, 0=unlimited)
+    - settings.view.pagination.itemsPerPage (int: items per page, 0=show all)
+    
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
+
+<!-- Pagination Limit: Maximum total items to display (0 = unlimited) -->
+<settings.view.pagination.limit>
+    <label>LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:flexform.pagination.limit</label>
+    <config>
+        <type>number</type>
+        <default>0</default>
+        <range>
+            <lower>0</lower>
+        </range>
+    </config>
+</settings.view.pagination.limit>
+
+<!-- Items Per Page: Number of items shown per page (0 = show all without pagination) -->
+<settings.view.pagination.itemsPerPage>
+    <label>LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:flexform.pagination.itemsPerPage</label>
+    <config>
+        <type>number</type>
+        <default>10</default>
+        <range>
+            <lower>0</lower>
+        </range>
+    </config>
+</settings.view.pagination.itemsPerPage>

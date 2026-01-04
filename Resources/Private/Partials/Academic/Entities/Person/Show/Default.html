@@ -1,209 +1,362 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<!--
+    Person Show Template - Default View
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
 <div class="person-detail">
-    <!-- Header -->
-    <div class="row align-items-center mb-5">
-        <div class="col-md-3 text-center text-md-start">
-            <div class="d-inline-block position-relative">
-                <f:if condition="{item.mediaImage}">
-                    <f:then>
-                        <f:media file="{item.mediaImage}" class="rounded shadow-sm"
-                            style="width: 200px; height: 200px; object-fit: cover;"
-                            alt="{item.firstName} {item.lastName}" />
-                    </f:then>
-                    <f:else>
-                        <div class="rounded bg-light d-flex align-items-center justify-content-center shadow-sm"
-                            style="width: 200px; height: 200px;">
-                            <i class="bi bi-person fs-1 text-muted"></i>
-                        </div>
-                    </f:else>
-                </f:if>
-            </div>
+    <!-- ================================================================== -->
+    <!-- Header: Image + Name -->
+    <!-- ================================================================== -->
+    <div class="row align-items-center mb-4">
+        <div class="col-auto">
+            <f:if condition="{item.mediaImage}">
+                <f:then>
+                    <f:media file="{item.mediaImage}" class="rounded-circle shadow-sm"
+                        style="width: 120px; height: 120px; object-fit: cover;"
+                        alt="{item.firstName} {item.lastName}" />
+                </f:then>
+                <f:else>
+                    <div class="rounded-circle bg-light d-flex align-items-center justify-content-center shadow-sm"
+                        style="width: 120px; height: 120px;">
+                        <i class="bi bi-person fs-1 text-muted"></i>
+                    </div>
+                </f:else>
+            </f:if>
         </div>
-        <div class="col-md-9 mt-3 mt-md-0">
-            <h1 class="display-4 fw-bold mb-1">{item.academicTitle.title} {item.firstName} {item.lastName}</h1>
-            <h4 class="text-muted mb-3">{item.academicRank.title}</h4>
+        <div class="col">
+            <h1 class="h2 fw-bold mb-1">
+                <f:if condition="{item.academicTitle}">{item.academicTitle.title} </f:if>{item.firstName}
+                {item.lastName}
+            </h1>
+            <p class="text-muted mb-0 fs-5">
+                <f:if condition="{item.academicRank}">{item.academicRank.title}</f:if>
+                <f:if condition="{item.academicRank} && {item.primaryDepartment}"> · </f:if>
+                <f:if condition="{item.primaryDepartment}">
+                    <f:link.action action="show" arguments="{department: item.primaryDepartment}" pluginName="Pi2">
+                        {item.primaryDepartment.title}
+                    </f:link.action>
+                </f:if>
+            </p>
+        </div>
+    </div>
 
-            <div class="d-flex flex-wrap gap-3">
-                <f:if condition="{item.contactEmail}">
-                    <a href="mailto:{item.contactEmail}" class="btn btn-outline-primary">
-                        <i class="bi bi-envelope me-2"></i>
-                        <f:translate key="fe.email" extensionName="spark_academics" />
-                    </a>
-                </f:if>
-                <f:if condition="{item.phoneOffice}">
-                    <a href="tel:{item.phoneOffice}" class="btn btn-outline-secondary">
-                        <i class="bi bi-telephone me-2"></i>
-                        <f:translate key="fe.call" extensionName="spark_academics" />
-                    </a>
-                </f:if>
-                <f:if condition="{item.biographyFilePdf}">
-                    <a href="{f:uri.resource(path: item.biographyFilePdf.originalResource.publicUrl)}" target="_blank"
-                        class="btn btn-outline-success">
-                        <i class="bi bi-file-pdf me-2"></i>
-                        <f:translate key="fe.download_cv" extensionName="spark_academics" />
-                    </a>
-                </f:if>
-            </div>
+    <!-- ================================================================== -->
+    <!-- Contact Information -->
+    <!-- ================================================================== -->
+    <div class="mb-4">
+        <div class="d-flex flex-wrap gap-2 align-items-center">
+            <f:if condition="{item.contactEmail}">
+                <a href="mailto:{item.contactEmail}" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-envelope me-1"></i> {item.contactEmail}
+                </a>
+            </f:if>
+            <f:if condition="{item.phoneOffice}">
+                <a href="tel:{item.phoneOffice}" class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-telephone me-1"></i> {item.phoneOffice}
+                </a>
+            </f:if>
+            <f:if condition="{item.phoneMobile}">
+                <a href="tel:{item.phoneMobile}" class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-phone me-1"></i> {item.phoneMobile}
+                </a>
+            </f:if>
+            <f:if condition="{item.contactOffice}">
+                <span class="btn btn-sm btn-light border disabled">
+                    <i class="bi bi-geo-alt me-1"></i> {item.contactOffice}
+                </span>
+            </f:if>
+            <f:if condition="{item.contactWebsite}">
+                <a href="{item.contactWebsite}" target="_blank" class="btn btn-sm btn-outline-info">
+                    <i class="bi bi-globe me-1"></i>
+                    <f:translate key="fe.personal_website" extensionName="spark_academics" />
+                </a>
+            </f:if>
+            <f:if condition="{item.biographyFilePdf}">
+                <a href="{f:uri.resource(path: item.biographyFilePdf.originalResource.publicUrl)}" target="_blank"
+                    class="btn btn-sm btn-outline-success">
+                    <i class="bi bi-file-pdf me-1"></i>
+                    <f:translate key="fe.download_cv" extensionName="spark_academics" />
+                </a>
+            </f:if>
+        </div>
+    </div>
 
-            <!-- Academic Profiles -->
-            <div class="d-flex flex-wrap gap-2 mt-3">
+    <!-- ================================================================== -->
+    <!-- Academic Profiles -->
+    <!-- ================================================================== -->
+    <f:if
+        condition="{item.profileGoogleScholar} || {item.profileResearchGate} || {item.profileOrcid} || {item.profileLinkedin} || {item.profileGithub} || {item.scopusId} || {item.researcherId}">
+        <div class="mb-4">
+            <div class="d-flex flex-wrap gap-2">
                 <f:if condition="{item.profileGoogleScholar}">
                     <a href="{item.profileGoogleScholar}" target="_blank" class="btn btn-sm btn-light border">
-                        <i class="bi bi-mortarboard me-1"></i> Google Scholar</a>
+                        <i class="bi bi-mortarboard me-1"></i> Google Scholar
+                    </a>
                 </f:if>
                 <f:if condition="{item.profileResearchGate}">
                     <a href="{item.profileResearchGate}" target="_blank" class="btn btn-sm btn-light border">
-                        <i class="bi bi-journal-text me-1"></i> ResearchGate</a>
+                        <i class="bi bi-journal-text me-1"></i> ResearchGate
+                    </a>
                 </f:if>
                 <f:if condition="{item.profileOrcid}">
                     <a href="https://orcid.org/{item.profileOrcid}" target="_blank" class="btn btn-sm btn-light border">
-                        <i class="bi bi-person-badge me-1"></i> ORCID</a>
+                        <i class="bi bi-person-badge me-1"></i> ORCID
+                    </a>
+                </f:if>
+                <f:if condition="{item.scopusId}">
+                    <a href="https://www.scopus.com/authid/detail.uri?authorId={item.scopusId}" target="_blank"
+                        class="btn btn-sm btn-light border">
+                        <i class="bi bi-database me-1"></i> Scopus
+                    </a>
+                </f:if>
+                <f:if condition="{item.researcherId}">
+                    <a href="https://www.webofscience.com/wos/author/record/{item.researcherId}" target="_blank"
+                        class="btn btn-sm btn-light border">
+                        <i class="bi bi-book me-1"></i> Web of Science
+                    </a>
                 </f:if>
                 <f:if condition="{item.profileLinkedin}">
                     <a href="{item.profileLinkedin}" target="_blank" class="btn btn-sm btn-light border">
-                        <i class="bi bi-linkedin me-1"></i> LinkedIn</a>
+                        <i class="bi bi-linkedin me-1"></i> LinkedIn
+                    </a>
                 </f:if>
                 <f:if condition="{item.profileGithub}">
                     <a href="https://github.com/{item.profileGithub}" target="_blank"
                         class="btn btn-sm btn-light border">
-                        <i class="bi bi-github me-1"></i> GitHub</a>
+                        <i class="bi bi-github me-1"></i> GitHub
+                    </a>
                 </f:if>
             </div>
         </div>
-    </div>
+    </f:if>
 
-    <div class="row">
-        <!-- Main Content -->
-        <div class="col-lg-8">
-            <!-- Biography -->
-            <f:if condition="{item.biography}">
-                <div class="mb-5">
-                    <h3>
-                        <f:translate key="person.biography" extensionName="spark_academics" />
-                    </h3>
-                    <div class="lead">
-                        <f:format.html>{item.biography}</f:format.html>
-                    </div>
+    <hr class="my-4" />
+
+    <!-- ================================================================== -->
+    <!-- Tabs: Biography, Education, Mentoring, Projects, Courses, etc. -->
+    <!-- ================================================================== -->
+    <ul class="nav nav-tabs mb-4" id="personTabs" role="tablist">
+        <!-- Biography Tab (always first if exists) -->
+        <f:if condition="{item.biography}">
+            <li class="nav-item">
+                <button class="nav-link active" id="biography-tab" data-bs-toggle="tab" data-bs-target="#biography"
+                    type="button">
+                    <f:translate key="person.biography" extensionName="spark_academics" />
+                </button>
+            </li>
+        </f:if>
+
+        <!-- Research Interests Tab -->
+        <f:if condition="{item.researchInterests}">
+            <li class="nav-item">
+                <button class="nav-link {f:if(condition: '!{item.biography}', then: 'active')}" id="research-tab"
+                    data-bs-toggle="tab" data-bs-target="#research" type="button">
+                    <f:translate key="person.research_interests" extensionName="spark_academics" />
+                </button>
+            </li>
+        </f:if>
+
+        <!-- Education Tab -->
+        <f:if condition="{item.education -> f:count()} > 0">
+            <li class="nav-item">
+                <button class="nav-link" id="education-tab" data-bs-toggle="tab" data-bs-target="#education"
+                    type="button">
+                    <f:translate key="person.education" extensionName="spark_academics" />
+                    <span class="badge bg-secondary ms-1">{item.education -> f:count()}</span>
+                </button>
+            </li>
+        </f:if>
+
+        <!-- Mentoring Tab -->
+        <f:if condition="{item.mentoring -> f:count()} > 0">
+            <li class="nav-item">
+                <button class="nav-link" id="mentoring-tab" data-bs-toggle="tab" data-bs-target="#mentoring"
+                    type="button">
+                    <f:translate key="person.tab.mentoring" extensionName="spark_academics" />
+                    <span class="badge bg-secondary ms-1">{item.mentoring -> f:count()}</span>
+                </button>
+            </li>
+        </f:if>
+
+        <!-- Projects Tab -->
+        <f:if condition="{item.projects -> f:count()} > 0">
+            <li class="nav-item">
+                <button class="nav-link" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projects"
+                    type="button">
+                    <f:translate key="fe.projects" extensionName="spark_academics" />
+                    <span class="badge bg-secondary ms-1">{item.projects -> f:count()}</span>
+                </button>
+            </li>
+        </f:if>
+
+        <!-- Courses Tab -->
+        <f:if condition="{item.courses -> f:count()} > 0">
+            <li class="nav-item">
+                <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses" type="button">
+                    <f:translate key="fe.courses" extensionName="spark_academics" />
+                    <span class="badge bg-secondary ms-1">{item.courses -> f:count()}</span>
+                </button>
+            </li>
+        </f:if>
+
+        <!-- Affiliations Tab -->
+        <f:if condition="{item.laboratories -> f:count()} > 0 || {item.groups -> f:count()} > 0">
+            <li class="nav-item">
+                <button class="nav-link" id="affiliations-tab" data-bs-toggle="tab" data-bs-target="#affiliations"
+                    type="button">
+                    <f:translate key="fe.affiliations" extensionName="spark_academics" />
+                </button>
+            </li>
+        </f:if>
+
+        <!-- Consultation Hours Tab -->
+        <f:if condition="{item.consultationHours}">
+            <li class="nav-item">
+                <button class="nav-link" id="consultation-tab" data-bs-toggle="tab" data-bs-target="#consultation"
+                    type="button">
+                    <f:translate key="person.consultation_hours" extensionName="spark_academics" />
+                </button>
+            </li>
+        </f:if>
+    </ul>
+
+    <div class="tab-content" id="personTabContent">
+        <!-- Biography Tab Content -->
+        <f:if condition="{item.biography}">
+            <div class="tab-pane fade show active" id="biography" role="tabpanel">
+                <div class="lead">
+                    <f:format.html>{item.biography}</f:format.html>
                 </div>
-            </f:if>
+            </div>
+        </f:if>
 
-            <!-- Tabs -->
-            <div class="mt-4">
-                <ul class="nav nav-tabs mb-3" id="personTabs" role="tablist">
-                    <f:if condition="{item.education -> f:count()} > 0">
-                        <li class="nav-item">
-                            <button class="nav-link active" id="education-tab" data-bs-toggle="tab"
-                                data-bs-target="#education" type="button">
-                                <f:translate key="person.education" extensionName="spark_academics" /> ({item.education
-                                -> f:count()})
-                            </button>
-                        </li>
-                    </f:if>
-                    <f:if condition="{item.mentoring -> f:count()} > 0">
-                        <li class="nav-item">
-                            <button
-                                class="nav-link {f:if(condition: '{item.education -> f:count()} == 0', then: 'active')}"
-                                id="mentoring-tab" data-bs-toggle="tab" data-bs-target="#mentoring" type="button">
-                                <f:translate key="person.tab.mentoring" extensionName="spark_academics" />
-                                ({item.mentoring -> f:count()})
-                            </button>
-                        </li>
-                    </f:if>
-                    <f:if condition="{item.projects -> f:count()} > 0">
-                        <li class="nav-item">
-                            <button class="nav-link" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projects"
-                                type="button">
-                                <f:translate key="fe.projects" extensionName="spark_academics" /> ({item.projects ->
-                                f:count()})
-                            </button>
-                        </li>
-                    </f:if>
-                    <f:if condition="{item.courses -> f:count()} > 0">
-                        <li class="nav-item">
-                            <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
-                                type="button">
-                                <f:translate key="fe.courses" extensionName="spark_academics" />
-                            </button>
-                        </li>
-                    </f:if>
-                </ul>
+        <!-- Research Interests Tab Content -->
+        <f:if condition="{item.researchInterests}">
+            <div class="tab-pane fade {f:if(condition: '!{item.biography}', then: 'show active')}" id="research"
+                role="tabpanel">
+                <p class="lead">{item.researchInterests}</p>
+            </div>
+        </f:if>
 
-                <div class="tab-content" id="personTabContent">
-                    <!-- Education Tab -->
-                    <f:if condition="{item.education -> f:count()} > 0">
-                        <div class="tab-pane fade show active" id="education" role="tabpanel">
-                            <div class="list-group list-group-flush">
-                                <f:for each="{item.education}" as="edu">
-                                    <div class="list-group-item px-0">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">{edu.qualification}</h5>
-                                            <span class="badge bg-secondary">{edu.year}</span>
-                                        </div>
-                                        <p class="mb-1 text-muted">{edu.institution}</p>
-                                        <f:if condition="{edu.fieldOfStudy}">
-                                            <small class="text-muted"><i
-                                                    class="bi bi-mortarboard me-1"></i>{edu.fieldOfStudy}</small>
-                                        </f:if>
-                                    </div>
-                                </f:for>
+        <!-- Education Tab Content -->
+        <f:if condition="{item.education -> f:count()} > 0">
+            <div class="tab-pane fade" id="education" role="tabpanel">
+                <div class="list-group list-group-flush">
+                    <f:for each="{item.education}" as="edu">
+                        <div class="list-group-item px-0">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{edu.qualification}</h5>
+                                <span class="badge bg-primary">{edu.year}</span>
+                            </div>
+                            <p class="mb-1 text-muted">{edu.institution}</p>
+                            <f:if condition="{edu.fieldOfStudy}">
+                                <small class="text-muted">
+                                    <i class="bi bi-mortarboard me-1"></i>{edu.fieldOfStudy}
+                                </small>
+                            </f:if>
+                            <f:if condition="{edu.thesisTitle}">
+                                <small class="d-block text-muted mt-1">
+                                    <i class="bi bi-file-text me-1"></i>{edu.thesisTitle}
+                                </small>
+                            </f:if>
+                        </div>
+                    </f:for>
+                </div>
+            </div>
+        </f:if>
+
+        <!-- Mentoring Tab Content -->
+        <f:if condition="{item.mentoring -> f:count()} > 0">
+            <div class="tab-pane fade" id="mentoring" role="tabpanel">
+                <div class="list-group list-group-flush">
+                    <f:for each="{item.mentoring}" as="mentored">
+                        <div class="list-group-item px-0">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{mentored.studentName}</h5>
+                                <span class="badge bg-primary">{mentored.year}</span>
+                            </div>
+                            <p class="mb-1">{mentored.thesisTitle}</p>
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-light text-dark">{mentored.thesisType}</span>
+                                <span class="badge bg-light text-dark">{mentored.role}</span>
                             </div>
                         </div>
-                    </f:if>
+                    </f:for>
+                </div>
+            </div>
+        </f:if>
 
-                    <!-- Mentoring Tab -->
-                    <f:if condition="{item.mentoring -> f:count()} > 0">
-                        <div class="tab-pane fade {f:if(condition: '{item.education -> f:count()} == 0', then: 'show active')}"
-                            id="mentoring" role="tabpanel">
-                            <div class="list-group list-group-flush">
-                                <f:for each="{item.mentoring}" as="mentored">
-                                    <div class="list-group-item px-0">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">{mentored.studentName}</h5>
-                                            <span class="badge bg-primary">{mentored.year}</span>
-                                        </div>
-                                        <p class="mb-1">{mentored.thesisTitle}</p>
-                                        <div class="d-flex gap-2">
-                                            <span class="badge bg-light text-dark">{mentored.thesisType}</span>
-                                            <span class="badge bg-light text-dark">{mentored.role}</span>
-                                        </div>
-                                    </div>
-                                </f:for>
+        <!-- Projects Tab Content -->
+        <f:if condition="{item.projects -> f:count()} > 0">
+            <div class="tab-pane fade" id="projects" role="tabpanel">
+                <div class="list-group list-group-flush">
+                    <f:for each="{item.projects}" as="project">
+                        <f:link.action action="show" arguments="{project: project}" pluginName="Pi2"
+                            class="list-group-item list-group-item-action px-0">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{project.title}</h5>
+                                <small class="text-muted">
+                                    <f:format.date format="Y">{project.startDate}</f:format.date>
+                                </small>
                             </div>
+                            <f:if condition="{project.acronym}">
+                                <p class="mb-0 text-muted">{project.acronym}</p>
+                            </f:if>
+                        </f:link.action>
+                    </f:for>
+                </div>
+            </div>
+        </f:if>
+
+        <!-- Courses Tab Content -->
+        <f:if condition="{item.courses -> f:count()} > 0">
+            <div class="tab-pane fade" id="courses" role="tabpanel">
+                <div class="list-group list-group-flush">
+                    <f:for each="{item.courses}" as="course">
+                        <div class="list-group-item px-0">
+                            <span class="fw-bold">{course.title}</span>
+                            <f:if condition="{course.courseCode}">
+                                <span class="text-muted ms-2">({course.courseCode})</span>
+                            </f:if>
+                        </div>
+                    </f:for>
+                </div>
+            </div>
+        </f:if>
+
+        <!-- Affiliations Tab Content -->
+        <f:if condition="{item.laboratories -> f:count()} > 0 || {item.groups -> f:count()} > 0">
+            <div class="tab-pane fade" id="affiliations" role="tabpanel">
+                <div class="row">
+                    <f:if condition="{item.laboratories -> f:count()} > 0">
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-3">
+                                <f:translate key="fe.lab" extensionName="spark_academics" />
+                            </h6>
+                            <ul class="list-unstyled">
+                                <f:for each="{item.laboratories}" as="lab">
+                                    <li class="mb-2">
+                                        <i class="bi bi-building me-2 text-primary"></i>
+                                        <f:link.action action="show" arguments="{lab: lab}" pluginName="Pi2">
+                                            {lab.title}
+                                        </f:link.action>
+                                    </li>
+                                </f:for>
+                            </ul>
                         </div>
                     </f:if>
-
-                    <!-- Projects Tab -->
-                    <f:if condition="{item.projects -> f:count()} > 0">
-                        <div class="tab-pane fade" id="projects" role="tabpanel">
-                            <div class="list-group">
-                                <f:for each="{item.projects}" as="project">
-                                    <f:link.action action="show" arguments="{project: project}" pluginName="Pi2"
-                                        class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">{project.title}</h5>
-                                            <small class="text-muted">
-                                                <f:format.date format="Y">{project.startDate}</f:format.date>
-                                            </small>
-                                        </div>
-                                        <f:if condition="{project.acronym}">
-                                            <p class="mb-1 text-muted">{project.acronym}</p>
-                                        </f:if>
-                                    </f:link.action>
-                                </f:for>
-                            </div>
-                        </div>
-                    </f:if>
-
-                    <!-- Courses Tab -->
-                    <f:if condition="{item.courses -> f:count()} > 0">
-                        <div class="tab-pane fade" id="courses" role="tabpanel">
-                            <ul class="list-group">
-                                <f:for each="{item.courses}" as="course">
-                                    <li class="list-group-item">
-                                        <span class="fw-bold">{course.title}</span>
-                                        <f:if condition="{course.courseCode}">
-                                            <span class="text-muted ms-2">({course.courseCode})</span>
-                                        </f:if>
+                    <f:if condition="{item.groups -> f:count()} > 0">
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-3">
+                                <f:translate key="fe.group" extensionName="spark_academics" />
+                            </h6>
+                            <ul class="list-unstyled">
+                                <f:for each="{item.groups}" as="group">
+                                    <li class="mb-2">
+                                        <i class="bi bi-people me-2 text-primary"></i>
+                                        <f:link.action action="show" arguments="{group: group}" pluginName="Pi2">
+                                            {group.title}
+                                        </f:link.action>
                                     </li>
                                 </f:for>
                             </ul>
@@ -211,102 +364,17 @@
                     </f:if>
                 </div>
             </div>
-        </div>
+        </f:if>
 
-        <!-- Sidebar -->
-        <div class="col-lg-4">
-            <!-- Contact Information Card -->
-            <div class="card mb-4 border-0 bg-light">
-                <div class="card-body">
-                    <h5 class="card-title mb-3">
-                        <f:translate key="fe.contact_information" extensionName="spark_academics" />
-                    </h5>
-                    <ul class="list-unstyled mb-0">
-                        <f:if condition="{item.contactEmail}">
-                            <li class="mb-2"><i class="bi bi-envelope me-2 text-primary"></i>
-                                <a href="mailto:{item.contactEmail}">{item.contactEmail}</a>
-                            </li>
-                        </f:if>
-                        <f:if condition="{item.phoneOffice}">
-                            <li class="mb-2"><i class="bi bi-telephone me-2 text-primary"></i> {item.phoneOffice}</li>
-                        </f:if>
-                        <f:if condition="{item.phoneMobile}">
-                            <li class="mb-2"><i class="bi bi-phone me-2 text-primary"></i> {item.phoneMobile}</li>
-                        </f:if>
-                        <f:if condition="{item.contactOffice}">
-                            <li class="mb-2"><i class="bi bi-geo-alt me-2 text-primary"></i> {item.contactOffice}</li>
-                        </f:if>
-                        <f:if condition="{item.contactWebsite}">
-                            <li class="mb-2"><i class="bi bi-globe me-2 text-primary"></i>
-                                <a href="{item.contactWebsite}" target="_blank">
-                                    <f:translate key="fe.personal_website" extensionName="spark_academics" />
-                                </a>
-                            </li>
-                        </f:if>
-                    </ul>
+        <!-- Consultation Hours Tab Content -->
+        <f:if condition="{item.consultationHours}">
+            <div class="tab-pane fade" id="consultation" role="tabpanel">
+                <div class="alert alert-info">
+                    <i class="bi bi-clock me-2"></i>
+                    <f:format.html>{item.consultationHours}</f:format.html>
                 </div>
             </div>
-
-            <!-- Affiliations Card -->
-            <div class="card mb-4 border-0">
-                <div class="card-header bg-white fw-bold">
-                    <f:translate key="fe.affiliations" extensionName="spark_academics" />
-                </div>
-                <ul class="list-group list-group-flush">
-                    <f:if condition="{item.primaryDepartment}">
-                        <li class="list-group-item">
-                            <small class="text-muted d-block">
-                                <f:translate key="fe.department" extensionName="spark_academics" />
-                            </small>
-                            <f:link.action action="show" arguments="{department: item.primaryDepartment}"
-                                pluginName="Pi2">{item.primaryDepartment.title}</f:link.action>
-                        </li>
-                    </f:if>
-                    <f:for each="{item.laboratories}" as="lab">
-                        <li class="list-group-item">
-                            <small class="text-muted d-block">
-                                <f:translate key="fe.lab" extensionName="spark_academics" />
-                            </small>
-                            <f:link.action action="show" arguments="{lab: lab}" pluginName="Pi2">{lab.title}
-                            </f:link.action>
-                        </li>
-                    </f:for>
-                    <f:for each="{item.groups}" as="group">
-                        <li class="list-group-item">
-                            <small class="text-muted d-block">
-                                <f:translate key="fe.group" extensionName="spark_academics" />
-                            </small>
-                            <f:link.action action="show" arguments="{group: group}" pluginName="Pi2">{group.title}
-                            </f:link.action>
-                        </li>
-                    </f:for>
-                </ul>
-            </div>
-
-            <!-- Research Interests -->
-            <f:if condition="{item.researchInterests}">
-                <div class="card mb-4 border-0">
-                    <div class="card-header bg-white fw-bold">
-                        <f:translate key="person.research_interests" extensionName="spark_academics" />
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">{item.researchInterests}</p>
-                    </div>
-                </div>
-            </f:if>
-
-            <!-- Consultation Hours -->
-            <f:if condition="{item.consultationHours}">
-                <div class="card mb-4 border-0 bg-light">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <f:translate key="person.consultation_hours" extensionName="spark_academics" />
-                        </h5>
-                        <f:format.html>{item.consultationHours}</f:format.html>
-                    </div>
-                </div>
-            </f:if>
-        </div>
+        </f:if>
     </div>
 </div>
 

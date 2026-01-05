@@ -1,6 +1,6 @@
 <f:layout name="Module" />
 
 <f:section name="Content">
-    <f:render partial="Backend/Common/List"
-        arguments="{items: items, title: '{f:translate(key: \'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf:lab\')}'}" />
+    <f:render partial="Backend/Common/SimpleFilter" arguments="{filter: filter}" />
+    <f:render partial="Backend/Common/SimpleListTable" arguments="{items: items}" />
 </f:section>

@@ -67,7 +67,24 @@ class StudyProgramController extends AbstractBackendController
     {
         // Study entities use spark_perm_study_groups
         $canManage = $this->backendPermissionService->canViewAllRecords('spark_perm_study_groups');
-        $items = $this->repository->findAll();
+
+        // Get filter from request
+        $queryParams = $this->request->getQueryParams();
+        $postParams = $this->request->getParsedBody() ?? [];
+        $filter = $postParams['filter'] ?? $queryParams['filter'] ?? [];
+
+        // Get all items and apply search filter
+        $allItems = $this->repository->findAll();
+        $items = [];
+        $searchTerm = strtolower(trim($filter['search'] ?? ''));
+        foreach ($allItems as $item) {
+            if (empty($searchTerm) || 
+                str_contains(strtolower($item->getTitle() ?? ''), $searchTerm) ||
+                str_contains(strtolower($item->getDescription() ?? ''), $searchTerm)
+            ) {
+                $items[] = $item;
+            }
+        }
 
         $userItems = [];
         foreach ($items as $item) {
@@ -84,6 +101,7 @@ class StudyProgramController extends AbstractBackendController
         }
 
         $moduleTemplate->assign('items', $userItems);
+        $moduleTemplate->assign('filter', $filter);
         $moduleTemplate->assign('canManage', $canManage);
         $moduleTemplate->assignMultiple($this->additionalViewVariables);
 

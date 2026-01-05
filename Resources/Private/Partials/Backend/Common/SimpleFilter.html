@@ -1,0 +1,39 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+<!--
+    Simple Search Filter for Backend Modules
+    Used by organizational and study entity modules
+    
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
+<div class="card card-default mb-4">
+    <div class="card-body">
+        <f:form action="list" method="post" noCacheHash="true" class="row g-3 align-items-end">
+            <!-- Search -->
+            <div class="col-md-6">
+                <label class="form-label" for="filter-search">
+                    <f:translate key="LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.search"
+                        default="Search" />
+                </label>
+                <f:form.textfield id="filter-search" name="filter[search]" value="{filter.search}"
+                    placeholder="Title, Description..." class="form-control form-control-sm" />
+            </div>
+
+            <!-- Buttons -->
+            <div class="col-md-2 d-grid">
+                <f:form.submit value="Filter" class="btn btn-primary btn-sm" />
+            </div>
+        </f:form>
+
+        <!-- Reset Link -->
+        <f:if condition="{filter.search}">
+            <div class="mt-2 text-end">
+                <f:link.action action="list" class="btn btn-sm btn-link text-secondary text-decoration-none">
+                    <core:icon identifier="actions-close" size="small" /> Reset Filter
+                </f:link.action>
+            </div>
+        </f:if>
+    </div>
+</div>
+
+</html>

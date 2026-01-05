@@ -72,8 +72,25 @@ class DepartmentController extends AbstractBackendController
         // Check organization editor permissions
         $canManage = $this->backendPermissionService->canViewAllRecords('spark_perm_org_groups');
 
-        // Get all departments (organizational units are global, not filtered by BE user)
-        $items = $this->repository->findAll();
+        // Get filter from request (POST for form, GET for links)
+        $queryParams = $this->request->getQueryParams();
+        $postParams = $this->request->getParsedBody() ?? [];
+        $filter = $postParams['filter'] ?? $queryParams['filter'] ?? [];
+
+        // Get all departments
+        $allItems = $this->repository->findAll();
+        
+        // Apply search filter if provided
+        $items = [];
+        $searchTerm = strtolower(trim($filter['search'] ?? ''));
+        foreach ($allItems as $item) {
+            if (empty($searchTerm) || 
+                str_contains(strtolower($item->getTitle() ?? ''), $searchTerm) ||
+                str_contains(strtolower($item->getDescription() ?? ''), $searchTerm)
+            ) {
+                $items[] = $item;
+            }
+        }
 
         $userItems = [];
         foreach ($items as $item) {
@@ -91,6 +108,7 @@ class DepartmentController extends AbstractBackendController
         }
 
         $moduleTemplate->assign('items', $userItems);
+        $moduleTemplate->assign('filter', $filter);
         $moduleTemplate->assign('canManage', $canManage);
         $moduleTemplate->assignMultiple($this->additionalViewVariables);
 

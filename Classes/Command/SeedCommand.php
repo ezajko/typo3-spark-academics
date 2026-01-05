@@ -418,10 +418,9 @@ class SeedCommand extends Command
         $io->section('Seeding Study Cycles');
         
         $data = [
-            ['title' => 'First Cycle (Bachelor)', 'level' => 1, 'description' => 'Undergraduate studies, 180-240 ECTS', 'sorting' => 10],
-            ['title' => 'Second Cycle (Master)', 'level' => 2, 'description' => 'Graduate studies, 60-120 ECTS', 'sorting' => 20],
-            ['title' => 'Third Cycle (Doctoral)', 'level' => 3, 'description' => 'Doctoral studies, 180 ECTS', 'sorting' => 30],
-            ['title' => 'Integrated Studies', 'level' => 2, 'description' => 'Integrated first and second cycle, 300+ ECTS', 'sorting' => 25],
+            ['title' => 'First Cycle (Bachelor)', 'level' => 1, 'description' => 'Undergraduate studies, 180-240 ECTS'],
+            ['title' => 'Second Cycle (Master)', 'level' => 2, 'description' => 'Graduate studies, 60-120 ECTS'],
+            ['title' => 'Third Cycle (Doctoral)', 'level' => 3, 'description' => 'Doctoral studies, 180 ECTS'],
         ];
         
         return $this->insertRecords($io, 'tx_spark_study_cycle', $data, $pid, $force, 'level');

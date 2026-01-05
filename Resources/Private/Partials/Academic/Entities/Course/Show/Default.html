@@ -49,6 +49,27 @@
                             </div>
                         </f:if>
 
+                        <f:if condition="{syllabus.assessmentMethods}">
+                            <div class="mb-4">
+                                <h5>Assessment Methods</h5>
+                                <f:format.html>{syllabus.assessmentMethods}</f:format.html>
+                            </div>
+                        </f:if>
+
+                        <f:if condition="{syllabus.literatureRequired}">
+                            <div class="mb-4">
+                                <h5>Required Literature</h5>
+                                <f:format.html>{syllabus.literatureRequired}</f:format.html>
+                            </div>
+                        </f:if>
+
+                        <f:if condition="{syllabus.literatureSupplementary}">
+                            <div class="mb-4">
+                                <h5>Supplementary Literature</h5>
+                                <f:format.html>{syllabus.literatureSupplementary}</f:format.html>
+                            </div>
+                        </f:if>
+
                     </f:alias>
                 </f:if>
             </div>
@@ -114,6 +135,26 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <span>Laboratory</span>
                             <span class="badge bg-secondary rounded-pill">{syllabus.hoursLaboratory}</span>
+                        </li>
+                        <f:if condition="{syllabus.hoursSeminar} > 0">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>Seminar</span>
+                                <span class="badge bg-secondary rounded-pill">{syllabus.hoursSeminar}</span>
+                            </li>
+                        </f:if>
+                        <f:if condition="{syllabus.hoursPractice} > 0">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>Practice</span>
+                                <span class="badge bg-secondary rounded-pill">{syllabus.hoursPractice}</span>
+                            </li>
+                        </f:if>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>Self Study</span>
+                            <span class="badge bg-light text-dark border rounded-pill">{syllabus.hoursSelfStudy}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-light fw-bold">
+                            <span>Total</span>
+                            <span>{syllabus.hoursTotal}h</span>
                         </li>
                     </ul>
                 </div>

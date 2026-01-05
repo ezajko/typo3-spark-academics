@@ -5,8 +5,82 @@
     <p class="lead">{item.acronym}</p>
 </f:if>
 
-<div>
+<div class="description">
     <f:format.html>{item.description}</f:format.html>
+</div>
+
+<hr>
+
+<f:if condition="{item.latestSyllabus}">
+    <f:alias map="{syllabus: item.latestSyllabus}">
+
+        <h3>Syllabus ({syllabus.versionLabel})</h3>
+
+        <div class="meta-info">
+            <p><strong>Academic Year:</strong> {syllabus.academicYear}</p>
+            <p><strong>ECTS:</strong> {syllabus.ects}</p>
+            <p><strong>Language:</strong> {syllabus.language.title}</p>
+            <p><strong>Cycle:</strong> {syllabus.studyCycle.title}</p>
+            <p><strong>Category:</strong> {syllabus.courseCategory.title}</p>
+            <p><strong>Status:</strong> {syllabus.courseStatus.title}</p>
+        </div>
+
+        <div class="workload">
+            <h4>Workload</h4>
+            <ul>
+                <li>Lectures: {syllabus.hoursLectures}</li>
+                <li>Exercises: {syllabus.hoursExercises}</li>
+                <li>Laboratory: {syllabus.hoursLaboratory}</li>
+                <li>Seminar: {syllabus.hoursSeminar}</li>
+                <li>Practice: {syllabus.hoursPractice}</li>
+                <li>Self Study: {syllabus.hoursSelfStudy}</li>
+                <li><strong>Total: {syllabus.hoursTotal}</strong></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <f:if condition="{syllabus.courseObjectives}">
+                <h4>Objectives</h4>
+                <f:format.html>{syllabus.courseObjectives}</f:format.html>
+            </f:if>
+
+            <f:if condition="{syllabus.learningOutcomes}">
+                <h4>Learning Outcomes</h4>
+                <f:format.html>{syllabus.learningOutcomes}</f:format.html>
+            </f:if>
+
+            <f:if condition="{syllabus.thematicUnits}">
+                <h4>Thematic Units</h4>
+                <f:format.html>{syllabus.thematicUnits}</f:format.html>
+            </f:if>
+
+            <f:if condition="{syllabus.assessmentMethods}">
+                <h4>Assessment</h4>
+                <f:format.html>{syllabus.assessmentMethods}</f:format.html>
+            </f:if>
+
+            <f:if condition="{syllabus.literatureRequired}">
+                <h4>Required Literature</h4>
+                <f:format.html>{syllabus.literatureRequired}</f:format.html>
+            </f:if>
+
+            <f:if condition="{syllabus.literatureSupplementary}">
+                <h4>Supplementary Literature</h4>
+                <f:format.html>{syllabus.literatureSupplementary}</f:format.html>
+            </f:if>
+        </div>
+
+    </f:alias>
+</f:if>
+
+<div class="organization">
+    <h4>Organization</h4>
+    <f:if condition="{item.department}">
+        <p>Department: {item.department.title}</p>
+    </f:if>
+    <f:if condition="{item.chair}">
+        <p>Chair: {item.chair.title}</p>
+    </f:if>
 </div>
 
 <f:link.action action="list" class="btn btn-primary mt-3">Back to List</f:link.action>

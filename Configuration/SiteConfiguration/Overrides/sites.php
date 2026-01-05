@@ -22,6 +22,7 @@ defined('TYPO3') || die();
         'academic_pid_course_detail',
         'academic_pid_program_detail',
         'academic_pid_project_detail',
+        'academic_pid_course_storage',
         'academic_pid_project_storage',
         'academic_pid_person_storage',
     ];

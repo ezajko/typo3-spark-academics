@@ -54,6 +54,15 @@
             <trans-unit id="site.configuration.academic_pid_project_detail">
                 <source>Project Detail Page</source>
             </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_course_storage">
+                <source>Course Storage Page</source>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_project_storage">
+                <source>Project Storage Page</source>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_person_storage">
+                <source>Person Storage Page</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

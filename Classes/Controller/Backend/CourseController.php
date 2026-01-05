@@ -80,6 +80,7 @@ class CourseController extends AbstractBackendController
         foreach ($allItems as $item) {
             if (empty($searchTerm) || 
                 str_contains(strtolower($item->getTitle() ?? ''), $searchTerm) ||
+                str_contains(strtolower($item->getAcronym() ?? ''), $searchTerm) ||
                 str_contains(strtolower($item->getDescription() ?? ''), $searchTerm)
             ) {
                 $items[] = $item;

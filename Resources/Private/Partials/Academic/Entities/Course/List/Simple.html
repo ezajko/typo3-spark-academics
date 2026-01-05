@@ -1,0 +1,16 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<ul class="list-group">
+    <f:for each="{items}" as="course">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <f:link.action action="show" arguments="{course: course}" pageUid="{detailPid}">
+                {course.code} - {course.title}
+            </f:link.action>
+            <f:if condition="{course.latestSyllabus}">
+                <span class="badge bg-primary rounded-pill">{course.latestSyllabus.ects} ECTS</span>
+            </f:if>
+        </li>
+    </f:for>
+</ul>
+
+</html>

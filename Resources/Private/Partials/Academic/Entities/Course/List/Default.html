@@ -1,0 +1,43 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <f:for each="{items}" as="course">
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <f:link.action action="show" arguments="{course: course}" pageUid="{detailPid}">
+                            {course.title}
+                        </f:link.action>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        <span class="badge bg-secondary">{course.code}</span>
+                        <f:if condition="{course.acronym}">
+                            <span class="badge bg-info text-dark">{course.acronym}</span>
+                        </f:if>
+                    </h6>
+
+                    <p class="card-text text-truncate-3">
+                        <f:format.crop maxCharacters="100">{course.description}</f:format.crop>
+                    </p>
+
+                    <f:if condition="{course.latestSyllabus}">
+                        <ul class="list-unstyled small text-muted mb-0">
+                            <li><strong>ECTS:</strong> {course.latestSyllabus.ects}</li>
+                            <li><strong>Cycle:</strong> {course.latestSyllabus.studyCycle.title}</li>
+                            <li><strong>Category:</strong> {course.latestSyllabus.courseCategory.title}</li>
+                        </ul>
+                    </f:if>
+                </div>
+                <div class="card-footer bg-transparent border-top-0">
+                    <f:link.action action="show" arguments="{course: course}" pageUid="{detailPid}"
+                        class="btn btn-sm btn-outline-primary stretched-link">
+                        View Details
+                    </f:link.action>
+                </div>
+            </div>
+        </div>
+    </f:for>
+</div>
+
+</html>

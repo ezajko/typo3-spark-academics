@@ -50,8 +50,35 @@ class DemandService
         if ($entityType === 'Person') {
             $this->applyPersonFilters($demand, $settings);
         }
+        
+        // Course-specific filters
+        if ($entityType === 'Course') {
+            $this->applyCourseFilters($demand, $settings);
+        }
 
         return $demand;
+    }
+
+    protected function applyCourseFilters(Demand $demand, array $settings): void
+    {
+        $departmentUid = (int)($settings['filter']['department'] ?? $settings['filter.department'] ?? $settings['filter_department'] ?? 0);
+        $chairUid = (int)($settings['filter']['chair'] ?? $settings['filter.chair'] ?? $settings['filter_chair'] ?? 0);
+        
+        // Filter by Department
+        if ($departmentUid > 0) {
+            $department = $this->departmentRepository->findBy(['uid' => $departmentUid])->getFirst();
+            if ($department) {
+                $demand->addFilter('department', $department);
+            }
+        }
+        
+        // Filter by Chair
+        if ($chairUid > 0) {
+            $chair = $this->chairRepository->findBy(['uid' => $chairUid])->getFirst();
+            if ($chair) {
+                $demand->addFilter('chair', $chair);
+            }
+        }
     }
 
     protected function applyPersonFilters(Demand $demand, array $settings): void

@@ -25,6 +25,9 @@ use EtfUnsa\SparkAcademics\Domain\Repository\ScientificFieldRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\ResearchGroupRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\ResearchLabRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\StudyProgramRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\CourseCategoryRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\StudyCycleRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\LanguageRepository;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -48,6 +51,12 @@ class AcademicController extends ActionController
     protected FundingProgramRepository $fundingProgramRepository;
     protected ScientificFieldRepository $scientificFieldRepository;
     protected PersonRepository $personRepository;
+    
+    // Course Lookups
+    protected CourseCategoryRepository $courseCategoryRepository;
+    protected StudyCycleRepository $studyCycleRepository;
+    protected LanguageRepository $languageRepository;
+
     protected DemandService $demandService;
 
     public function __construct(
@@ -63,6 +72,9 @@ class AcademicController extends ActionController
         FundingProgramRepository $fundingProgramRepository,
         ScientificFieldRepository $scientificFieldRepository,
         PersonRepository $personRepository,
+        CourseCategoryRepository $courseCategoryRepository,
+        StudyCycleRepository $studyCycleRepository,
+        LanguageRepository $languageRepository,
         DemandService $demandService
     ) {
         $this->departmentRepository = $departmentRepository;
@@ -77,6 +89,9 @@ class AcademicController extends ActionController
         $this->fundingProgramRepository = $fundingProgramRepository;
         $this->scientificFieldRepository = $scientificFieldRepository;
         $this->personRepository = $personRepository;
+        $this->courseCategoryRepository = $courseCategoryRepository;
+        $this->studyCycleRepository = $studyCycleRepository;
+        $this->languageRepository = $languageRepository;
         $this->demandService = $demandService;
     }
 
@@ -170,6 +185,37 @@ class AcademicController extends ActionController
                 'availableTypes' => $this->projectTypeRepository->findAll(),
                 'availablePrograms' => $this->fundingProgramRepository->findAll(),
                 'availableFields' => $this->scientificFieldRepository->findBy(['level' => 2]), // Only show minor fields
+                'availableFields' => $this->scientificFieldRepository->findBy(['level' => 2]), // Only show minor fields
+            ]);
+        } elseif ($entityType === 'Course') {
+            $filter = $this->request->hasArgument('filter') ? $this->request->getArgument('filter') : [];
+            $settingsFilter = $settings['filter'] ?? [];
+
+            // Use generic Demand for filtering (handled by DemandService)
+            $demand = $this->demandService->createFromSettings($settings);
+            
+            // Apply frontend filter overrides
+            // Note: Currently DemandService maps backend settings.
+            // We should map frontend filters here to Demand if we want dynamic filtering.
+            // For now, let's just assume basic settings filtering works, 
+            // and if we add frontend filter form, we might need to extend DemandService::createFromRequest logic here 
+            // or implicitly handle it via DemandService::createFromSettings if merging request args into settings.
+            // Simplified: If 'filter' arg exists, use it?
+            if (!empty($filter['department'])) $demand->addFilter('department', $filter['department']);
+            if (!empty($filter['chair'])) $demand->addFilter('chair', $filter['chair']);
+            
+            // Note: CourseCategory and StudyCycle filtering on Course entity requires complex lookup 
+            // because they are on Syllabus relation.
+            // For now, simple Department/Chair filtering.
+
+            $items = $this->courseRepository->findByDemand($demand);
+            
+            $this->view->assignMultiple([
+                'filter' => $filter,
+                'availableDepartments' => $this->departmentRepository->findAll(),
+                'availableChairs' => $this->chairRepository->findAll(),
+                // 'availableCategories' => $this->courseCategoryRepository->findAll(), 
+                // 'availableCycles' => $this->studyCycleRepository->findAll(),
             ]);
         } else {
             // Default generic behavior for other entities

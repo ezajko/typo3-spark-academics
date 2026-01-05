@@ -1,0 +1,39 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<div class="card mb-4">
+    <div class="card-body">
+        <f:form action="listFiltered" object="{demand}" name="demand" class="row g-3">
+
+            <!-- Search -->
+            <div class="col-md-12">
+                <label for="filter-search" class="form-label">Search</label>
+                <f:form.textfield name="filter[search]" value="{filter.search}" id="filter-search" class="form-control"
+                    placeholder="Search courses..." />
+            </div>
+
+            <!-- Department -->
+            <div class="col-md-6">
+                <label for="filter-department" class="form-label">Department</label>
+                <f:form.select name="filter[department]" options="{availableDepartments}" optionLabelField="title"
+                    optionValueField="uid" value="{filter.department}" prependOptionLabel="- Any Department -"
+                    prependOptionValue="0" class="form-select" />
+            </div>
+
+            <!-- Chair -->
+            <div class="col-md-6">
+                <label for="filter-chair" class="form-label">Chair</label>
+                <f:form.select name="filter[chair]" options="{availableChairs}" optionLabelField="title"
+                    optionValueField="uid" value="{filter.chair}" prependOptionLabel="- Any Chair -"
+                    prependOptionValue="0" class="form-select" />
+            </div>
+
+            <!-- Submit -->
+            <div class="col-12 text-end">
+                <f:link.action action="list" class="btn btn-outline-secondary me-2">Reset</f:link.action>
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+        </f:form>
+    </div>
+</div>
+
+</html>

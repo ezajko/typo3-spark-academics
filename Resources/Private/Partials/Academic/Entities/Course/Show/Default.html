@@ -1,36 +1,144 @@
-<table>
-    <tr>
-        <th>UID:</th>
-        <td>{item.uid}</td>
-    </tr>
-    <tr>
-        <th>Title:</th>
-        <td>{item.title}</td>
-    </tr>
-    <tr>
-        <th>Acronym:</th>
-        <td>{item.acronym}</td>
-    </tr>
-    <tr>
-        <th>UUID:</th>
-        <td>{item.uuid}</td>
-    </tr>
-    <tr>
-        <th>Description:</th>
-        <td>
-            <f:format.html>{item.description}</f:format.html>
-        </td>
-    </tr>
-    <tr>
-        <th>Members:</th>
-        <td>
-            <f:for each="{item.persons}" as="person" iteration="i">
-                <f:link.action action="show" arguments="{person: person}" pageUid="{detailPid}">{person.firstName}
-                    {person.lastName}</f:link.action>
-                <f:if condition="{i.isLast}">
-                    <f:else>, </f:else>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<div class="row">
+    <!-- Main Content -->
+    <div class="col-lg-8">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h1 class="card-title h3 mb-0">{item.title}</h1>
+                    <span class="badge bg-primary fs-6">{item.code}</span>
+                </div>
+
+                <f:if condition="{item.acronym}">
+                    <h6 class="card-subtitle mb-4 text-muted">{item.acronym}</h6>
                 </f:if>
-            </f:for>
-        </td>
-    </tr>
-</table>
+
+                <hr>
+
+                <div class="mb-4">
+                    <h5>Description</h5>
+                    <f:format.html>{item.description}</f:format.html>
+                </div>
+
+                <f:if condition="{item.latestSyllabus}">
+                    <f:alias map="{syllabus: item.latestSyllabus}">
+
+                        <div class="alert alert-light border">
+                            <strong>Latest Syllabus Version:</strong> {syllabus.versionLabel} ({syllabus.academicYear})
+                        </div>
+
+                        <f:if condition="{syllabus.courseObjectives}">
+                            <div class="mb-4">
+                                <h5>Course Objectives</h5>
+                                <f:format.html>{syllabus.courseObjectives}</f:format.html>
+                            </div>
+                        </f:if>
+
+                        <f:if condition="{syllabus.learningOutcomes}">
+                            <div class="mb-4">
+                                <h5>Learning Outcomes</h5>
+                                <f:format.html>{syllabus.learningOutcomes}</f:format.html>
+                            </div>
+                        </f:if>
+
+                        <f:if condition="{syllabus.thematicUnits}">
+                            <div class="mb-4">
+                                <h5>Thematic Units</h5>
+                                <f:format.html>{syllabus.thematicUnits}</f:format.html>
+                            </div>
+                        </f:if>
+
+                    </f:alias>
+                </f:if>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+
+        <!-- Key Facts -->
+        <f:if condition="{item.latestSyllabus}">
+            <f:alias map="{syllabus: item.latestSyllabus}">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-light">
+                        <h5 class="card-title mb-0 h6">Course Facts</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>ECTS Credits</span>
+                            <span class="fw-bold">{syllabus.ects}</span>
+                        </li>
+                        <f:if condition="{syllabus.language}">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>Language</span>
+                                <span>{syllabus.language.title}</span>
+                            </li>
+                        </f:if>
+                        <f:if condition="{syllabus.studyCycle}">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>Cycle</span>
+                                <span>{syllabus.studyCycle.title}</span>
+                            </li>
+                        </f:if>
+                        <f:if condition="{syllabus.courseCategory}">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>Category</span>
+                                <span>{syllabus.courseCategory.title}</span>
+                            </li>
+                        </f:if>
+                        <f:if condition="{syllabus.courseStatus}">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>Status</span>
+                                <span>{syllabus.courseStatus.title}</span>
+                            </li>
+                        </f:if>
+                    </ul>
+                </div>
+
+                <!-- Workload -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-light">
+                        <h5 class="card-title mb-0 h6">Workload (Hours)</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>Lectures</span>
+                            <span class="badge bg-secondary rounded-pill">{syllabus.hoursLectures}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>Exercises</span>
+                            <span class="badge bg-secondary rounded-pill">{syllabus.hoursExercises}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>Laboratory</span>
+                            <span class="badge bg-secondary rounded-pill">{syllabus.hoursLaboratory}</span>
+                        </li>
+                    </ul>
+                </div>
+            </f:alias>
+        </f:if>
+
+        <!-- Organization -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-light">
+                <h5 class="card-title mb-0 h6">Organization</h5>
+            </div>
+            <div class="card-body">
+                <f:if condition="{item.department}">
+                    <p class="mb-1"><small class="text-muted">Department</small></p>
+                    <p class="fw-bold">{item.department.title}</p>
+                </f:if>
+                <f:if condition="{item.chair}">
+                    <p class="mb-1"><small class="text-muted">Chair</small></p>
+                    <p class="fw-bold">{item.chair.title}</p>
+                </f:if>
+            </div>
+        </div>
+
+        <f:link.action action="list" class="btn btn-outline-secondary w-100">Back to List</f:link.action>
+    </div>
+</div>
+
+</html>

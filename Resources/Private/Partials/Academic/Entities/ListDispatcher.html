@@ -5,6 +5,10 @@
     <f:render partial="Academic/Entities/Project/List/Filter" arguments="{_all}" />
 </f:if>
 
+<f:if condition="{entity} == 'Course'">
+    <f:render partial="Academic/Entities/Course/List/Filter" arguments="{_all}" />
+</f:if>
+
 <f:render partial="Academic/Entities/{entity}/List/{viewType}"
     arguments="{items: items, settings: settings, detailPid: detailPid}" optional="true">
     <!-- Fallback if specific view type doesn't exist -->

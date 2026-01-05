@@ -25,6 +25,9 @@ class ExternalCourse extends AbstractEntity
     /** @var string Course description */
     protected string $description = '';
 
+    /** @var Course|null Parent course (for IRRE inline) */
+    protected ?Course $course = null;
+
     public function getTitle(): string
     {
         return $this->title;
@@ -63,5 +66,15 @@ class ExternalCourse extends AbstractEntity
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+
+    public function getCourse(): ?Course
+    {
+        return $this->course;
+    }
+
+    public function setCourse(?Course $course): void
+    {
+        $this->course = $course;
     }
 }

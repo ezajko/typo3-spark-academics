@@ -201,18 +201,24 @@ return [
             ],
         ],
 
-        // External Courses
+        // External Courses (IRRE inline - each Course has its own references)
         'external_courses' => [
             'exclude' => true,
             'label' => 'Similar External Courses',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
+                'type' => 'inline',
                 'foreign_table' => 'tx_spark_external_course',
-                'foreign_table_where' => 'ORDER BY title',
-                'MM' => 'tx_spark_course_externalcourse_mm',
-                'size' => 5,
+                'foreign_field' => 'course',
+                'foreign_sortby' => 'sorting',
                 'maxitems' => 99,
+                'appearance' => [
+                    'collapseAll' => true,
+                    'expandSingle' => true,
+                    'useSortable' => true,
+                    'showNewRecordLink' => true,
+                    'newRecordLinkTitle' => 'Add External Course',
+                    'levelLinksPosition' => 'top',
+                ],
             ],
         ],
 

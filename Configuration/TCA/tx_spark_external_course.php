@@ -112,5 +112,9 @@ return [
                 'eval' => 'trim',
             ],
         ],
+        // Parent course reference for IRRE inline
+        'course' => [
+            'config' => ['type' => 'passthrough'],
+        ],
     ],
 ];

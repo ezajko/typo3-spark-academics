@@ -17,18 +17,19 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * Console command to seed lookup tables with initial data
  * 
  * Seeds: ScientificField (OECD FOS), AcademicRank, AcademicTitle, 
- *        ProjectStatus, ProjectType, FundingProgram
+ *        ProjectStatus, ProjectType, FundingProgram,
+ *        SDG, CourseCategory, StudyCycle, CourseStatus, TeachingMethod, Language
  * 
  * Usage:
  *   ddev typo3 academics:seed --pid=123
- *   ddev typo3 academics:seed --pid=123 --type=scientific-fields
- *   ddev typo3 academics:seed --pid=123 --type=academic-ranks --force
+ *   ddev typo3 academics:seed --pid=123 --type=sdg
+ *   ddev typo3 academics:seed --pid=123 --type=course-categories --force
  * 
  * @author Ernedin Zajko <ezajko@root.ba>
  */
 #[AsCommand(
     name: 'academics:seed',
-    description: 'Seed lookup tables with initial data (ScientificField, AcademicRank, AcademicTitle, etc.)',
+    description: 'Seed lookup tables with initial data (ScientificField, AcademicRank, SDG, CourseCategory, etc.)',
 )]
 class SeedCommand extends Command
 {
@@ -40,6 +41,12 @@ class SeedCommand extends Command
         'project-status',
         'project-types',
         'funding-programs',
+        'sdg',
+        'course-categories',
+        'study-cycles',
+        'course-status',
+        'teaching-methods',
+        'languages',
     ];
 
     protected function configure(): void
@@ -119,6 +126,36 @@ class SeedCommand extends Command
         if ($type === 'all' || $type === 'funding-programs') {
             $folderPid = $this->getOrCreateFolderPage($io, $pid, 'Programi finansiranja', 'Funding Programs');
             $totalInserted += $this->seedFundingPrograms($io, $folderPid, $force);
+        }
+        
+        if ($type === 'all' || $type === 'sdg') {
+            $folderPid = $this->getOrCreateFolderPage($io, $pid, 'SDG ciljevi', 'SDG Goals');
+            $totalInserted += $this->seedSdg($io, $folderPid, $force);
+        }
+        
+        if ($type === 'all' || $type === 'course-categories') {
+            $folderPid = $this->getOrCreateFolderPage($io, $pid, 'Kategorije predmeta', 'Course Categories');
+            $totalInserted += $this->seedCourseCategories($io, $folderPid, $force);
+        }
+        
+        if ($type === 'all' || $type === 'study-cycles') {
+            $folderPid = $this->getOrCreateFolderPage($io, $pid, 'Ciklusi studija', 'Study Cycles');
+            $totalInserted += $this->seedStudyCycles($io, $folderPid, $force);
+        }
+        
+        if ($type === 'all' || $type === 'course-status') {
+            $folderPid = $this->getOrCreateFolderPage($io, $pid, 'Statusi predmeta', 'Course Status');
+            $totalInserted += $this->seedCourseStatus($io, $folderPid, $force);
+        }
+        
+        if ($type === 'all' || $type === 'teaching-methods') {
+            $folderPid = $this->getOrCreateFolderPage($io, $pid, 'Metode nastave', 'Teaching Methods');
+            $totalInserted += $this->seedTeachingMethods($io, $folderPid, $force);
+        }
+        
+        if ($type === 'all' || $type === 'languages') {
+            $folderPid = $this->getOrCreateFolderPage($io, $pid, 'Jezici', 'Languages');
+            $totalInserted += $this->seedLanguages($io, $folderPid, $force);
         }
         
         $io->success("Seeding complete! Total records inserted: $totalInserted");
@@ -323,6 +360,132 @@ class SeedCommand extends Command
         ];
         
         return $this->insertRecords($io, 'tx_spark_funding_program', $data, $pid, $force, 'title');
+    }
+
+    /**
+     * Seeds UN Sustainable Development Goals (17 SDGs)
+     */
+    private function seedSdg(SymfonyStyle $io, int $pid, bool $force): int
+    {
+        $io->section('Seeding SDG Goals');
+        
+        $data = [
+            ['number' => 1, 'title' => 'No Poverty', 'description' => 'End poverty in all its forms everywhere'],
+            ['number' => 2, 'title' => 'Zero Hunger', 'description' => 'End hunger, achieve food security and improved nutrition'],
+            ['number' => 3, 'title' => 'Good Health and Well-being', 'description' => 'Ensure healthy lives and promote well-being for all'],
+            ['number' => 4, 'title' => 'Quality Education', 'description' => 'Ensure inclusive and equitable quality education'],
+            ['number' => 5, 'title' => 'Gender Equality', 'description' => 'Achieve gender equality and empower all women and girls'],
+            ['number' => 6, 'title' => 'Clean Water and Sanitation', 'description' => 'Ensure access to water and sanitation for all'],
+            ['number' => 7, 'title' => 'Affordable and Clean Energy', 'description' => 'Ensure access to affordable, reliable energy'],
+            ['number' => 8, 'title' => 'Decent Work and Economic Growth', 'description' => 'Promote decent work and economic growth'],
+            ['number' => 9, 'title' => 'Industry, Innovation and Infrastructure', 'description' => 'Build resilient infrastructure and foster innovation'],
+            ['number' => 10, 'title' => 'Reduced Inequalities', 'description' => 'Reduce inequality within and among countries'],
+            ['number' => 11, 'title' => 'Sustainable Cities and Communities', 'description' => 'Make cities inclusive, safe, resilient and sustainable'],
+            ['number' => 12, 'title' => 'Responsible Consumption and Production', 'description' => 'Ensure sustainable consumption and production patterns'],
+            ['number' => 13, 'title' => 'Climate Action', 'description' => 'Take urgent action to combat climate change'],
+            ['number' => 14, 'title' => 'Life Below Water', 'description' => 'Conserve and sustainably use the oceans'],
+            ['number' => 15, 'title' => 'Life on Land', 'description' => 'Protect, restore and promote sustainable ecosystems'],
+            ['number' => 16, 'title' => 'Peace, Justice and Strong Institutions', 'description' => 'Promote peaceful and inclusive societies'],
+            ['number' => 17, 'title' => 'Partnerships for the Goals', 'description' => 'Strengthen global partnerships for sustainable development'],
+        ];
+        
+        return $this->insertRecords($io, 'tx_spark_sdg', $data, $pid, $force, 'number');
+    }
+
+    /**
+     * Seeds Course Categories (difficulty levels)
+     */
+    private function seedCourseCategories(SymfonyStyle $io, int $pid, bool $force): int
+    {
+        $io->section('Seeding Course Categories');
+        
+        $data = [
+            ['title' => 'Core Course', 'code' => 'A', 'description' => 'Fundamental required course', 'sorting' => 10],
+            ['title' => 'Elective Course', 'code' => 'B', 'description' => 'Optional elective course', 'sorting' => 20],
+            ['title' => 'Specialized Course', 'code' => 'C', 'description' => 'Specialized/advanced course', 'sorting' => 30],
+            ['title' => 'General Education', 'code' => 'D', 'description' => 'General education course', 'sorting' => 40],
+            ['title' => 'Practical Course', 'code' => 'E', 'description' => 'Practice/internship course', 'sorting' => 50],
+        ];
+        
+        return $this->insertRecords($io, 'tx_spark_course_category', $data, $pid, $force, 'code');
+    }
+
+    /**
+     * Seeds Study Cycles (Bologna I/II/III)
+     */
+    private function seedStudyCycles(SymfonyStyle $io, int $pid, bool $force): int
+    {
+        $io->section('Seeding Study Cycles');
+        
+        $data = [
+            ['title' => 'First Cycle (Bachelor)', 'level' => 1, 'description' => 'Undergraduate studies, 180-240 ECTS', 'sorting' => 10],
+            ['title' => 'Second Cycle (Master)', 'level' => 2, 'description' => 'Graduate studies, 60-120 ECTS', 'sorting' => 20],
+            ['title' => 'Third Cycle (Doctoral)', 'level' => 3, 'description' => 'Doctoral studies, 180 ECTS', 'sorting' => 30],
+            ['title' => 'Integrated Studies', 'level' => 2, 'description' => 'Integrated first and second cycle, 300+ ECTS', 'sorting' => 25],
+        ];
+        
+        return $this->insertRecords($io, 'tx_spark_study_cycle', $data, $pid, $force, 'level');
+    }
+
+    /**
+     * Seeds Course Status options
+     */
+    private function seedCourseStatus(SymfonyStyle $io, int $pid, bool $force): int
+    {
+        $io->section('Seeding Course Status');
+        
+        $data = [
+            ['title' => 'Active', 'code' => 'active', 'sorting' => 10],
+            ['title' => 'Inactive', 'code' => 'inactive', 'sorting' => 20],
+            ['title' => 'Archived', 'code' => 'archived', 'sorting' => 30],
+            ['title' => 'Draft', 'code' => 'draft', 'sorting' => 5],
+        ];
+        
+        return $this->insertRecords($io, 'tx_spark_course_status', $data, $pid, $force, 'code');
+    }
+
+    /**
+     * Seeds Teaching Methods
+     */
+    private function seedTeachingMethods(SymfonyStyle $io, int $pid, bool $force): int
+    {
+        $io->section('Seeding Teaching Methods');
+        
+        $data = [
+            ['title' => 'Lectures', 'description' => 'Traditional classroom lectures', 'sorting' => 10],
+            ['title' => 'Exercises', 'description' => 'Practical exercises and problem solving', 'sorting' => 20],
+            ['title' => 'Laboratory Work', 'description' => 'Hands-on laboratory sessions', 'sorting' => 30],
+            ['title' => 'Seminars', 'description' => 'Student presentations and discussions', 'sorting' => 40],
+            ['title' => 'Project Work', 'description' => 'Individual or group projects', 'sorting' => 50],
+            ['title' => 'E-Learning', 'description' => 'Online/distance learning', 'sorting' => 60],
+            ['title' => 'Field Work', 'description' => 'On-site practical work', 'sorting' => 70],
+            ['title' => 'Consultations', 'description' => 'Individual consultations with instructor', 'sorting' => 80],
+            ['title' => 'Case Studies', 'description' => 'Analysis of real-world cases', 'sorting' => 90],
+            ['title' => 'Workshops', 'description' => 'Interactive hands-on workshops', 'sorting' => 100],
+        ];
+        
+        return $this->insertRecords($io, 'tx_spark_teaching_method', $data, $pid, $force, 'title');
+    }
+
+    /**
+     * Seeds Languages of instruction
+     */
+    private function seedLanguages(SymfonyStyle $io, int $pid, bool $force): int
+    {
+        $io->section('Seeding Languages');
+        
+        $data = [
+            ['title' => 'Bosnian', 'code' => 'bs', 'sorting' => 10],
+            ['title' => 'Croatian', 'code' => 'hr', 'sorting' => 20],
+            ['title' => 'Serbian', 'code' => 'sr', 'sorting' => 30],
+            ['title' => 'English', 'code' => 'en', 'sorting' => 40],
+            ['title' => 'German', 'code' => 'de', 'sorting' => 50],
+            ['title' => 'French', 'code' => 'fr', 'sorting' => 60],
+            ['title' => 'Turkish', 'code' => 'tr', 'sorting' => 70],
+            ['title' => 'Arabic', 'code' => 'ar', 'sorting' => 80],
+        ];
+        
+        return $this->insertRecords($io, 'tx_spark_language', $data, $pid, $force, 'code');
     }
 
     /**

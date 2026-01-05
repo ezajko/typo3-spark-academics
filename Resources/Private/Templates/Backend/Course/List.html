@@ -20,8 +20,8 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
+                                <th>Code</th>
                                 <th>Title</th>
-                                <th>Acronym</th>
                                 <th>Department</th>
                                 <th>Chair</th>
                                 <th>Syllabi</th>
@@ -31,22 +31,25 @@
                         <tbody>
                             <f:for each="{items}" as="itemData">
                                 <tr>
+                                    <!-- Code -->
+                                    <td class="align-middle">
+                                        <f:if condition="{itemData.item.code}">
+                                            <code>{itemData.item.code}</code>
+                                        </f:if>
+                                    </td>
+
                                     <!-- Title -->
                                     <td class="align-middle">
                                         <b>{itemData.item.title}</b>
+                                        <f:if condition="{itemData.item.acronym}">
+                                            <span class="badge bg-secondary ms-1">{itemData.item.acronym}</span>
+                                        </f:if>
                                         <f:if condition="{itemData.item.description}">
                                             <br />
                                             <small class="text-muted">
                                                 <f:format.crop maxCharacters="60">{itemData.item.description}
                                                 </f:format.crop>
                                             </small>
-                                        </f:if>
-                                    </td>
-
-                                    <!-- Acronym -->
-                                    <td class="align-middle">
-                                        <f:if condition="{itemData.item.acronym}">
-                                            <span class="badge bg-secondary">{itemData.item.acronym}</span>
                                         </f:if>
                                     </td>
 

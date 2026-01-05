@@ -38,7 +38,7 @@ return [
         '1' => [
             'showitem' => '
                 --div--;General,
-                    hidden, title, acronym, uuid, description, courseware_url,
+                    hidden, code, title, acronym, uuid, description, courseware_url,
                 --div--;Organization,
                     department, chair,
                 --div--;Syllabi,
@@ -106,6 +106,16 @@ return [
         ],
 
         // Basic Info
+        'code' => [
+            'exclude' => false,
+            'label' => 'Course Code (Šifra predmeta)',
+            'config' => [
+                'type' => 'input',
+                'size' => 20,
+                'max' => 50,
+                'eval' => 'trim',
+            ],
+        ],
         'title' => [
             'exclude' => false,
             'label' => 'Title',

@@ -17,6 +17,7 @@ use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 class Course extends AbstractEntity
 {
     // Basic Info
+    protected string $code = '';
     protected string $title = '';
     protected string $acronym = '';
     protected string $uuid = '';
@@ -64,6 +65,16 @@ class Course extends AbstractEntity
     }
 
     // Basic Info
+    public function getCode(): string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): void
+    {
+        $this->code = $code;
+    }
+
     public function getTitle(): string
     {
         return $this->title;

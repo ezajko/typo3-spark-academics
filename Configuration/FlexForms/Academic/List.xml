@@ -208,6 +208,58 @@
                         </config>
                     </settings.filter.chair>
 
+                    <!-- Course Specific Filters -->
+                    <settings.filter.study_cycle>
+                        <label>Filter by Study Cycle</label>
+                        <displayCond>FIELD:settings.entityType:=:Course</displayCond>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <foreign_table>tx_spark_study_cycle</foreign_table>
+                            <items>
+                                <numIndex index="0">
+                                    <label>-- All Cycles --</label>
+                                    <value>0</value>
+                                </numIndex>
+                            </items>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.filter.study_cycle>
+
+                    <settings.filter.course_category>
+                        <label>Filter by Category</label>
+                        <displayCond>FIELD:settings.entityType:=:Course</displayCond>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <foreign_table>tx_spark_course_category</foreign_table>
+                            <items>
+                                <numIndex index="0">
+                                    <label>-- All Categories --</label>
+                                    <value>0</value>
+                                </numIndex>
+                            </items>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.filter.course_category>
+
+                    <settings.filter.scientific_field>
+                        <label>Filter by Scientific Field</label>
+                        <displayCond>FIELD:settings.entityType:=:Course</displayCond>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <foreign_table>tx_spark_scientific_field</foreign_table>
+                            <items>
+                                <numIndex index="0">
+                                    <label>-- All Fields --</label>
+                                    <value>0</value>
+                                </numIndex>
+                            </items>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.filter.scientific_field>
+
                     <!-- Project Specific Filters -->
                     <settings.filter.project_status>
                         <label>Filter by Status</label>

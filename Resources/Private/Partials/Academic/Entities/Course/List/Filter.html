@@ -27,6 +27,30 @@
                     prependOptionValue="0" class="form-select" />
             </div>
 
+            <!-- Study Cycle -->
+            <div class="col-md-4">
+                <label for="filter-study-cycle" class="form-label">Study Cycle</label>
+                <f:form.select name="filter[study_cycle]" options="{availableCycles}" optionLabelField="title"
+                    optionValueField="uid" value="{filter.study_cycle}" prependOptionLabel="- Any Cycle -"
+                    prependOptionValue="0" class="form-select" />
+            </div>
+
+            <!-- Course Category -->
+            <div class="col-md-4">
+                <label for="filter-course-category" class="form-label">Category</label>
+                <f:form.select name="filter[course_category]" options="{availableCategories}" optionLabelField="title"
+                    optionValueField="uid" value="{filter.course_category}" prependOptionLabel="- Any Category -"
+                    prependOptionValue="0" class="form-select" />
+            </div>
+
+            <!-- Scientific Field -->
+            <div class="col-md-4">
+                <label for="filter-scientific-field" class="form-label">Scientific Field</label>
+                <f:form.select name="filter[scientific_field]" options="{availableFields}" optionLabelField="title"
+                    optionValueField="uid" value="{filter.scientific_field}" prependOptionLabel="- Any Field -"
+                    prependOptionValue="0" class="form-select" />
+            </div>
+
             <!-- Submit -->
             <div class="col-12 text-end">
                 <f:link.action action="list" class="btn btn-outline-secondary me-2">Reset</f:link.action>

@@ -203,6 +203,9 @@ class AcademicController extends ActionController
             // Simplified: If 'filter' arg exists, use it?
             if (!empty($filter['department'])) $demand->addFilter('department', $filter['department']);
             if (!empty($filter['chair'])) $demand->addFilter('chair', $filter['chair']);
+            if (!empty($filter['study_cycle'])) $demand->addFilter('syllabi.studyCycle', $filter['study_cycle']);
+            if (!empty($filter['course_category'])) $demand->addFilter('syllabi.courseCategory', $filter['course_category']);
+            if (!empty($filter['scientific_field'])) $demand->addFilter('syllabi.scientificField', $filter['scientific_field']);
             
             // Note: CourseCategory and StudyCycle filtering on Course entity requires complex lookup 
             // because they are on Syllabus relation.
@@ -214,8 +217,9 @@ class AcademicController extends ActionController
                 'filter' => $filter,
                 'availableDepartments' => $this->departmentRepository->findAll(),
                 'availableChairs' => $this->chairRepository->findAll(),
-                // 'availableCategories' => $this->courseCategoryRepository->findAll(), 
-                // 'availableCycles' => $this->studyCycleRepository->findAll(),
+                'availableCategories' => $this->courseCategoryRepository->findAll(), 
+                'availableCycles' => $this->studyCycleRepository->findAll(),
+                'availableFields' => $this->scientificFieldRepository->findBy(['level' => 2]), // Only show minor fields
             ]);
         } else {
             // Default generic behavior for other entities

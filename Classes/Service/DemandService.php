@@ -63,6 +63,9 @@ class DemandService
     {
         $departmentUid = (int)($settings['filter']['department'] ?? $settings['filter.department'] ?? $settings['filter_department'] ?? 0);
         $chairUid = (int)($settings['filter']['chair'] ?? $settings['filter.chair'] ?? $settings['filter_chair'] ?? 0);
+        $cycleUid = (int)($settings['filter']['study_cycle'] ?? $settings['filter.study_cycle'] ?? $settings['filter_study_cycle'] ?? 0);
+        $categoryUid = (int)($settings['filter']['course_category'] ?? $settings['filter.course_category'] ?? $settings['filter_course_category'] ?? 0);
+        $fieldUid = (int)($settings['filter']['scientific_field'] ?? $settings['filter.scientific_field'] ?? $settings['filter_scientific_field'] ?? 0);
         
         // Filter by Department
         if ($departmentUid > 0) {
@@ -78,6 +81,21 @@ class DemandService
             if ($chair) {
                 $demand->addFilter('chair', $chair);
             }
+        }
+        
+        // Filter by Study Cycle (via Sullabus)
+        if ($cycleUid > 0) {
+            $demand->addFilter('syllabi.studyCycle', $cycleUid);
+        }
+
+        // Filter by Course Category (via Syllabus)
+        if ($categoryUid > 0) {
+            $demand->addFilter('syllabi.courseCategory', $categoryUid);
+        }
+
+        // Filter by Scientific Field (via Syllabus)
+        if ($fieldUid > 0) {
+            $demand->addFilter('syllabi.scientificField', $fieldUid);
         }
     }
 

@@ -10,7 +10,9 @@
 
 <f:section name="Content">
     <!-- Search Filter -->
-    <f:render partial="Backend/Common/SimpleFilter" arguments="{filter: filter}" />
+    <!-- Custom Filter -->
+    <f:render partial="Backend/Course/Filter"
+        arguments="{filter: filter, availableCycle: availableCycle, availableCategories: availableCategories, availableFields: availableFields}" />
 
     <!-- Course List Table -->
     <div class="module-body">

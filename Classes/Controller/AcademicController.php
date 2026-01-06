@@ -217,9 +217,24 @@ class AcademicController extends ActionController
                 'filter' => $filter,
                 'availableDepartments' => $this->departmentRepository->findAll(),
                 'availableChairs' => $this->chairRepository->findAll(),
-                'availableCategories' => $this->courseCategoryRepository->findAll(), 
-                'availableCycles' => $this->studyCycleRepository->findAll(),
-                'availableFields' => $this->scientificFieldRepository->findBy(['level' => 2]), // Only show minor fields
+                'availableCategories' => $this->courseCategoryRepository->findAll()->toArray(), // Fallback if query usage is complex, but let's use query
+            ]);
+            
+            // Re-assign using storage-ignoring queries
+            $categoryQuery = $this->courseCategoryRepository->createQuery();
+            $categoryQuery->getQuerySettings()->setRespectStoragePage(false);
+            
+            $cycleQuery = $this->studyCycleRepository->createQuery();
+            $cycleQuery->getQuerySettings()->setRespectStoragePage(false);
+
+            $fieldQuery = $this->scientificFieldRepository->createQuery();
+            $fieldQuery->getQuerySettings()->setRespectStoragePage(false);
+            $fieldQuery->matching($fieldQuery->equals('level', 2));
+
+            $this->view->assignMultiple([
+                'availableCategories' => $categoryQuery->execute(),
+                'availableCycles' => $cycleQuery->execute(),
+                'availableFields' => $fieldQuery->execute(),
             ]);
         } else {
             // Default generic behavior for other entities

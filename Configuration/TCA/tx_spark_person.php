@@ -22,6 +22,7 @@ return [
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
         'delete' => 'deleted',
+        'default_sortby' => 'ORDER BY last_name ASC, first_name ASC',
         'enablecolumns' => [
             'disabled' => 'hidden',
             'starttime' => 'starttime',
@@ -45,8 +46,10 @@ return [
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.mentoring,
                     mentoring,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.research,
-                    research_interests,
+                    research_interests, keywords,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.teaching,
+                    teaching, courses, study_programs,
+                --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.consultations,
                     consultation_hours,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.profiles,
                     profile_google_scholar, profile_research_gate, profile_github, profile_orcid, profile_linkedin, scopus_id, researcher_id,
@@ -56,7 +59,7 @@ return [
                     media_image,
                 --div--;Administration,
                     be_users,
-                    departments, laboratories, groups, chairs, courses, study_programs, projects,
+                    departments, laboratories, groups, chairs, projects,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.access,
                     --palette--;;hidden,
                     --palette--;;access,
@@ -145,6 +148,7 @@ return [
         // =====================================================================
         'first_name' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.first_name',
             'config' => [
@@ -156,6 +160,7 @@ return [
         ],
         'last_name' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.last_name',
             'config' => [
@@ -266,6 +271,7 @@ return [
         ],
         'biography_file_pdf' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.biography_file_pdf',
             'config' => [
                 'type' => 'file',
@@ -370,8 +376,26 @@ return [
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.research_interests',
             'config' => [
                 'type' => 'text',
+                'enableRichtext' => true,
+                'richtextConfiguration' => 'default',
+                'fieldControl' => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
+                    ],
+                ],
                 'cols' => 40,
                 'rows' => 5,
+                'eval' => 'trim',
+            ],
+        ],
+        'keywords' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.keywords',
+            'description' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.keywords.description',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 2,
                 'eval' => 'trim',
             ],
         ],
@@ -382,6 +406,23 @@ return [
                 'type' => 'text',
                 'enableRichtext' => true,
                 'richtextConfiguration' => 'default',
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim',
+            ],
+        ],
+        'teaching' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.teaching',
+            'config' => [
+                'type' => 'text',
+                'enableRichtext' => true,
+                'richtextConfiguration' => 'default',
+                'fieldControl' => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
+                    ],
+                ],
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
@@ -485,6 +526,7 @@ return [
         // =====================================================================
         'departments' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_department',
             'config' => [
                 'type' => 'select',
@@ -500,6 +542,7 @@ return [
         ],
         'laboratories' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_research_lab',
             'config' => [
                 'type' => 'select',
@@ -515,6 +558,7 @@ return [
         ],
         'groups' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_research_group',
             'config' => [
                 'type' => 'select',
@@ -530,6 +574,7 @@ return [
         ],
         'chairs' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.chairs',
             'config' => [
                 'type' => 'select',
@@ -544,6 +589,7 @@ return [
         ],
         'courses' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.courses',
             'config' => [
                 'type' => 'select',
@@ -558,6 +604,7 @@ return [
         ],
         'study_programs' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.study_programs',
             'config' => [
                 'type' => 'select',
@@ -572,6 +619,7 @@ return [
         ],
         'projects' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.projects',
             'config' => [
                 'type' => 'select',
@@ -586,6 +634,7 @@ return [
         ],
         'publications' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.publications',
             'config' => [
                 'type' => 'inline',

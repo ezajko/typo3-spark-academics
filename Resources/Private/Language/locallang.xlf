@@ -81,8 +81,17 @@
 			<trans-unit id="person.research_interests">
 				<source>Research Interests</source>
 			</trans-unit>
+			<trans-unit id="person.keywords">
+				<source>Keywords</source>
+			</trans-unit>
+			<trans-unit id="person.keywords.description">
+				<source>Comma-separated keywords (e.g. AI, Machine Learning, Data Science)</source>
+			</trans-unit>
 			<trans-unit id="person.consultation_hours">
 				<source>Consultation Hours</source>
+			</trans-unit>
+			<trans-unit id="person.teaching">
+				<source>Teaching</source>
 			</trans-unit>
 			<trans-unit id="person.path">
 				<source>URL Path</source>
@@ -133,6 +142,9 @@
 			</trans-unit>
 			<trans-unit id="person.tab.teaching">
 				<source>Teaching</source>
+			</trans-unit>
+			<trans-unit id="person.tab.consultations">
+				<source>Consultations</source>
 			</trans-unit>
 			<trans-unit id="person.tab.cv">
 				<source>Curriculum Vitae</source>

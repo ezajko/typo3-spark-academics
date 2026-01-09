@@ -435,6 +435,32 @@ class Person extends AbstractEntity
         $this->researchInterests = $researchInterests;
     }
 
+    /** @var string Keywords (comma separated) */
+    protected string $keywords = '';
+
+    public function getKeywords(): string
+    {
+        return $this->keywords;
+    }
+
+    public function setKeywords(string $keywords): void
+    {
+        $this->keywords = $keywords;
+    }
+
+    /**
+     * Returns keywords as array
+     * 
+     * @return array
+     */
+    public function getKeywordsArray(): array
+    {
+        if (empty($this->keywords)) {
+            return [];
+        }
+        return array_map('trim', explode(',', $this->keywords));
+    }
+
     public function getConsultationHours(): string
     {
         return $this->consultationHours;
@@ -443,6 +469,19 @@ class Person extends AbstractEntity
     public function setConsultationHours(string $consultationHours): void
     {
         $this->consultationHours = $consultationHours;
+    }
+    
+    /** @var string Teaching (RTE content) */
+    protected string $teaching = '';
+    
+    public function getTeaching(): string
+    {
+        return $this->teaching;
+    }
+    
+    public function setTeaching(string $teaching): void
+    {
+        $this->teaching = $teaching;
     }
 
     // =========================================================================

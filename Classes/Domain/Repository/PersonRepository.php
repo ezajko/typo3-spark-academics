@@ -6,9 +6,18 @@ namespace EtfUnsa\SparkAcademics\Domain\Repository;
 
 /**
  * Repository for Person
+ * 
+ * @author Ernedin Zajko <ezajko@root.ba>
  */
 class PersonRepository extends AbstractRepository
 {
+    /**
+     * Default ordering for Person lists: by last name, then first name
+     */
+    protected $defaultOrderings = [
+        'lastName' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+        'firstName' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+    ];
     public function findByPersonDemand(\EtfUnsa\SparkAcademics\Domain\Model\Dto\PersonDemand $demand, array $orderings = []): \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
     {
         $query = $this->createQuery();

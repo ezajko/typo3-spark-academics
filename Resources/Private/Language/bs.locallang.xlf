@@ -106,9 +106,21 @@
 				<source>Research Interests</source>
 				<target>Istraživački interesi</target>
 			</trans-unit>
+			<trans-unit id="person.keywords">
+				<source>Keywords</source>
+				<target>Ključne riječi</target>
+			</trans-unit>
+			<trans-unit id="person.keywords.description">
+				<source>Comma-separated keywords (e.g. AI, Machine Learning, Data Science)</source>
+				<target>Ključne riječi odvojene zarezom (npr. UI, Mašinsko učenje, Data Science)</target>
+			</trans-unit>
 			<trans-unit id="person.consultation_hours">
 				<source>Consultation Hours</source>
 				<target>Termin konsultacija</target>
+			</trans-unit>
+			<trans-unit id="person.teaching">
+				<source>Teaching</source>
+				<target>Nastava</target>
 			</trans-unit>
 			<trans-unit id="person.path">
 				<source>URL Path</source>
@@ -175,6 +187,10 @@
 			<trans-unit id="person.tab.teaching">
 				<source>Teaching</source>
 				<target>Nastava</target>
+			</trans-unit>
+			<trans-unit id="person.tab.consultations">
+				<source>Consultations</source>
+				<target>Konsultacije</target>
 			</trans-unit>
 			<trans-unit id="person.tab.cv">
 				<source>Curriculum Vitae</source>

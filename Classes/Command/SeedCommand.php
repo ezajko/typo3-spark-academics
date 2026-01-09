@@ -47,6 +47,8 @@ class SeedCommand extends Command
         'course-status',
         'teaching-methods',
         'languages',
+        'study-types',
+        'study-modes',
     ];
 
     protected function configure(): void
@@ -156,6 +158,16 @@ class SeedCommand extends Command
         if ($type === 'all' || $type === 'languages') {
             $folderPid = $this->getOrCreateFolderPage($io, $pid, 'Jezici', 'Languages');
             $totalInserted += $this->seedLanguages($io, $folderPid, $force);
+        }
+
+        if ($type === 'all' || $type === 'study-types') {
+            $folderPid = $this->getOrCreateFolderPage($io, $pid, 'Tipovi studija', 'Study Types');
+            $totalInserted += $this->seedStudyTypes($io, $folderPid, $force);
+        }
+
+        if ($type === 'all' || $type === 'study-modes') {
+            $folderPid = $this->getOrCreateFolderPage($io, $pid, 'Načini studiranja', 'Study Modes');
+            $totalInserted += $this->seedStudyModes($io, $folderPid, $force);
         }
         
         $io->success("Seeding complete! Total records inserted: $totalInserted");
@@ -485,6 +497,39 @@ class SeedCommand extends Command
         ];
         
         return $this->insertRecords($io, 'tx_spark_language', $data, $pid, $force, 'code');
+    }
+
+    /**
+     * Seeds Study Types (Academic, Professional, etc.)
+     */
+    private function seedStudyTypes(SymfonyStyle $io, int $pid, bool $force): int
+    {
+        $io->section('Seeding Study Types');
+
+        $data = [
+            ['title' => 'Academic (University)', 'description' => 'Academic university study program', 'sorting' => 10],
+            ['title' => 'Professional (Vocational)', 'description' => 'Professional vocational study program', 'sorting' => 20],
+            ['title' => 'Interdisciplinary', 'description' => 'Interdisciplinary study program', 'sorting' => 30],
+            ['title' => 'Specialist', 'description' => 'Specialist study program', 'sorting' => 40],
+        ];
+
+        return $this->insertRecords($io, 'tx_spark_study_type', $data, $pid, $force, 'title');
+    }
+
+    /**
+     * Seeds Modes of Study (Full-time, Part-time, DL)
+     */
+    private function seedStudyModes(SymfonyStyle $io, int $pid, bool $force): int
+    {
+        $io->section('Seeding Study Modes');
+
+        $data = [
+            ['title' => 'Full-time', 'description' => 'Regular full-time study', 'sorting' => 10],
+            ['title' => 'Part-time', 'description' => 'Part-time study (work and study)', 'sorting' => 20],
+            ['title' => 'Distance Learning', 'description' => 'Distance learning / E-learning', 'sorting' => 30],
+        ];
+
+        return $this->insertRecords($io, 'tx_spark_mode_of_study', $data, $pid, $force, 'title');
     }
 
     /**

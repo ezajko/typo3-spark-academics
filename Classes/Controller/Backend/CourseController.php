@@ -10,6 +10,8 @@ use EtfUnsa\SparkAcademics\Domain\Repository\StudyCycleRepository;
 use EtfUnsa\SparkAcademics\Service\DemandService;
 use EtfUnsa\SparkAcademics\Domain\Model\Dto\Demand;
 use EtfUnsa\SparkAcademics\Domain\Repository\CourseRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\DepartmentRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\ChairRepository;
 use EtfUnsa\SparkAcademics\Service\BackendPermissionService;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -33,7 +35,10 @@ class CourseController extends AbstractBackendController
     protected DemandService $demandService;
     protected CourseCategoryRepository $courseCategoryRepository;
     protected StudyCycleRepository $studyCycleRepository;
+
     protected ScientificFieldRepository $scientificFieldRepository;
+    protected DepartmentRepository $departmentRepository;
+    protected ChairRepository $chairRepository;
 
     public function __construct(
         CourseRepository $courseRepository,
@@ -45,7 +50,9 @@ class CourseController extends AbstractBackendController
         DemandService $demandService,
         CourseCategoryRepository $courseCategoryRepository,
         StudyCycleRepository $studyCycleRepository,
-        ScientificFieldRepository $scientificFieldRepository
+        ScientificFieldRepository $scientificFieldRepository,
+        DepartmentRepository $departmentRepository,
+        ChairRepository $chairRepository
     ) {
         parent::__construct($moduleTemplateFactory, $backendUriBuilder);
         $this->repository = $courseRepository;
@@ -55,7 +62,10 @@ class CourseController extends AbstractBackendController
         $this->demandService = $demandService;
         $this->courseCategoryRepository = $courseCategoryRepository;
         $this->studyCycleRepository = $studyCycleRepository;
+
         $this->scientificFieldRepository = $scientificFieldRepository;
+        $this->departmentRepository = $departmentRepository;
+        $this->chairRepository = $chairRepository;
         $this->tableName = 'tx_spark_course';
     }
 
@@ -142,21 +152,28 @@ class CourseController extends AbstractBackendController
         $moduleTemplate->assign('canManage', $canManage);
         
         // Assign options for filters
-        $moduleTemplate->assign('availableCycle', $this->studyCycleRepository->findAll());
-        $moduleTemplate->assign('availableCategories', $this->courseCategoryRepository->findAll());
-        $moduleTemplate->assign('availableFields', $this->scientificFieldRepository->findBy(['level' => 2])); // Minor fields
-        
-        // Needed for Department/Chair selection (though not currently injected into DemandService, usually generic Repositories are needed)
-        // Let's assume generic view helpers or we need to fetch them if we want dropdowns.
-        // Wait, I didn't inject Department/Chair repositories in Constructor update above!
-        // But the previous implementation didn't have Department/Chair dropdowns either (only search).
-        // User requested "same filters as frontend".
-        // So I should fetch Departments and Chairs too.
-        // However, I missed injecting them in previous step.
-        // I will first implement the new ones, and if I need Dept/Chair, I'll add them.
-        // Actually, existing backend list didn't fail on missing variables, so maybe it relies on ViewHelpers or didn't have them.
-        // Let's stick to the requested new filters plus Search for now, and Department/Chair if I can easily add them or if they were already there (they were not in findAll loop).
-        
+        // Disable storage page respect for lookups to find them globally/in storage folders
+        $cycleQuery = $this->studyCycleRepository->createQuery();
+        $cycleQuery->getQuerySettings()->setRespectStoragePage(false);
+        $moduleTemplate->assign('availableCycle', $cycleQuery->execute());
+
+        $categoryQuery = $this->courseCategoryRepository->createQuery();
+        $categoryQuery->getQuerySettings()->setRespectStoragePage(false);
+        $moduleTemplate->assign('availableCategories', $categoryQuery->execute());
+
+        $fieldQuery = $this->scientificFieldRepository->createQuery();
+        $fieldQuery->getQuerySettings()->setRespectStoragePage(false);
+        $fieldQuery->matching($fieldQuery->equals('level', 2)); // Minor fields
+        $moduleTemplate->assign('availableFields', $fieldQuery->execute());
+
+        // Assign Department and Chair options (globally)
+        $deptQuery = $this->departmentRepository->createQuery();
+        $deptQuery->getQuerySettings()->setRespectStoragePage(false);
+        $moduleTemplate->assign('availableDepartments', $deptQuery->execute());
+
+        $chairQuery = $this->chairRepository->createQuery();
+        $chairQuery->getQuerySettings()->setRespectStoragePage(false);
+        $moduleTemplate->assign('availableChairs', $chairQuery->execute());
         $moduleTemplate->assignMultiple($this->additionalViewVariables);
 
         return $moduleTemplate->renderResponse($this->getTemplatePath());

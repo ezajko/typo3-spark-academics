@@ -1,0 +1,27 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<h1>{item.title}</h1>
+<p class="lead">{item.qualificationTitle}</p>
+
+<div class="alert alert-light border">
+    <strong>Degree:</strong> {item.studyCycle.title} |
+    <strong>Duration:</strong> {item.durationYears} Years ({item.durationSemesters} Semesters) |
+    <strong>ECTS:</strong> {item.ectsCredits}
+</div>
+
+<f:format.html>{item.description}</f:format.html>
+
+<f:if condition="{item.curricula}">
+    <hr>
+    <h3>Curricula</h3>
+    <ul>
+        <f:for each="{item.curricula}" as="curriculum">
+            <li>{curriculum.title} ({curriculum.year})</li>
+        </f:for>
+    </ul>
+</f:if>
+
+<f:link.action action="list" pageUid="{settings.listPid}" class="btn btn-outline-primary mt-3">Back to list
+</f:link.action>
+
+</html>

@@ -28,6 +28,8 @@ use EtfUnsa\SparkAcademics\Domain\Repository\StudyProgramRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\CourseCategoryRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\StudyCycleRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\LanguageRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\StudyTypeRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\ModeOfStudyRepository;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -56,6 +58,8 @@ class AcademicController extends ActionController
     protected CourseCategoryRepository $courseCategoryRepository;
     protected StudyCycleRepository $studyCycleRepository;
     protected LanguageRepository $languageRepository;
+    protected StudyTypeRepository $studyTypeRepository;
+    protected ModeOfStudyRepository $modeOfStudyRepository;
 
     protected DemandService $demandService;
 
@@ -75,6 +79,8 @@ class AcademicController extends ActionController
         CourseCategoryRepository $courseCategoryRepository,
         StudyCycleRepository $studyCycleRepository,
         LanguageRepository $languageRepository,
+        StudyTypeRepository $studyTypeRepository,
+        ModeOfStudyRepository $modeOfStudyRepository,
         DemandService $demandService
     ) {
         $this->departmentRepository = $departmentRepository;
@@ -92,6 +98,8 @@ class AcademicController extends ActionController
         $this->courseCategoryRepository = $courseCategoryRepository;
         $this->studyCycleRepository = $studyCycleRepository;
         $this->languageRepository = $languageRepository;
+        $this->studyTypeRepository = $studyTypeRepository;
+        $this->modeOfStudyRepository = $modeOfStudyRepository;
         $this->demandService = $demandService;
     }
 
@@ -236,6 +244,25 @@ class AcademicController extends ActionController
                 'availableCycles' => $cycleQuery->execute(),
                 'availableFields' => $fieldQuery->execute(),
             ]);
+        } elseif ($entityType === 'StudyProgram') {
+            $filter = $this->request->hasArgument('filter') ? $this->request->getArgument('filter') : [];
+            
+            // Merge request filter into settings for DemandService
+            if (!empty($filter)) {
+                $settings['filter'] = array_replace_recursive($settings['filter'] ?? [], $filter);
+            }
+            
+            $demand = $this->demandService->createFromSettings($settings);
+            $items = $this->studyProgramRepository->findByDemand($demand);
+            
+            // Assign lookup data
+            $this->view->assignMultiple([
+                'filter' => $filter,
+                'availableDepartments' => $this->departmentRepository->findAll(),
+                'availableStudyTypes' => $this->studyTypeRepository->findAll(),
+                'availableModes' => $this->modeOfStudyRepository->findAll(),
+                'availableLanguages' => $this->languageRepository->findAll(),
+            ]);
         } else {
             // Default generic behavior for other entities
             $demand = $this->demandService->createFromSettings($settings);
@@ -284,7 +311,7 @@ class AcademicController extends ActionController
         ?ResearchGroup $group = null,
         ?Chair $chair = null,
         ?Course $course = null,
-        ?StudyProgram $program = null,
+        ?StudyProgram $studyProgram = null,
         ?Project $project = null,
         ?Person $person = null
     ): ResponseInterface {

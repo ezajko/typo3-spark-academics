@@ -10,6 +10,8 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
 abstract class AbstractRepository extends Repository
 {
+    protected array $searchFields = ['title'];
+
     public function initializeObject(): void
     {
         /** @var Typo3QuerySettings $querySettings */
@@ -19,6 +21,10 @@ abstract class AbstractRepository extends Repository
         // We set respectStoragePage to false so that items can be fetched globally 
         // without requiring a specific storagePid to be set in TypoScript.
         $querySettings->setRespectStoragePage(false);
+        
+        // Language settings: respect the current language to avoid duplicate records
+        // Fallback behavior is handled by site configuration
+        $querySettings->setRespectSysLanguage(true);
         
         $this->setDefaultQuerySettings($querySettings);
     }
@@ -51,6 +57,19 @@ abstract class AbstractRepository extends Repository
             } else {
                 // Fallback to equals if invalid operator is provided
                 $constraints[] = $query->equals($prop, $val);
+            }
+        }
+
+        if (!empty($demand->getSearch())) {
+            $search = $demand->getSearch();
+            $searchConstraints = [];
+            foreach ($this->searchFields as $field) {
+                // Check if property exists in model is hard without ReflectionService injection,
+                // but let's assume repositories set valid fields.
+                $searchConstraints[] = $query->like($field, '%' . $search . '%');
+            }
+            if (!empty($searchConstraints)) {
+                $constraints[] = $query->logicalOr(...$searchConstraints);
             }
         }
 

@@ -56,7 +56,43 @@ class DemandService
             $this->applyCourseFilters($demand, $settings);
         }
 
+        // StudyProgram-specific filters
+        if ($entityType === 'StudyProgram') {
+            $this->applyStudyProgramFilters($demand, $settings);
+        }
+
         return $demand;
+    }
+
+    protected function applyStudyProgramFilters(Demand $demand, array $settings): void
+    {
+        $departmentUid = (int)($settings['filter']['department'] ?? $settings['filter.department'] ?? $settings['filter_department'] ?? 0);
+        $typeUid = (int)($settings['filter']['study_type'] ?? $settings['filter.study_type'] ?? $settings['filter_study_type'] ?? 0);
+        $modeUid = (int)($settings['filter']['mode_of_study'] ?? $settings['filter.mode_of_study'] ?? $settings['filter_mode_of_study'] ?? 0);
+        $languageUid = (int)($settings['filter']['language'] ?? $settings['filter.language'] ?? $settings['filter_language'] ?? 0);
+
+        // Filter by Department
+        if ($departmentUid > 0) {
+            $department = $this->departmentRepository->findBy(['uid' => $departmentUid])->getFirst();
+            if ($department) {
+                $demand->addFilter('departments', $department, 'contains');
+            }
+        }
+
+        // Filter by Study Type
+        if ($typeUid > 0) {
+            $demand->addFilter('studyTypes', $typeUid, 'contains');
+        }
+
+        // Filter by Mode of Study
+        if ($modeUid > 0) {
+            $demand->addFilter('modesOfStudy', $modeUid, 'contains');
+        }
+
+        // Filter by Language
+        if ($languageUid > 0) {
+            $demand->addFilter('languages', $languageUid, 'contains');
+        }
     }
 
     protected function applyCourseFilters(Demand $demand, array $settings): void

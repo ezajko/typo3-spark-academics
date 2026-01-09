@@ -110,6 +110,34 @@
 				<source>Consultation Hours</source>
 				<target>Termin konsultacija</target>
 			</trans-unit>
+			<trans-unit id="person.path">
+				<source>URL Path</source>
+				<target>URL putanja</target>
+			</trans-unit>
+			<trans-unit id="person.chairs">
+				<source>Chairs</source>
+				<target>Katedre</target>
+			</trans-unit>
+			<trans-unit id="person.courses">
+				<source>Courses</source>
+				<target>Predmeti</target>
+			</trans-unit>
+			<trans-unit id="person.study_programs">
+				<source>Study Programs</source>
+				<target>Studijski programi</target>
+			</trans-unit>
+			<trans-unit id="person.projects">
+				<source>Projects</source>
+				<target>Projekti</target>
+			</trans-unit>
+			<trans-unit id="person.publications">
+				<source>Publications</source>
+				<target>Publikacije</target>
+			</trans-unit>
+			<trans-unit id="person.publications.add_new">
+				<source>Add Publication</source>
+				<target>Dodaj publikaciju</target>
+			</trans-unit>
 
 			<!-- Person Tabs -->
 			<trans-unit id="person.tab.general">

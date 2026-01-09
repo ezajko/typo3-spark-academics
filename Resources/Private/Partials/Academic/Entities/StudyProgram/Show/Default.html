@@ -1,36 +1,364 @@
-<table>
-    <tr>
-        <th>UID:</th>
-        <td>{item.uid}</td>
-    </tr>
-    <tr>
-        <th>Title:</th>
-        <td>{item.title}</td>
-    </tr>
-    <tr>
-        <th>Acronym:</th>
-        <td>{item.acronym}</td>
-    </tr>
-    <tr>
-        <th>UUID:</th>
-        <td>{item.uuid}</td>
-    </tr>
-    <tr>
-        <th>Description:</th>
-        <td>
-            <f:format.html>{item.description}</f:format.html>
-        </td>
-    </tr>
-    <tr>
-        <th>Members:</th>
-        <td>
-            <f:for each="{item.persons}" as="person" iteration="i">
-                <f:link.action action="show" arguments="{person: person}" pageUid="{detailPid}">{person.firstName}
-                    {person.lastName}</f:link.action>
-                <f:if condition="{i.isLast}">
-                    <f:else>, </f:else>
-                </f:if>
-            </f:for>
-        </td>
-    </tr>
-</table>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<div class="study-program-detail">
+    <!-- Header -->
+    <div class="bg-light p-5 rounded-3 mb-5 border">
+        <span class="badge bg-primary mb-2">{item.studyCycle.title}</span>
+        <h1 class="display-5 fw-bold text-gradient">{item.title}</h1>
+        <p class="lead">{item.qualificationTitle}</p>
+
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <small class="text-muted d-block text-uppercase fw-bold">Duration</small>
+                <span><i class="bi bi-clock"></i> {item.durationYears} Years ({item.durationSemesters} Semesters)</span>
+            </div>
+            <div class="col-md-3">
+                <small class="text-muted d-block text-uppercase fw-bold">Credits</small>
+                <span><i class="bi bi-award"></i> {item.ectsCredits} ECTS</span>
+            </div>
+            <div class="col-md-3">
+                <small class="text-muted d-block text-uppercase fw-bold">Language</small>
+                <f:for each="{item.languages}" as="lang" iteration="i">
+                    <span>{lang.title}{f:if(condition: i.isLast, else: ', ')}</span>
+                </f:for>
+            </div>
+            <div class="col-md-3">
+                <small class="text-muted d-block text-uppercase fw-bold">Acronym</small>
+                <span>{item.acronym}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-5">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            <f:if condition="{item.description}">
+                <div class="mb-5">
+                    <h3>About the Program</h3>
+                    <f:format.html>{item.description}</f:format.html>
+                </div>
+            </f:if>
+
+            <!-- Curriculum Section -->
+            <f:if condition="{item.curricula}">
+                <div class="mb-5">
+                    <h3 class="mb-4">Curriculum</h3>
+
+                    <!-- Curriculum Tabs -->
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <f:for each="{item.curricula}" as="curriculum" iteration="i">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link {f:if(condition: i.isFirst, then: 'active')}"
+                                    id="pills-curriculum-{curriculum.uid}-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-curriculum-{curriculum.uid}" type="button" role="tab">
+                                    {curriculum.title}
+                                </button>
+                            </li>
+                        </f:for>
+                    </ul>
+
+                    <!-- Curriculum Content -->
+                    <div class="tab-content" id="pills-tabContent">
+                        <f:for each="{item.curricula}" as="curriculum" iteration="i">
+                            <div class="tab-pane fade {f:if(condition: i.isFirst, then: 'show active')}"
+                                id="pills-curriculum-{curriculum.uid}" role="tabpanel">
+
+                                <!-- Years Accordion -->
+                                <div class="accordion" id="accordionYear-{curriculum.uid}">
+                                    <f:for each="{curriculum.semestersByYear}" as="semesters" key="year">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="heading-year-{year}-{curriculum.uid}">
+                                                <button
+                                                    class="accordion-button {f:if(condition: '{year} == 1', else: 'collapsed')}"
+                                                    type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapse-year-{year}-{curriculum.uid}">
+                                                    Year {year}
+                                                </button>
+                                            </h2>
+                                            <div id="collapse-year-{year}-{curriculum.uid}"
+                                                class="accordion-collapse collapse {f:if(condition: '{year} == 1', then: 'show')}"
+                                                data-bs-parent="#accordionYear-{curriculum.uid}">
+                                                <div class="accordion-body">
+
+                                                    <!-- Semester Tabs -->
+                                                    <ul class="nav nav-tabs mb-3" id="tab-year-{year}-{curriculum.uid}"
+                                                        role="tablist">
+                                                        <f:for each="{semesters}" as="semester" iteration="s">
+                                                            <li class="nav-item" role="presentation">
+                                                                <button
+                                                                    class="nav-link {f:if(condition: s.isFirst, then: 'active')}"
+                                                                    id="sem-{semester.uid}-tab" data-bs-toggle="tab"
+                                                                    data-bs-target="#sem-{semester.uid}" type="button"
+                                                                    role="tab">
+                                                                    {semester.title}
+                                                                </button>
+                                                            </li>
+                                                        </f:for>
+                                                    </ul>
+
+                                                    <div class="tab-content">
+                                                        <f:for each="{semesters}" as="semester" iteration="s">
+                                                            <div class="tab-pane fade {f:if(condition: s.isFirst, then: 'show active')}"
+                                                                id="sem-{semester.uid}" role="tabpanel">
+
+                                                                <!-- Semester Table -->
+                                                                <div class="table-responsive mb-4">
+                                                                    <table
+                                                                        class="table table-hover align-middle border">
+                                                                        <thead class="table-light">
+                                                                            <tr>
+                                                                                <th scope="col" width="10%">Code</th>
+                                                                                <th scope="col" width="50%">Course</th>
+                                                                                <th scope="col" width="15%"
+                                                                                    class="text-center">Hours</th>
+                                                                                <th scope="col" width="10%"
+                                                                                    class="text-center">ECTS</th>
+                                                                                <th scope="col" width="15%"></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <!-- 1. Mandatory Courses -->
+                                                                            <f:for each="{semester.courseGroups}"
+                                                                                as="group">
+                                                                                <f:if
+                                                                                    condition="{group.type} == 'mandatory'">
+                                                                                    <f:for each="{group.courses}"
+                                                                                        as="course">
+                                                                                        <tr>
+                                                                                            <td
+                                                                                                class="text-muted small fw-mono">
+                                                                                                {course.code}</td>
+                                                                                            <td>
+                                                                                                <span
+                                                                                                    class="fw-medium">{course.title}</span>
+                                                                                                <f:if
+                                                                                                    condition="{course.acronym}">
+                                                                                                    <small
+                                                                                                        class="text-muted ms-1">({course.acronym})</small>
+                                                                                                </f:if>
+                                                                                            </td>
+                                                                                            <td
+                                                                                                class="text-center small text-muted">
+                                                                                                {course.currentSyllabus.hoursLecture}+{course.currentSyllabus.hoursExercise}+{course.currentSyllabus.hoursSeminar}
+                                                                                            </td>
+                                                                                            <td
+                                                                                                class="text-center fw-bold">
+                                                                                                {course.currentSyllabus.ects}
+                                                                                            </td>
+                                                                                            <td class="text-end">
+                                                                                                <f:link.action
+                                                                                                    action="show"
+                                                                                                    controller="Academic"
+                                                                                                    extensionName="SparkAcademics"
+                                                                                                    pluginName="Display"
+                                                                                                    pageUid="{settings.detailPid}"
+                                                                                                    arguments="{course: course}"
+                                                                                                    class="btn btn-sm btn-outline-primary py-0 px-2">
+                                                                                                    Detail
+                                                                                                </f:link.action>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </f:for>
+                                                                                </f:if>
+                                                                            </f:for>
+
+                                                                            <!-- 2. Elective Slots (Placeholders) -->
+                                                                            <f:for each="{semester.courseGroups}"
+                                                                                as="group">
+                                                                                <f:if
+                                                                                    condition="{group.type} == 'elective'">
+                                                                                    <tr class="table-light">
+                                                                                        <td
+                                                                                            class="text-muted small fw-mono">
+                                                                                            -</td>
+                                                                                        <td
+                                                                                            class="fst-italic text-muted">
+                                                                                            <i
+                                                                                                class="bi bi-collection me-1"></i>
+                                                                                            {group.title}
+                                                                                            <span
+                                                                                                class="badge bg-secondary ms-2 small">Elective
+                                                                                                (Select
+                                                                                                {group.requiredCounts})</span>
+                                                                                        </td>
+                                                                                        <td
+                                                                                            class="text-center small text-muted">
+                                                                                            -</td>
+                                                                                        <td
+                                                                                            class="text-center fw-bold text-muted">
+                                                                                            -</td>
+                                                                                        <td class="text-end">
+                                                                                            <a href="#group-{group.uid}"
+                                                                                                class="btn btn-sm btn-link text-decoration-none py-0 px-2 text-muted">
+                                                                                                <small>See list <i
+                                                                                                        class="bi bi-arrow-down"></i></small>
+                                                                                            </a>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </f:if>
+                                                                            </f:for>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+
+                                                                <!-- Elective Details List -->
+                                                                <f:for each="{semester.courseGroups}" as="group">
+                                                                    <f:if condition="{group.type} == 'elective'">
+                                                                        <div id="group-{group.uid}" class="mt-4 mb-3">
+                                                                            <h6
+                                                                                class="fw-bold mb-3 d-flex align-items-center">
+                                                                                <i
+                                                                                    class="bi bi-collection me-2 text-primary"></i>
+                                                                                {group.title}
+                                                                            </h6>
+                                                                            <div class="table-responsive">
+                                                                                <table
+                                                                                    class="table table-sm table-hover align-middle mb-0 border">
+                                                                                    <thead class="table-light">
+                                                                                        <tr>
+                                                                                            <th scope="col" width="10%">
+                                                                                                Code</th>
+                                                                                            <th scope="col" width="50%">
+                                                                                                Course</th>
+                                                                                            <th scope="col" width="15%"
+                                                                                                class="text-center">
+                                                                                                Hours</th>
+                                                                                            <th scope="col" width="10%"
+                                                                                                class="text-center">ECTS
+                                                                                            </th>
+                                                                                            <th scope="col" width="15%">
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <f:for each="{group.courses}"
+                                                                                            as="course">
+                                                                                            <tr>
+                                                                                                <td
+                                                                                                    class="text-muted small fw-mono">
+                                                                                                    {course.code}</td>
+                                                                                                <td>
+                                                                                                    <span
+                                                                                                        class="fw-medium">{course.title}</span>
+                                                                                                    <f:if
+                                                                                                        condition="{course.acronym}">
+                                                                                                        <small
+                                                                                                            class="text-muted ms-1">({course.acronym})</small>
+                                                                                                    </f:if>
+                                                                                                </td>
+                                                                                                <td
+                                                                                                    class="text-center small text-muted">
+                                                                                                    {course.currentSyllabus.hoursLecture}+{course.currentSyllabus.hoursExercise}+{course.currentSyllabus.hoursSeminar}
+                                                                                                </td>
+                                                                                                <td
+                                                                                                    class="text-center fw-bold">
+                                                                                                    {course.currentSyllabus.ects}
+                                                                                                </td>
+                                                                                                <td class="text-end">
+                                                                                                    <f:link.action
+                                                                                                        action="show"
+                                                                                                        controller="Academic"
+                                                                                                        extensionName="SparkAcademics"
+                                                                                                        pluginName="Display"
+                                                                                                        pageUid="{settings.detailPid}"
+                                                                                                        arguments="{course: course}"
+                                                                                                        class="btn btn-sm btn-outline-secondary py-0 px-2">
+                                                                                                        <i
+                                                                                                            class="bi bi-arrow-right"></i>
+                                                                                                    </f:link.action>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </f:for>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </f:if>
+                                                                </f:for>
+
+                                                            </div>
+                                                        </f:for>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </f:for>
+                                </div>
+                                <f:if condition="{curriculum.note}">
+                                    <div class="alert alert-info mt-3 small">
+                                        <i class="bi bi-info-circle me-1"></i> {curriculum.note}
+                                    </div>
+                                </f:if>
+                            </div>
+                        </f:for>
+                    </div>
+            </f:if>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-white fw-bold">Organization</div>
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <small class="d-block text-muted">Departments</small>
+                        <f:for each="{item.departments}" as="dept">
+                            <div class="fw-medium">{dept.title}</div>
+                        </f:for>
+                    </div>
+                    <div class="list-group-item">
+                        <small class="d-block text-muted">Chairs</small>
+                        <f:for each="{item.chairs}" as="chair">
+                            <div>{chair.title}</div>
+                        </f:for>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-white fw-bold">Details</div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="small text-muted d-block">Study Types</label>
+                        <f:for each="{item.studyTypes}" as="type">
+                            <span class="badge bg-light text-dark border me-1">{type.title}</span>
+                        </f:for>
+                    </div>
+                    <div class="mb-3">
+                        <label class="small text-muted d-block">Modes of Study</label>
+                        <f:for each="{item.modesOfStudy}" as="mode">
+                            <span class="badge bg-light text-dark border me-1">{mode.title}</span>
+                        </f:for>
+                    </div>
+                    <div>
+                        <label class="small text-muted d-block">Scientific Field</label>
+                        <span>{item.scientificField.title}</span>
+                    </div>
+                </div>
+            </div>
+
+            <f:if condition="{item.persons}">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white fw-bold">Program Staff</div>
+                    <div class="list-group list-group-flush">
+                        <f:for each="{item.persons}" as="person">
+                            <div class="list-group-item d-flex align-items-center">
+                                <f:if condition="{person.image}">
+                                    <f:image image="{person.image}" class="rounded-circle me-2" width="32" height="32"
+                                        cropVariant="default" />
+                                </f:if>
+                                <div>
+                                    <div class="fw-medium">{person.firstName} {person.lastName}</div>
+                                    <small class="text-muted">{person.academicTitle.title}</small>
+                                </div>
+                            </div>
+                        </f:for>
+                    </div>
+                </div>
+            </f:if>
+        </div>
+    </div>
+</div>
+
+</html>

@@ -17,6 +17,10 @@ return [
         'crdate' => 'crdate',
         'delete' => 'deleted',
         'hideTable' => true,
+        // Localization support
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],

@@ -83,4 +83,26 @@ return [
     \EtfUnsa\SparkAcademics\Domain\Model\Language::class => [
         'tableName' => 'tx_spark_language',
     ],
+    \EtfUnsa\SparkAcademics\Domain\Model\StudyType::class => [
+        'tableName' => 'tx_spark_study_type',
+    ],
+    \EtfUnsa\SparkAcademics\Domain\Model\ModeOfStudy::class => [
+        'tableName' => 'tx_spark_mode_of_study',
+    ],
+
+    // --- Curriculum Entities ---
+    \EtfUnsa\SparkAcademics\Domain\Model\Curriculum::class => [
+        'tableName' => 'tx_spark_curriculum',
+    ],
+    \EtfUnsa\SparkAcademics\Domain\Model\CurriculumSemester::class => [
+        'tableName' => 'tx_spark_curriculum_semester',
+    ],
+    \EtfUnsa\SparkAcademics\Domain\Model\CourseGroup::class => [
+        'tableName' => 'tx_spark_course_group',
+    ],
+
+    // --- Publication Entities ---
+    \EtfUnsa\SparkAcademics\Domain\Model\Publication::class => [
+        'tableName' => 'tx_spark_publication',
+    ],
 ];

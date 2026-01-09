@@ -208,6 +208,14 @@ class Course extends AbstractEntity
         return $syllabiArray;
     }
 
+    /**
+     * Alias for getLatestSyllabus to support {course.currentSyllabus} in Fluid
+     */
+    public function getCurrentSyllabus(): ?CourseSyllabus
+    {
+        return $this->getLatestSyllabus();
+    }
+
     // External Courses
     /** @return ObjectStorage<ExternalCourse> */
     public function getExternalCourses(): ?ObjectStorage

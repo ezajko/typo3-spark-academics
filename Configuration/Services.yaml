@@ -38,3 +38,38 @@ services:
       - name: console.command
         command: 'academics:generate-projects'
         description: 'Generate test projects with faker data'
+
+  EtfUnsa\SparkAcademics\Command\GenerateTestCoursesCommand:
+    tags:
+      - name: console.command
+        command: 'academics:generate-courses'
+        description: 'Generate test courses with syllabi for testing purposes'
+
+  EtfUnsa\SparkAcademics\Command\GenerateTestStudyProgramsCommand:
+      tags:
+          - name: console.command
+            command: 'academics:generate-programs'
+            description: 'Generate test Study Programs with nested curriculum structure'
+
+  EtfUnsa\SparkAcademics\Command\SyncOrcidCommand:
+    tags:
+      - name: console.command
+        command: 'academics:sync-orcid'
+        description: 'Syncs publications from ORCID for all Persons with an ORCID ID'
+
+  EtfUnsa\SparkAcademics\Command\GenerateHomeFoldersCommand:
+    tags:
+      - name: console.command
+        command: 'academics:generate-home-folders'
+        description: 'Generates Home Folders and File Mounts for all existing Backend Users'
+
+
+  # Event Listeners
+  EtfUnsa\SparkAcademics\EventListener\BackendUserEventListener:
+    tags:
+      - name: event.listener
+        identifier: 'spark-academics-beuser-creation'
+        event: TYPO3\CMS\Core\DataHandling\Event\AfterRecordCreationEvent
+      - name: event.listener
+        identifier: 'spark-academics-beuser-update'
+        event: TYPO3\CMS\Core\DataHandling\Event\AfterRecordUpdateEvent

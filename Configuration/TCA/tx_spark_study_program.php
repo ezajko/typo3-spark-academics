@@ -27,6 +27,12 @@ return [
             'showitem' => '
                 --div--;General,
                     hidden, landing_page, title, acronym, uuid, description,
+                --div--;Organization,
+                    departments, chairs, study_cycle, scientific_field, study_types, modes_of_study, languages,
+                --div--;Details,
+                    qualification_title, duration_years, duration_semesters, ects_credits,
+                --div--;Curriculum,
+                    curricula,
                 --div--;Editors,
                     be_users,
                 --div--;People,
@@ -143,6 +149,172 @@ return [
             'config' => [
                 'type' => 'uuid',
             ],
+        ],
+        'departments' => [
+            'exclude' => true,
+            'label' => 'Departments',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_department',
+                'MM' => 'tx_spark_studyprogram_department_mm',
+                'size' => 5,
+                'maxitems' => 99,
+                'default' => 0,
+            ],
+        ],
+        'chairs' => [
+            'exclude' => true,
+            'label' => 'Chairs',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_chair',
+                'MM' => 'tx_spark_studyprogram_chair_mm',
+                'size' => 5,
+                'maxitems' => 99,
+                'default' => 0,
+            ],
+        ],
+        'study_cycle' => [
+            'exclude' => true,
+            'label' => 'Study Cycle',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_spark_study_cycle',
+                'items' => [['label' => '-- Select --', 'value' => 0]],
+                'default' => 0,
+            ],
+        ],
+        'scientific_field' => [
+            'exclude' => true,
+            'label' => 'Scientific Field (Primary)',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectTree',
+                'foreign_table' => 'tx_spark_scientific_field',
+                'foreign_table_where' => 'ORDER BY tx_spark_scientific_field.sorting',
+                'treeConfig' => [
+                    'parentField' => 'parent',
+                    'appearance' => [
+                        'expandAll' => true,
+                        'showHeader' => true,
+                    ],
+                ],
+                'default' => 0,
+                'minitems' => 0,
+                'maxitems' => 1,
+            ],
+        ],
+        'study_types' => [
+            'exclude' => true,
+            'label' => 'Study Types',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_study_type',
+                'MM' => 'tx_spark_studyprogram_studytype_mm',
+                'size' => 5,
+                'maxitems' => 99,
+                'default' => 0,
+            ],
+        ],
+        'modes_of_study' => [
+            'exclude' => true,
+            'label' => 'Modes of Study',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_mode_of_study',
+                'MM' => 'tx_spark_studyprogram_modeofstudy_mm',
+                'size' => 5,
+                'maxitems' => 99,
+                'default' => 0,
+            ],
+        ],
+        'languages' => [
+            'exclude' => true,
+            'label' => 'Languages',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_spark_language',
+                'MM' => 'tx_spark_studyprogram_language_mm',
+                'size' => 5,
+                'maxitems' => 99,
+                'default' => 0,
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                    ],
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                    'listModule' => [
+                        'disabled' => true,
+                    ],
+                ],
+            ],
+        ],
+        'curricula' => [
+            'exclude' => true,
+            'label' => 'Curricula',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_spark_curriculum',
+                'foreign_field' => 'study_program',
+                'appearance' => [
+                    'collapseAll' => true,
+                    'expandSingle' => true,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => true,
+                    'showPossibleLocalizationRecords' => true,
+                    'showAllLocalizationLink' => true,
+                    'enabledControls' => [
+                        'info' => false,
+                    ],
+                ]
+            ],
+        ],
+        'duration_years' => [
+            'exclude' => true,
+            'label' => 'Duration (Years)',
+            'config' => [
+                'type' => 'input',
+                'size' => 4,
+                'eval' => 'int',
+                'default' => 0
+            ]
+        ],
+        'duration_semesters' => [
+            'exclude' => true,
+            'label' => 'Duration (Semesters)',
+            'config' => [
+                'type' => 'input',
+                'size' => 4,
+                'eval' => 'int',
+                'default' => 0
+            ]
+        ],
+        'ects_credits' => [
+            'exclude' => true,
+            'label' => 'ECTS Credits',
+            'config' => [
+                'type' => 'input',
+                'size' => 4,
+                'eval' => 'int',
+                'default' => 0
+            ]
+        ],
+        'qualification_title' => [
+            'exclude' => true,
+            'label' => 'Qualification Title',
+            'config' => [
+                'type' => 'input',
+                'size' => 40,
+                'eval' => 'trim'
+            ]
         ],
         'description' => [
             'exclude' => true,

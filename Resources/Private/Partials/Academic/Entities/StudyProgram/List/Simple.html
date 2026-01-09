@@ -1,0 +1,20 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<ul class="list-group list-group-flush">
+    <f:for each="{items}" as="item">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                <f:link.action action="show" arguments="{studyProgram: item}" pageUid="{detailPid}"
+                    class="text-decoration-none fw-bold">
+                    {item.title}
+                </f:link.action>
+                <div class="small text-muted">
+                    {item.qualificationTitle} &bull; {item.durationYears} Years
+                </div>
+            </div>
+            <span class="badge bg-secondary rounded-pill">{item.ectsCredits} ECTS</span>
+        </li>
+    </f:for>
+</ul>
+
+</html>

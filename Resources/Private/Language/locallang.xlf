@@ -84,6 +84,27 @@
 			<trans-unit id="person.consultation_hours">
 				<source>Consultation Hours</source>
 			</trans-unit>
+			<trans-unit id="person.path">
+				<source>URL Path</source>
+			</trans-unit>
+			<trans-unit id="person.chairs">
+				<source>Chairs</source>
+			</trans-unit>
+			<trans-unit id="person.courses">
+				<source>Courses</source>
+			</trans-unit>
+			<trans-unit id="person.study_programs">
+				<source>Study Programs</source>
+			</trans-unit>
+			<trans-unit id="person.projects">
+				<source>Projects</source>
+			</trans-unit>
+			<trans-unit id="person.publications">
+				<source>Publications</source>
+			</trans-unit>
+			<trans-unit id="person.publications.add_new">
+				<source>Add Publication</source>
+			</trans-unit>
 
 			<!-- Person Tabs -->
 			<trans-unit id="person.tab.general">

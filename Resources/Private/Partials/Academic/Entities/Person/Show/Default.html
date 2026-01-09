@@ -156,6 +156,16 @@
             </li>
         </f:if>
 
+        <!-- Publications Tab -->
+        <f:if condition="{item.publications -> f:count()} > 0">
+            <li class="nav-item">
+                <button class="nav-link" id="publications-tab" data-bs-toggle="tab" data-bs-target="#publications"
+                    type="button">
+                    Publications
+                </button>
+            </li>
+        </f:if>
+
         <!-- Education Tab -->
         <f:if condition="{item.education -> f:count()} > 0">
             <li class="nav-item">
@@ -231,6 +241,75 @@
             <div class="tab-pane fade {f:if(condition: '!{item.biography}', then: 'show active')}" id="research"
                 role="tabpanel">
                 <p class="lead">{item.researchInterests}</p>
+            </div>
+        </f:if>
+
+        <!-- Publications Tab Content -->
+        <f:if condition="{item.publications -> f:count()} > 0">
+            <div class="tab-pane fade" id="publications" role="tabpanel">
+                <div class="list-group list-group-flush">
+                    <f:for each="{item.sortedPublications}" as="pub">
+                        <div class="list-group-item px-0">
+                            <!-- Featured Badge -->
+                            <f:if condition="{pub.isFeatured}">
+                                <div class="mb-1">
+                                    <span class="badge bg-warning text-dark">
+                                        <i class="bi bi-star-fill me-1"></i> Selected
+                                    </span>
+                                </div>
+                            </f:if>
+
+                            <!-- Title & Link -->
+                            <h5 class="mb-1">
+                                <f:if condition="{pub.accessUrl}">
+                                    <f:then>
+                                        <a href="{pub.accessUrl}" target="_blank"
+                                            class="text-decoration-none text-dark">
+                                            {pub.title}
+                                            <i class="bi bi-box-arrow-up-right small ms-1 text-primary"></i>
+                                        </a>
+                                    </f:then>
+                                    <f:else>
+                                        {pub.title}
+                                    </f:else>
+                                </f:if>
+                            </h5>
+
+                            <!-- Main Citation Info (Authors + Year + Journal) -->
+                            <p class="mb-1 text-muted">
+                                <f:if condition="{pub.authorList}">
+                                    <span>{pub.authorList}</span>
+                                </f:if>
+                                <span
+                                    class="{f:if(condition: '{pub.authorList}', then: 'ms-1')}">({pub.publicationYear}).</span>
+
+                                <f:if condition="{pub.journalTitle}">
+                                    <span class="fst-italic ms-1">{pub.journalTitle}</span>
+                                </f:if>
+
+                                <f:if condition="{pub.volume} || {pub.issue} || {pub.pages}">
+                                    <span class="ms-1">
+                                        <f:if condition="{pub.volume}">, {pub.volume}</f:if>
+                                        <f:if condition="{pub.issue}">({pub.issue})</f:if>
+                                        <f:if condition="{pub.pages}">, {pub.pages}</f:if>
+                                    </span>
+                                </f:if>
+                            </p>
+
+                            <!-- Identifiers & Type -->
+                            <div class="d-flex gap-2 align-items-center mt-2 small">
+                                <span class="badge bg-light text-dark border text-uppercase"
+                                    style="font-size: 0.7rem;">{pub.publicationType}</span>
+                                <f:if condition="{pub.doi}">
+                                    <a href="https://doi.org/{pub.doi}" target="_blank"
+                                        class="text-muted text-decoration-none">
+                                        <i class="bi bi-link-45deg me-1"></i>DOI: {pub.doi}
+                                    </a>
+                                </f:if>
+                            </div>
+                        </div>
+                    </f:for>
+                </div>
             </div>
         </f:if>
 

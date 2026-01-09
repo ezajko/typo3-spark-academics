@@ -22,18 +22,45 @@ routeEnhancers:
     defaults:
       currentPage: 1
     aspects:
-      department: { type: PersistedAliasMapper, tableName: tx_spark_department, routeFieldName: title }
-      lab: { type: PersistedAliasMapper, tableName: tx_spark_research_lab, routeFieldName: title }
-      group: { type: PersistedAliasMapper, tableName: tx_spark_research_group, routeFieldName: title }
-      chair: { type: PersistedAliasMapper, tableName: tx_spark_chair, routeFieldName: title }
-      course: { type: PersistedAliasMapper, tableName: tx_spark_course, routeFieldName: title }
-      program: { type: PersistedAliasMapper, tableName: tx_spark_study_program, routeFieldName: title }
-      project: { type: PersistedAliasMapper, tableName: tx_spark_project, routeFieldName: title }
+      department:
+        type: PersistedAliasMapper
+        tableName: tx_spark_department
+        routeFieldName: title
+        languageAware: true
+      lab:
+        type: PersistedAliasMapper
+        tableName: tx_spark_research_lab
+        routeFieldName: title
+        languageAware: true
+      group:
+        type: PersistedAliasMapper
+        tableName: tx_spark_research_group
+        routeFieldName: title
+        languageAware: true
+      chair:
+        type: PersistedAliasMapper
+        tableName: tx_spark_chair
+        routeFieldName: title
+        languageAware: true
+      course:
+        type: PersistedAliasMapper
+        tableName: tx_spark_course
+        routeFieldName: title
+        languageAware: true
+      program:
+        type: PersistedAliasMapper
+        tableName: tx_spark_study_program
+        routeFieldName: title
+        languageAware: true
+      project:
+        type: PersistedAliasMapper
+        tableName: tx_spark_project
+        routeFieldName: title
+        languageAware: true
       person:
-        type: PersistedPatternMapper
+        type: PersistedAliasMapper
         tableName: tx_spark_person
-        routeFieldPattern: '^(?P<first_name>.+)\.(?P<last_name>.+)$'
-        routeFieldResult: '{first_name}.{last_name}'
+        routeFieldName: path
       currentPage:
         type: StaticRangeMapper
         start: '1'

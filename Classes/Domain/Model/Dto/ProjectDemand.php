@@ -6,7 +6,7 @@ namespace EtfUnsa\SparkAcademics\Domain\Model\Dto;
 
 class ProjectDemand extends Demand
 {
-    protected ?string $search = null;
+
     protected ?int $projectStatus = null;
     protected ?int $projectType = null;
     protected ?int $fundingProgram = null;
@@ -18,15 +18,7 @@ class ProjectDemand extends Demand
     protected ?\DateTime $dateFrom = null;
     protected ?\DateTime $dateTo = null;
 
-    public function getSearch(): ?string
-    {
-        return $this->search;
-    }
 
-    public function setSearch(?string $search): void
-    {
-        $this->search = $search;
-    }
 
     public function getProjectStatus(): ?int
     {

@@ -1,0 +1,63 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<div class="mb-4">
+    <f:render partial="Academic/Filter/StudyProgram" arguments="{_all}" />
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <f:for each="{items}" as="item">
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge bg-primary rounded-pill">{item.qualificationTitle}</span>
+                        <small class="text-muted">{item.ectsCredits} ECTS</small>
+                    </div>
+
+                    <h5 class="card-title">
+                        <f:link.action action="show" arguments="{studyProgram: item}" pageUid="{detailPid}"
+                            class="text-decoration-none text-dark stretched-link">
+                            {item.title}
+                        </f:link.action>
+                    </h5>
+
+                    <p class="card-text text-muted small">
+                        <f:if condition="{item.departments}">
+                            <i class="bi bi-building me-1"></i>
+                            <f:for each="{item.departments}" as="dept" iteration="i">
+                                {dept.title}{f:if(condition: i.isLast, else: ', ')}
+                            </f:for>
+                            <br>
+                        </f:if>
+                        <i class="bi bi-clock me-1"></i> {item.durationYears} Years ({item.durationSemesters} Semesters)
+                    </p>
+
+                    <div class="mt-3">
+                        <f:if condition="{item.studyTypes}">
+                            <f:for each="{item.studyTypes}" as="type">
+                                <span class="badge bg-light text-dark border me-1">{type.title}</span>
+                            </f:for>
+                        </f:if>
+                        <f:if condition="{item.modesOfStudy}">
+                            <f:for each="{item.modesOfStudy}" as="mode">
+                                <span class="badge bg-light text-dark border me-1">{mode.title}</span>
+                            </f:for>
+                        </f:if>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-top-0">
+                    <small class="text-muted">
+                        <f:if condition="{item.languages}">
+                            Language:
+                            <f:for each="{item.languages}" as="lang" iteration="i">
+                                {lang.title}{f:if(condition: i.isLast, else: ', ')}
+                            </f:for>
+                        </f:if>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </f:for>
+</div>
+
+</html>

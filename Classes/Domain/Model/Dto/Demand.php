@@ -8,6 +8,7 @@ class Demand
 {
     protected array $filters = [];
     protected string $logicalOperator = 'AND'; // OR | AND
+    protected string $search = '';
 
     public function addFilter(string $propertyName, $value, string $operator = 'equals'): self
     {
@@ -37,6 +38,17 @@ class Demand
 
     public function hasFilters(): bool
     {
-        return !empty($this->filters);
+        return !empty($this->filters) || !empty($this->search);
+    }
+
+    public function setSearch(string $search): self
+    {
+        $this->search = $search;
+        return $this;
+    }
+
+    public function getSearch(): string
+    {
+        return $this->search;
     }
 }

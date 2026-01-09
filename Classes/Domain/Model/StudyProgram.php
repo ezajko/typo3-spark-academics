@@ -17,6 +17,38 @@ class StudyProgram extends AbstractEntity
     protected int $landingPage = 0;
 
     /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Department>
+     */
+    protected ?ObjectStorage $departments = null;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Chair>
+     */
+    protected ?ObjectStorage $chairs = null;
+
+    protected ?StudyCycle $studyCycle = null;
+    protected ?ScientificField $scientificField = null;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\StudyType>
+     */
+    protected ?ObjectStorage $studyTypes = null;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ModeOfStudy>
+     */
+    protected ?ObjectStorage $modesOfStudy = null;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Language>
+     */
+    protected ?ObjectStorage $languages = null;
+    protected int $durationSemesters = 0;
+    protected int $durationYears = 0;
+    protected int $ectsCredits = 0;
+    protected string $qualificationTitle = '';
+
+    /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser>
      */
     protected ?ObjectStorage $beUsers = null;
@@ -26,10 +58,21 @@ class StudyProgram extends AbstractEntity
      */
     protected ?ObjectStorage $persons = null;
 
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Curriculum>
+     */
+    protected ?ObjectStorage $curricula = null;
+
     public function __construct()
     {
         $this->beUsers = new ObjectStorage();
         $this->persons = new ObjectStorage();
+        $this->departments = new ObjectStorage();
+        $this->chairs = new ObjectStorage();
+        $this->studyTypes = new ObjectStorage();
+        $this->modesOfStudy = new ObjectStorage();
+        $this->languages = new ObjectStorage();
+        $this->curricula = new ObjectStorage();
     }
 
     public function getTitle(): string
@@ -111,5 +154,161 @@ class StudyProgram extends AbstractEntity
     public function setLandingPage(int $landingPage): void
     {
         $this->landingPage = $landingPage;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Department>
+     */
+    public function getDepartments(): ?ObjectStorage
+    {
+        return $this->departments;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Department> $departments
+     */
+    public function setDepartments(ObjectStorage $departments): void
+    {
+        $this->departments = $departments;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Chair>
+     */
+    public function getChairs(): ?ObjectStorage
+    {
+        return $this->chairs;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Chair> $chairs
+     */
+    public function setChairs(ObjectStorage $chairs): void
+    {
+        $this->chairs = $chairs;
+    }
+
+    public function getStudyCycle(): ?StudyCycle
+    {
+        return $this->studyCycle;
+    }
+
+    public function setStudyCycle(?StudyCycle $studyCycle): void
+    {
+        $this->studyCycle = $studyCycle;
+    }
+
+    public function getScientificField(): ?ScientificField
+    {
+        return $this->scientificField;
+    }
+
+    public function setScientificField(?ScientificField $scientificField): void
+    {
+        $this->scientificField = $scientificField;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\StudyType>
+     */
+    public function getStudyTypes(): ?ObjectStorage
+    {
+        return $this->studyTypes;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\StudyType> $studyTypes
+     */
+    public function setStudyTypes(ObjectStorage $studyTypes): void
+    {
+        $this->studyTypes = $studyTypes;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ModeOfStudy>
+     */
+    public function getModesOfStudy(): ?ObjectStorage
+    {
+        return $this->modesOfStudy;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ModeOfStudy> $modesOfStudy
+     */
+    public function setModesOfStudy(ObjectStorage $modesOfStudy): void
+    {
+        $this->modesOfStudy = $modesOfStudy;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Language>
+     */
+    public function getLanguages(): ?ObjectStorage
+    {
+        return $this->languages;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Language> $languages
+     */
+    public function setLanguages(ObjectStorage $languages): void
+    {
+        $this->languages = $languages;
+    }
+
+    public function getDurationSemesters(): int
+    {
+        return $this->durationSemesters;
+    }
+
+    public function setDurationSemesters(int $durationSemesters): void
+    {
+        $this->durationSemesters = $durationSemesters;
+    }
+
+    public function getDurationYears(): int
+    {
+        return $this->durationYears;
+    }
+
+    public function setDurationYears(int $durationYears): void
+    {
+        $this->durationYears = $durationYears;
+    }
+
+    public function getEctsCredits(): int
+    {
+        return $this->ectsCredits;
+    }
+
+    public function setEctsCredits(int $ectsCredits): void
+    {
+        $this->ectsCredits = $ectsCredits;
+    }
+
+    public function getQualificationTitle(): string
+    {
+        return $this->qualificationTitle;
+    }
+
+    public function setQualificationTitle(string $qualificationTitle): void
+    {
+        $this->qualificationTitle = $qualificationTitle;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Curriculum>
+     */
+    public function getCurricula(): ?ObjectStorage
+    {
+        return $this->curricula;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Curriculum> $curricula
+     */
+    public function setCurricula(ObjectStorage $curricula): void
+    {
+        $this->curricula = $curricula;
     }
 }

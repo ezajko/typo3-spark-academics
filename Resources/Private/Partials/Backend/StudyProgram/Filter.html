@@ -1,0 +1,50 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:form action="list" method="post" class="form-horizontal">
+    <div class="row row-cols-auto g-3 align-items-end">
+
+        <!-- Search -->
+        <div class="col">
+            <div class="input-group">
+                <f:form.textfield name="filter[search]" value="{filter.search}" class="form-control"
+                    placeholder="Search programs..." />
+                <button class="btn btn-primary" type="submit">
+                    <core:icon identifier="actions-search" />
+                </button>
+                <f:if condition="{filter}">
+                    <f:link.action action="list" class="btn btn-warning" title="Reset filter">
+                        <core:icon identifier="actions-close" />
+                    </f:link.action>
+                </f:if>
+            </div>
+        </div>
+
+        <!-- Department -->
+        <div class="col">
+            <f:form.select name="filter[department]" options="{availableDepartments}" value="{filter.department}"
+                optionLabelField="title" optionValueField="uid" prependOptionLabel="All Departments"
+                prependOptionValue="0" class="form-select" />
+        </div>
+
+        <!-- Chair -->
+        <div class="col">
+            <f:form.select name="filter[chair]" options="{availableChairs}" value="{filter.chair}"
+                optionLabelField="title" optionValueField="uid" prependOptionLabel="All Chairs" prependOptionValue="0"
+                class="form-select" />
+        </div>
+
+        <!-- Cycle -->
+        <div class="col">
+            <f:form.select name="filter[study_cycle]" options="{availableCycle}" value="{filter.study_cycle}"
+                optionLabelField="title" optionValueField="uid" prependOptionLabel="All Cycles" prependOptionValue="0"
+                class="form-select" />
+        </div>
+
+        <div class="col">
+            <f:form.submit class="btn btn-default" value="Filter" />
+        </div>
+    </div>
+</f:form>
+
+</html>

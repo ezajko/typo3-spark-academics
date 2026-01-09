@@ -1,0 +1,56 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:form action="list" controller="Academic" extensionName="SparkAcademics" pluginName="Display" method="get"
+    class="mb-4">
+    <div class="card bg-light border-0">
+        <div class="card-body">
+            <div class="row g-3">
+                <!-- Search -->
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <f:form.textfield name="filter[search]" value="{filter.search}" class="form-control"
+                            placeholder="Search study programs..." />
+                        <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i> Search</button>
+                    </div>
+                </div>
+
+                <!-- Department -->
+                <f:if condition="{availableDepartments}">
+                    <div class="col-md-3">
+                        <f:form.select name="filter[department]" options="{availableDepartments}" optionValueField="uid"
+                            optionLabelField="title" prependOptionLabel="All Departments" prependOptionValue=""
+                            value="{filter.department}" class="form-select" />
+                    </div>
+                </f:if>
+
+                <!-- Study Type -->
+                <f:if condition="{availableStudyTypes}">
+                    <div class="col-md-3">
+                        <f:form.select name="filter[study_type]" options="{availableStudyTypes}" optionValueField="uid"
+                            optionLabelField="title" prependOptionLabel="All Study Types" prependOptionValue=""
+                            value="{filter.study_type}" class="form-select" />
+                    </div>
+                </f:if>
+
+                <!-- Mode of Study -->
+                <f:if condition="{availableModes}">
+                    <div class="col-md-3">
+                        <f:form.select name="filter[mode_of_study]" options="{availableModes}" optionValueField="uid"
+                            optionLabelField="title" prependOptionLabel="All Modes" prependOptionValue=""
+                            value="{filter.mode_of_study}" class="form-select" />
+                    </div>
+                </f:if>
+
+                <!-- Language -->
+                <f:if condition="{availableLanguages}">
+                    <div class="col-md-3">
+                        <f:form.select name="filter[language]" options="{availableLanguages}" optionValueField="uid"
+                            optionLabelField="title" prependOptionLabel="All Languages" prependOptionValue=""
+                            value="{filter.language}" class="form-select" />
+                    </div>
+                </f:if>
+            </div>
+        </div>
+    </div>
+</f:form>
+
+</html>

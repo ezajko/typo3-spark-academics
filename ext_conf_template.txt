@@ -1,0 +1,8 @@
+# cat=orcid; type=string; label=ORCID Client ID: Enter your ORCID Public API Client ID here
+orcidClientId = 
+
+# cat=orcid; type=string; label=ORCID Client Secret: Enter your ORCID Public API Client Secret here
+orcidClientSecret = 
+
+# cat=orcid; type=string; label=ORCID API Base URL: (Default: https://pub.orcid.org/v3.0)
+orcidApiBaseUrl = https://pub.orcid.org/v3.0

@@ -6,4 +6,5 @@ namespace EtfUnsa\SparkAcademics\Domain\Repository;
 
 class StudyProgramRepository extends AbstractRepository
 {
+    protected array $searchFields = ['title', 'acronym'];
 }

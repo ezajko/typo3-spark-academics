@@ -50,6 +50,8 @@ return [
                     consultation_hours,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.profiles,
                     profile_google_scholar, profile_research_gate, profile_github, profile_orcid, profile_linkedin, scopus_id, researcher_id,
+                --div--;Publications,
+                    publications,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.media,
                     media_image,
                 --div--;Administration,
@@ -143,7 +145,7 @@ return [
         // =====================================================================
         'first_name' => [
             'exclude' => true,
-            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.first_name',
             'config' => [
                 'type' => 'input',
@@ -154,7 +156,7 @@ return [
         ],
         'last_name' => [
             'exclude' => true,
-            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.last_name',
             'config' => [
                 'type' => 'input',
@@ -165,8 +167,7 @@ return [
         ],
         'path' => [
             'exclude' => true,
-            'l10n_mode' => 'exclude',
-            'label' => 'Path',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.path',
             'config' => [
                 'type' => 'input',
                 'eval' => 'trim',
@@ -258,6 +259,9 @@ return [
                 'type' => 'file',
                 'allowed' => 'common-image-types',
                 'maxitems' => 1,
+                'appearance' => [
+                    'fileUploadAllowed' => false,
+                ],
             ],
         ],
         'biography_file_pdf' => [
@@ -267,6 +271,9 @@ return [
                 'type' => 'file',
                 'allowed' => 'pdf',
                 'maxitems' => 1,
+                'appearance' => [
+                    'fileUploadAllowed' => false,
+                ],
             ],
         ],
 
@@ -523,7 +530,7 @@ return [
         ],
         'chairs' => [
             'exclude' => true,
-            'label' => 'Chairs (Katedre)',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.chairs',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
@@ -537,7 +544,7 @@ return [
         ],
         'courses' => [
             'exclude' => true,
-            'label' => 'Courses',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.courses',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
@@ -551,7 +558,7 @@ return [
         ],
         'study_programs' => [
             'exclude' => true,
-            'label' => 'Study Programs',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.study_programs',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
@@ -565,7 +572,7 @@ return [
         ],
         'projects' => [
             'exclude' => true,
-            'label' => 'Projects',
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.projects',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
@@ -575,6 +582,27 @@ return [
                 'size' => 10,
                 'maxitems' => 99,
                 'readOnly' => 1,
+            ],
+        ],
+        'publications' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.publications',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_spark_publication',
+                'foreign_field' => 'authors', // Wait, authors is M:N, inline needs MM table adjustment or different config
+                'MM' => 'tx_spark_person_publication_mm',
+                'appearance' => [
+                    'collapseAll' => true,
+                    'expandSingle' => true,
+                    'useSortable' => false,
+                    'newRecordLinkTitle' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.publications.add_new',
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => 1,
+                    'showAllLocalizationLink' => 1,
+                    'showPossibleLocalizationRecords' => 1,
+                    'showRemovedLocalizationRecords' => 1,
+                ],
             ],
         ],
     ],

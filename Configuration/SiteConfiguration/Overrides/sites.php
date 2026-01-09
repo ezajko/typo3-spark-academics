@@ -25,6 +25,7 @@ defined('TYPO3') || die();
         'academic_pid_course_storage',
         'academic_pid_project_storage',
         'academic_pid_person_storage',
+        'academic_pid_program_storage',
     ];
 
     foreach ($academicPidFields as $field) {
@@ -88,5 +89,38 @@ defined('TYPO3') || die();
 
     // Add to existing PIDS tab using palette
     $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] .= ', --div--;Spark Permissions, --palette--;;sparkPermissions';
+
+    // User Home Configuration
+    $userHomeFields = [
+        'spark_home_storage_uid' => [
+            'label' => 'User Home: Storage UID (sys_file_storage)',
+            'description' => 'UID of the File Storage where user folders will be created (Default: 1 used for fileadmin)',
+            'config' => [
+                'type' => 'number',
+                'default' => 1,
+            ],
+        ],
+        'spark_home_path' => [
+            'label' => 'User Home: Base Path',
+            'description' => 'Path relative to the storage root (e.g. user_homes/). Must end with /',
+            'config' => [
+                'type' => 'input',
+                'eval' => 'trim',
+                'default' => 'user_homes/',
+            ]
+        ]
+    ];
+
+    $userHomePaletteItems = [];
+    foreach ($userHomeFields as $field => $config) {
+        $GLOBALS['SiteConfiguration']['site']['columns'][$field] = $config;
+        $userHomePaletteItems[] = $field;
+    }
+
+    $GLOBALS['SiteConfiguration']['site']['palettes']['sparkUserHomes'] = [
+        'showitem' => implode(', ', $userHomePaletteItems),
+    ];
+
+    $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] .= ', --div--;User Homes, --palette--;;sparkUserHomes';
 
 })();

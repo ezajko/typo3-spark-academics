@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<!--
+    Bosnian translations for database table labels
+    @author Ernedin Zajko <ezajko@root.ba>
+-->
+<xliff version="1.0">
+    <file source-language="en" target-language="bs" datatype="plaintext" original="messages" date="2026-01-09T10:00:00Z" product-name="spark_academics">
+        <header/>
+        <body>
+            <!-- Table Labels -->
+            <trans-unit id="tx_spark_person">
+                <source>Person</source>
+                <target>Osoba</target>
+            </trans-unit>
+            <trans-unit id="tx_spark_department">
+                <source>Department</source>
+                <target>Odsjek</target>
+            </trans-unit>
+            <trans-unit id="tx_spark_department_primary">
+                <source>Primary Department</source>
+                <target>Primarni odsjek</target>
+            </trans-unit>
+            <trans-unit id="tx_spark_research_lab">
+                <source>Research Lab</source>
+                <target>Istraživački laboratorij</target>
+            </trans-unit>
+            <trans-unit id="tx_spark_research_group">
+                <source>Research Group</source>
+                <target>Istraživačka grupa</target>
+            </trans-unit>
+            <trans-unit id="tx_spark_scientific_field">
+                <source>Scientific Field</source>
+                <target>Naučna oblast</target>
+            </trans-unit>
+            <trans-unit id="tx_spark_academic_title">
+                <source>Academic Title</source>
+                <target>Akademska titula</target>
+            </trans-unit>
+            <trans-unit id="tx_spark_academic_rank">
+                <source>Academic Rank</source>
+                <target>Akademsko zvanje</target>
+            </trans-unit>
+
+            <!-- Site Configuration Labels -->
+            <trans-unit id="site.configuration.academicPids">
+                <source>Academic Detail Pages</source>
+                <target>Detaljne stranice akademskih entiteta</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_person_detail">
+                <source>Person Detail Page</source>
+                <target>Stranica detalja osobe</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_dept_detail">
+                <source>Department Detail Page</source>
+                <target>Stranica detalja odsjeka</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_lab_detail">
+                <source>Research Lab Detail Page</source>
+                <target>Stranica detalja laboratorija</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_group_detail">
+                <source>Research Group Detail Page</source>
+                <target>Stranica detalja istraživačke grupe</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_chair_detail">
+                <source>Chair Detail Page</source>
+                <target>Stranica detalja katedre</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_course_detail">
+                <source>Course Detail Page</source>
+                <target>Stranica detalja predmeta</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_program_detail">
+                <source>Study Program Detail Page</source>
+                <target>Stranica detalja studijskog programa</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_project_detail">
+                <source>Project Detail Page</source>
+                <target>Stranica detalja projekta</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_course_storage">
+                <source>Course Storage Page</source>
+                <target>Stranica za pohranu predmeta</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_project_storage">
+                <source>Project Storage Page</source>
+                <target>Stranica za pohranu projekata</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.academic_pid_person_storage">
+                <source>Person Storage Page</source>
+                <target>Stranica za pohranu osoba</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -8,6 +8,7 @@ use TYPO3\CMS\Beuser\Domain\Model\BackendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use EtfUnsa\SparkAcademics\Domain\Model\Publication; // Added import
 
 /**
  * Person domain model
@@ -189,6 +190,12 @@ class Person extends AbstractEntity
      */
     protected ?ObjectStorage $projects = null;
 
+    /**
+     * Publications (M:N)
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Publication>
+     */
+    protected ?ObjectStorage $publications = null;
+
     // =========================================================================
     // Constructor
     // =========================================================================
@@ -205,6 +212,7 @@ class Person extends AbstractEntity
         $this->courses = new ObjectStorage();
         $this->studyPrograms = new ObjectStorage();
         $this->projects = new ObjectStorage();
+        $this->publications = new ObjectStorage();
     }
 
     // =========================================================================
@@ -603,5 +611,55 @@ class Person extends AbstractEntity
     public function setProjects(ObjectStorage $projects): void
     {
         $this->projects = $projects;
+    }
+
+    public function getPublications(): ?ObjectStorage
+    {
+        return $this->publications;
+    }
+
+    public function setPublications(ObjectStorage $publications): void
+    {
+        $this->publications = $publications;
+    }
+
+    public function addPublication(Publication $publication): void
+    {
+        $this->publications->attach($publication);
+    }
+
+    public function removePublication(Publication $publication): void
+    {
+        $this->publications->detach($publication);
+    }
+
+    /**
+     * Get publications sorted by Featured first, then Year descending
+     * @return array<Publication>
+     */
+    public function getSortedPublications(): array
+    {
+        if ($this->publications === null) {
+            return [];
+        }
+
+        $publicationsArray = $this->publications->toArray();
+        
+        usort($publicationsArray, function (Publication $a, Publication $b) {
+            // 1. Featured first
+            if ($a->isFeatured() !== $b->isFeatured()) {
+                return $b->isFeatured() <=> $a->isFeatured(); // True (1) before False (0)
+            }
+            
+            // 2. Year descending (newest first)
+            if ($a->getPublicationYear() !== $b->getPublicationYear()) {
+                return $b->getPublicationYear() <=> $a->getPublicationYear();
+            }
+
+            // 3. Fallback: Title
+            return strcasecmp($a->getTitle(), $b->getTitle());
+        });
+
+        return $publicationsArray;
     }
 }

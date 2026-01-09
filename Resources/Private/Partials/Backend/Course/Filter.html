@@ -16,6 +16,20 @@
             </div>
         </div>
 
+        <!-- Department -->
+        <div class="col">
+            <f:form.select name="filter[department]" options="{availableDepartments}" value="{filter.department}"
+                optionLabelField="title" optionValueField="uid" prependOptionLabel="All Departments"
+                prependOptionValue="0" class="form-select" />
+        </div>
+
+        <!-- Chair -->
+        <div class="col">
+            <f:form.select name="filter[chair]" options="{availableChairs}" value="{filter.chair}"
+                optionLabelField="title" optionValueField="uid" prependOptionLabel="All Chairs" prependOptionValue="0"
+                class="form-select" />
+        </div>
+
         <!-- Cycle -->
         <div class="col">
             <f:form.select name="filter[study_cycle]" options="{availableCycle}" value="{filter.study_cycle}"

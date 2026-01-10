@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<T3DataStructure>
+    <ROOT>
+        <TCEforms>
+            <sheetTitle>Study Program Settings</sheetTitle>
+            <displayCond>FIELD:settings.entityType:=:StudyProgram</displayCond>
+        </TCEforms>
+        <type>array</type>
+        <el>
+             <settings.select.studyprogram>
+                <label>Select Study Programs</label>
+                <config>
+                    <type>group</type>
+                    <internal_type>db</internal_type>
+                    <allowed>tx_spark_study_program</allowed>
+                    <size>5</size>
+                    <maxitems>99</maxitems>
+                    <minitems>0</minitems>
+                </config>
+            </settings.select.studyprogram>
+        </el>
+    </ROOT>
+</T3DataStructure>

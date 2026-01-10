@@ -3,12 +3,10 @@
         <sDEF>
             <ROOT>
                 <TCEforms>
-                    <sheetTitle>Settings</sheetTitle>
+                    <sheetTitle>General Settings</sheetTitle>
                 </TCEforms>
                 <type>array</type>
                 <el>
-
-
                     <!-- Entity Type (Triggers Reload) -->
                     <settings.entityType>
                         <label>Entity Type</label>
@@ -53,352 +51,6 @@
                         </config>
                     </settings.entityType>
 
-                    <!-- Pagination Settings -->
-                    <settings.view.pagination.limit>
-                        <label>LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:flexform.pagination.limit</label>
-                        <config>
-                            <type>number</type>
-                            <default>0</default>
-                            <range>
-                                <lower>0</lower>
-                            </range>
-                        </config>
-                    </settings.view.pagination.limit>
-
-                    <settings.view.pagination.itemsPerPage>
-                        <label>LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:flexform.pagination.itemsPerPage</label>
-                        <config>
-                            <type>number</type>
-                            <default>10</default>
-                            <range>
-                                <lower>0</lower>
-                            </range>
-                        </config>
-                    </settings.view.pagination.itemsPerPage>
-
-                    <!-- Person Specific Filters (displayCond) -->
-                    <settings.filter.primary_department>
-                        <label>Primary Department</label>
-                        <displayCond>FIELD:settings.entityType:=:Person</displayCond>
-                        <config>
-                            <type>select</type>
-                            <renderType>selectSingle</renderType>
-                            <foreign_table>tx_spark_department</foreign_table>
-                            <items>
-                                <numIndex index="0">
-                                    <label>-- All Departments --</label>
-                                    <value>0</value>
-                                </numIndex>
-                            </items>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.filter.primary_department>
-
-                    <settings.filter.department>
-                        <label>Department (Any)</label>
-                        <displayCond>
-                            <OR>
-                                <numIndex index="0">FIELD:settings.entityType:=:Person</numIndex>
-                                <numIndex index="1">FIELD:settings.entityType:=:Project</numIndex>
-                                <numIndex index="2">FIELD:settings.entityType:=:Course</numIndex>
-                            </OR>
-                        </displayCond>
-                        <config>
-                            <type>select</type>
-                            <renderType>selectSingle</renderType>
-                            <foreign_table>tx_spark_department</foreign_table>
-                            <items>
-                                <numIndex index="0">
-                                    <label>-- All Departments --</label>
-                                    <value>0</value>
-                                </numIndex>
-                            </items>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.filter.department>
-
-                    <settings.filter.academic_rank>
-                        <label>Filter by Academic Rank</label>
-                        <displayCond>FIELD:settings.entityType:=:Person</displayCond>
-                        <config>
-                            <type>select</type>
-                            <renderType>selectSingle</renderType>
-                            <items>
-                                <numIndex index="0">
-                                    <numIndex index="0">All Ranks</numIndex>
-                                    <numIndex index="1">0</numIndex>
-                                </numIndex>
-                            </items>
-                            <foreign_table>tx_spark_academic_rank</foreign_table>
-                        </config>
-                    </settings.filter.academic_rank>
-
-                    <settings.filter.research_group>
-                        <label>Filter by Research Group</label>
-                        <displayCond>
-                            <OR>
-                                <numIndex index="0">FIELD:settings.entityType:=:Person</numIndex>
-                                <numIndex index="1">FIELD:settings.entityType:=:Project</numIndex>
-                            </OR>
-                        </displayCond>
-                        <config>
-                            <type>select</type>
-                            <renderType>selectSingle</renderType>
-                            <foreign_table>tx_spark_research_group</foreign_table>
-                            <items>
-                                <numIndex index="0">
-                                    <label>-- All Groups --</label>
-                                    <value>0</value>
-                                </numIndex>
-                            </items>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.filter.research_group>
-
-                    <settings.filter.research_lab>
-                        <label>Filter by Research Lab</label>
-                        <displayCond>
-                            <OR>
-                                <numIndex index="0">FIELD:settings.entityType:=:Person</numIndex>
-                                <numIndex index="1">FIELD:settings.entityType:=:Project</numIndex>
-                            </OR>
-                        </displayCond>
-                        <config>
-                            <type>select</type>
-                            <renderType>selectSingle</renderType>
-                            <foreign_table>tx_spark_research_lab</foreign_table>
-                            <items>
-                                <numIndex index="0">
-                                    <label>-- All Labs --</label>
-                                    <value>0</value>
-                                </numIndex>
-                            </items>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.filter.research_lab>
-
-                    <settings.filter.chair>
-                        <label>Filter by Chair</label>
-                        <displayCond>
-                            <OR>
-                                <numIndex index="0">FIELD:settings.entityType:=:Person</numIndex>
-                                <numIndex index="1">FIELD:settings.entityType:=:Project</numIndex>
-                                <numIndex index="2">FIELD:settings.entityType:=:Course</numIndex>
-                            </OR>
-                        </displayCond>
-                        <config>
-                            <type>select</type>
-                            <renderType>selectSingle</renderType>
-                            <foreign_table>tx_spark_chair</foreign_table>
-                            <items>
-                                <numIndex index="0">
-                                    <label>-- All Chairs --</label>
-                                    <value>0</value>
-                                </numIndex>
-                            </items>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.filter.chair>
-
-                    <!-- Course Specific Filters -->
-                    <settings.filter.study_cycle>
-                        <label>Filter by Study Cycle</label>
-                        <displayCond>FIELD:settings.entityType:=:Course</displayCond>
-                        <config>
-                            <type>select</type>
-                            <renderType>selectSingle</renderType>
-                            <foreign_table>tx_spark_study_cycle</foreign_table>
-                            <items>
-                                <numIndex index="0">
-                                    <label>-- All Cycles --</label>
-                                    <value>0</value>
-                                </numIndex>
-                            </items>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.filter.study_cycle>
-
-                    <settings.filter.course_category>
-                        <label>Filter by Category</label>
-                        <displayCond>FIELD:settings.entityType:=:Course</displayCond>
-                        <config>
-                            <type>select</type>
-                            <renderType>selectSingle</renderType>
-                            <foreign_table>tx_spark_course_category</foreign_table>
-                            <items>
-                                <numIndex index="0">
-                                    <label>-- All Categories --</label>
-                                    <value>0</value>
-                                </numIndex>
-                            </items>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.filter.course_category>
-
-                    <settings.filter.scientific_field>
-                        <label>Filter by Scientific Field</label>
-                        <displayCond>FIELD:settings.entityType:=:Course</displayCond>
-                        <config>
-                            <type>select</type>
-                            <renderType>selectSingle</renderType>
-                            <foreign_table>tx_spark_scientific_field</foreign_table>
-                            <items>
-                                <numIndex index="0">
-                                    <label>-- All Fields --</label>
-                                    <value>0</value>
-                                </numIndex>
-                            </items>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.filter.scientific_field>
-
-                    <!-- Project Specific Filters -->
-                    <settings.filter.project_status>
-                        <label>Filter by Status</label>
-                        <displayCond>FIELD:settings.entityType:=:Project</displayCond>
-                        <config>
-                            <type>select</type>
-                            <renderType>selectSingle</renderType>
-                            <foreign_table>tx_spark_project_status</foreign_table>
-                            <items>
-                                <numIndex index="0">
-                                    <label>-- All Statuses --</label>
-                                    <value>0</value>
-                                </numIndex>
-                            </items>
-                        </config>
-                    </settings.filter.project_status>
-
-                    <settings.filter.project_type>
-                        <label>Filter by Type</label>
-                        <displayCond>FIELD:settings.entityType:=:Project</displayCond>
-                        <config>
-                            <type>select</type>
-                            <renderType>selectSingle</renderType>
-                            <foreign_table>tx_spark_project_type</foreign_table>
-                            <items>
-                                <numIndex index="0">
-                                    <label>-- All Types --</label>
-                                    <value>0</value>
-                                </numIndex>
-                            </items>
-                        </config>
-                    </settings.filter.project_type>
-
-                    <settings.filter.funding_program>
-                        <label>Filter by Funding Program</label>
-                        <displayCond>FIELD:settings.entityType:=:Project</displayCond>
-                        <config>
-                            <type>select</type>
-                            <renderType>selectSingle</renderType>
-                            <foreign_table>tx_spark_funding_program</foreign_table>
-                            <items>
-                                <numIndex index="0">
-                                    <label>-- All Programs --</label>
-                                    <value>0</value>
-                                </numIndex>
-                            </items>
-                        </config>
-                    </settings.filter.funding_program>
-
-                    <!-- Selection Fields -->
-                    <settings.select.department>
-                        <label>Select Departments</label>
-                        <displayCond>FIELD:settings.entityType:=:Department</displayCond>
-                        <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>tx_spark_department</allowed>
-                            <size>5</size>
-                            <maxitems>99</maxitems>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.select.department>
-                    <settings.select.researchlab>
-                        <label>Select Research Labs</label>
-                        <displayCond>FIELD:settings.entityType:=:ResearchLab</displayCond>
-                        <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>tx_spark_research_lab</allowed>
-                            <size>5</size>
-                            <maxitems>99</maxitems>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.select.researchlab>
-                    <settings.select.researchgroup>
-                        <label>Select Research Groups</label>
-                        <displayCond>FIELD:settings.entityType:=:ResearchGroup</displayCond>
-                        <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>tx_spark_research_group</allowed>
-                            <size>5</size>
-                            <maxitems>99</maxitems>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.select.researchgroup>
-                    <settings.select.chair>
-                        <label>Select Chairs</label>
-                        <displayCond>FIELD:settings.entityType:=:Chair</displayCond>
-                        <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>tx_spark_chair</allowed>
-                            <size>5</size>
-                            <maxitems>99</maxitems>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.select.chair>
-                    <settings.select.course>
-                        <label>Select Courses</label>
-                        <displayCond>FIELD:settings.entityType:=:Course</displayCond>
-                        <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>tx_spark_course</allowed>
-                            <size>5</size>
-                            <maxitems>99</maxitems>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.select.course>
-                    <settings.select.studyprogram>
-                        <label>Select Study Programs</label>
-                        <displayCond>FIELD:settings.entityType:=:StudyProgram</displayCond>
-                        <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>tx_spark_study_program</allowed>
-                            <size>5</size>
-                            <maxitems>99</maxitems>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.select.studyprogram>
-                    <settings.select.project>
-                        <label>Select Projects</label>
-                        <displayCond>FIELD:settings.entityType:=:Project</displayCond>
-                        <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>tx_spark_project</allowed>
-                            <size>5</size>
-                            <maxitems>99</maxitems>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.select.project>
-                    <settings.select.person>
-                        <label>Select Persons</label>
-                        <displayCond>FIELD:settings.entityType:=:Person</displayCond>
-                        <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>tx_spark_person</allowed>
-                            <size>5</size>
-                            <maxitems>99</maxitems>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.select.person>
-
                     <settings.detailPid>
                         <label>Detail Page (overrides global site setting)</label>
                         <config>
@@ -414,5 +66,134 @@
                 </el>
             </ROOT>
         </sDEF>
+
+        <!-- Pagination Sheet -->
+        <s_pagination>
+             <ROOT>
+                <TCEforms>
+                    <sheetTitle>Pagination</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <xi:include href="EXT:spark_academics/Configuration/FlexForms/Partials/Pagination.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(//T3DataStructure/*)" />
+                </el>
+            </ROOT>
+        </s_pagination>
+
+        <!-- Person Sheet -->
+        <s_person>
+             <xi:include href="EXT:spark_academics/Configuration/FlexForms/Entities/Person/List.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(//T3DataStructure/*)" />
+        </s_person>
+
+        <!-- Project Sheet -->
+        <s_project>
+             <xi:include href="EXT:spark_academics/Configuration/FlexForms/Entities/Project/List.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(//T3DataStructure/*)" />
+        </s_project>
+
+        <!-- Course Sheet -->
+        <s_course>
+             <xi:include href="EXT:spark_academics/Configuration/FlexForms/Entities/Course/List.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(//T3DataStructure/*)" />
+        </s_course>
+
+        <!-- Study Program Sheet -->
+        <s_studyprogram>
+             <xi:include href="EXT:spark_academics/Configuration/FlexForms/Entities/StudyProgram/List.xml" xmlns:xi="http://www.w3.org/2001/XInclude" xpointer="xpointer(//T3DataStructure/*)" />
+        </s_studyprogram>
+
+         <!-- Organizational Sheets (Department, Chair, Labs, Groups) - Condensed for now since they are simple Selection -->
+         <!-- For brevity, I will add Department selections inline or create simple sheets later. -->
+         <!-- Re-adding simple selections for Organizational units below to ensure BC -->
+         <s_department>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>Department Settings</sheetTitle>
+                    <displayCond>FIELD:settings.entityType:=:Department</displayCond>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.select.department>
+                        <label>Select Departments</label>
+                        <config>
+                            <type>group</type>
+                            <internal_type>db</internal_type>
+                            <allowed>tx_spark_department</allowed>
+                            <size>5</size>
+                            <maxitems>99</maxitems>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.select.department>
+                </el>
+            </ROOT>
+         </s_department>
+
+         <s_chair>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>Chair Settings</sheetTitle>
+                    <displayCond>FIELD:settings.entityType:=:Chair</displayCond>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.select.chair>
+                        <label>Select Chairs</label>
+                        <config>
+                            <type>group</type>
+                            <internal_type>db</internal_type>
+                            <allowed>tx_spark_chair</allowed>
+                            <size>5</size>
+                            <maxitems>99</maxitems>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.select.chair>
+                </el>
+            </ROOT>
+         </s_chair>
+
+          <s_researchlab>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>Research Lab Settings</sheetTitle>
+                    <displayCond>FIELD:settings.entityType:=:ResearchLab</displayCond>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.select.researchlab>
+                        <label>Select Research Labs</label>
+                        <config>
+                            <type>group</type>
+                            <internal_type>db</internal_type>
+                            <allowed>tx_spark_research_lab</allowed>
+                            <size>5</size>
+                            <maxitems>99</maxitems>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.select.researchlab>
+                </el>
+            </ROOT>
+         </s_researchlab>
+
+         <s_researchgroup>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>Research Group Settings</sheetTitle>
+                    <displayCond>FIELD:settings.entityType:=:ResearchGroup</displayCond>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.select.researchgroup>
+                        <label>Select Research Groups</label>
+                        <config>
+                            <type>group</type>
+                            <internal_type>db</internal_type>
+                            <allowed>tx_spark_research_group</allowed>
+                            <size>5</size>
+                            <maxitems>99</maxitems>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.select.researchgroup>
+                </el>
+            </ROOT>
+         </s_researchgroup>
+
     </sheets>
 </T3DataStructure>

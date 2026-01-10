@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<T3DataStructure>
+    <ROOT>
+        <TCEforms>
+            <sheetTitle>Person Settings</sheetTitle>
+            <displayCond>FIELD:settings.entityType:=:Person</displayCond>
+        </TCEforms>
+        <type>array</type>
+        <el>
+            <settings.filter.primary_department>
+                <label>Primary Department</label>
+                <config>
+                    <type>select</type>
+                    <renderType>selectSingle</renderType>
+                    <foreign_table>tx_spark_department</foreign_table>
+                    <items>
+                        <numIndex index="0">
+                            <label>-- All Departments --</label>
+                            <value>0</value>
+                        </numIndex>
+                    </items>
+                    <minitems>0</minitems>
+                </config>
+            </settings.filter.primary_department>
+
+            <settings.filter.academic_rank>
+                <label>Filter by Academic Rank</label>
+                <config>
+                    <type>select</type>
+                    <renderType>selectSingle</renderType>
+                    <items>
+                        <numIndex index="0">
+                            <numIndex index="0">All Ranks</numIndex>
+                            <numIndex index="1">0</numIndex>
+                        </numIndex>
+                    </items>
+                    <foreign_table>tx_spark_academic_rank</foreign_table>
+                </config>
+            </settings.filter.academic_rank>
+
+            <settings.filter.department>
+                <label>Department (Any)</label>
+                <config>
+                    <type>select</type>
+                    <renderType>selectSingle</renderType>
+                    <foreign_table>tx_spark_department</foreign_table>
+                    <items>
+                        <numIndex index="0">
+                            <label>-- All Departments --</label>
+                            <value>0</value>
+                        </numIndex>
+                    </items>
+                    <minitems>0</minitems>
+                </config>
+            </settings.filter.department>
+
+            <settings.filter.research_group>
+                <label>Filter by Research Group</label>
+                <config>
+                    <type>select</type>
+                    <renderType>selectSingle</renderType>
+                    <foreign_table>tx_spark_research_group</foreign_table>
+                    <items>
+                        <numIndex index="0">
+                            <label>-- All Groups --</label>
+                            <value>0</value>
+                        </numIndex>
+                    </items>
+                    <minitems>0</minitems>
+                </config>
+            </settings.filter.research_group>
+
+            <settings.filter.research_lab>
+                <label>Filter by Research Lab</label>
+                <config>
+                    <type>select</type>
+                    <renderType>selectSingle</renderType>
+                    <foreign_table>tx_spark_research_lab</foreign_table>
+                    <items>
+                        <numIndex index="0">
+                            <label>-- All Labs --</label>
+                            <value>0</value>
+                        </numIndex>
+                    </items>
+                    <minitems>0</minitems>
+                </config>
+            </settings.filter.research_lab>
+
+            <settings.filter.chair>
+                <label>Filter by Chair</label>
+                <config>
+                    <type>select</type>
+                    <renderType>selectSingle</renderType>
+                    <foreign_table>tx_spark_chair</foreign_table>
+                    <items>
+                        <numIndex index="0">
+                            <label>-- All Chairs --</label>
+                            <value>0</value>
+                        </numIndex>
+                    </items>
+                    <minitems>0</minitems>
+                </config>
+            </settings.filter.chair>
+
+            <settings.select.person>
+                <label>Select Persons</label>
+                <config>
+                    <type>group</type>
+                    <internal_type>db</internal_type>
+                    <allowed>tx_spark_person</allowed>
+                    <size>5</size>
+                    <maxitems>99</maxitems>
+                    <minitems>0</minitems>
+                </config>
+            </settings.select.person>
+        </el>
+    </ROOT>
+</T3DataStructure>

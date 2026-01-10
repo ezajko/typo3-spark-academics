@@ -16,26 +16,28 @@
     Author: Ernedin Zajko <ezajko@root.ba>
 -->
 
-<!-- Pagination Limit: Maximum total items to display (0 = unlimited) -->
-<settings.view.pagination.limit>
-    <label>LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:flexform.pagination.limit</label>
-    <config>
-        <type>number</type>
-        <default>0</default>
-        <range>
-            <lower>0</lower>
-        </range>
-    </config>
-</settings.view.pagination.limit>
+<T3DataStructure>
+    <!-- Pagination Limit: Maximum total items to display (0 = unlimited) -->
+    <settings.view.pagination.limit>
+        <label>LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:flexform.pagination.limit</label>
+        <config>
+            <type>number</type>
+            <default>0</default>
+            <range>
+                <lower>0</lower>
+            </range>
+        </config>
+    </settings.view.pagination.limit>
 
-<!-- Items Per Page: Number of items shown per page (0 = show all without pagination) -->
-<settings.view.pagination.itemsPerPage>
-    <label>LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:flexform.pagination.itemsPerPage</label>
-    <config>
-        <type>number</type>
-        <default>10</default>
-        <range>
-            <lower>0</lower>
-        </range>
-    </config>
-</settings.view.pagination.itemsPerPage>
+    <!-- Items Per Page: Number of items shown per page (0 = show all without pagination) -->
+    <settings.view.pagination.itemsPerPage>
+        <label>LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:flexform.pagination.itemsPerPage</label>
+        <config>
+            <type>number</type>
+            <default>10</default>
+            <range>
+                <lower>0</lower>
+            </range>
+        </config>
+    </settings.view.pagination.itemsPerPage>
+</T3DataStructure>

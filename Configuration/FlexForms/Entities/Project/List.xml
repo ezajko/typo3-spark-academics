@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<T3DataStructure>
+    <ROOT>
+        <TCEforms>
+            <sheetTitle>Project Settings</sheetTitle>
+            <displayCond>FIELD:settings.entityType:=:Project</displayCond>
+        </TCEforms>
+        <type>array</type>
+        <el>
+            <settings.filter.project_status>
+                <label>Filter by Status</label>
+                <config>
+                    <type>select</type>
+                    <renderType>selectSingle</renderType>
+                    <foreign_table>tx_spark_project_status</foreign_table>
+                    <items>
+                        <numIndex index="0">
+                            <label>-- All Statuses --</label>
+                            <value>0</value>
+                        </numIndex>
+                    </items>
+                </config>
+            </settings.filter.project_status>
+
+            <settings.filter.project_type>
+                <label>Filter by Type</label>
+                <config>
+                    <type>select</type>
+                    <renderType>selectSingle</renderType>
+                    <foreign_table>tx_spark_project_type</foreign_table>
+                    <items>
+                        <numIndex index="0">
+                            <label>-- All Types --</label>
+                            <value>0</value>
+                        </numIndex>
+                    </items>
+                </config>
+            </settings.filter.project_type>
+
+            <settings.filter.funding_program>
+                <label>Filter by Funding Program</label>
+                <config>
+                    <type>select</type>
+                    <renderType>selectSingle</renderType>
+                    <foreign_table>tx_spark_funding_program</foreign_table>
+                    <items>
+                        <numIndex index="0">
+                            <label>-- All Programs --</label>
+                            <value>0</value>
+                        </numIndex>
+                    </items>
+                </config>
+            </settings.filter.funding_program>
+
+            <!-- Organizational Filters for Projects -->
+             <settings.filter.department>
+                <label>Department (Any)</label>
+                <config>
+                    <type>select</type>
+                    <renderType>selectSingle</renderType>
+                    <foreign_table>tx_spark_department</foreign_table>
+                    <items>
+                        <numIndex index="0">
+                            <label>-- All Departments --</label>
+                            <value>0</value>
+                        </numIndex>
+                    </items>
+                    <minitems>0</minitems>
+                </config>
+            </settings.filter.department>
+
+            <settings.filter.research_group>
+                <label>Filter by Research Group</label>
+                <config>
+                    <type>select</type>
+                    <renderType>selectSingle</renderType>
+                    <foreign_table>tx_spark_research_group</foreign_table>
+                    <items>
+                        <numIndex index="0">
+                            <label>-- All Groups --</label>
+                            <value>0</value>
+                        </numIndex>
+                    </items>
+                    <minitems>0</minitems>
+                </config>
+            </settings.filter.research_group>
+
+            <settings.filter.research_lab>
+                <label>Filter by Research Lab</label>
+                <config>
+                    <type>select</type>
+                    <renderType>selectSingle</renderType>
+                    <foreign_table>tx_spark_research_lab</foreign_table>
+                    <items>
+                        <numIndex index="0">
+                            <label>-- All Labs --</label>
+                            <value>0</value>
+                        </numIndex>
+                    </items>
+                    <minitems>0</minitems>
+                </config>
+            </settings.filter.research_lab>
+
+            <settings.filter.chair>
+                <label>Filter by Chair</label>
+                <config>
+                    <type>select</type>
+                    <renderType>selectSingle</renderType>
+                    <foreign_table>tx_spark_chair</foreign_table>
+                    <items>
+                        <numIndex index="0">
+                            <label>-- All Chairs --</label>
+                            <value>0</value>
+                        </numIndex>
+                    </items>
+                    <minitems>0</minitems>
+                </config>
+            </settings.filter.chair>
+
+            <settings.select.project>
+                <label>Select Projects</label>
+                <config>
+                    <type>group</type>
+                    <internal_type>db</internal_type>
+                    <allowed>tx_spark_project</allowed>
+                    <size>5</size>
+                    <maxitems>99</maxitems>
+                    <minitems>0</minitems>
+                </config>
+            </settings.select.project>
+        </el>
+    </ROOT>
+</T3DataStructure>

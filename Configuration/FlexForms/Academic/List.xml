@@ -7,15 +7,7 @@
                 </TCEforms>
                 <type>array</type>
                 <el>
-                    <!-- View Type Selection -->
-                    <settings.viewType>
-                        <label>View Type</label>
-                        <config>
-                            <type>select</type>
-                            <renderType>selectSingle</renderType>
-                            <items></items>
-                        </config>
-                    </settings.viewType>
+
 
                     <!-- Entity Type (Triggers Reload) -->
                     <settings.entityType>

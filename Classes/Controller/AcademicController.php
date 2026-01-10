@@ -164,15 +164,15 @@ class AcademicController extends ActionController
             // Logic: Use Frontend if present, else use Backend setting
             
             // Status
-            $status = !empty($filter['status']) ? (int)$filter['status'] : (int)($settingsFilter['project_status'] ?? 0);
+            $status = !empty($filter['status']) ? (int)$filter['status'] : (int)($settingsFilter['projectStatus'] ?? 0);
             if ($status > 0) $demand->setProjectStatus($status);
 
             // Type
-            $type = !empty($filter['type']) ? (int)$filter['type'] : (int)($settingsFilter['project_type'] ?? 0);
+            $type = !empty($filter['type']) ? (int)$filter['type'] : (int)($settingsFilter['projectType'] ?? 0);
             if ($type > 0) $demand->setProjectType($type);
 
             // Program
-            $program = !empty($filter['program']) ? (int)$filter['program'] : (int)($settingsFilter['funding_program'] ?? 0);
+            $program = !empty($filter['program']) ? (int)$filter['program'] : (int)($settingsFilter['fundingProgram'] ?? 0);
             if ($program > 0) $demand->setFundingProgram($program);
 
             // Field
@@ -183,10 +183,10 @@ class AcademicController extends ActionController
             $dept = (int)($settingsFilter['department'] ?? 0);
             if ($dept > 0) $demand->setDepartment($dept);
 
-            $lab = (int)($settingsFilter['research_lab'] ?? 0);
+            $lab = (int)($settingsFilter['researchLab'] ?? 0);
             if ($lab > 0) $demand->setResearchLab($lab);
 
-            $group = (int)($settingsFilter['research_group'] ?? 0);
+            $group = (int)($settingsFilter['researchGroup'] ?? 0);
             if ($group > 0) $demand->setResearchGroup($group);
 
             $chair = (int)($settingsFilter['chair'] ?? 0);

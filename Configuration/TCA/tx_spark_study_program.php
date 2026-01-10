@@ -94,7 +94,8 @@ return [
                 'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
-                ]
+                ],
+                'l10n_mode' => 'exclude',
             ],
         ],
         'endtime' => [
@@ -110,11 +111,13 @@ return [
                 ],
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
-                ]
+                ],
+                'l10n_mode' => 'exclude',
             ],
         ],
         'landing_page' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Landing Page',
             'config' => [
                 'type' => 'group',
@@ -136,6 +139,7 @@ return [
         ],
         'acronym' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Acronym',
             'config' => [
                 'type' => 'input',
@@ -145,6 +149,7 @@ return [
         ],
         'uuid' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'UUID',
             'config' => [
                 'type' => 'uuid',
@@ -152,6 +157,7 @@ return [
         ],
         'departments' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Departments',
             'config' => [
                 'type' => 'select',
@@ -165,6 +171,7 @@ return [
         ],
         'chairs' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Chairs',
             'config' => [
                 'type' => 'select',
@@ -178,6 +185,7 @@ return [
         ],
         'study_cycle' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Study Cycle',
             'config' => [
                 'type' => 'select',
@@ -189,6 +197,7 @@ return [
         ],
         'scientific_field' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Scientific Field (Primary)',
             'config' => [
                 'type' => 'select',
@@ -209,6 +218,7 @@ return [
         ],
         'study_types' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Study Types',
             'config' => [
                 'type' => 'select',
@@ -222,6 +232,7 @@ return [
         ],
         'modes_of_study' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Modes of Study',
             'config' => [
                 'type' => 'select',
@@ -235,6 +246,7 @@ return [
         ],
         'languages' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Languages',
             'config' => [
                 'type' => 'select',
@@ -259,6 +271,7 @@ return [
         ],
         'curricula' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Curricula',
             'config' => [
                 'type' => 'inline',
@@ -279,6 +292,7 @@ return [
         ],
         'duration_years' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Duration (Years)',
             'config' => [
                 'type' => 'input',
@@ -289,6 +303,7 @@ return [
         ],
         'duration_semesters' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Duration (Semesters)',
             'config' => [
                 'type' => 'input',
@@ -299,6 +314,7 @@ return [
         ],
         'ects_credits' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'ECTS Credits',
             'config' => [
                 'type' => 'input',
@@ -329,6 +345,7 @@ return [
         ],
         'be_users' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Editors',
             'config' => [
                 'type' => 'select',
@@ -341,6 +358,7 @@ return [
         ],
         'persons' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Members',
             'config' => [
                 'type' => 'select',

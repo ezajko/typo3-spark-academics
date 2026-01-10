@@ -1,0 +1,6 @@
+..  This file is included in all .rst files
+..  It provides common substitutions and link targets
+
+.. role:: typo3-icon-extension
+.. role:: typo3-icon-universe
+.. role:: typo3-icon-content

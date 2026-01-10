@@ -88,7 +88,8 @@ return [
                 'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
-                ]
+                ],
+                'l10n_mode' => 'exclude',
             ],
         ],
         'endtime' => [
@@ -104,11 +105,13 @@ return [
                 ],
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
-                ]
+                ],
+                'l10n_mode' => 'exclude',
             ],
         ],
         'landing_page' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Landing Page',
             'config' => [
                 'type' => 'group',
@@ -130,6 +133,7 @@ return [
         ],
         'acronym' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Acronym',
             'config' => [
                 'type' => 'input',
@@ -139,6 +143,7 @@ return [
         ],
         'uuid' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'UUID',
             'config' => [
                 'type' => 'uuid',
@@ -157,6 +162,7 @@ return [
         ],
         'be_users' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Editors',
             'config' => [
                 'type' => 'select',
@@ -169,6 +175,7 @@ return [
         ],
         'start_date' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Start Date',
             'config' => [
                 'type' => 'input',
@@ -179,6 +186,7 @@ return [
         ],
         'end_date' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'End Date',
             'config' => [
                 'type' => 'input',
@@ -189,6 +197,7 @@ return [
         ],
         'status' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Status',
             'config' => [
                 'type' => 'select',
@@ -200,6 +209,7 @@ return [
         ],
         'funding_program' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Funding Program',
             'config' => [
                 'type' => 'select',
@@ -211,16 +221,19 @@ return [
         ],
         'grant_agreement_number' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Grant Agreement Number',
             'config' => ['type' => 'input', 'eval' => 'trim'],
         ],
         'website' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Website',
             'config' => ['type' => 'input', 'eval' => 'trim', 'renderType' => 'inputLink'],
         ],
         'coordinator' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Project Coordinator',
             'config' => [
                 'type' => 'select',
@@ -232,6 +245,7 @@ return [
         ],
         'persons' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Team Members',
             'config' => [
                 'type' => 'select',
@@ -244,6 +258,7 @@ return [
         ],
         'partners' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Partners',
             'config' => [
                 'type' => 'select',
@@ -276,6 +291,7 @@ return [
         ],
         'logo' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Logo',
             'config' => [
                 'type' => 'file',
@@ -285,6 +301,7 @@ return [
         ],
         'main_image' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Main Image',
             'config' => [
                 'type' => 'file',
@@ -294,6 +311,7 @@ return [
         ],
         'departments' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Departments',
             'config' => [
                 'type' => 'select',
@@ -306,6 +324,7 @@ return [
         ],
         'chairs' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Chairs',
             'config' => [
                 'type' => 'select',
@@ -318,6 +337,7 @@ return [
         ],
         'research_labs' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Research Labs',
             'config' => [
                 'type' => 'select',
@@ -330,6 +350,7 @@ return [
         ],
         'research_groups' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Research Groups',
             'config' => [
                 'type' => 'select',
@@ -343,6 +364,7 @@ return [
         // CERIF-compatible fields
         'local_budget' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Local Budget (EUR)',
             'description' => 'Budget allocated to local institution',
             'config' => [
@@ -353,6 +375,7 @@ return [
         ],
         'total_budget' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Total Budget (EUR)',
             'description' => 'Total project budget',
             'config' => [
@@ -374,6 +397,7 @@ return [
         ],
         'project_type' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Project Type',
             'description' => 'Classification type (Research, Development, etc.)',
             'config' => [
@@ -386,6 +410,7 @@ return [
         ],
         'scientific_fields' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Scientific Fields',
             'description' => 'OECD FOS classification (CERIF: cfProj_Class)',
             'config' => [

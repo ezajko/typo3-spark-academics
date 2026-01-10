@@ -93,6 +93,7 @@ return [
             'config' => [
                 'type' => 'datetime',
                 'default' => 0,
+                'l10n_mode' => 'exclude',
             ],
         ],
         'endtime' => [
@@ -102,6 +103,7 @@ return [
                 'type' => 'datetime',
                 'default' => 0,
                 'range' => ['upper' => 2145916800],
+                'l10n_mode' => 'exclude',
             ],
         ],
 
@@ -114,6 +116,7 @@ return [
                 'size' => 20,
                 'max' => 50,
                 'eval' => 'trim',
+                'l10n_mode' => 'exclude',
             ],
         ],
         'title' => [
@@ -135,10 +138,12 @@ return [
                 'size' => 15,
                 'max' => 30,
                 'eval' => 'trim',
+                'l10n_mode' => 'exclude',
             ],
         ],
         'uuid' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'UUID',
             'config' => ['type' => 'uuid'],
         ],
@@ -155,6 +160,7 @@ return [
         ],
         'courseware_url' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Courseware URL (Moodle/LMS)',
             'config' => [
                 'type' => 'link',
@@ -165,6 +171,7 @@ return [
         // Organization
         'department' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Department (Odsjek)',
             'config' => [
                 'type' => 'select',
@@ -178,6 +185,7 @@ return [
         ],
         'chair' => [
             'exclude' => true,
+            'l10n_mode' => 'exclude',
             'label' => 'Chair (Katedra)',
             'config' => [
                 'type' => 'select',
@@ -230,6 +238,7 @@ return [
                     'levelLinksPosition' => 'top',
                 ],
             ],
+            'l10n_mode' => 'exclude',
         ],
 
         // Editors
@@ -244,6 +253,7 @@ return [
                 'size' => 5,
                 'maxitems' => 99,
             ],
+            'l10n_mode' => 'exclude',
         ],
 
         // People
@@ -259,6 +269,7 @@ return [
                 'size' => 10,
                 'maxitems' => 9999,
             ],
+            'l10n_mode' => 'exclude',
         ],
 
         // Notes

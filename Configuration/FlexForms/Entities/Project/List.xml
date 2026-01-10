@@ -7,7 +7,7 @@
         </TCEforms>
         <type>array</type>
         <el>
-            <settings.filter.project_status>
+            <settings.filter.projectStatus>
                 <label>Filter by Status</label>
                 <config>
                     <type>select</type>
@@ -20,9 +20,9 @@
                         </numIndex>
                     </items>
                 </config>
-            </settings.filter.project_status>
+            </settings.filter.projectStatus>
 
-            <settings.filter.project_type>
+            <settings.filter.projectType>
                 <label>Filter by Type</label>
                 <config>
                     <type>select</type>
@@ -35,9 +35,9 @@
                         </numIndex>
                     </items>
                 </config>
-            </settings.filter.project_type>
+            </settings.filter.projectType>
 
-            <settings.filter.funding_program>
+            <settings.filter.fundingProgram>
                 <label>Filter by Funding Program</label>
                 <config>
                     <type>select</type>
@@ -50,7 +50,7 @@
                         </numIndex>
                     </items>
                 </config>
-            </settings.filter.funding_program>
+            </settings.filter.fundingProgram>
 
             <!-- Organizational Filters for Projects -->
              <settings.filter.department>
@@ -69,7 +69,7 @@
                 </config>
             </settings.filter.department>
 
-            <settings.filter.research_group>
+            <settings.filter.researchGroup>
                 <label>Filter by Research Group</label>
                 <config>
                     <type>select</type>
@@ -83,9 +83,9 @@
                     </items>
                     <minitems>0</minitems>
                 </config>
-            </settings.filter.research_group>
+            </settings.filter.researchGroup>
 
-            <settings.filter.research_lab>
+            <settings.filter.researchLab>
                 <label>Filter by Research Lab</label>
                 <config>
                     <type>select</type>
@@ -99,7 +99,7 @@
                     </items>
                     <minitems>0</minitems>
                 </config>
-            </settings.filter.research_lab>
+            </settings.filter.researchLab>
 
             <settings.filter.chair>
                 <label>Filter by Chair</label>

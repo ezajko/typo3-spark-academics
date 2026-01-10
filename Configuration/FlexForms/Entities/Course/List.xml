@@ -7,7 +7,7 @@
         </TCEforms>
         <type>array</type>
         <el>
-            <settings.filter.study_cycle>
+            <settings.filter.studyCycle>
                 <label>Filter by Study Cycle</label>
                 <config>
                     <type>select</type>
@@ -21,9 +21,9 @@
                     </items>
                     <minitems>0</minitems>
                 </config>
-            </settings.filter.study_cycle>
+            </settings.filter.studyCycle>
 
-            <settings.filter.course_category>
+            <settings.filter.courseCategory>
                 <label>Filter by Category</label>
                 <config>
                     <type>select</type>
@@ -37,9 +37,9 @@
                     </items>
                     <minitems>0</minitems>
                 </config>
-            </settings.filter.course_category>
+            </settings.filter.courseCategory>
 
-            <settings.filter.scientific_field>
+            <settings.filter.scientificField>
                 <label>Filter by Scientific Field</label>
                 <config>
                     <type>select</type>
@@ -53,7 +53,7 @@
                     </items>
                     <minitems>0</minitems>
                 </config>
-            </settings.filter.scientific_field>
+            </settings.filter.scientificField>
 
             <settings.filter.department>
                 <label>Department (Any)</label>

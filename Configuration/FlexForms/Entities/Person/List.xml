@@ -7,7 +7,7 @@
         </TCEforms>
         <type>array</type>
         <el>
-            <settings.filter.primary_department>
+            <settings.filter.primaryDepartment>
                 <label>Primary Department</label>
                 <config>
                     <type>select</type>
@@ -21,9 +21,9 @@
                     </items>
                     <minitems>0</minitems>
                 </config>
-            </settings.filter.primary_department>
+            </settings.filter.primaryDepartment>
 
-            <settings.filter.academic_rank>
+            <settings.filter.academicRank>
                 <label>Filter by Academic Rank</label>
                 <config>
                     <type>select</type>
@@ -36,7 +36,7 @@
                     </items>
                     <foreign_table>tx_spark_academic_rank</foreign_table>
                 </config>
-            </settings.filter.academic_rank>
+            </settings.filter.academicRank>
 
             <settings.filter.department>
                 <label>Department (Any)</label>
@@ -54,7 +54,7 @@
                 </config>
             </settings.filter.department>
 
-            <settings.filter.research_group>
+            <settings.filter.researchGroup>
                 <label>Filter by Research Group</label>
                 <config>
                     <type>select</type>
@@ -68,9 +68,9 @@
                     </items>
                     <minitems>0</minitems>
                 </config>
-            </settings.filter.research_group>
+            </settings.filter.researchGroup>
 
-            <settings.filter.research_lab>
+            <settings.filter.researchLab>
                 <label>Filter by Research Lab</label>
                 <config>
                     <type>select</type>
@@ -84,7 +84,7 @@
                     </items>
                     <minitems>0</minitems>
                 </config>
-            </settings.filter.research_lab>
+            </settings.filter.researchLab>
 
             <settings.filter.chair>
                 <label>Filter by Chair</label>

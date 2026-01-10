@@ -43,9 +43,9 @@ class Course extends AbstractEntity
     /**
      * Syllabi versions (IRRE inline)
      * @var ObjectStorage<CourseSyllabus>
-     * @Cascade("remove")
      */
-    protected ?ObjectStorage $syllabi = null;
+    #[Cascade(['remove'])]
+    protected ?\TYPO3\CMS\Extbase\Persistence\ObjectStorage $syllabi = null;
 
     /**
      * External similar courses

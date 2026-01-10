@@ -73,9 +73,38 @@ class Project extends AbstractEntity
     protected ?ObjectStorage $beUsers = null;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Person>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ProjectPerson>
      */
+    #[Cascade(['remove'])]
     protected ?ObjectStorage $persons = null;
+
+    // ...
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ProjectPerson>
+     */
+    public function getPersons(): ?ObjectStorage
+    {
+        return $this->persons;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ProjectPerson> $persons
+     */
+    public function setPersons(ObjectStorage $persons): void
+    {
+        $this->persons = $persons;
+    }
+
+    public function addPerson(ProjectPerson $person): void
+    {
+        $this->persons->attach($person);
+    }
+
+    public function removePerson(ProjectPerson $person): void
+    {
+        $this->persons->detach($person);
+    }
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Partner>
@@ -290,21 +319,7 @@ class Project extends AbstractEntity
         $this->beUsers = $beUsers;
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Person>
-     */
-    public function getPersons(): ?ObjectStorage
-    {
-        return $this->persons;
-    }
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Person> $persons
-     */
-    public function setPersons(ObjectStorage $persons): void
-    {
-        $this->persons = $persons;
-    }
 
     /**
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Partner>

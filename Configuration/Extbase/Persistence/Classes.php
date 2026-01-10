@@ -40,6 +40,12 @@ return [
     \EtfUnsa\SparkAcademics\Domain\Model\Partner::class => [
         'tableName' => 'tx_spark_partner',
     ],
+    \EtfUnsa\SparkAcademics\Domain\Model\CoursePerson::class => [
+        'tableName' => 'tx_spark_course_person',
+    ],
+    \EtfUnsa\SparkAcademics\Domain\Model\ProjectPerson::class => [
+        'tableName' => 'tx_spark_project_person',
+    ],
 
     // --- Course Entities ---
     \EtfUnsa\SparkAcademics\Domain\Model\Course::class => [

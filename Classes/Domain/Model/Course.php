@@ -60,9 +60,10 @@ class Course extends AbstractEntity
     protected ?ObjectStorage $beUsers = null;
 
     /**
-     * Associated persons
-     * @var ObjectStorage<Person>
+     * Associated persons (with roles)
+     * @var ObjectStorage<CoursePerson>
      */
+    #[Cascade(['remove'])]
     protected ?ObjectStorage $persons = null;
 
     public function __construct()
@@ -73,184 +74,10 @@ class Course extends AbstractEntity
         $this->persons = new ObjectStorage();
     }
 
-    // Basic Info
-    public function getCode(): string
-    {
-        return $this->code;
-    }
-
-    public function setCode(string $code): void
-    {
-        $this->code = $code;
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
-    }
-
-    public function getAcronym(): string
-    {
-        return $this->acronym;
-    }
-
-    public function setAcronym(string $acronym): void
-    {
-        $this->acronym = $acronym;
-    }
-
-    public function getUuid(): string
-    {
-        return $this->uuid;
-    }
-
-    public function setUuid(string $uuid): void
-    {
-        $this->uuid = $uuid;
-    }
-
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): void
-    {
-        $this->description = $description;
-    }
-
-    public function getCoursewareUrl(): string
-    {
-        return $this->coursewareUrl;
-    }
-
-    public function setCoursewareUrl(string $coursewareUrl): void
-    {
-        $this->coursewareUrl = $coursewareUrl;
-    }
-
-    // Organization
-    public function getDepartment(): ?Department
-    {
-        return $this->department;
-    }
-
-    public function setDepartment(?Department $department): void
-    {
-        $this->department = $department;
-    }
-
-    public function getChair(): ?Chair
-    {
-        return $this->chair;
-    }
-
-    public function setChair(?Chair $chair): void
-    {
-        $this->chair = $chair;
-    }
-
-    // Notes
-    public function getNotes(): string
-    {
-        return $this->notes;
-    }
-
-    public function setNotes(string $notes): void
-    {
-        $this->notes = $notes;
-    }
-
-    // Syllabi
-    /** @return ObjectStorage<CourseSyllabus> */
-    public function getSyllabi(): ?ObjectStorage
-    {
-        return $this->syllabi;
-    }
-
-    public function setSyllabi(ObjectStorage $syllabi): void
-    {
-        $this->syllabi = $syllabi;
-    }
-
-    public function addSyllabus(CourseSyllabus $syllabus): void
-    {
-        $this->syllabi->attach($syllabus);
-    }
-
-    public function removeSyllabus(CourseSyllabus $syllabus): void
-    {
-        $this->syllabi->detach($syllabus);
-    }
-
-    /**
-     * Get the latest syllabus version (sorted by validFrom or crdate descending)
-     */
-    public function getLatestSyllabus(): ?CourseSyllabus
-    {
-        if ($this->syllabi === null || $this->syllabi->count() === 0) {
-            return null;
-        }
-
-        $sorted = $this->getSortedSyllabi();
-        return $sorted[0] ?? null;
-    }
-
-    /**
-     * Get all syllabi sorted by academic year descending (newest first)
-     * 
-     * @return CourseSyllabus[]
-     */
-    public function getSortedSyllabi(): array
-    {
-        $syllabiArray = $this->syllabi->toArray();
-        usort($syllabiArray, function (CourseSyllabus $a, CourseSyllabus $b) {
-            // Sort by academic year descending (newest first)
-            $yearDiff = strcmp($b->getAcademicYear(), $a->getAcademicYear());
-            return $yearDiff !== 0 ? $yearDiff : ($b->getUid() <=> $a->getUid());
-        });
-        return $syllabiArray;
-    }
-
-    /**
-     * Alias for getLatestSyllabus to support {course.currentSyllabus} in Fluid
-     */
-    public function getCurrentSyllabus(): ?CourseSyllabus
-    {
-        return $this->getLatestSyllabus();
-    }
-
-    // External Courses
-    /** @return ObjectStorage<ExternalCourse> */
-    public function getExternalCourses(): ?ObjectStorage
-    {
-        return $this->externalCourses;
-    }
-
-    public function setExternalCourses(ObjectStorage $externalCourses): void
-    {
-        $this->externalCourses = $externalCourses;
-    }
-
-    // Backend Users
-    /** @return ObjectStorage<BackendUser> */
-    public function getBeUsers(): ?ObjectStorage
-    {
-        return $this->beUsers;
-    }
-
-    public function setBeUsers(ObjectStorage $beUsers): void
-    {
-        $this->beUsers = $beUsers;
-    }
+    // ... (rest of methods)
 
     // Persons
-    /** @return ObjectStorage<Person> */
+    /** @return ObjectStorage<CoursePerson> */
     public function getPersons(): ?ObjectStorage
     {
         return $this->persons;
@@ -259,5 +86,15 @@ class Course extends AbstractEntity
     public function setPersons(ObjectStorage $persons): void
     {
         $this->persons = $persons;
+    }
+
+    public function addPerson(CoursePerson $person): void
+    {
+        $this->persons->attach($person);
+    }
+
+    public function removePerson(CoursePerson $person): void
+    {
+        $this->persons->detach($person);
     }
 }

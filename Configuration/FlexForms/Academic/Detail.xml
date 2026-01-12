@@ -1,12 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3DataStructure>
     <sheets>
+        <!-- General Settings -->
         <sDEF>
             <ROOT>
-                <TCEforms>
-                    <sheetTitle>General Settings</sheetTitle>
-                </TCEforms>
+                <sheetTitle>General</sheetTitle>
                 <type>array</type>
                 <el>
+                    <!-- Entity Type -->
                     <settings.entityType>
                         <label>Entity Type</label>
                         <onChange>reload</onChange>
@@ -15,87 +16,101 @@
                             <renderType>selectSingle</renderType>
                             <items>
                                 <numIndex index="0">
-                                    <numIndex index="0">Organization</numIndex>
-                                    <numIndex index="1">Organization</numIndex>
+                                    <label>Organization</label>
+                                    <value>Organization</value>
                                 </numIndex>
                                 <numIndex index="1">
-                                    <numIndex index="0">Course</numIndex>
-                                    <numIndex index="1">Course</numIndex>
+                                    <label>Person</label>
+                                    <value>Person</value>
                                 </numIndex>
                                 <numIndex index="2">
-                                    <numIndex index="0">Study Program</numIndex>
-                                    <numIndex index="1">StudyProgram</numIndex>
+                                    <label>Course</label>
+                                    <value>Course</value>
                                 </numIndex>
                                 <numIndex index="3">
-                                    <numIndex index="0">Project</numIndex>
-                                    <numIndex index="1">Project</numIndex>
+                                    <label>Study Program</label>
+                                    <value>StudyProgram</value>
                                 </numIndex>
                                 <numIndex index="4">
-                                    <numIndex index="0">Person</numIndex>
-                                    <numIndex index="1">Person</numIndex>
+                                    <label>Project</label>
+                                    <value>Project</value>
                                 </numIndex>
                             </items>
                         </config>
                     </settings.entityType>
 
-                    <settings.select.organization>
-                        <label>Select Organization</label>
-                        <displayCond>FIELD:settings.entityType:=:Organization</displayCond>
+                    <!-- List Page (for back links) -->
+                    <settings.listPid>
+                        <label>List Page (for back links)</label>
                         <config>
                             <type>group</type>
-                            <internal_type>db</internal_type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.listPid>
+                </el>
+            </ROOT>
+        </sDEF>
+
+        <!-- Organization Settings -->
+        <sOrganization>
+            <ROOT>
+                <sheetTitle>Organization</sheetTitle>
+                <displayCond>FIELD:sDEF.settings.entityType:=:Organization</displayCond>
+                <type>array</type>
+                <el>
+                    <!-- Select Organization -->
+                    <settings.select.organization>
+                        <label>Select Organization</label>
+                        <config>
+                            <type>group</type>
                             <allowed>tx_spark_organization</allowed>
                             <size>1</size>
                             <maxitems>1</maxitems>
                             <minitems>0</minitems>
                         </config>
                     </settings.select.organization>
-                    
-                    <settings.select.course>
-                        <label>Select Course</label>
-                        <displayCond>FIELD:settings.entityType:=:Course</displayCond>
-                        <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>tx_spark_course</allowed>
-                            <size>1</size>
-                            <maxitems>1</maxitems>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.select.course>
 
-                    <settings.select.studyprogram>
-                        <label>Select Study Program</label>
-                        <displayCond>FIELD:settings.entityType:=:StudyProgram</displayCond>
+                    <!-- View Type for Organization -->
+                    <settings.view.viewType>
+                        <label>View Type</label>
                         <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>tx_spark_study_program</allowed>
-                            <size>1</size>
-                            <maxitems>1</maxitems>
-                            <minitems>0</minitems>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <label>Default</label>
+                                    <value>Default</value>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <label>Simple</label>
+                                    <value>Simple</value>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <label>Debug</label>
+                                    <value>Debug</value>
+                                </numIndex>
+                            </items>
                         </config>
-                    </settings.select.studyprogram>
+                    </settings.view.viewType>
+                </el>
+            </ROOT>
+        </sOrganization>
 
-                    <settings.select.project>
-                        <label>Select Project</label>
-                        <displayCond>FIELD:settings.entityType:=:Project</displayCond>
-                        <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>tx_spark_project</allowed>
-                            <size>1</size>
-                            <maxitems>1</maxitems>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.select.project>
-
+        <!-- Person Settings -->
+        <sPerson>
+            <ROOT>
+                <sheetTitle>Person</sheetTitle>
+                <displayCond>FIELD:sDEF.settings.entityType:=:Person</displayCond>
+                <type>array</type>
+                <el>
+                    <!-- Select Person -->
                     <settings.select.person>
                         <label>Select Person</label>
-                        <displayCond>FIELD:settings.entityType:=:Person</displayCond>
                         <config>
                             <type>group</type>
-                            <internal_type>db</internal_type>
                             <allowed>tx_spark_person</allowed>
                             <size>1</size>
                             <maxitems>1</maxitems>
@@ -103,20 +118,166 @@
                         </config>
                     </settings.select.person>
 
-                    <settings.listPid>
-                        <label>List Page (for back links)</label>
+                    <!-- View Type for Person -->
+                    <settings.view.viewType>
+                        <label>View Type</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <label>Default</label>
+                                    <value>Default</value>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <label>Simple</label>
+                                    <value>Simple</value>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <label>Debug</label>
+                                    <value>Debug</value>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </settings.view.viewType>
+                </el>
+            </ROOT>
+        </sPerson>
+
+        <!-- Course Settings -->
+        <sCourse>
+            <ROOT>
+                <sheetTitle>Course</sheetTitle>
+                <displayCond>FIELD:sDEF.settings.entityType:=:Course</displayCond>
+                <type>array</type>
+                <el>
+                    <!-- Select Course -->
+                    <settings.select.course>
+                        <label>Select Course</label>
                         <config>
                             <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>pages</allowed>
+                            <allowed>tx_spark_course</allowed>
                             <size>1</size>
                             <maxitems>1</maxitems>
                             <minitems>0</minitems>
-                            <show_thumbs>1</show_thumbs>
                         </config>
-                    </settings.listPid>
+                    </settings.select.course>
+
+                    <!-- View Type for Course -->
+                    <settings.view.viewType>
+                        <label>View Type</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <label>Default</label>
+                                    <value>Default</value>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <label>Simple</label>
+                                    <value>Simple</value>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <label>Debug</label>
+                                    <value>Debug</value>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </settings.view.viewType>
                 </el>
             </ROOT>
-        </sDEF>
+        </sCourse>
+
+        <!-- Study Program Settings -->
+        <sStudyProgram>
+            <ROOT>
+                <sheetTitle>Study Program</sheetTitle>
+                <displayCond>FIELD:sDEF.settings.entityType:=:StudyProgram</displayCond>
+                <type>array</type>
+                <el>
+                    <!-- Select Study Program -->
+                    <settings.select.studyprogram>
+                        <label>Select Study Program</label>
+                        <config>
+                            <type>group</type>
+                            <allowed>tx_spark_study_program</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.select.studyprogram>
+
+                    <!-- View Type for StudyProgram -->
+                    <settings.view.viewType>
+                        <label>View Type</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <label>Default</label>
+                                    <value>Default</value>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <label>Simple</label>
+                                    <value>Simple</value>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <label>Debug</label>
+                                    <value>Debug</value>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </settings.view.viewType>
+                </el>
+            </ROOT>
+        </sStudyProgram>
+
+        <!-- Project Settings -->
+        <sProject>
+            <ROOT>
+                <sheetTitle>Project</sheetTitle>
+                <displayCond>FIELD:sDEF.settings.entityType:=:Project</displayCond>
+                <type>array</type>
+                <el>
+                    <!-- Select Project -->
+                    <settings.select.project>
+                        <label>Select Project</label>
+                        <config>
+                            <type>group</type>
+                            <allowed>tx_spark_project</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.select.project>
+
+                    <!-- View Type for Project -->
+                    <settings.view.viewType>
+                        <label>View Type</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <label>Default</label>
+                                    <value>Default</value>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <label>Simple</label>
+                                    <value>Simple</value>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <label>Debug</label>
+                                    <value>Debug</value>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </settings.view.viewType>
+                </el>
+            </ROOT>
+        </sProject>
+
     </sheets>
 </T3DataStructure>

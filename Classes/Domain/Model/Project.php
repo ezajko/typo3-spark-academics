@@ -17,6 +17,7 @@ use TYPO3\CMS\Beuser\Domain\Model\BackendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 
 class Project extends AbstractEntity
 {

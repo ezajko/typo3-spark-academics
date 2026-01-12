@@ -112,6 +112,12 @@ class Person extends AbstractEntity
     /** @var string Research interests description */
     protected string $researchInterests = '';
     
+    /** @var string Research keywords (comma-separated) */
+    protected string $keywords = '';
+    
+    /** @var string Teaching description (RTE content) */
+    protected string $teaching = '';
+    
     /** @var string Consultation hours (RTE content) */
     protected string $consultationHours = '';
 
@@ -437,6 +443,26 @@ class Person extends AbstractEntity
         $this->consultationHours = $consultationHours;
     }
 
+    public function getKeywords(): string
+    {
+        return $this->keywords;
+    }
+
+    public function setKeywords(string $keywords): void
+    {
+        $this->keywords = $keywords;
+    }
+
+    public function getTeaching(): string
+    {
+        return $this->teaching;
+    }
+
+    public function setTeaching(string $teaching): void
+    {
+        $this->teaching = $teaching;
+    }
+
     // =========================================================================
     // Profile Identifiers Getters/Setters
     // =========================================================================
@@ -489,6 +515,26 @@ class Person extends AbstractEntity
     public function setProfileLinkedin(string $profileLinkedin): void
     {
         $this->profileLinkedin = $profileLinkedin;
+    }
+
+    public function getScopusId(): string
+    {
+        return $this->scopusId;
+    }
+
+    public function setScopusId(string $scopusId): void
+    {
+        $this->scopusId = $scopusId;
+    }
+
+    public function getResearcherId(): string
+    {
+        return $this->researcherId;
+    }
+
+    public function setResearcherId(string $researcherId): void
+    {
+        $this->researcherId = $researcherId;
     }
 
     // =========================================================================

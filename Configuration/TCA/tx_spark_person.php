@@ -212,20 +212,6 @@ return [
         // =====================================================================
         // Academic Affiliation (on General tab)
         // =====================================================================
-        'primary_department' => [
-            'exclude' => true,
-            'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_department_primary',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_spark_department',
-                'items' => [
-                    ['', 0],
-                ],
-                'default' => 0,
-            ],
-        ],
         'academic_title' => [
             'exclude' => true,
             'l10n_mode' => 'exclude',

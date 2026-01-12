@@ -13,70 +13,144 @@ declare(strict_types=1);
 
 namespace EtfUnsa\SparkAcademics\Domain\Model\Dto;
 
-class ProjectDemand extends Demand
+/**
+ * DTO for Project filtering criteria
+ * 
+ * Supports filtering by status, type, funding program, organization, and date range.
+ * Used by ProjectRepository and backend/frontend controllers.
+ * 
+ * @author Ernedin Zajko <ezajko@root.ba>
+ */
+class ProjectDemand extends AbstractDemand
 {
+    /**
+     * Filter by project status
+     */
+    protected int $projectStatus = 0;
 
-    protected ?int $projectStatus = null;
-    protected ?int $projectType = null;
-    protected ?int $fundingProgram = null;
-    protected ?int $scientificField = null;
-    protected ?int $department = null;
-    protected ?int $researchLab = null;
-    protected ?int $researchGroup = null;
-    protected ?int $chair = null;
+    /**
+     * Filter by project type
+     */
+    protected int $projectType = 0;
+
+    /**
+     * Filter by funding program
+     */
+    protected int $fundingProgram = 0;
+
+    /**
+     * Filter by scientific field
+     */
+    protected int $scientificField = 0;
+
+    /**
+     * Filter by organization (unified)
+     */
+    protected int $organization = 0;
+
+    /**
+     * Filter by date range - from
+     */
     protected ?\DateTime $dateFrom = null;
+
+    /**
+     * Filter by date range - to
+     */
     protected ?\DateTime $dateTo = null;
 
+    /**
+     * Filter by backend user (for permission-based filtering)
+     */
+    protected int $backendUser = 0;
 
+    // =========================================================================
+    // Project Status
+    // =========================================================================
 
-    public function getProjectStatus(): ?int
+    public function getProjectStatus(): int
     {
         return $this->projectStatus;
     }
 
-    public function setProjectStatus(?int $projectStatus): void
+    public function setProjectStatus(int $projectStatus): self
     {
         $this->projectStatus = $projectStatus;
+        return $this;
     }
 
-    public function getProjectType(): ?int
+    // =========================================================================
+    // Project Type
+    // =========================================================================
+
+    public function getProjectType(): int
     {
         return $this->projectType;
     }
 
-    public function setProjectType(?int $projectType): void
+    public function setProjectType(int $projectType): self
     {
         $this->projectType = $projectType;
+        return $this;
     }
 
-    public function getFundingProgram(): ?int
+    // =========================================================================
+    // Funding Program
+    // =========================================================================
+
+    public function getFundingProgram(): int
     {
         return $this->fundingProgram;
     }
 
-    public function setFundingProgram(?int $fundingProgram): void
+    public function setFundingProgram(int $fundingProgram): self
     {
         $this->fundingProgram = $fundingProgram;
+        return $this;
     }
 
-    public function getScientificField(): ?int
+    // =========================================================================
+    // Scientific Field
+    // =========================================================================
+
+    public function getScientificField(): int
     {
         return $this->scientificField;
     }
 
-    public function setScientificField(?int $scientificField): void
+    public function setScientificField(int $scientificField): self
     {
         $this->scientificField = $scientificField;
+        return $this;
     }
+
+    // =========================================================================
+    // Organization
+    // =========================================================================
+
+    public function getOrganization(): int
+    {
+        return $this->organization;
+    }
+
+    public function setOrganization(int $organization): self
+    {
+        $this->organization = $organization;
+        return $this;
+    }
+
+    // =========================================================================
+    // Date Range
+    // =========================================================================
 
     public function getDateFrom(): ?\DateTime
     {
         return $this->dateFrom;
     }
 
-    public function setDateFrom(?\DateTime $dateFrom): void
+    public function setDateFrom(?\DateTime $dateFrom): self
     {
         $this->dateFrom = $dateFrom;
+        return $this;
     }
 
     public function getDateTo(): ?\DateTime
@@ -84,60 +158,72 @@ class ProjectDemand extends Demand
         return $this->dateTo;
     }
 
-    public function setDateTo(?\DateTime $dateTo): void
+    public function setDateTo(?\DateTime $dateTo): self
     {
         $this->dateTo = $dateTo;
+        return $this;
     }
 
-    public function getDepartment(): ?int
-    {
-        return $this->department;
-    }
+    // =========================================================================
+    // Backend User
+    // =========================================================================
 
-    public function setDepartment(?int $department): void
-    {
-        $this->department = $department;
-    }
-
-    public function getResearchLab(): ?int
-    {
-        return $this->researchLab;
-    }
-
-    public function setResearchLab(?int $researchLab): void
-    {
-        $this->researchLab = $researchLab;
-    }
-
-    public function getResearchGroup(): ?int
-    {
-        return $this->researchGroup;
-    }
-
-    public function setResearchGroup(?int $researchGroup): void
-    {
-        $this->researchGroup = $researchGroup;
-    }
-
-    public function getChair(): ?int
-    {
-        return $this->chair;
-    }
-
-    public function setChair(?int $chair): void
-    {
-        $this->chair = $chair;
-    }
-
-    protected ?int $backendUser = null;
-
-    public function getBackendUser(): ?int
+    public function getBackendUser(): int
     {
         return $this->backendUser;
     }
 
-    public function setBackendUser(?int $backendUser): void
+    public function setBackendUser(int $backendUser): self
     {
         $this->backendUser = $backendUser;
+        return $this;
+    }
+
+    // =========================================================================
+    // AbstractDemand Implementation
+    // =========================================================================
+
+    public function hasFilters(): bool
+    {
+        return $this->projectStatus > 0
+            || $this->projectType > 0
+            || $this->fundingProgram > 0
+            || $this->scientificField > 0
+            || $this->organization > 0
+            || $this->dateFrom !== null
+            || $this->dateTo !== null
+            || $this->backendUser > 0;
+    }
+
+    public function getFilterProperties(): array
+    {
+        $filters = [];
+        
+        if ($this->projectStatus > 0) {
+            $filters['status'] = $this->projectStatus;
+        }
+        if ($this->projectType > 0) {
+            $filters['projectType'] = $this->projectType;
+        }
+        if ($this->fundingProgram > 0) {
+            $filters['fundingProgram'] = $this->fundingProgram;
+        }
+        if ($this->scientificField > 0) {
+            $filters['scientificFields'] = $this->scientificField; // M:N
+        }
+        if ($this->organization > 0) {
+            $filters['organizations'] = $this->organization; // M:N
+        }
+        if ($this->dateFrom !== null) {
+            $filters['dateFrom'] = $this->dateFrom;
+        }
+        if ($this->dateTo !== null) {
+            $filters['dateTo'] = $this->dateTo;
+        }
+        if ($this->backendUser > 0) {
+            $filters['beUsers'] = $this->backendUser;
+        }
+        
+        return $filters;
     }
 }

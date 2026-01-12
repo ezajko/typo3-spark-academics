@@ -167,13 +167,8 @@
                 <h5 class="card-title mb-0 h6">Organization</h5>
             </div>
             <div class="card-body">
-                <f:if condition="{item.department}">
-                    <p class="mb-1"><small class="text-muted">Department</small></p>
-                    <p class="fw-bold">{item.department.title}</p>
-                </f:if>
-                <f:if condition="{item.chair}">
-                    <p class="mb-1"><small class="text-muted">Chair</small></p>
-                    <p class="fw-bold">{item.chair.title}</p>
+                <f:if condition="{item.organization}">
+                    <p class="fw-bold mb-0">{item.organization.title}</p>
                 </f:if>
             </div>
         </div>

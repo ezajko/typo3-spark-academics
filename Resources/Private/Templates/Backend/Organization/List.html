@@ -1,0 +1,66 @@
+<f:layout name="Module" />
+
+<f:section name="Content">
+    <!-- Filter (optional - can be added later) -->
+    <f:render partial="Backend/Organization/Filter" arguments="{_all}" optional="true" />
+
+    <!-- Organization List Table -->
+    <div class="table-fit">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Acronym</th>
+                    <th>Type</th>
+                    <th>Parent</th>
+                    <th>Head Person</th>
+                    <th style="width: 100px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <f:for each="{items}" as="itemData">
+                    <tr>
+                        <td class="align-middle">
+                            <b>{itemData.item.title}</b>
+                        </td>
+                        <td class="align-middle">
+                            <f:if condition="{itemData.item.acronym}">
+                                <span class="badge bg-secondary">{itemData.item.acronym}</span>
+                            </f:if>
+                        </td>
+                        <td class="align-middle">
+                            <f:if condition="{itemData.item.type}">
+                                <span class="badge bg-info">{itemData.item.type.title}</span>
+                            </f:if>
+                        </td>
+                        <td class="align-middle">
+                            <f:if condition="{itemData.item.parent}">
+                                <small>{itemData.item.parent.title}</small>
+                            </f:if>
+                        </td>
+                        <td class="align-middle">
+                            <f:if condition="{itemData.item.headPerson}">
+                                <small>{itemData.item.headPerson.firstName} {itemData.item.headPerson.lastName}</small>
+                            </f:if>
+                        </td>
+                        <td class="align-middle">
+                            <a href="{itemData.editUrl}" class="btn btn-default btn-sm">
+                                <core:icon identifier="actions-open" size="small" />
+                                <f:translate
+                                    key="LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.edit" />
+                            </a>
+                        </td>
+                    </tr>
+                </f:for>
+                <f:if condition="{items -> f:count()} == 0">
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">
+                            <core:icon identifier="actions-search" size="medium" /><br>
+                            No organizations found.
+                        </td>
+                    </tr>
+                </f:if>
+            </tbody>
+        </table>
+    </div>
+</f:section>

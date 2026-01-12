@@ -75,8 +75,8 @@ class GenerateTestStudyProgramsCommand extends Command
         // Load lookup data
         $lookups = $this->loadLookupData();
         
-        if (empty($lookups['departments'])) {
-            $io->error('No Departments found. Please run basic seeding first.');
+        if (empty($lookups['organizations'])) {
+            $io->error('No Organizations found. Please run basic seeding first.');
             return Command::FAILURE;
         }
 
@@ -96,8 +96,7 @@ class GenerateTestStudyProgramsCommand extends Command
             $programUid = (int)$programConn->lastInsertId('tx_spark_study_program');
             
             // Add Relations (Multi-select)
-            $this->addRelations($programUid, 'department', $lookups['departments'], 1, 3, $faker);
-            $this->addRelations($programUid, 'chair', $lookups['chairs'], 1, 2, $faker);
+            $this->addRelations($programUid, 'organization', $lookups['organizations'], 1, 3, $faker);
             $this->addRelations($programUid, 'studytype', $lookups['study_types'], 1, 1, $faker);
             $this->addRelations($programUid, 'modeofstudy', $lookups['modes_of_study'], 1, 2, $faker);
             $this->addRelations($programUid, 'language', $lookups['languages'], 1, 2, $faker);
@@ -185,8 +184,7 @@ class GenerateTestStudyProgramsCommand extends Command
         );
 
         return [
-            'departments' => $fetchUids('tx_spark_department'),
-            'chairs' => $fetchUids('tx_spark_chair'),
+            'organizations' => $fetchUids('tx_spark_organization'),
             'cycles' => $fetchUids('tx_spark_study_cycle'),
             'fields' => $fetchUids('tx_spark_scientific_field'),
             'languages' => $fetchUids('tx_spark_language'),

@@ -22,17 +22,11 @@ return [
     \EtfUnsa\SparkAcademics\Domain\Model\PersonMentoring::class => [
         'tableName' => 'tx_spark_person_mentoring',
     ],
-    \EtfUnsa\SparkAcademics\Domain\Model\Department::class => [
-        'tableName' => 'tx_spark_department',
+    \EtfUnsa\SparkAcademics\Domain\Model\Organization::class => [
+        'tableName' => 'tx_spark_organization',
     ],
-    \EtfUnsa\SparkAcademics\Domain\Model\Chair::class => [
-        'tableName' => 'tx_spark_chair',
-    ],
-    \EtfUnsa\SparkAcademics\Domain\Model\ResearchLab::class => [
-        'tableName' => 'tx_spark_research_lab',
-    ],
-    \EtfUnsa\SparkAcademics\Domain\Model\ResearchGroup::class => [
-        'tableName' => 'tx_spark_research_group',
+    \EtfUnsa\SparkAcademics\Domain\Model\OrganizationType::class => [
+        'tableName' => 'tx_spark_organization_type',
     ],
     \EtfUnsa\SparkAcademics\Domain\Model\Project::class => [
         'tableName' => 'tx_spark_project',

@@ -40,7 +40,7 @@ return [
                 --div--;Classification, scientific_fields,
                 --div--;Details, objectives, outcomes, website,
                 --div--;Media, logo, main_image,
-                --div--;Relations, be_users, departments, chairs, research_labs, research_groups,
+                --div--;Relations, be_users, organizations,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime
             '
         ],
@@ -325,56 +325,18 @@ return [
                 'maxitems' => 1,
             ],
         ],
-        'departments' => [
+        'organizations' => [
             'exclude' => true,
-            'l10n_mode' => 'exclude',
-            'label' => 'Departments',
+            'label' => 'Participating Organizations',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_spark_department',
-                'MM' => 'tx_spark_project_department_mm',
+                'foreign_table' => 'tx_spark_organization',
+                'foreign_table_where' => 'AND {#tx_spark_organization}.{#sys_language_uid} IN (-1,0) ORDER BY title',
+                'MM' => 'tx_spark_project_organization_mm',
                 'size' => 10,
-                'maxitems' => 9999,
-            ],
-        ],
-        'chairs' => [
-            'exclude' => true,
-            'l10n_mode' => 'exclude',
-            'label' => 'Chairs',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_spark_chair',
-                'MM' => 'tx_spark_project_chair_mm',
-                'size' => 10,
-                'maxitems' => 9999,
-            ],
-        ],
-        'research_labs' => [
-            'exclude' => true,
-            'l10n_mode' => 'exclude',
-            'label' => 'Research Labs',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_spark_research_lab',
-                'MM' => 'tx_spark_project_research_lab_mm',
-                'size' => 10,
-                'maxitems' => 9999,
-            ],
-        ],
-        'research_groups' => [
-            'exclude' => true,
-            'l10n_mode' => 'exclude',
-            'label' => 'Research Groups',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_spark_research_group',
-                'MM' => 'tx_spark_project_research_group_mm',
-                'size' => 10,
-                'maxitems' => 9999,
+                'minitems' => 0,
+                'maxitems' => 99,
             ],
         ],
         // CERIF-compatible fields

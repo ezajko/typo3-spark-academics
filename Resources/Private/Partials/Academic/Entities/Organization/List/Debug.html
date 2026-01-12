@@ -1,0 +1,28 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<!--
+    Organization List/Debug Template
+    Debug view showing all available data
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
+<div class="card border-warning">
+    <div class="card-header bg-warning text-dark">
+        <i class="bi bi-bug me-2"></i>Debug View - Organization List
+    </div>
+    <div class="card-body">
+        <h5>Settings</h5>
+        <f:debug title="Settings">{settings}</f:debug>
+
+        <h5 class="mt-4">Items ({items -> f:count()} total)</h5>
+        <f:for each="{items}" as="item" iteration="iter">
+            <div class="border rounded p-3 mb-3 bg-light">
+                <h6>Item #{iter.cycle}: {item.title}</h6>
+                <f:debug title="Item {iter.cycle}">{item}</f:debug>
+            </div>
+        </f:for>
+
+        <h5 class="mt-4">All Variables</h5>
+        <f:debug title="All Variables">{_all}</f:debug>
+    </div>
+</div>
+
+</html>

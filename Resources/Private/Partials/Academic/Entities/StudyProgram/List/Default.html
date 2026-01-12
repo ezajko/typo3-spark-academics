@@ -22,10 +22,10 @@
                     </h5>
 
                     <p class="card-text text-muted small">
-                        <f:if condition="{item.departments}">
+                        <f:if condition="{item.organizations}">
                             <i class="bi bi-building me-1"></i>
-                            <f:for each="{item.departments}" as="dept" iteration="i">
-                                {dept.title}{f:if(condition: i.isLast, else: ', ')}
+                            <f:for each="{item.organizations}" as="org" iteration="i">
+                                {org.title}{f:if(condition: i.isLast, else: ', ')}
                             </f:for>
                             <br>
                         </f:if>

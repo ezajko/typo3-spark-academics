@@ -25,7 +25,8 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><strong>Academic Title:</strong> {item.academicTitle.title}</li>
                     <li class="list-group-item"><strong>Academic Rank:</strong> {item.academicRank.title}</li>
-                    <li class="list-group-item"><strong>Primary Department:</strong> {item.primaryDepartment.title}</li>
+                    <li class="list-group-item"><strong>Primary Organization:</strong> {item.primaryOrganization.title}
+                    </li>
                 </ul>
             </div>
 
@@ -60,11 +61,11 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><strong>Education:</strong> {item.education -> f:count()} items</li>
                     <li class="list-group-item"><strong>Mentoring:</strong> {item.mentoring -> f:count()} items</li>
-                    <li class="list-group-item"><strong>Departments:</strong> {item.departments -> f:count()} items</li>
+                    <li class="list-group-item"><strong>Organizations:</strong> {item.organizations -> f:count()} items
+                    </li>
                     <li class="list-group-item"><strong>Laboratories:</strong> {item.laboratories -> f:count()} items
                     </li>
                     <li class="list-group-item"><strong>Groups:</strong> {item.groups -> f:count()} items</li>
-                    <li class="list-group-item"><strong>Chairs:</strong> {item.chairs -> f:count()} items</li>
                     <li class="list-group-item"><strong>Courses:</strong> {item.courses -> f:count()} items</li>
                     <li class="list-group-item"><strong>Study Programs:</strong> {item.studyPrograms -> f:count()} items
                     </li>

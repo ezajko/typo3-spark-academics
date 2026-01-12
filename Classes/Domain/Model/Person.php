@@ -47,9 +47,6 @@ class Person extends AbstractEntity
     // Academic Affiliation
     // =========================================================================
     
-    /** @var Department|null Primary department affiliation */
-    protected ?Department $primaryDepartment = null;
-    
     /** @var AcademicTitle|null Academic title (e.g., Dr., Prof.) */
     protected ?AcademicTitle $academicTitle = null;
     
@@ -154,32 +151,27 @@ class Person extends AbstractEntity
     protected $beUsers = null;
 
     // =========================================================================
-    // Organizational Relations (read-only, managed from other entities)
+    // Staff Status & Roles
+    // =========================================================================
+
+    protected bool $isAcademic = false;
+    protected bool $isCouncilMember = false;
+    protected string $staffStatus = '';
+
+    // =========================================================================
+    // Organizational Relations
     // =========================================================================
     
     /**
-     * Departments this person belongs to
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Department>
+     * Primary Organization (e.g. Department)
      */
-    protected ?ObjectStorage $departments = null;
+    protected ?Organization $primaryOrganization = null;
 
     /**
-     * Research laboratories
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ResearchLab>
+     * Additional Affiliations (e.g. Research Labs, Centers)
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization>
      */
-    protected ?ObjectStorage $laboratories = null;
-
-    /**
-     * Research groups
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ResearchGroup>
-     */
-    protected ?ObjectStorage $groups = null;
-
-    /**
-     * Chairs (Katedre)
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Chair>
-     */
-    protected ?ObjectStorage $chairs = null;
+    protected ?ObjectStorage $additionalOrganizations = null;
 
     /**
      * Courses taught
@@ -214,20 +206,17 @@ class Person extends AbstractEntity
         $this->beUsers = new ObjectStorage();
         $this->education = new ObjectStorage();
         $this->mentoring = new ObjectStorage();
-        $this->departments = new ObjectStorage();
-        $this->laboratories = new ObjectStorage();
-        $this->groups = new ObjectStorage();
-        $this->chairs = new ObjectStorage();
+        $this->additionalOrganizations = new ObjectStorage();
         $this->courses = new ObjectStorage();
         $this->studyPrograms = new ObjectStorage();
         $this->projects = new ObjectStorage();
         $this->publications = new ObjectStorage();
     }
-
+    
     // =========================================================================
-    // Basic Information Getters/Setters
+    // Basic Getters/Setters
     // =========================================================================
-
+    
     public function getFirstName(): string
     {
         return $this->firstName;
@@ -246,6 +235,14 @@ class Person extends AbstractEntity
     public function setLastName(string $lastName): void
     {
         $this->lastName = $lastName;
+    }
+
+    /**
+     * Get full name in "FirstName LastName" format
+     */
+    public function getFullName(): string
+    {
+        return trim($this->firstName . ' ' . $this->lastName);
     }
 
     public function getPath(): string
@@ -271,16 +268,6 @@ class Person extends AbstractEntity
     // =========================================================================
     // Academic Affiliation Getters/Setters
     // =========================================================================
-
-    public function getPrimaryDepartment(): ?Department
-    {
-        return $this->primaryDepartment;
-    }
-
-    public function setPrimaryDepartment(?Department $primaryDepartment): void
-    {
-        $this->primaryDepartment = $primaryDepartment;
-    }
 
     public function getAcademicTitle(): ?AcademicTitle
     {
@@ -391,7 +378,7 @@ class Person extends AbstractEntity
     }
 
     // =========================================================================
-    // Education Getters/Setters
+    // Education & Mentoring Getters/Setters
     // =========================================================================
 
     /**
@@ -409,10 +396,6 @@ class Person extends AbstractEntity
     {
         $this->education = $education;
     }
-
-    // =========================================================================
-    // Mentoring Getters/Setters
-    // =========================================================================
 
     /**
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\PersonMentoring>
@@ -444,32 +427,6 @@ class Person extends AbstractEntity
         $this->researchInterests = $researchInterests;
     }
 
-    /** @var string Keywords (comma separated) */
-    protected string $keywords = '';
-
-    public function getKeywords(): string
-    {
-        return $this->keywords;
-    }
-
-    public function setKeywords(string $keywords): void
-    {
-        $this->keywords = $keywords;
-    }
-
-    /**
-     * Returns keywords as array
-     * 
-     * @return array
-     */
-    public function getKeywordsArray(): array
-    {
-        if (empty($this->keywords)) {
-            return [];
-        }
-        return array_map('trim', explode(',', $this->keywords));
-    }
-
     public function getConsultationHours(): string
     {
         return $this->consultationHours;
@@ -479,22 +436,9 @@ class Person extends AbstractEntity
     {
         $this->consultationHours = $consultationHours;
     }
-    
-    /** @var string Teaching (RTE content) */
-    protected string $teaching = '';
-    
-    public function getTeaching(): string
-    {
-        return $this->teaching;
-    }
-    
-    public function setTeaching(string $teaching): void
-    {
-        $this->teaching = $teaching;
-    }
 
     // =========================================================================
-    // Academic Profiles Getters/Setters
+    // Profile Identifiers Getters/Setters
     // =========================================================================
 
     public function getProfileGoogleScholar(): string
@@ -547,34 +491,14 @@ class Person extends AbstractEntity
         $this->profileLinkedin = $profileLinkedin;
     }
 
-    public function getScopusId(): string
-    {
-        return $this->scopusId;
-    }
-
-    public function setScopusId(string $scopusId): void
-    {
-        $this->scopusId = $scopusId;
-    }
-
-    public function getResearcherId(): string
-    {
-        return $this->researcherId;
-    }
-
-    public function setResearcherId(string $researcherId): void
-    {
-        $this->researcherId = $researcherId;
-    }
-
     // =========================================================================
-    // Backend User Getters/Setters
+    // Backend User Relation Getters/Setters
     // =========================================================================
 
     /**
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<BackendUser>
      */
-    public function getBeUsers(): ObjectStorage
+    public function getBeUsers(): ?ObjectStorage
     {
         return $this->beUsers;
     }
@@ -588,47 +512,73 @@ class Person extends AbstractEntity
     }
 
     // =========================================================================
-    // Organizational Relations Getters/Setters
+    // Organization, Status & Academic Flags Getters/Setters
     // =========================================================================
 
-    public function getDepartments(): ?ObjectStorage
+    public function isAcademic(): bool
     {
-        return $this->departments;
+        return $this->isAcademic;
     }
 
-    public function setDepartments(ObjectStorage $departments): void
+    public function setIsAcademic(bool $isAcademic): void
     {
-        $this->departments = $departments;
+        $this->isAcademic = $isAcademic;
     }
 
-    public function getLaboratories(): ?ObjectStorage
+    public function isCouncilMember(): bool
     {
-        return $this->laboratories;
+        return $this->isCouncilMember;
     }
 
-    public function setLaboratories(ObjectStorage $laboratories): void
+    public function setIsCouncilMember(bool $isCouncilMember): void
     {
-        $this->laboratories = $laboratories;
+        $this->isCouncilMember = $isCouncilMember;
     }
 
-    public function getGroups(): ?ObjectStorage
+    public function getStaffStatus(): string
     {
-        return $this->groups;
+        return $this->staffStatus;
     }
 
-    public function setGroups(ObjectStorage $groups): void
+    public function setStaffStatus(string $staffStatus): void
     {
-        $this->groups = $groups;
+        $this->staffStatus = $staffStatus;
     }
 
-    public function getChairs(): ?ObjectStorage
+    public function getPrimaryOrganization(): ?Organization
     {
-        return $this->chairs;
+        return $this->primaryOrganization;
     }
 
-    public function setChairs(ObjectStorage $chairs): void
+    public function setPrimaryOrganization(?Organization $primaryOrganization): void
     {
-        $this->chairs = $chairs;
+        $this->primaryOrganization = $primaryOrganization;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization>
+     */
+    public function getAdditionalOrganizations(): ?ObjectStorage
+    {
+        return $this->additionalOrganizations;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization> $additionalOrganizations
+     */
+    public function setAdditionalOrganizations(ObjectStorage $additionalOrganizations): void
+    {
+        $this->additionalOrganizations = $additionalOrganizations;
+    }
+
+    public function addAdditionalOrganization(Organization $organization): void
+    {
+        $this->additionalOrganizations->attach($organization);
+    }
+
+    public function removeAdditionalOrganization(Organization $organization): void
+    {
+        $this->additionalOrganizations->detach($organization);
     }
 
     public function getCourses(): ?ObjectStorage

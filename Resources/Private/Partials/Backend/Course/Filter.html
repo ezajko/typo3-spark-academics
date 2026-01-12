@@ -1,65 +1,52 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
-
-<div class="row row-cols-auto g-3 align-items-end mb-3">
-    <f:form method="post" action="list" class="row row-cols-auto g-3 align-items-end">
-
-        <!-- Search -->
-        <div class="col">
-            <label for="filter-search" class="form-label visually-hidden">Search</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <core:icon identifier="actions-search" />
-                </span>
-                <f:form.textfield name="filter[search]" value="{filter.search}" class="form-control"
-                    placeholder="Search courses..." />
+<!--
+    Backend Course Filter - Normalized Design
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
+<div class="card card-default mb-4">
+    <div class="card-body">
+        <f:form action="list" method="post" noCacheHash="true" class="row g-3 align-items-end">
+            <!-- Search -->
+            <div class="col-md-3">
+                <label class="form-label" for="filter-search">Search</label>
+                <f:form.textfield id="filter-search" name="filter[search]" value="{filter.search}"
+                    placeholder="Title, Code..." class="form-control form-control-sm" />
             </div>
-        </div>
 
-        <!-- Department -->
-        <div class="col">
-            <f:form.select name="filter[department]" options="{availableDepartments}" value="{filter.department}"
-                optionLabelField="title" optionValueField="uid" prependOptionLabel="All Departments"
-                prependOptionValue="0" class="form-select" />
-        </div>
+            <!-- Organization -->
+            <div class="col-md-2">
+                <label class="form-label" for="filter-organization">Organization</label>
+                <f:form.select id="filter-organization" name="filter[organization]" options="{availableOrganizations}"
+                    optionValueField="uid" optionLabelField="title" prependOptionLabel="All" prependOptionValue=""
+                    value="{filter.organization}" class="form-select form-select-sm" />
+            </div>
 
-        <!-- Chair -->
-        <div class="col">
-            <f:form.select name="filter[chair]" options="{availableChairs}" value="{filter.chair}"
-                optionLabelField="title" optionValueField="uid" prependOptionLabel="All Chairs" prependOptionValue="0"
-                class="form-select" />
-        </div>
+            <!-- Cycle -->
+            <div class="col-md-2">
+                <label class="form-label" for="filter-cycle">Cycle</label>
+                <f:form.select id="filter-cycle" name="filter[study_cycle]" options="{availableCycle}"
+                    optionValueField="uid" optionLabelField="title" prependOptionLabel="All" prependOptionValue=""
+                    value="{filter.study_cycle}" class="form-select form-select-sm" />
+            </div>
 
-        <!-- Cycle -->
-        <div class="col">
-            <f:form.select name="filter[study_cycle]" options="{availableCycle}" value="{filter.study_cycle}"
-                optionLabelField="title" optionValueField="uid" prependOptionLabel="All Cycles" prependOptionValue="0"
-                class="form-select" />
-        </div>
+            <!-- Category -->
+            <div class="col-md-2">
+                <label class="form-label" for="filter-category">Category</label>
+                <f:form.select id="filter-category" name="filter[course_category]" options="{availableCategories}"
+                    optionValueField="uid" optionLabelField="title" prependOptionLabel="All" prependOptionValue=""
+                    value="{filter.course_category}" class="form-select form-select-sm" />
+            </div>
 
-        <!-- Category -->
-        <div class="col">
-            <f:form.select name="filter[course_category]" options="{availableCategories}"
-                value="{filter.course_category}" optionLabelField="title" optionValueField="uid"
-                prependOptionLabel="All Categories" prependOptionValue="0" class="form-select" />
-        </div>
-
-        <!-- Field -->
-        <div class="col">
-            <f:form.select name="filter[scientific_field]" options="{availableFields}" value="{filter.scientific_field}"
-                optionLabelField="title" optionValueField="uid" prependOptionLabel="All Fields" prependOptionValue="0"
-                class="form-select" />
-        </div>
-
-        <!-- Actions -->
-        <div class="col">
-            <f:link.action action="list" class="btn btn-default" title="Reset">
-                <core:icon identifier="actions-refresh" />
-            </f:link.action>
-            <f:form.submit value="Filter" class="btn btn-primary" />
-        </div>
-
-    </f:form>
+            <!-- Buttons -->
+            <div class="col-md-3 d-flex gap-2">
+                <f:form.submit value="Filter" class="btn btn-primary btn-sm" />
+                <f:link.action action="list" class="btn btn-outline-secondary btn-sm">
+                    <core:icon identifier="actions-close" size="small" /> Reset
+                </f:link.action>
+            </div>
+        </f:form>
+    </div>
 </div>
 
 </html>

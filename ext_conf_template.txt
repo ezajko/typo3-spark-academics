@@ -6,3 +6,9 @@ orcidClientSecret =
 
 # cat=orcid; type=string; label=ORCID API Base URL: (Default: https://pub.orcid.org/v3.0)
 orcidApiBaseUrl = https://pub.orcid.org/v3.0
+
+# cat=permissions; type=string; label=Organization Permission Groups: List of BE user group UIDs allowed to manage Organizations (comma separated)
+spark_perm_org_groups = 
+
+# cat=permissions; type=string; label=Study/Course Permission Groups: List of BE user group UIDs allowed to manage Courses/Programs (comma separated)
+spark_perm_study_groups = 

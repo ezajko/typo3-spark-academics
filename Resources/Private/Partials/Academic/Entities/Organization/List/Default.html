@@ -1,0 +1,53 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<!--
+    Organization List/Default Template
+    Card grid layout for Organization list
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
+<f:if condition="{items}">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <f:for each="{items}" as="item">
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <f:if condition="{item.type}">
+                                <span class="badge bg-primary rounded-pill">{item.type.title}</span>
+                            </f:if>
+                            <f:if condition="{item.acronym}">
+                                <span class="badge bg-secondary">{item.acronym}</span>
+                            </f:if>
+                        </div>
+
+                        <h5 class="card-title mb-2">
+                            <f:link.action action="show" arguments="{organization: item}" pageUid="{detailPid}"
+                                class="text-decoration-none text-dark stretched-link">
+                                {item.title}
+                            </f:link.action>
+                        </h5>
+
+                        <f:if condition="{item.parent}">
+                            <p class="card-text text-muted small mb-2">
+                                <i class="bi bi-diagram-3 me-1"></i>{item.parent.title}
+                            </p>
+                        </f:if>
+
+                        <f:if condition="{item.headPerson}">
+                            <p class="card-text small">
+                                <i class="bi bi-person me-1"></i>
+                                {item.headPerson.firstName} {item.headPerson.lastName}
+                            </p>
+                        </f:if>
+                    </div>
+                </div>
+            </div>
+        </f:for>
+    </div>
+    <f:else>
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i>No organizations found.
+        </div>
+    </f:else>
+</f:if>
+
+</html>

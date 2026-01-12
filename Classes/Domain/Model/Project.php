@@ -112,34 +112,16 @@ class Project extends AbstractEntity
     protected ?ObjectStorage $partners = null;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Department>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization>
      */
-    protected ?ObjectStorage $departments = null;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Chair>
-     */
-    protected ?ObjectStorage $chairs = null;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ResearchLab>
-     */
-    protected ?ObjectStorage $researchLabs = null;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ResearchGroup>
-     */
-    protected ?ObjectStorage $researchGroups = null;
+    protected ?ObjectStorage $organizations = null;
 
     public function __construct()
     {
         $this->beUsers = new ObjectStorage();
         $this->persons = new ObjectStorage();
         $this->partners = new ObjectStorage();
-        $this->departments = new ObjectStorage();
-        $this->chairs = new ObjectStorage();
-        $this->researchLabs = new ObjectStorage();
-        $this->researchGroups = new ObjectStorage();
+        $this->organizations = new ObjectStorage();
         $this->scientificFields = new ObjectStorage();
     }
 
@@ -338,67 +320,29 @@ class Project extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Department>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization>
      */
-    public function getDepartments(): ?ObjectStorage
+    public function getOrganizations(): ?ObjectStorage
     {
-        return $this->departments;
+        return $this->organizations;
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Department> $departments
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization> $organizations
      */
-    public function setDepartments(ObjectStorage $departments): void
+    public function setOrganizations(ObjectStorage $organizations): void
     {
-        $this->departments = $departments;
+        $this->organizations = $organizations;
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Chair>
-     */
-    public function getChairs(): ?ObjectStorage
+    public function addOrganization(Organization $organization): void
     {
-        return $this->chairs;
+        $this->organizations->attach($organization);
     }
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Chair> $chairs
-     */
-    public function setChairs(ObjectStorage $chairs): void
+    public function removeOrganization(Organization $organization): void
     {
-        $this->chairs = $chairs;
-    }
-
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ResearchLab>
-     */
-    public function getResearchLabs(): ?ObjectStorage
-    {
-        return $this->researchLabs;
-    }
-
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ResearchLab> $researchLabs
-     */
-    public function setResearchLabs(ObjectStorage $researchLabs): void
-    {
-        $this->researchLabs = $researchLabs;
-    }
-
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ResearchGroup>
-     */
-    public function getResearchGroups(): ?ObjectStorage
-    {
-        return $this->researchGroups;
-    }
-
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ResearchGroup> $researchGroups
-     */
-    public function setResearchGroups(ObjectStorage $researchGroups): void
-    {
-        $this->researchGroups = $researchGroups;
+        $this->organizations->detach($organization);
     }
 
     // CERIF-compatible attribute getters/setters

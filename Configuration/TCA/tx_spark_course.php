@@ -49,7 +49,7 @@ return [
                 --div--;General,
                     hidden, code, title, acronym, uuid, description, courseware_url,
                 --div--;Organization,
-                    department, chair,
+                    organization,
                 --div--;Syllabi,
                     syllabi,
                 --div--;External Courses,
@@ -178,29 +178,15 @@ return [
         ],
 
         // Organization
-        'department' => [
+        'organization' => [
             'exclude' => true,
             'l10n_mode' => 'exclude',
-            'label' => 'Department (Odsjek)',
+            'label' => 'Organization (Department/Chair)',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_spark_department',
-                'foreign_table_where' => 'ORDER BY title',
-                'items' => [['label' => '-- Select --', 'value' => 0]],
-                'minitems' => 0,
-                'maxitems' => 1,
-            ],
-        ],
-        'chair' => [
-            'exclude' => true,
-            'l10n_mode' => 'exclude',
-            'label' => 'Chair (Katedra)',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_spark_chair',
-                'foreign_table_where' => 'ORDER BY title',
+                'foreign_table' => 'tx_spark_organization',
+                'foreign_table_where' => 'AND {#tx_spark_organization}.{#sys_language_uid} IN (-1,0) ORDER BY title',
                 'items' => [['label' => '-- Select --', 'value' => 0]],
                 'minitems' => 0,
                 'maxitems' => 1,

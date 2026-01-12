@@ -3,13 +3,10 @@
         <sDEF>
             <ROOT>
                 <TCEforms>
-                    <sheetTitle>Settings</sheetTitle>
+                    <sheetTitle>General Settings</sheetTitle>
                 </TCEforms>
                 <type>array</type>
                 <el>
-
-
-                    <!-- Entity Type (Triggers Reload) -->
                     <settings.entityType>
                         <label>Entity Type</label>
                         <onChange>reload</onChange>
@@ -18,34 +15,22 @@
                             <renderType>selectSingle</renderType>
                             <items>
                                 <numIndex index="0">
-                                    <numIndex index="0">Department</numIndex>
-                                    <numIndex index="1">Department</numIndex>
+                                    <numIndex index="0">Organization</numIndex>
+                                    <numIndex index="1">Organization</numIndex>
                                 </numIndex>
                                 <numIndex index="1">
-                                    <numIndex index="0">Research Lab</numIndex>
-                                    <numIndex index="1">ResearchLab</numIndex>
-                                </numIndex>
-                                <numIndex index="2">
-                                    <numIndex index="0">Research Group</numIndex>
-                                    <numIndex index="1">ResearchGroup</numIndex>
-                                </numIndex>
-                                <numIndex index="3">
-                                    <numIndex index="0">Chair</numIndex>
-                                    <numIndex index="1">Chair</numIndex>
-                                </numIndex>
-                                <numIndex index="4">
                                     <numIndex index="0">Course</numIndex>
                                     <numIndex index="1">Course</numIndex>
                                 </numIndex>
-                                <numIndex index="5">
+                                <numIndex index="2">
                                     <numIndex index="0">Study Program</numIndex>
                                     <numIndex index="1">StudyProgram</numIndex>
                                 </numIndex>
-                                <numIndex index="6">
+                                <numIndex index="3">
                                     <numIndex index="0">Project</numIndex>
                                     <numIndex index="1">Project</numIndex>
                                 </numIndex>
-                                <numIndex index="7">
+                                <numIndex index="4">
                                     <numIndex index="0">Person</numIndex>
                                     <numIndex index="1">Person</numIndex>
                                 </numIndex>
@@ -53,54 +38,19 @@
                         </config>
                     </settings.entityType>
 
-                    <settings.select.department>
-                        <label>Select Department</label>
-                        <displayCond>FIELD:settings.entityType:=:Department</displayCond>
+                    <settings.select.organization>
+                        <label>Select Organization</label>
+                        <displayCond>FIELD:settings.entityType:=:Organization</displayCond>
                         <config>
                             <type>group</type>
                             <internal_type>db</internal_type>
-                            <allowed>tx_spark_department</allowed>
+                            <allowed>tx_spark_organization</allowed>
                             <size>1</size>
                             <maxitems>1</maxitems>
                             <minitems>0</minitems>
                         </config>
-                    </settings.select.department>
-                    <settings.select.researchlab>
-                        <label>Select Research Lab</label>
-                        <displayCond>FIELD:settings.entityType:=:ResearchLab</displayCond>
-                        <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>tx_spark_research_lab</allowed>
-                            <size>1</size>
-                            <maxitems>1</maxitems>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.select.researchlab>
-                    <settings.select.researchgroup>
-                        <label>Select Research Group</label>
-                        <displayCond>FIELD:settings.entityType:=:ResearchGroup</displayCond>
-                        <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>tx_spark_research_group</allowed>
-                            <size>1</size>
-                            <maxitems>1</maxitems>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.select.researchgroup>
-                    <settings.select.chair>
-                        <label>Select Chair</label>
-                        <displayCond>FIELD:settings.entityType:=:Chair</displayCond>
-                        <config>
-                            <type>group</type>
-                            <internal_type>db</internal_type>
-                            <allowed>tx_spark_chair</allowed>
-                            <size>1</size>
-                            <maxitems>1</maxitems>
-                            <minitems>0</minitems>
-                        </config>
-                    </settings.select.chair>
+                    </settings.select.organization>
+                    
                     <settings.select.course>
                         <label>Select Course</label>
                         <displayCond>FIELD:settings.entityType:=:Course</displayCond>
@@ -113,6 +63,7 @@
                             <minitems>0</minitems>
                         </config>
                     </settings.select.course>
+
                     <settings.select.studyprogram>
                         <label>Select Study Program</label>
                         <displayCond>FIELD:settings.entityType:=:StudyProgram</displayCond>
@@ -125,6 +76,7 @@
                             <minitems>0</minitems>
                         </config>
                     </settings.select.studyprogram>
+
                     <settings.select.project>
                         <label>Select Project</label>
                         <displayCond>FIELD:settings.entityType:=:Project</displayCond>
@@ -137,6 +89,7 @@
                             <minitems>0</minitems>
                         </config>
                     </settings.select.project>
+
                     <settings.select.person>
                         <label>Select Person</label>
                         <displayCond>FIELD:settings.entityType:=:Person</displayCond>
@@ -149,6 +102,19 @@
                             <minitems>0</minitems>
                         </config>
                     </settings.select.person>
+
+                    <settings.listPid>
+                        <label>List Page (for back links)</label>
+                        <config>
+                            <type>group</type>
+                            <internal_type>db</internal_type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                            <show_thumbs>1</show_thumbs>
+                        </config>
+                    </settings.listPid>
                 </el>
             </ROOT>
         </sDEF>

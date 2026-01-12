@@ -1,0 +1,22 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:layout name="Backend/Default" />
+
+<f:section name="Content">
+    <f:render partial="Backend/SimpleFilter" arguments="{searchFields: 'title,acronym', demand: demand}" />
+
+    <f:render partial="Backend/SimpleListTable" arguments="{
+        items: items,
+        columns: {
+            0: {propertyPath: 'title', label: 'Title'},
+            1: {propertyPath: 'acronym', label: 'Acronym'},
+            2: {propertyPath: 'type.title', label: 'Type'}
+        },
+        tableName: 'tx_spark_organization',
+        canCreate: canCreate,
+        createLabel: 'Create New Organization'
+    }" />
+</f:section>
+
+</html>

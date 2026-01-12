@@ -1,51 +1,50 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
-<div class="card mb-4">
+<!--
+    Backend Project Filter - Normalized Design
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
+<div class="card card-default mb-4">
     <div class="card-body">
-        <f:form action="list" method="post" name="filter" object="{filter}" noCacheHash="true">
-            <div class="row g-3 align-items-end">
-                <div class="col-md-3">
-                    <label class="form-label small text-muted">Search</label>
-                    <f:form.textfield property="search" class="form-control" placeholder="Search title..." />
-                </div>
-                <div class="col-md-2">
-                    <label class="form-label small text-muted">Status</label>
-                    <f:form.select property="status" options="{availableStatuses}" optionLabelField="title"
-                        optionValueField="uid" class="form-select" prependOptionLabel="All Statuses"
-                        prependOptionValue="" />
-                </div>
-                <div class="col-md-2">
-                    <label class="form-label small text-muted">Type</label>
-                    <f:form.select property="type" options="{availableTypes}" optionLabelField="title"
-                        optionValueField="uid" class="form-select" prependOptionLabel="All Types"
-                        prependOptionValue="" />
-                </div>
-                <div class="col-md-2">
-                    <label class="form-label small text-muted">Program</label>
-                    <f:form.select property="program" options="{availablePrograms}" optionLabelField="title"
-                        optionValueField="uid" class="form-select" prependOptionLabel="All Programs"
-                        prependOptionValue="" />
-                </div>
-                <div class="col-md-2">
-                    <label class="form-label small text-muted">Field</label>
-                    <f:form.select property="field" options="{availableFields}" optionLabelField="title"
-                        optionValueField="uid" class="form-select" prependOptionLabel="All Fields"
-                        prependOptionValue="" />
-                </div>
-                <div class="col-md-1">
-                    <f:form.submit value="Filter" class="btn btn-primary w-100" />
-                </div>
+        <f:form action="list" method="post" noCacheHash="true" class="row g-3 align-items-end">
+            <!-- Search -->
+            <div class="col-md-3">
+                <label class="form-label" for="filter-search">Search</label>
+                <f:form.textfield id="filter-search" name="filter[search]" value="{filter.search}"
+                    placeholder="Title..." class="form-control form-control-sm" />
             </div>
 
-            <!-- Reset Filters -->
-            <f:if condition="{filter.search} || {filter.status} || {filter.type} || {filter.program} || {filter.field}">
-                <div class="mt-2">
-                    <f:link.action action="list" class="btn btn-sm btn-outline-secondary">
-                        <core:icon identifier="actions-close" size="small" /> Reset Filters
-                    </f:link.action>
-                </div>
-            </f:if>
+            <!-- Project Status -->
+            <div class="col-md-2">
+                <label class="form-label" for="filter-projectStatus">Status</label>
+                <f:form.select id="filter-projectStatus" name="filter[projectStatus]" options="{availableStatuses}"
+                    optionValueField="uid" optionLabelField="title" prependOptionLabel="All" prependOptionValue=""
+                    value="{filter.projectStatus}" class="form-select form-select-sm" />
+            </div>
 
+            <!-- Project Type -->
+            <div class="col-md-2">
+                <label class="form-label" for="filter-projectType">Type</label>
+                <f:form.select id="filter-projectType" name="filter[projectType]" options="{availableTypes}"
+                    optionValueField="uid" optionLabelField="title" prependOptionLabel="All" prependOptionValue=""
+                    value="{filter.projectType}" class="form-select form-select-sm" />
+            </div>
+
+            <!-- Funding Program -->
+            <div class="col-md-2">
+                <label class="form-label" for="filter-fundingProgram">Program</label>
+                <f:form.select id="filter-fundingProgram" name="filter[fundingProgram]" options="{availablePrograms}"
+                    optionValueField="uid" optionLabelField="title" prependOptionLabel="All" prependOptionValue=""
+                    value="{filter.fundingProgram}" class="form-select form-select-sm" />
+            </div>
+
+            <!-- Buttons -->
+            <div class="col-md-3 d-flex gap-2">
+                <f:form.submit value="Filter" class="btn btn-primary btn-sm" />
+                <f:link.action action="list" class="btn btn-outline-secondary btn-sm">
+                    <core:icon identifier="actions-close" size="small" /> Reset
+                </f:link.action>
+            </div>
         </f:form>
     </div>
 </div>

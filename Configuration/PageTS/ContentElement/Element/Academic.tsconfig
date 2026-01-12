@@ -1,6 +1,6 @@
 # Configuration for Spark Academics View Types
 # This file controls the available options in the "View Type" dropdown
-# for both the List (Pi1) and Detail (Pi2) plugins.
+# for each entity type in the Academic List Plugin (Pi1).
 #
 # Documentation:
 # Use 'addItems' to add new view types to the dropdown.
@@ -8,26 +8,70 @@
 # - Key:   Used in file paths (e.g., Partials/Academic/Entities/Person/List/Key.html)
 # - Label: Visible in the backend dropdown
 #
-# IMPORTANT: The field name "settings.viewType" contains a dot, 
-# so it MUST be escaped as "settings\.viewType" in TSConfig.
+# IMPORTANT: Field names containing dots MUST be escaped with backslash.
 #
 # Author: Ernedin Zajko <ezajko@root.ba>
 
 # --------------------------------------------------------------------------
-# List Plugin (Pi1)
+# View Types Configuration per Entity Sheet
 # --------------------------------------------------------------------------
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sDEF.settings\.viewType {
+
+# Organization ViewTypes (sOrganization sheet)
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sOrganization.settings\.view\.viewType {
     addItems {
-        Default = Default
+        Default = Default (Cards)
+        List = List (Table)
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+# Person ViewTypes (sPerson sheet)
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sPerson.settings\.view\.viewType {
+    addItems {
+        Default = Default (Grid)
+        List = List (Table)
+        Card = Card
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+# Course ViewTypes (sCourse sheet)
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sCourse.settings\.view\.viewType {
+    addItems {
+        Default = Default (Grid)
+        List = List (Table)
+        Card = Card
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+# StudyProgram ViewTypes (sStudyProgram sheet)
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sStudyProgram.settings\.view\.viewType {
+    addItems {
+        Default = Default (Grid)
+        List = List (Table)
+        Card = Card
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+# Project ViewTypes (sProject sheet)
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sProject.settings\.view\.viewType {
+    addItems {
+        Default = Default (Grid)
         Simple = Simple
         Debug = Debug
     }
 }
 
 # --------------------------------------------------------------------------
-# Detail Plugin (Pi2)
+# Detail Plugin (Pi2) - Generally uses Default view
 # --------------------------------------------------------------------------
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi2.sDEF.settings\.viewType {
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi2.sDEF.settings\.view\.viewType {
     addItems {
         Default = Default
         Simple = Simple

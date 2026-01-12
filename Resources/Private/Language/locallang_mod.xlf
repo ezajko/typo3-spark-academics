@@ -9,6 +9,9 @@
 			<trans-unit id="person">
 				<source>People</source>
 			</trans-unit>
+			<trans-unit id="organization">
+				<source>Organizations</source>
+			</trans-unit>
 			<trans-unit id="department">
 				<source>Departments</source>
 			</trans-unit>

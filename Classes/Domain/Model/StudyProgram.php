@@ -17,6 +17,12 @@ use TYPO3\CMS\Beuser\Domain\Model\BackendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
+/**
+ * StudyProgram domain model
+ * Represents an academic study program (Bachelor, Master, PhD, etc.)
+ * 
+ * @author Ernedin Zajko <ezajko@root.ba>
+ */
 class StudyProgram extends AbstractEntity
 {
     protected string $title = '';
@@ -26,14 +32,10 @@ class StudyProgram extends AbstractEntity
     protected int $landingPage = 0;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Department>
+     * Organizations (unified, replaces deprecated departments/chairs)
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization>
      */
-    protected ?ObjectStorage $departments = null;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Chair>
-     */
-    protected ?ObjectStorage $chairs = null;
+    protected ?ObjectStorage $organizations = null;
 
     protected ?StudyCycle $studyCycle = null;
     protected ?ScientificField $scientificField = null;
@@ -76,8 +78,7 @@ class StudyProgram extends AbstractEntity
     {
         $this->beUsers = new ObjectStorage();
         $this->persons = new ObjectStorage();
-        $this->departments = new ObjectStorage();
-        $this->chairs = new ObjectStorage();
+        $this->organizations = new ObjectStorage();
         $this->studyTypes = new ObjectStorage();
         $this->modesOfStudy = new ObjectStorage();
         $this->languages = new ObjectStorage();
@@ -155,6 +156,7 @@ class StudyProgram extends AbstractEntity
     {
         $this->persons = $persons;
     }
+
     public function getLandingPage(): int
     {
         return $this->landingPage;
@@ -166,35 +168,30 @@ class StudyProgram extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Department>
+     * Organizations (unified, replaces deprecated departments/chairs)
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization>
      */
-    public function getDepartments(): ?ObjectStorage
+    public function getOrganizations(): ?ObjectStorage
     {
-        return $this->departments;
+        return $this->organizations;
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Department> $departments
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization> $organizations
      */
-    public function setDepartments(ObjectStorage $departments): void
+    public function setOrganizations(ObjectStorage $organizations): void
     {
-        $this->departments = $departments;
+        $this->organizations = $organizations;
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Chair>
-     */
-    public function getChairs(): ?ObjectStorage
+    public function addOrganization(Organization $organization): void
     {
-        return $this->chairs;
+        $this->organizations->attach($organization);
     }
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Chair> $chairs
-     */
-    public function setChairs(ObjectStorage $chairs): void
+    public function removeOrganization(Organization $organization): void
     {
-        $this->chairs = $chairs;
+        $this->organizations->detach($organization);
     }
 
     public function getStudyCycle(): ?StudyCycle

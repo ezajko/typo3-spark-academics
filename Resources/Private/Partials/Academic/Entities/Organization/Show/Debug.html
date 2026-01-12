@@ -1,0 +1,23 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<!--
+    Organization Show/Debug Template
+    Debug view showing all available data for single item
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
+<div class="card border-warning">
+    <div class="card-header bg-warning text-dark">
+        <i class="bi bi-bug me-2"></i>Debug View - Organization Detail
+    </div>
+    <div class="card-body">
+        <h5>Settings</h5>
+        <f:debug title="Settings">{settings}</f:debug>
+
+        <h5 class="mt-4">Item: {item.title}</h5>
+        <f:debug title="Item">{item}</f:debug>
+
+        <h5 class="mt-4">All Variables</h5>
+        <f:debug title="All Variables">{_all}</f:debug>
+    </div>
+</div>
+
+</html>

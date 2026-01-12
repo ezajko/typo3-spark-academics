@@ -13,57 +13,32 @@ declare(strict_types=1);
 
 namespace EtfUnsa\SparkAcademics\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+
 /**
- * Repository for Person
+ * Repository for Person entities
+ * 
+ * Supports filtering by organization, academic rank/title, and text search
+ * across name and email fields.
  * 
  * @author Ernedin Zajko <ezajko@root.ba>
  */
 class PersonRepository extends AbstractRepository
 {
     /**
-     * Default ordering for Person lists: by last name, then first name
+     * Fields to search in for text queries
+     */
+    protected array $searchFields = [
+        'firstName',
+        'lastName',
+        'contactEmail',
+    ];
+
+    /**
+     * Default ordering: by last name, then first name
      */
     protected $defaultOrderings = [
-        'lastName' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
-        'firstName' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+        'lastName' => QueryInterface::ORDER_ASCENDING,
+        'firstName' => QueryInterface::ORDER_ASCENDING,
     ];
-    public function findByPersonDemand(\EtfUnsa\SparkAcademics\Domain\Model\Dto\PersonDemand $demand, array $orderings = []): \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-    {
-        $query = $this->createQuery();
-        $constraints = [];
-
-        if ($demand->getSearch() !== '') {
-            $constraints[] = $query->logicalOr(
-                $query->like('firstName', '%' . $demand->getSearch() . '%'),
-                $query->like('lastName', '%' . $demand->getSearch() . '%'),
-                $query->like('contactEmail', '%' . $demand->getSearch() . '%')
-            );
-        }
-
-        if ($demand->getDepartment() > 0) {
-            $constraints[] = $query->equals('primaryDepartment', $demand->getDepartment());
-        }
-
-        if ($demand->getAcademicRank() > 0) {
-            $constraints[] = $query->equals('academicRank', $demand->getAcademicRank());
-        }
-
-        if ($demand->getAcademicTitle() > 0) {
-            $constraints[] = $query->equals('academicTitle', $demand->getAcademicTitle());
-        }
-
-        if ($demand->getBackendUser() > 0) {
-            $constraints[] = $query->contains('beUsers', $demand->getBackendUser());
-        }
-
-        if (!empty($constraints)) {
-            $query->matching($query->logicalAnd(...$constraints));
-        }
-
-        if (!empty($orderings)) {
-            $query->setOrderings($orderings);
-        }
-
-        return $query->execute();
-    }
 }

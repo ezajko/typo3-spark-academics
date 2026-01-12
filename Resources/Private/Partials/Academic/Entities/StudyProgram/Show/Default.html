@@ -299,20 +299,15 @@
         <!-- Sidebar -->
         <div class="col-lg-4">
             <div class="card shadow-sm border-0 mb-4">
-                <div class="card-header bg-white fw-bold">Organization</div>
+                <div class="card-header bg-white fw-bold">Organizations</div>
                 <div class="list-group list-group-flush">
-                    <div class="list-group-item">
-                        <small class="d-block text-muted">Departments</small>
-                        <f:for each="{item.departments}" as="dept">
-                            <div class="fw-medium">{dept.title}</div>
+                    <f:if condition="{item.organizations}">
+                        <f:for each="{item.organizations}" as="org">
+                            <div class="list-group-item">
+                                <div class="fw-medium">{org.title}</div>
+                            </div>
                         </f:for>
-                    </div>
-                    <div class="list-group-item">
-                        <small class="d-block text-muted">Chairs</small>
-                        <f:for each="{item.chairs}" as="chair">
-                            <div>{chair.title}</div>
-                        </f:for>
-                    </div>
+                    </f:if>
                 </div>
             </div>
 

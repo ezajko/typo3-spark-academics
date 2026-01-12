@@ -7,100 +7,21 @@
         </TCEforms>
         <type>array</type>
         <el>
-            <settings.filter.primaryDepartment>
-                <label>Primary Department</label>
+            <settings.filter.organization>
+                <label>Organization (Any)</label>
                 <config>
                     <type>select</type>
                     <renderType>selectSingle</renderType>
-                    <foreign_table>tx_spark_department</foreign_table>
+                    <foreign_table>tx_spark_organization</foreign_table>
                     <items>
                         <numIndex index="0">
-                            <label>-- All Departments --</label>
+                            <label>-- All Organizations --</label>
                             <value>0</value>
                         </numIndex>
                     </items>
                     <minitems>0</minitems>
                 </config>
-            </settings.filter.primaryDepartment>
-
-            <settings.filter.academicRank>
-                <label>Filter by Academic Rank</label>
-                <config>
-                    <type>select</type>
-                    <renderType>selectSingle</renderType>
-                    <items>
-                        <numIndex index="0">
-                            <numIndex index="0">All Ranks</numIndex>
-                            <numIndex index="1">0</numIndex>
-                        </numIndex>
-                    </items>
-                    <foreign_table>tx_spark_academic_rank</foreign_table>
-                </config>
-            </settings.filter.academicRank>
-
-            <settings.filter.department>
-                <label>Department (Any)</label>
-                <config>
-                    <type>select</type>
-                    <renderType>selectSingle</renderType>
-                    <foreign_table>tx_spark_department</foreign_table>
-                    <items>
-                        <numIndex index="0">
-                            <label>-- All Departments --</label>
-                            <value>0</value>
-                        </numIndex>
-                    </items>
-                    <minitems>0</minitems>
-                </config>
-            </settings.filter.department>
-
-            <settings.filter.researchGroup>
-                <label>Filter by Research Group</label>
-                <config>
-                    <type>select</type>
-                    <renderType>selectSingle</renderType>
-                    <foreign_table>tx_spark_research_group</foreign_table>
-                    <items>
-                        <numIndex index="0">
-                            <label>-- All Groups --</label>
-                            <value>0</value>
-                        </numIndex>
-                    </items>
-                    <minitems>0</minitems>
-                </config>
-            </settings.filter.researchGroup>
-
-            <settings.filter.researchLab>
-                <label>Filter by Research Lab</label>
-                <config>
-                    <type>select</type>
-                    <renderType>selectSingle</renderType>
-                    <foreign_table>tx_spark_research_lab</foreign_table>
-                    <items>
-                        <numIndex index="0">
-                            <label>-- All Labs --</label>
-                            <value>0</value>
-                        </numIndex>
-                    </items>
-                    <minitems>0</minitems>
-                </config>
-            </settings.filter.researchLab>
-
-            <settings.filter.chair>
-                <label>Filter by Chair</label>
-                <config>
-                    <type>select</type>
-                    <renderType>selectSingle</renderType>
-                    <foreign_table>tx_spark_chair</foreign_table>
-                    <items>
-                        <numIndex index="0">
-                            <label>-- All Chairs --</label>
-                            <value>0</value>
-                        </numIndex>
-                    </items>
-                    <minitems>0</minitems>
-                </config>
-            </settings.filter.chair>
+            </settings.filter.organization>
 
             <settings.select.person>
                 <label>Select Persons</label>

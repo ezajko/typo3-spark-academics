@@ -37,8 +37,9 @@
                                     <small class="text-muted">{itemData.item.uuid}</small>
                                 </td>
                                 <td class="align-middle">
-                                    <f:if condition="{itemData.item.primaryDepartment}">
-                                        <span class="badge bg-secondary">{itemData.item.primaryDepartment.title}</span>
+                                    <f:if condition="{itemData.item.primaryOrganization}">
+                                        <span
+                                            class="badge bg-secondary">{itemData.item.primaryOrganization.title}</span>
                                     </f:if>
                                     <f:if condition="{itemData.item.academicTitle}">
                                         <small class="d-block text-muted">{itemData.item.academicTitle.title}</small>

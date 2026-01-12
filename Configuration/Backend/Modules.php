@@ -31,54 +31,15 @@ return [
             ],
         ],
     ],
-    'spark_academics_department' => [
+    'spark_academics_organization' => [
         'parent' => 'academic',
         'access' => 'user',
         'workspaces' => '*',
-        'path' => '/module/academic/spark-academics-department',
-        'labels' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf:department',
+        'path' => '/module/academic/spark-academics-organization',
+        'labels' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf:organization',
         'extensionName' => 'SparkAcademics',
         'controllerActions' => [
-            \EtfUnsa\SparkAcademics\Controller\Backend\DepartmentController::class => [
-                'list', 'edit', 'update'
-            ],
-        ],
-    ],
-    'spark_academics_lab' => [
-        'parent' => 'academic',
-        'access' => 'user',
-        'workspaces' => '*',
-        'path' => '/module/academic/spark-academics-lab',
-        'labels' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf:lab',
-        'extensionName' => 'SparkAcademics',
-        'controllerActions' => [
-            \EtfUnsa\SparkAcademics\Controller\Backend\ResearchLabController::class => [
-                'list', 'edit', 'update'
-            ],
-        ],
-    ],
-    'spark_academics_group' => [
-        'parent' => 'academic',
-        'access' => 'user',
-        'workspaces' => '*',
-        'path' => '/module/academic/spark-academics-group',
-        'labels' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf:group',
-        'extensionName' => 'SparkAcademics',
-        'controllerActions' => [
-            \EtfUnsa\SparkAcademics\Controller\Backend\ResearchGroupController::class => [
-                'list', 'edit', 'update'
-            ],
-        ],
-    ],
-    'spark_academics_chair' => [
-        'parent' => 'academic',
-        'access' => 'user',
-        'workspaces' => '*',
-        'path' => '/module/academic/spark-academics-chair',
-        'labels' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf:chair',
-        'extensionName' => 'SparkAcademics',
-        'controllerActions' => [
-            \EtfUnsa\SparkAcademics\Controller\Backend\ChairController::class => [
+            \EtfUnsa\SparkAcademics\Controller\Backend\OrganizationController::class => [
                 'list', 'edit', 'update'
             ],
         ],

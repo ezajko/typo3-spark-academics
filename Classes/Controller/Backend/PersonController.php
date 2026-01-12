@@ -16,8 +16,8 @@ namespace EtfUnsa\SparkAcademics\Controller\Backend;
 use EtfUnsa\SparkAcademics\Domain\Repository\PersonRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\AcademicRankRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\AcademicTitleRepository;
-use EtfUnsa\SparkAcademics\Domain\Repository\DepartmentRepository;
-use EtfUnsa\SparkAcademics\Domain\Model\Dto\PersonDemand;
+use EtfUnsa\SparkAcademics\Domain\Repository\OrganizationRepository;
+use EtfUnsa\SparkAcademics\Service\DemandFactory;
 use EtfUnsa\SparkAcademics\Service\BackendPermissionService;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -31,34 +31,42 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
+/**
+ * Backend controller for Person entity management
+ * 
+ * @author Ernedin Zajko <ezajko@root.ba>
+ */
 class PersonController extends AbstractBackendController
 {
     protected AcademicRankRepository $academicRankRepository;
     protected AcademicTitleRepository $academicTitleRepository;
-    protected DepartmentRepository $departmentRepository;
+    protected OrganizationRepository $organizationRepository;
     protected BackendPermissionService $backendPermissionService;
     protected IconFactory $iconFactory;
     protected SiteFinder $siteFinder;
+    protected DemandFactory $demandFactory;
 
     public function __construct(
         PersonRepository $personRepository,
         AcademicRankRepository $academicRankRepository,
         AcademicTitleRepository $academicTitleRepository,
-        DepartmentRepository $departmentRepository,
+        OrganizationRepository $organizationRepository,
         BackendPermissionService $backendPermissionService,
         ModuleTemplateFactory $moduleTemplateFactory,
         UriBuilder $backendUriBuilder,
         IconFactory $iconFactory,
-        SiteFinder $siteFinder
+        SiteFinder $siteFinder,
+        DemandFactory $demandFactory
     ) {
         parent::__construct($moduleTemplateFactory, $backendUriBuilder);
         $this->repository = $personRepository;
         $this->academicRankRepository = $academicRankRepository;
         $this->academicTitleRepository = $academicTitleRepository;
-        $this->departmentRepository = $departmentRepository;
+        $this->organizationRepository = $organizationRepository;
         $this->backendPermissionService = $backendPermissionService;
         $this->iconFactory = $iconFactory;
         $this->siteFinder = $siteFinder;
+        $this->demandFactory = $demandFactory;
         $this->tableName = 'tx_spark_person';
     }
 
@@ -95,7 +103,7 @@ class PersonController extends AbstractBackendController
         $queryParams = $this->request->getQueryParams();
         $postParams = $this->request->getParsedBody() ?? [];
         
-        // Filter can come from POST (form submit) or GET (sort/pagination links)
+        // Build filter array for DemandFactory
         $filter = $postParams['filter'] ?? $queryParams['filter'] ?? [];
         $sort = $queryParams['sort'] ?? 'lastName';
         $direction = $queryParams['direction'] ?? 'asc';
@@ -104,30 +112,20 @@ class PersonController extends AbstractBackendController
             $currentPage = 1;
         }
 
-        $demand = new PersonDemand();
-        if (!empty($filter['search'])) {
-            $demand->setSearch($filter['search']);
-        }
-        if (!empty($filter['department'])) {
-            $demand->setDepartment((int)$filter['department']);
-        }
-        if (!empty($filter['rank'])) {
-            $demand->setAcademicRank((int)$filter['rank']);
-        }
-        if (!empty($filter['title'])) {
-            $demand->setAcademicTitle((int)$filter['title']);
-        }
-
-        // Check Permissions
+        // Check Permissions first (may add backendUser to filter)
         $canManage = $this->backendPermissionService->canViewAllRecords('spark_perm_person_groups');
-
         if (!$canManage) {
-             $demand->setBackendUser((int)$currentBeUser['uid']);
+            $filter['backendUser'] = (int)$currentBeUser['uid'];
         }
 
-        $orderings = [$sort => $direction === 'asc' ? \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING : \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING];
+        // Create demand using factory
+        $demand = $this->demandFactory->createPersonDemand([], $filter);
+        
+        // Apply orderings
+        $orderings = [$sort => $direction === 'asc' ? QueryInterface::ORDER_ASCENDING : QueryInterface::ORDER_DESCENDING];
+        $demand->setOrderings($orderings);
 
-        $items = $this->repository->findByPersonDemand($demand, $orderings);
+        $items = $this->repository->findByDemand($demand);
 
         $paginator = new \TYPO3\CMS\Extbase\Pagination\QueryResultPaginator($items, $currentPage, 20);
         $pagination = new SlidingWindowPagination($paginator, 5);
@@ -149,7 +147,8 @@ class PersonController extends AbstractBackendController
             'direction' => $direction,
         ];
         
-        $this->additionalViewVariables['availableDepartments'] = $this->getDepartments();
+        // Organization options (unified, replaces department)
+        $this->additionalViewVariables['availableOrganizations'] = $this->getOrganizations();
         $this->additionalViewVariables['availableRanks'] = $this->getRanks();
         $this->additionalViewVariables['availableTitles'] = $this->getTitles();
 
@@ -193,10 +192,10 @@ class PersonController extends AbstractBackendController
         $buttonBar->addButton($newButton, ButtonBar::BUTTON_POSITION_LEFT);
     }
 
-    protected function getDepartments(): array
+    protected function getOrganizations(): array
     {
-        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_spark_department');
-        return $q->select('uid', 'title')->from('tx_spark_department')->orderBy('title')->executeQuery()->fetchAllAssociative();
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_spark_organization');
+        return $q->select('uid', 'title')->from('tx_spark_organization')->orderBy('title')->executeQuery()->fetchAllAssociative();
     }
 
     protected function getRanks(): array

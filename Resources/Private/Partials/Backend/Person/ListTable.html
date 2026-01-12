@@ -21,7 +21,7 @@
                 </th>
                 <th>Academic Title</th>
                 <th>Academic Rank</th>
-                <th>Primary Dept</th>
+                <th>Primary Org</th>
                 <th>Contact</th>
                 <th>Actions</th>
             </tr>
@@ -43,8 +43,8 @@
                         </f:if>
                     </td>
                     <td>
-                        <f:if condition="{row.item.primaryDepartment}">
-                            {row.item.primaryDepartment.title}
+                        <f:if condition="{row.item.primaryOrganization}">
+                            {row.item.primaryOrganization.title}
                         </f:if>
                     </td>
                     <td>

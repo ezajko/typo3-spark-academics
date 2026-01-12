@@ -75,11 +75,8 @@
 
 <div class="organization">
     <h4>Organization</h4>
-    <f:if condition="{item.department}">
-        <p>Department: {item.department.title}</p>
-    </f:if>
-    <f:if condition="{item.chair}">
-        <p>Chair: {item.chair.title}</p>
+    <f:if condition="{item.organization}">
+        <p>{item.organization.title}</p>
     </f:if>
 </div>
 

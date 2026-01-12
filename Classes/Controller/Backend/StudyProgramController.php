@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace EtfUnsa\SparkAcademics\Controller\Backend;
 
 use EtfUnsa\SparkAcademics\Domain\Repository\StudyProgramRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\OrganizationRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\StudyCycleRepository;
 use EtfUnsa\SparkAcademics\Service\BackendPermissionService;
+use EtfUnsa\SparkAcademics\Service\DemandFactory;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
@@ -22,13 +25,6 @@ use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Site\SiteFinder;
-use EtfUnsa\SparkAcademics\Domain\Repository\DepartmentRepository;
-use EtfUnsa\SparkAcademics\Domain\Repository\ChairRepository;
-use EtfUnsa\SparkAcademics\Domain\Repository\StudyCycleRepository;
-use EtfUnsa\SparkAcademics\Service\DemandService;
-use EtfUnsa\SparkAcademics\Domain\Model\Dto\Demand;
-
-
 
 /**
  * Backend controller for Study Program entity management
@@ -41,9 +37,8 @@ class StudyProgramController extends AbstractBackendController
     protected BackendPermissionService $backendPermissionService;
     protected IconFactory $iconFactory;
     protected SiteFinder $siteFinder;
-    protected DemandService $demandService;
-    protected DepartmentRepository $departmentRepository;
-    protected ChairRepository $chairRepository;
+    protected DemandFactory $demandFactory;
+    protected OrganizationRepository $organizationRepository;
     protected StudyCycleRepository $studyCycleRepository;
 
     public function __construct(
@@ -53,9 +48,8 @@ class StudyProgramController extends AbstractBackendController
         UriBuilder $backendUriBuilder,
         IconFactory $iconFactory,
         SiteFinder $siteFinder,
-        DemandService $demandService,
-        DepartmentRepository $departmentRepository,
-        ChairRepository $chairRepository,
+        DemandFactory $demandFactory,
+        OrganizationRepository $organizationRepository,
         StudyCycleRepository $studyCycleRepository
     ) {
         parent::__construct($moduleTemplateFactory, $backendUriBuilder);
@@ -63,9 +57,8 @@ class StudyProgramController extends AbstractBackendController
         $this->backendPermissionService = $backendPermissionService;
         $this->iconFactory = $iconFactory;
         $this->siteFinder = $siteFinder;
-        $this->demandService = $demandService;
-        $this->departmentRepository = $departmentRepository;
-        $this->chairRepository = $chairRepository;
+        $this->demandFactory = $demandFactory;
+        $this->organizationRepository = $organizationRepository;
         $this->studyCycleRepository = $studyCycleRepository;
         $this->tableName = 'tx_spark_study_program';
     }
@@ -101,21 +94,8 @@ class StudyProgramController extends AbstractBackendController
         $postParams = $this->request->getParsedBody() ?? [];
         $filter = $postParams['filter'] ?? $queryParams['filter'] ?? [];
 
-        // Build Demand object
-        $demand = new Demand();
-        
-        if (!empty($filter['search'])) {
-            $demand->setSearch($filter['search']);
-        }
-        if (!empty($filter['department'])) {
-            $demand->addFilter('department', (int)$filter['department']);
-        }
-        if (!empty($filter['chair'])) {
-            $demand->addFilter('chair', (int)$filter['chair']);
-        }
-        if (!empty($filter['study_cycle'])) {
-            $demand->addFilter('studyCycle', (int)$filter['study_cycle']);
-        }
+        // Build Demand object using DemandFactory
+        $demand = $this->demandFactory->createStudyProgramDemand([], $filter);
 
         // Execute Query
         $items = $this->repository->findByDemand($demand);
@@ -138,14 +118,10 @@ class StudyProgramController extends AbstractBackendController
         $moduleTemplate->assign('filter', $filter);
         $moduleTemplate->assign('canManage', $canManage);
         
-        // Assign options for filters
-        $deptQuery = $this->departmentRepository->createQuery();
-        $deptQuery->getQuerySettings()->setRespectStoragePage(false);
-        $moduleTemplate->assign('availableDepartments', $deptQuery->execute());
-
-        $chairQuery = $this->chairRepository->createQuery();
-        $chairQuery->getQuerySettings()->setRespectStoragePage(false);
-        $moduleTemplate->assign('availableChairs', $chairQuery->execute());
+        // Assign options for filters - Organization (unified, replaces department/chair)
+        $orgQuery = $this->organizationRepository->createQuery();
+        $orgQuery->getQuerySettings()->setRespectStoragePage(false);
+        $moduleTemplate->assign('availableOrganizations', $orgQuery->execute());
 
         $cycleQuery = $this->studyCycleRepository->createQuery();
         $cycleQuery->getQuerySettings()->setRespectStoragePage(false);

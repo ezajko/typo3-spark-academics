@@ -212,35 +212,13 @@
         </section>
     </f:if>
 
-    <!-- Related: Departments, Labs, Groups -->
-    <f:if condition="{item.departments}">
+    <!-- Related: Organizations -->
+    <f:if condition="{item.organizations}">
         <section class="mt-4">
-            <h4>Departments</h4>
+            <h4>Organizations</h4>
             <ul class="list-inline">
-                <f:for each="{item.departments}" as="dept">
-                    <li class="list-inline-item"><span class="badge bg-secondary">{dept.title}</span></li>
-                </f:for>
-            </ul>
-        </section>
-    </f:if>
-
-    <f:if condition="{item.researchLabs}">
-        <section class="mt-4">
-            <h4>Research Labs</h4>
-            <ul class="list-inline">
-                <f:for each="{item.researchLabs}" as="lab">
-                    <li class="list-inline-item"><span class="badge bg-secondary">{lab.title}</span></li>
-                </f:for>
-            </ul>
-        </section>
-    </f:if>
-
-    <f:if condition="{item.researchGroups}">
-        <section class="mt-4">
-            <h4>Research Groups</h4>
-            <ul class="list-inline">
-                <f:for each="{item.researchGroups}" as="group">
-                    <li class="list-inline-item"><span class="badge bg-secondary">{group.title}</span></li>
+                <f:for each="{item.organizations}" as="org">
+                    <li class="list-inline-item"><span class="badge bg-secondary">{org.title}</span></li>
                 </f:for>
             </ul>
         </section>

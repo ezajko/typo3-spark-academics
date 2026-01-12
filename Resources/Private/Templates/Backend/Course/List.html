@@ -2,7 +2,7 @@
     xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
 <!--
     Course Backend List Template
-    Shows Course list with Department, Chair, Syllabus count
+    Shows Course list with Organization, Syllabus count
     
     Author: Ernedin Zajko <ezajko@root.ba>
 -->
@@ -24,8 +24,7 @@
                             <tr>
                                 <th>Code</th>
                                 <th>Title</th>
-                                <th>Department</th>
-                                <th>Chair</th>
+                                <th>Organization</th>
                                 <th>Syllabi</th>
                                 <th style="width: 100px;">Actions</th>
                             </tr>
@@ -55,17 +54,10 @@
                                         </f:if>
                                     </td>
 
-                                    <!-- Department -->
+                                    <!-- Organization -->
                                     <td class="align-middle">
-                                        <f:if condition="{itemData.item.department}">
-                                            <small>{itemData.item.department.title}</small>
-                                        </f:if>
-                                    </td>
-
-                                    <!-- Chair -->
-                                    <td class="align-middle">
-                                        <f:if condition="{itemData.item.chair}">
-                                            <small>{itemData.item.chair.title}</small>
+                                        <f:if condition="{itemData.item.organization}">
+                                            <small>{itemData.item.organization.title}</small>
                                         </f:if>
                                     </td>
 

@@ -53,69 +53,21 @@
             </settings.filter.fundingProgram>
 
             <!-- Organizational Filters for Projects -->
-             <settings.filter.department>
-                <label>Department (Any)</label>
+            <settings.filter.organization>
+                <label>Filter by Organization</label>
                 <config>
                     <type>select</type>
                     <renderType>selectSingle</renderType>
-                    <foreign_table>tx_spark_department</foreign_table>
+                    <foreign_table>tx_spark_organization</foreign_table>
                     <items>
                         <numIndex index="0">
-                            <label>-- All Departments --</label>
+                            <label>-- All Organizations --</label>
                             <value>0</value>
                         </numIndex>
                     </items>
                     <minitems>0</minitems>
                 </config>
-            </settings.filter.department>
-
-            <settings.filter.researchGroup>
-                <label>Filter by Research Group</label>
-                <config>
-                    <type>select</type>
-                    <renderType>selectSingle</renderType>
-                    <foreign_table>tx_spark_research_group</foreign_table>
-                    <items>
-                        <numIndex index="0">
-                            <label>-- All Groups --</label>
-                            <value>0</value>
-                        </numIndex>
-                    </items>
-                    <minitems>0</minitems>
-                </config>
-            </settings.filter.researchGroup>
-
-            <settings.filter.researchLab>
-                <label>Filter by Research Lab</label>
-                <config>
-                    <type>select</type>
-                    <renderType>selectSingle</renderType>
-                    <foreign_table>tx_spark_research_lab</foreign_table>
-                    <items>
-                        <numIndex index="0">
-                            <label>-- All Labs --</label>
-                            <value>0</value>
-                        </numIndex>
-                    </items>
-                    <minitems>0</minitems>
-                </config>
-            </settings.filter.researchLab>
-
-            <settings.filter.chair>
-                <label>Filter by Chair</label>
-                <config>
-                    <type>select</type>
-                    <renderType>selectSingle</renderType>
-                    <foreign_table>tx_spark_chair</foreign_table>
-                    <items>
-                        <numIndex index="0">
-                            <label>-- All Chairs --</label>
-                            <value>0</value>
-                        </numIndex>
-                    </items>
-                    <minitems>0</minitems>
-                </config>
-            </settings.filter.chair>
+            </settings.filter.organization>
 
             <settings.select.project>
                 <label>Select Projects</label>

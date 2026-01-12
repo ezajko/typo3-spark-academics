@@ -13,12 +13,12 @@
                     </div>
                 </div>
 
-                <!-- Department -->
-                <f:if condition="{availableDepartments}">
+                <!-- Organization -->
+                <f:if condition="{availableOrganizations}">
                     <div class="col-md-3">
-                        <f:form.select name="filter[department]" options="{availableDepartments}" optionValueField="uid"
-                            optionLabelField="title" prependOptionLabel="All Departments" prependOptionValue=""
-                            value="{filter.department}" class="form-select" />
+                        <f:form.select name="filter[organization]" options="{availableOrganizations}"
+                            optionValueField="uid" optionLabelField="title" prependOptionLabel="All Organizations"
+                            prependOptionValue="" value="{filter.organization}" class="form-select" />
                     </div>
                 </f:if>
 

@@ -1,0 +1,31 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<!--
+    Organization List/Simple Template
+    Compact simple list for Organization entities
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
+<f:if condition="{items}">
+    <ul class="list-group">
+        <f:for each="{items}" as="item">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <f:link.action action="show" arguments="{organization: item}" pageUid="{detailPid}"
+                        class="text-decoration-none fw-bold">
+                        {item.title}
+                    </f:link.action>
+                    <f:if condition="{item.type}">
+                        <small class="text-muted ms-2">({item.type.title})</small>
+                    </f:if>
+                </div>
+                <f:if condition="{item.acronym}">
+                    <span class="badge bg-secondary">{item.acronym}</span>
+                </f:if>
+            </li>
+        </f:for>
+    </ul>
+    <f:else>
+        <p class="text-muted">No organizations found.</p>
+    </f:else>
+</f:if>
+
+</html>

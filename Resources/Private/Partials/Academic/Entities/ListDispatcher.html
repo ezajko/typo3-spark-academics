@@ -1,12 +1,9 @@
-<f:variable name="viewType" value="{settings.viewType -> f:or(alternative: 'Default')}" />
+<f:variable name="viewType" value="{settings.view.viewType -> f:or(alternative: 'Default')}" />
 <f:variable name="entity" value="{entityType -> f:format.case(mode: 'capital')}" />
 
-<f:if condition="{entity} == 'Project'">
-    <f:render partial="Academic/Entities/Project/List/Filter" arguments="{_all}" />
-</f:if>
-
-<f:if condition="{entity} == 'Course'">
-    <f:render partial="Academic/Entities/Course/List/Filter" arguments="{_all}" />
+<!-- Frontend Filter (conditional based on settings) -->
+<f:if condition="{settings.view.frontendFilter.enabled}">
+    <f:render partial="Academic/Entities/{entity}/List/Filter" arguments="{_all}" optional="true" />
 </f:if>
 
 <f:render partial="Academic/Entities/{entity}/List/{viewType}"

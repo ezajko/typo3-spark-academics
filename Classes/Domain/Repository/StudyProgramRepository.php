@@ -13,7 +13,31 @@ declare(strict_types=1);
 
 namespace EtfUnsa\SparkAcademics\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+
+/**
+ * Repository for StudyProgram entities
+ * 
+ * Supports filtering by organization, cycle, type, mode, and language.
+ * Text search across title, acronym, and description.
+ * 
+ * @author Ernedin Zajko <ezajko@root.ba>
+ */
 class StudyProgramRepository extends AbstractRepository
 {
-    protected array $searchFields = ['title', 'acronym'];
+    /**
+     * Fields to search in for text queries
+     */
+    protected array $searchFields = [
+        'title',
+        'acronym',
+        'description',
+    ];
+
+    /**
+     * Default ordering: by title
+     */
+    protected $defaultOrderings = [
+        'title' => QueryInterface::ORDER_ASCENDING,
+    ];
 }

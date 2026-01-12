@@ -1,7 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <!--
     Person List/Default Template
-    Card grid layout for Person list - shows profile image, name, rank, department
+    Card grid layout for Person list - shows profile image, name, rank, organization
     Author: Ernedin Zajko <ezajko@root.ba>
 -->
 <f:if condition="{items}">
@@ -38,8 +38,8 @@
                             <f:if condition="{item.academicRank}">
                                 <p class="card-text text-muted small mb-1">{item.academicRank.title}</p>
                             </f:if>
-                            <f:if condition="{item.primaryDepartment}">
-                                <p class="card-text text-muted smaller mb-0">{item.primaryDepartment.title}</p>
+                            <f:if condition="{item.primaryOrganization}">
+                                <p class="card-text text-muted smaller mb-0">{item.primaryOrganization.title}</p>
                             </f:if>
                         </div>
 

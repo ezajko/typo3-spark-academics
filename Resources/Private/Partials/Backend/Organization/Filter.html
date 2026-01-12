@@ -1,0 +1,44 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+<!--
+    Backend Organization Filter - Normalized Design
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
+<div class="card card-default mb-4">
+    <div class="card-body">
+        <f:form action="list" method="post" noCacheHash="true" class="row g-3 align-items-end">
+            <!-- Search -->
+            <div class="col-md-4">
+                <label class="form-label" for="filter-search">Search</label>
+                <f:form.textfield id="filter-search" name="filter[search]" value="{filter.search}"
+                    placeholder="Title, Acronym..." class="form-control form-control-sm" />
+            </div>
+
+            <!-- Type -->
+            <div class="col-md-3">
+                <label class="form-label" for="filter-type">Type</label>
+                <f:form.select id="filter-type" name="filter[type]" options="{availableTypes}" optionValueField="uid"
+                    optionLabelField="title" prependOptionLabel="All Types" prependOptionValue="" value="{filter.type}"
+                    class="form-select form-select-sm" />
+            </div>
+
+            <!-- Parent -->
+            <div class="col-md-2">
+                <label class="form-label" for="filter-parent">Parent</label>
+                <f:form.select id="filter-parent" name="filter[parent]" options="{availableParents}"
+                    optionValueField="uid" optionLabelField="title" prependOptionLabel="All" prependOptionValue=""
+                    value="{filter.parent}" class="form-select form-select-sm" />
+            </div>
+
+            <!-- Buttons -->
+            <div class="col-md-3 d-flex gap-2">
+                <f:form.submit value="Filter" class="btn btn-primary btn-sm" />
+                <f:link.action action="list" class="btn btn-outline-secondary btn-sm">
+                    <core:icon identifier="actions-close" size="small" /> Reset
+                </f:link.action>
+            </div>
+        </f:form>
+    </div>
+</div>
+
+</html>

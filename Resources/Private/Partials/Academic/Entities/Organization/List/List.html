@@ -1,0 +1,37 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<!--
+    Organization List/List Template
+    Simple table list for Organization entities
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Acronym</th>
+            <th>Type</th>
+            <th>Parent</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <f:for each="{items}" as="item">
+            <tr>
+                <td>{item.title}</td>
+                <td>{item.acronym}</td>
+                <td>
+                    <f:if condition="{item.type}">{item.type.title}</f:if>
+                </td>
+                <td>
+                    <f:if condition="{item.parent}">{item.parent.title}</f:if>
+                </td>
+                <td>
+                    <f:link.action action="show" arguments="{organization: item}" pageUid="{detailPid}">Show
+                    </f:link.action>
+                </td>
+            </tr>
+        </f:for>
+    </tbody>
+</table>
+
+</html>

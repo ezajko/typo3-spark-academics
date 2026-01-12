@@ -111,8 +111,7 @@ class GenerateTestCoursesCommand extends Command
             count($lookups['languages']) . ' languages',
             count($lookups['sdgs']) . ' SDG goals',
             count($lookups['fields']) . ' scientific fields',
-            count($lookups['departments']) . ' departments',
-            count($lookups['chairs']) . ' chairs',
+            count($lookups['organizations']) . ' organizations',
         ]);
         
         $faker = FakerFactory::create('en_US');
@@ -186,12 +185,8 @@ class GenerateTestCoursesCommand extends Command
             ->select(['uid'], 'tx_spark_scientific_field', ['deleted' => 0])
             ->fetchAllAssociative();
         
-        $departments = $connectionPool->getConnectionForTable('tx_spark_department')
-            ->select(['uid'], 'tx_spark_department', ['deleted' => 0])
-            ->fetchAllAssociative();
-        
-        $chairs = $connectionPool->getConnectionForTable('tx_spark_chair')
-            ->select(['uid'], 'tx_spark_chair', ['deleted' => 0])
+        $organizations = $connectionPool->getConnectionForTable('tx_spark_organization')
+            ->select(['uid'], 'tx_spark_organization', ['deleted' => 0])
             ->fetchAllAssociative();
         
         return [
@@ -202,8 +197,7 @@ class GenerateTestCoursesCommand extends Command
             'languages' => array_column($languages, 'uid'),
             'sdgs' => array_column($sdgs, 'uid'),
             'fields' => array_column($fields, 'uid'),
-            'departments' => array_column($departments, 'uid'),
-            'chairs' => array_column($chairs, 'uid'),
+            'organizations' => array_column($organizations, 'uid'),
         ];
     }
 
@@ -236,8 +230,7 @@ class GenerateTestCoursesCommand extends Command
             'acronym' => $acronym,
             'description' => '<p>' . $faker->paragraph(3) . '</p>',
             'courseware_url' => $faker->boolean(60) ? 'https://moodle.etf.unsa.ba/course/' . strtolower($acronym) : '',
-            'department' => !empty($lookups['departments']) ? $lookups['departments'][array_rand($lookups['departments'])] : 0,
-            'chair' => !empty($lookups['chairs']) ? $lookups['chairs'][array_rand($lookups['chairs'])] : 0,
+            'organization' => !empty($lookups['organizations']) ? $lookups['organizations'][array_rand($lookups['organizations'])] : 0,
             'notes' => $faker->boolean(30) ? '<p>' . $faker->sentence() . '</p>' : '',
             'tstamp' => time(),
             'crdate' => time(),

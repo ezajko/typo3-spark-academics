@@ -18,7 +18,7 @@ use EtfUnsa\SparkAcademics\Domain\Repository\ProjectStatusRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\ProjectTypeRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\FundingProgramRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\ScientificFieldRepository;
-use EtfUnsa\SparkAcademics\Domain\Model\Dto\ProjectDemand;
+use EtfUnsa\SparkAcademics\Service\DemandFactory;
 use EtfUnsa\SparkAcademics\Service\BackendPermissionService;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -42,6 +42,7 @@ class ProjectController extends AbstractBackendController
     protected BackendPermissionService $backendPermissionService;
     protected IconFactory $iconFactory;
     protected SiteFinder $siteFinder;
+    protected DemandFactory $demandFactory;
 
     public function __construct(
         ProjectRepository $projectRepository,
@@ -53,7 +54,8 @@ class ProjectController extends AbstractBackendController
         ModuleTemplateFactory $moduleTemplateFactory,
         UriBuilder $backendUriBuilder,
         IconFactory $iconFactory,
-        SiteFinder $siteFinder
+        SiteFinder $siteFinder,
+        DemandFactory $demandFactory
     ) {
         parent::__construct($moduleTemplateFactory, $backendUriBuilder);
         $this->repository = $projectRepository;
@@ -64,6 +66,7 @@ class ProjectController extends AbstractBackendController
         $this->backendPermissionService = $backendPermissionService;
         $this->iconFactory = $iconFactory;
         $this->siteFinder = $siteFinder;
+        $this->demandFactory = $demandFactory;
         $this->tableName = 'tx_spark_project';
     }
 
@@ -108,35 +111,20 @@ class ProjectController extends AbstractBackendController
         $direction = $this->request->hasArgument('direction') ? $this->request->getArgument('direction') : 'asc';
         $filter = $this->request->hasArgument('filter') ? $this->request->getArgument('filter') : [];
 
-        // Build demand
-        $demand = new ProjectDemand();
-        if (!empty($filter['search'])) {
-            $demand->setSearch($filter['search']);
-        }
-        if (!empty($filter['status'])) {
-            $demand->setProjectStatus((int)$filter['status']);
-        }
-        if (!empty($filter['type'])) {
-            $demand->setProjectType((int)$filter['type']);
-        }
-        if (!empty($filter['program'])) {
-            $demand->setFundingProgram((int)$filter['program']);
-        }
-        if (!empty($filter['field'])) {
-            $demand->setScientificField((int)$filter['field']);
-        }
-
-        // Check Permissions
+        // Check Permissions first (may add backendUser to filter)
         $canManage = $this->backendPermissionService->canViewAllRecords('spark_perm_project_groups');
-
-        // Restrict by BE User if not admin or authorized group
         if (!$canManage) {
-             $demand->setBackendUser((int)$currentBeUser['uid']);
+            $filter['backendUser'] = (int)$currentBeUser['uid'];
         }
 
-        $orderings = [$sort => $direction === 'asc' ? \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING : \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING];
+        // Create demand using factory
+        $demand = $this->demandFactory->createProjectDemand([], $filter);
+        
+        // Apply orderings
+        $orderings = [$sort => $direction === 'asc' ? QueryInterface::ORDER_ASCENDING : QueryInterface::ORDER_DESCENDING];
+        $demand->setOrderings($orderings);
 
-        $items = $this->repository->findByProjectDemand($demand, $orderings);
+        $items = $this->repository->findByDemand($demand);
 
         // Wrap items for view
         $userItems = [];

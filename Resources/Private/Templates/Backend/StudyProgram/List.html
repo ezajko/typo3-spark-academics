@@ -2,7 +2,7 @@
 
 <f:section name="Content">
     <f:render partial="Backend/StudyProgram/Filter"
-        arguments="{filter: filter, availableDepartments: availableDepartments, availableChairs: availableChairs, availableCycle: availableCycle}" />
+        arguments="{filter: filter, availableOrganizations: availableOrganizations, availableCycle: availableCycle}" />
 
     <div class="table-fit">
         <table class="table table-striped table-hover">
@@ -12,8 +12,7 @@
                         <f:translate key="tx_spark_study_program.title" default="Title" />
                     </th>
                     <th>Cycle</th>
-                    <th>Department</th>
-                    <th>Chair</th>
+                    <th>Organizations</th>
                     <th class="col-control"></th>
                 </tr>
             </thead>
@@ -30,13 +29,11 @@
                             </f:if>
                         </td>
                         <td>
-                            <f:if condition="{item.item.department}">
-                                {item.item.department.title}
-                            </f:if>
-                        </td>
-                        <td>
-                            <f:if condition="{item.item.chair}">
-                                {item.item.chair.title}
+                            <f:if condition="{item.item.organizations}">
+                                <f:for each="{item.item.organizations}" as="org" iteration="i">
+                                    <span class="badge bg-secondary">{org.title}</span>{f:if(condition: '!{i.isLast}',
+                                    then: ' ')}
+                                </f:for>
                             </f:if>
                         </td>
                         <td class="col-control">

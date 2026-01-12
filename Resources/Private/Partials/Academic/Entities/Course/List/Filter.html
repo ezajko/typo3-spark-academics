@@ -11,24 +11,16 @@
                     placeholder="Search courses..." />
             </div>
 
-            <!-- Department -->
+            <!-- Organization -->
             <div class="col-md-6">
-                <label for="filter-department" class="form-label">Department</label>
-                <f:form.select name="filter[department]" options="{availableDepartments}" optionLabelField="title"
-                    optionValueField="uid" value="{filter.department}" prependOptionLabel="- Any Department -"
-                    prependOptionValue="0" class="form-select" />
-            </div>
-
-            <!-- Chair -->
-            <div class="col-md-6">
-                <label for="filter-chair" class="form-label">Chair</label>
-                <f:form.select name="filter[chair]" options="{availableChairs}" optionLabelField="title"
-                    optionValueField="uid" value="{filter.chair}" prependOptionLabel="- Any Chair -"
+                <label for="filter-organization" class="form-label">Organization</label>
+                <f:form.select name="filter[organization]" options="{availableOrganizations}" optionLabelField="title"
+                    optionValueField="uid" value="{filter.organization}" prependOptionLabel="- Any Organization -"
                     prependOptionValue="0" class="form-select" />
             </div>
 
             <!-- Study Cycle -->
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label for="filter-study-cycle" class="form-label">Study Cycle</label>
                 <f:form.select name="filter[study_cycle]" options="{availableCycles}" optionLabelField="title"
                     optionValueField="uid" value="{filter.study_cycle}" prependOptionLabel="- Any Cycle -"

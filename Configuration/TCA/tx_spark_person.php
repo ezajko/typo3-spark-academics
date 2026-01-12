@@ -45,7 +45,9 @@ return [
             'showitem' => '
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.general,
                     --palette--;;name, path, gender,
+                    --palette--;;status,
                     --palette--;;affiliation,
+                    additional_organizations,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.biography,
                     biography, biography_file_pdf,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.contact,
@@ -68,7 +70,7 @@ return [
                     media_image,
                 --div--;Administration,
                     be_users,
-                    departments, laboratories, groups, chairs, projects,
+                    projects,
                 --div--;LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.tab.access,
                     --palette--;;hidden,
                     --palette--;;access,
@@ -80,9 +82,12 @@ return [
         'name' => [
             'showitem' => 'first_name, last_name',
         ],
-        // Affiliation palette: academic title, rank, and primary department
+        // Affiliation palette: academic title, rank, and primary organization
         'affiliation' => [
-            'showitem' => 'academic_title, academic_rank, --linebreak--, primary_department',
+            'showitem' => 'academic_title, academic_rank, primary_organization',
+        ],
+        'status' => [
+            'showitem' => 'is_academic, is_council_member, staff_status',
         ],
         'hidden' => [
             'showitem' => 'hidden',
@@ -533,67 +538,72 @@ return [
         // =====================================================================
         // Organizational Relations (read-only, managed from other entities)
         // =====================================================================
-        'departments' => [
+        // Organizational Relations
+        'primary_organization' => [
             'exclude' => true,
-            'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_department',
+            'label' => 'Primary Organization (e.g. Department)',
             'config' => [
                 'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_spark_department',
-                'MM' => 'tx_spark_person_department_mm',
-                'size' => 10,
-                'autoSizeMax' => 30,
-                'maxitems' => 9999,
-                'multiple' => 0,
-                'readOnly' => 1,
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_spark_organization',
+                'foreign_table_where' => 'AND {#tx_spark_organization}.{#sys_language_uid} IN (-1,0) ORDER BY title',
+                'items' => [['-- Select Organization --', 0]],
             ],
         ],
-        'laboratories' => [
+        'additional_organizations' => [
             'exclude' => true,
-            'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_research_lab',
+            'label' => 'Additional Affiliations',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_spark_research_lab',
-                'MM' => 'tx_spark_person_research_lab_mm',
+                'foreign_table' => 'tx_spark_organization',
+                'foreign_table_where' => 'AND {#tx_spark_organization}.{#sys_language_uid} IN (-1,0) ORDER BY title',
+                'MM' => 'tx_spark_person_organization_mm',
                 'size' => 10,
-                'autoSizeMax' => 30,
-                'maxitems' => 9999,
-                'multiple' => 0,
-                'readOnly' => 1,
-            ],
-        ],
-        'groups' => [
-            'exclude' => true,
-            'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_research_group',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_spark_research_group',
-                'MM' => 'tx_spark_person_research_group_mm',
-                'size' => 10,
-                'autoSizeMax' => 30,
-                'maxitems' => 9999,
-                'multiple' => 0,
-                'readOnly' => 1,
-            ],
-        ],
-        'chairs' => [
-            'exclude' => true,
-            'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.chairs',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_spark_chair',
-                'MM' => 'tx_spark_person_chair_mm',
-                'MM_opposite_field' => 'persons',
-                'size' => 10,
+                'minitems' => 0,
                 'maxitems' => 99,
-                'readOnly' => 1,
+            ],
+        ],
+        // Staff Status & Roles
+        'is_academic' => [
+            'exclude' => true,
+            'label' => 'Academic Staff',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        'label' => 'Is Academic Staff?',
+                    ],
+                ],
+            ],
+        ],
+        'is_council_member' => [
+            'exclude' => true,
+            'label' => 'Council Member',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        'label' => 'Is Council Member?',
+                    ],
+                ],
+            ],
+        ],
+        'staff_status' => [
+            'exclude' => true,
+            'label' => 'Staff Status',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['Active', 'active'],
+                    ['Inactive', 'inactive'],
+                    ['Sabbatical', 'sabbatical'],
+                    ['Retired', 'retired'],
+                ],
+                'default' => 'active',
             ],
         ],
         'courses' => [

@@ -3,9 +3,9 @@
 <f:section name="Main">
     <f:if condition="{item}">
         <f:then>
-            <f:variable name="viewType" value="{settings.viewType -> f:or(alternative: 'Default')}" />
+            <f:variable name="viewType" value="{settings.view.viewType -> f:or(alternative: 'Default')}" />
             <f:render partial="Academic/Entities/{entityType}/Show/{viewType}"
-                arguments="{item: item, detailPid: detailPid}" />
+                arguments="{item: item, detailPid: detailPid, settings: settings}" />
         </f:then>
         <f:else>
             <p>Item not found.</p>

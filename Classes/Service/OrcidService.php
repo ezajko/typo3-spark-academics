@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Service;
+namespace RootBa\Academics\Service;
 
-use EtfUnsa\SparkAcademics\Domain\Model\Person;
-use EtfUnsa\SparkAcademics\Domain\Model\Publication;
-use EtfUnsa\SparkAcademics\Domain\Repository\PersonRepository;
-use EtfUnsa\SparkAcademics\Domain\Repository\PublicationRepository;
+use RootBa\Academics\Domain\Model\Person;
+use RootBa\Academics\Domain\Model\Publication;
+use RootBa\Academics\Domain\Repository\PersonRepository;
+use RootBa\Academics\Domain\Repository\PublicationRepository;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

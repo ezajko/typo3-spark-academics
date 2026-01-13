@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Controller\Backend;
+namespace RootBa\Academics\Controller\Backend;
 
-use EtfUnsa\SparkAcademics\Domain\Repository\OrganizationRepository;
-use EtfUnsa\SparkAcademics\Domain\Repository\OrganizationTypeRepository;
+use RootBa\Academics\Domain\Repository\OrganizationRepository;
+use RootBa\Academics\Domain\Repository\OrganizationTypeRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -28,7 +28,7 @@ class OrganizationController extends AbstractBackendController
 {
     protected ?OrganizationRepository $organizationRepository = null;
     protected ?OrganizationTypeRepository $organizationTypeRepository = null;
-    protected \EtfUnsa\SparkCore\Service\BackendPermissionService $backendPermissionService;
+    protected \RootBa\SparkCore\Service\BackendPermissionService $backendPermissionService;
     protected string $tableName = 'tx_spark_organization';
 
     public function __construct(
@@ -46,7 +46,7 @@ class OrganizationController extends AbstractBackendController
         $this->repository = $organizationRepository;
     }
 
-    public function injectBackendPermissionService(\EtfUnsa\SparkCore\Service\BackendPermissionService $backendPermissionService): void
+    public function injectBackendPermissionService(\RootBa\SparkCore\Service\BackendPermissionService $backendPermissionService): void
     {
         $this->backendPermissionService = $backendPermissionService;
     }
@@ -69,7 +69,7 @@ class OrganizationController extends AbstractBackendController
             : [];
 
         // Create OrganizationDemand and apply filters
-        $demand = new \EtfUnsa\SparkAcademics\Domain\Model\Dto\OrganizationDemand();
+        $demand = new \RootBa\Academics\Domain\Model\Dto\OrganizationDemand();
         
         if (!empty($filter['search'])) {
             $demand->setSearch($filter['search']);

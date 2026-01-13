@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Domain\Model;
+namespace RootBa\Academics\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -24,7 +24,7 @@ class CourseGroup extends AbstractEntity
     protected string $color = '';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Course>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Course>
      */
     protected ?ObjectStorage $courses = null;
 
@@ -74,7 +74,7 @@ class CourseGroup extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Course>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Course>
      */
     public function getCourses(): ?ObjectStorage
     {
@@ -82,7 +82,7 @@ class CourseGroup extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Course> $courses
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Course> $courses
      */
     public function setCourses(ObjectStorage $courses): void
     {

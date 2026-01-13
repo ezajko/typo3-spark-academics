@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Command;
+namespace RootBa\Academics\Command;
 
 use Faker\Factory as FakerFactory;
 use Symfony\Component\Console\Attribute\AsCommand;

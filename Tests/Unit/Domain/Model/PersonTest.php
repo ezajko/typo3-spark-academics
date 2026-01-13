@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Tests\Unit\Domain\Model;
+namespace RootBa\Academics\Tests\Unit\Domain\Model;
 
-use EtfUnsa\SparkAcademics\Domain\Model\Person;
+use RootBa\Academics\Domain\Model\Person;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -73,7 +73,7 @@ final class PersonTest extends UnitTestCase
     #[Test]
     public function setAcademicRankSetsRank(): void
     {
-        $rank = new \EtfUnsa\SparkAcademics\Domain\Model\AcademicRank();
+        $rank = new \RootBa\Academics\Domain\Model\AcademicRank();
         $this->subject->setAcademicRank($rank);
         self::assertSame($rank, $this->subject->getAcademicRank());
     }

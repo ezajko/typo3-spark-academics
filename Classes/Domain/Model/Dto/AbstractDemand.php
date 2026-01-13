@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Domain\Model\Dto;
+namespace RootBa\Academics\Domain\Model\Dto;
 
 /**
  * Abstract base class for entity-specific Demand DTOs

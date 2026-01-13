@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Domain\Model;
+namespace RootBa\Academics\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -25,7 +25,7 @@ class Curriculum extends AbstractEntity
     protected bool $isActive = false;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\CurriculumSemester>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\CurriculumSemester>
      */
     protected ?ObjectStorage $semesters = null;
 
@@ -85,7 +85,7 @@ class Curriculum extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\CurriculumSemester>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\CurriculumSemester>
      */
     public function getSemesters(): ?ObjectStorage
     {
@@ -93,7 +93,7 @@ class Curriculum extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\CurriculumSemester> $semesters
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\CurriculumSemester> $semesters
      */
     public function setSemesters(ObjectStorage $semesters): void
     {
@@ -106,7 +106,7 @@ class Curriculum extends AbstractEntity
      * Year 2 = Sem 3, 4
      * etc.
      * 
-     * @return array<int, array<\EtfUnsa\SparkAcademics\Domain\Model\CurriculumSemester>>
+     * @return array<int, array<\RootBa\Academics\Domain\Model\CurriculumSemester>>
      */
     public function getSemestersByYear(): array
     {

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Domain\Model;
+namespace RootBa\Academics\Domain\Model;
 
 use TYPO3\CMS\Beuser\Domain\Model\BackendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -33,7 +33,7 @@ class StudyProgram extends AbstractEntity
 
     /**
      * Organizations (unified, replaces deprecated departments/chairs)
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Organization>
      */
     protected ?ObjectStorage $organizations = null;
 
@@ -41,17 +41,17 @@ class StudyProgram extends AbstractEntity
     protected ?ScientificField $scientificField = null;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\StudyType>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\StudyType>
      */
     protected ?ObjectStorage $studyTypes = null;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ModeOfStudy>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\ModeOfStudy>
      */
     protected ?ObjectStorage $modesOfStudy = null;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Language>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Language>
      */
     protected ?ObjectStorage $languages = null;
     protected int $durationSemesters = 0;
@@ -65,12 +65,12 @@ class StudyProgram extends AbstractEntity
     protected ?ObjectStorage $beUsers = null;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Person>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Person>
      */
     protected ?ObjectStorage $persons = null;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Curriculum>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Curriculum>
      */
     protected ?ObjectStorage $curricula = null;
 
@@ -142,7 +142,7 @@ class StudyProgram extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Person>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Person>
      */
     public function getPersons(): ?ObjectStorage
     {
@@ -150,7 +150,7 @@ class StudyProgram extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Person> $persons
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Person> $persons
      */
     public function setPersons(ObjectStorage $persons): void
     {
@@ -169,7 +169,7 @@ class StudyProgram extends AbstractEntity
 
     /**
      * Organizations (unified, replaces deprecated departments/chairs)
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Organization>
      */
     public function getOrganizations(): ?ObjectStorage
     {
@@ -177,7 +177,7 @@ class StudyProgram extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization> $organizations
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Organization> $organizations
      */
     public function setOrganizations(ObjectStorage $organizations): void
     {
@@ -215,7 +215,7 @@ class StudyProgram extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\StudyType>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\StudyType>
      */
     public function getStudyTypes(): ?ObjectStorage
     {
@@ -223,7 +223,7 @@ class StudyProgram extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\StudyType> $studyTypes
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\StudyType> $studyTypes
      */
     public function setStudyTypes(ObjectStorage $studyTypes): void
     {
@@ -231,7 +231,7 @@ class StudyProgram extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ModeOfStudy>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\ModeOfStudy>
      */
     public function getModesOfStudy(): ?ObjectStorage
     {
@@ -239,7 +239,7 @@ class StudyProgram extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ModeOfStudy> $modesOfStudy
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\ModeOfStudy> $modesOfStudy
      */
     public function setModesOfStudy(ObjectStorage $modesOfStudy): void
     {
@@ -247,7 +247,7 @@ class StudyProgram extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Language>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Language>
      */
     public function getLanguages(): ?ObjectStorage
     {
@@ -255,7 +255,7 @@ class StudyProgram extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Language> $languages
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Language> $languages
      */
     public function setLanguages(ObjectStorage $languages): void
     {
@@ -303,7 +303,7 @@ class StudyProgram extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Curriculum>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Curriculum>
      */
     public function getCurricula(): ?ObjectStorage
     {
@@ -311,7 +311,7 @@ class StudyProgram extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Curriculum> $curricula
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Curriculum> $curricula
      */
     public function setCurricula(ObjectStorage $curricula): void
     {

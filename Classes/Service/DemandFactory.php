@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Service;
+namespace RootBa\Academics\Service;
 
-use EtfUnsa\SparkAcademics\Domain\Model\Dto\AbstractDemand;
-use EtfUnsa\SparkAcademics\Service\DemandFactory\CourseDemandTrait;
-use EtfUnsa\SparkAcademics\Service\DemandFactory\OrganizationDemandTrait;
-use EtfUnsa\SparkAcademics\Service\DemandFactory\PersonDemandTrait;
-use EtfUnsa\SparkAcademics\Service\DemandFactory\ProjectDemandTrait;
-use EtfUnsa\SparkAcademics\Service\DemandFactory\StudyProgramDemandTrait;
+use RootBa\Academics\Domain\Model\Dto\AbstractDemand;
+use RootBa\Academics\Service\DemandFactory\CourseDemandTrait;
+use RootBa\Academics\Service\DemandFactory\OrganizationDemandTrait;
+use RootBa\Academics\Service\DemandFactory\PersonDemandTrait;
+use RootBa\Academics\Service\DemandFactory\ProjectDemandTrait;
+use RootBa\Academics\Service\DemandFactory\StudyProgramDemandTrait;
 
 /**
  * Factory for creating entity-specific Demand objects

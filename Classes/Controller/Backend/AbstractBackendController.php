@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Controller\Backend;
+namespace RootBa\Academics\Controller\Backend;
 
-use EtfUnsa\SparkAcademics\Domain\Repository\AbstractRepository;
+use RootBa\Academics\Domain\Repository\AbstractRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;

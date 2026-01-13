@@ -11,15 +11,15 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Controller\Backend;
+namespace RootBa\Academics\Controller\Backend;
 
-use EtfUnsa\SparkAcademics\Domain\Repository\ProjectRepository;
-use EtfUnsa\SparkAcademics\Domain\Repository\ProjectStatusRepository;
-use EtfUnsa\SparkAcademics\Domain\Repository\ProjectTypeRepository;
-use EtfUnsa\SparkAcademics\Domain\Repository\FundingProgramRepository;
-use EtfUnsa\SparkAcademics\Domain\Repository\ScientificFieldRepository;
-use EtfUnsa\SparkAcademics\Service\DemandFactory;
-use EtfUnsa\SparkAcademics\Service\BackendPermissionService;
+use RootBa\Academics\Domain\Repository\ProjectRepository;
+use RootBa\Academics\Domain\Repository\ProjectStatusRepository;
+use RootBa\Academics\Domain\Repository\ProjectTypeRepository;
+use RootBa\Academics\Domain\Repository\FundingProgramRepository;
+use RootBa\Academics\Domain\Repository\ScientificFieldRepository;
+use RootBa\Academics\Service\DemandFactory;
+use RootBa\Academics\Service\BackendPermissionService;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;

@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Service\DemandFactory;
+namespace RootBa\Academics\Service\DemandFactory;
 
-use EtfUnsa\SparkAcademics\Domain\Model\Dto\CourseDemand;
+use RootBa\Academics\Domain\Model\Dto\CourseDemand;
 
 /**
  * Trait for creating CourseDemand objects from settings

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Domain\Model\Dto;
+namespace RootBa\Academics\Domain\Model\Dto;
 
 /**
  * DTO for StudyProgram filtering criteria

@@ -11,13 +11,13 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Domain\Model;
+namespace RootBa\Academics\Domain\Model;
 
 use TYPO3\CMS\Beuser\Domain\Model\BackendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use EtfUnsa\SparkAcademics\Domain\Model\Publication; // Added import
+use RootBa\Academics\Domain\Model\Publication; // Added import
 
 /**
  * Person domain model
@@ -94,7 +94,7 @@ class Person extends AbstractEntity
     
     /**
      * Education entries - IRRE relation to PersonEducation
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\PersonEducation>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\PersonEducation>
      */
     protected ?ObjectStorage $education = null;
 
@@ -104,7 +104,7 @@ class Person extends AbstractEntity
     
     /**
      * Mentored students - IRRE relation to PersonMentoring
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\PersonMentoring>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\PersonMentoring>
      */
     protected ?ObjectStorage $mentoring = null;
 
@@ -178,31 +178,31 @@ class Person extends AbstractEntity
 
     /**
      * Additional Affiliations (e.g. Research Labs, Centers)
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Organization>
      */
     protected ?ObjectStorage $additionalOrganizations = null;
 
     /**
      * Courses taught
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Course>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Course>
      */
     protected ?ObjectStorage $courses = null;
 
     /**
      * Study programs
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\StudyProgram>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\StudyProgram>
      */
     protected ?ObjectStorage $studyPrograms = null;
 
     /**
      * Projects
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Project>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Project>
      */
     protected ?ObjectStorage $projects = null;
 
     /**
      * Publications (M:N)
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Publication>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Publication>
      */
     protected ?ObjectStorage $publications = null;
 
@@ -401,7 +401,7 @@ class Person extends AbstractEntity
     // =========================================================================
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\PersonEducation>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\PersonEducation>
      */
     public function getEducation(): ?ObjectStorage
     {
@@ -409,7 +409,7 @@ class Person extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\PersonEducation> $education
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\PersonEducation> $education
      */
     public function setEducation(ObjectStorage $education): void
     {
@@ -417,7 +417,7 @@ class Person extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\PersonMentoring>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\PersonMentoring>
      */
     public function getMentoring(): ?ObjectStorage
     {
@@ -425,7 +425,7 @@ class Person extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\PersonMentoring> $mentoring
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\PersonMentoring> $mentoring
      */
     public function setMentoring(ObjectStorage $mentoring): void
     {
@@ -615,7 +615,7 @@ class Person extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Organization>
      */
     public function getAdditionalOrganizations(): ?ObjectStorage
     {
@@ -623,7 +623,7 @@ class Person extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization> $additionalOrganizations
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Organization> $additionalOrganizations
      */
     public function setAdditionalOrganizations(ObjectStorage $additionalOrganizations): void
     {

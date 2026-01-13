@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\EventListener;
+namespace RootBa\Academics\EventListener;
 
-use EtfUnsa\SparkAcademics\Service\HomeFolderService;
+use RootBa\Academics\Service\HomeFolderService;
 use TYPO3\CMS\Core\DataHandling\Event\AfterRecordCreationEvent;
 use TYPO3\CMS\Core\DataHandling\Event\AfterRecordUpdateEvent;
 

@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Domain\Repository;
+namespace RootBa\Academics\Domain\Repository;
 
-use EtfUnsa\SparkAcademics\Domain\Model\Dto\AbstractDemand;
+use RootBa\Academics\Domain\Model\Dto\AbstractDemand;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;

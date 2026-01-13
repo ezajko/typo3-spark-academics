@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Domain\Repository;
+namespace RootBa\Academics\Domain\Repository;
 
 class StudyTypeRepository extends AbstractRepository
 {

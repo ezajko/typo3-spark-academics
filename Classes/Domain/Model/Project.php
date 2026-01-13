@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Domain\Model;
+namespace RootBa\Academics\Domain\Model;
 
 use TYPO3\CMS\Beuser\Domain\Model\BackendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -64,7 +64,7 @@ class Project extends AbstractEntity
     /**
      * Scientific fields / areas of research
      * CERIF: cfProj_Class (semantic layer)
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ScientificField>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\ScientificField>
      */
     protected ?ObjectStorage $scientificFields = null;
 
@@ -74,7 +74,7 @@ class Project extends AbstractEntity
     protected ?ObjectStorage $beUsers = null;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ProjectPerson>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\ProjectPerson>
      */
     #[Cascade(['remove'])]
     protected ?ObjectStorage $persons = null;
@@ -82,7 +82,7 @@ class Project extends AbstractEntity
     // ...
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ProjectPerson>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\ProjectPerson>
      */
     public function getPersons(): ?ObjectStorage
     {
@@ -90,7 +90,7 @@ class Project extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ProjectPerson> $persons
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\ProjectPerson> $persons
      */
     public function setPersons(ObjectStorage $persons): void
     {
@@ -108,12 +108,12 @@ class Project extends AbstractEntity
     }
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Partner>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Partner>
      */
     protected ?ObjectStorage $partners = null;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Organization>
      */
     protected ?ObjectStorage $organizations = null;
 
@@ -305,7 +305,7 @@ class Project extends AbstractEntity
 
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Partner>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Partner>
      */
     public function getPartners(): ?ObjectStorage
     {
@@ -313,7 +313,7 @@ class Project extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Partner> $partners
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Partner> $partners
      */
     public function setPartners(ObjectStorage $partners): void
     {
@@ -321,7 +321,7 @@ class Project extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Organization>
      */
     public function getOrganizations(): ?ObjectStorage
     {
@@ -329,7 +329,7 @@ class Project extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\Organization> $organizations
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\Organization> $organizations
      */
     public function setOrganizations(ObjectStorage $organizations): void
     {
@@ -401,7 +401,7 @@ class Project extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ScientificField>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\ScientificField>
      */
     public function getScientificFields(): ?ObjectStorage
     {
@@ -409,7 +409,7 @@ class Project extends AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\EtfUnsa\SparkAcademics\Domain\Model\ScientificField> $scientificFields
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RootBa\Academics\Domain\Model\ScientificField> $scientificFields
      */
     public function setScientificFields(ObjectStorage $scientificFields): void
     {

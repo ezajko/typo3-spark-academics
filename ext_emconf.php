@@ -15,13 +15,13 @@
  * @author Ernedin Zajko <ezajko@root.ba>
  */
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'Spark Academics',
-    'description' => 'Academic specific content types and features for Spark',
-    'category' => 'templates',
+    'title' => 'Academics',
+    'description' => 'Academic management system for TYPO3',
+    'category' => 'plugin',
     'author' => 'Ernedin Zajko',
     'author_email' => 'ezajko@root.ba',
     'state' => 'alpha',
-    'version' => '1.0.0',
+    'version' => '2.0.0',
     'constraints' => [
         'depends' => [
             'typo3' => '13.4.0-14.9.99',

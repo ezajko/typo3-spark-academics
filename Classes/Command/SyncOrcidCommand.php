@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace EtfUnsa\SparkAcademics\Command;
+namespace RootBa\Academics\Command;
 
-use EtfUnsa\SparkAcademics\Domain\Repository\PersonRepository;
-use EtfUnsa\SparkAcademics\Service\OrcidService;
+use RootBa\Academics\Domain\Repository\PersonRepository;
+use RootBa\Academics\Service\OrcidService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

@@ -82,9 +82,9 @@ return [
         'name' => [
             'showitem' => 'first_name, last_name',
         ],
-        // Affiliation palette: academic title, rank, and primary organization
+        // Affiliation palette: academic title, rank, type, and primary organization
         'affiliation' => [
-            'showitem' => 'academic_title, academic_rank, primary_organization',
+            'showitem' => 'academic_title, academic_rank, person_type, primary_organization',
         ],
         'status' => [
             'showitem' => 'is_academic, is_council_member, staff_status',
@@ -234,6 +234,21 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_spark_academic_rank',
+                'items' => [
+                    ['', 0],
+                ],
+                'default' => 0,
+            ],
+        ],
+        'person_type' => [
+            'exclude' => true,
+            'l10n_mode' => 'exclude',
+            'label' => 'Person Type',
+            'description' => 'Staff type (internal, visiting professor, guest, etc.)',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_spark_person_type',
                 'items' => [
                     ['', 0],
                 ],

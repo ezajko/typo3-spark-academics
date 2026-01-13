@@ -57,6 +57,12 @@ trait CourseDemandTrait
             $demand->setScientificField((int)($filter['scientificField'] ?? $filter['scientific_field']));
         }
         
+        // Selected Courses (explicit selection from FlexForm group field)
+        if (!empty($settings['select']['course'])) {
+            $selectedUids = $this->parseGroupFieldUids($settings['select']['course']);
+            $demand->setSelectedUids($selectedUids);
+        }
+        
         return $demand;
     }
 }

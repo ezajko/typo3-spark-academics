@@ -20,6 +20,7 @@ use EtfUnsa\SparkAcademics\Domain\Model\Project;
 use EtfUnsa\SparkAcademics\Domain\Model\StudyProgram;
 use EtfUnsa\SparkAcademics\Domain\Repository\AcademicRankRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\AcademicTitleRepository;
+use EtfUnsa\SparkAcademics\Domain\Repository\PersonTypeRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\CourseCategoryRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\CourseRepository;
 use EtfUnsa\SparkAcademics\Domain\Repository\FundingProgramRepository;
@@ -72,6 +73,7 @@ class AcademicController extends ActionController
     protected ModeOfStudyRepository $modeOfStudyRepository;
     protected AcademicRankRepository $academicRankRepository;
     protected AcademicTitleRepository $academicTitleRepository;
+    protected PersonTypeRepository $personTypeRepository;
 
     // Demand factory for creating entity-specific demands
     protected DemandFactory $demandFactory;
@@ -94,6 +96,7 @@ class AcademicController extends ActionController
         ModeOfStudyRepository $modeOfStudyRepository,
         AcademicRankRepository $academicRankRepository,
         AcademicTitleRepository $academicTitleRepository,
+        PersonTypeRepository $personTypeRepository,
         DemandFactory $demandFactory
     ) {
         $this->organizationRepository = $organizationRepository;
@@ -113,15 +116,19 @@ class AcademicController extends ActionController
         $this->modeOfStudyRepository = $modeOfStudyRepository;
         $this->academicRankRepository = $academicRankRepository;
         $this->academicTitleRepository = $academicTitleRepository;
+        $this->personTypeRepository = $personTypeRepository;
         $this->demandFactory = $demandFactory;
     }
 
     /**
-     * Generic list action (usually findAll)
+     * Generic list action with filtering support
+     * 
+     * @param int $currentPage Current page for pagination
+     * @param array|null $filter User-submitted filters from frontend form
      */
-    public function listAction(int $currentPage = 1): ResponseInterface
+    public function listAction(int $currentPage = 1, ?array $filter = null): ResponseInterface
     {
-        return $this->dispatchListAction($this->settings, $currentPage);
+        return $this->dispatchListAction($this->settings, $currentPage, $filter);
     }
 
     public function listAllAction(int $currentPage = 1): ResponseInterface
@@ -144,15 +151,17 @@ class AcademicController extends ActionController
      * 
      * Uses DemandFactory to create entity-specific demand objects and
      * delegates to the appropriate repository.
+     * 
+     * @param array $settings Plugin settings from FlexForm
+     * @param int $currentPage Current page for pagination
+     * @param array|null $filter User-submitted filters from frontend form
      */
-    protected function dispatchListAction(array $settings, int $currentPage = 1): ResponseInterface
+    protected function dispatchListAction(array $settings, int $currentPage = 1, ?array $filter = null): ResponseInterface
     {
         $entityType = $settings['entityType'] ?? 'Organization';
         
-        // Get request filter from frontend form
-        $requestFilter = $this->request->hasArgument('filter') 
-            ? $this->request->getArgument('filter') 
-            : [];
+        // Use filter from action argument (POST) - empty array if not provided
+        $requestFilter = $filter ?? [];
 
         // Create entity-specific demand using factory
         $demand = $this->demandFactory->createDemand($entityType, $settings, $requestFilter);
@@ -204,6 +213,7 @@ class AcademicController extends ActionController
             'Person' => $this->view->assignMultiple([
                 'availableRanks' => $this->academicRankRepository->findAll(),
                 'availableTitles' => $this->academicTitleRepository->findAll(),
+                'availablePersonTypes' => $this->personTypeRepository->findAll(),
             ]),
             'Project' => $this->view->assignMultiple([
                 'availableStatuses' => $this->projectStatusRepository->findAll(),
@@ -329,7 +339,7 @@ class AcademicController extends ActionController
         $site = $this->request->getAttribute('site');
         
         $configSuffix = strtolower($entityType);
-        $fieldName = 'academic_pid_' . $configSuffix . '_detail';
+        $fieldName = 'sparkAcademic_' . $configSuffix . '_detail_pid';
         $pidValue = null;
 
         // Check Site Configuration (config.yaml)

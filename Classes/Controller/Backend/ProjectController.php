@@ -90,7 +90,7 @@ class ProjectController extends AbstractBackendController
                 // Or better: Check if we are inside a site tree?
                 // For "New" button, usually we default to a specific storage folder regardless of where we are.
                 $config = $site->getConfiguration();
-                $storagePid = (int)($config['academic_pid_project_storage'] ?? 0);
+                $storagePid = (int)($config['sparkAcademic_project_storage_pid'] ?? 0);
                 if ($storagePid > 0) {
                     return $storagePid;
                 }
@@ -112,7 +112,7 @@ class ProjectController extends AbstractBackendController
         $filter = $this->request->hasArgument('filter') ? $this->request->getArgument('filter') : [];
 
         // Check Permissions first (may add backendUser to filter)
-        $canManage = $this->backendPermissionService->canViewAllRecords('spark_perm_project_groups');
+        $canManage = $this->backendPermissionService->canViewAllRecords('sparkAcademic_project_permission_groups');
         if (!$canManage) {
             $filter['backendUser'] = (int)$currentBeUser['uid'];
         }

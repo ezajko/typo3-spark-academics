@@ -24,9 +24,14 @@ namespace EtfUnsa\SparkAcademics\Domain\Model\Dto;
 class PersonDemand extends AbstractDemand
 {
     /**
-     * Filter by primary organization (or any associated organization)
+     * Filter by primary organization
      */
-    protected int $organization = 0;
+    protected int $primaryOrganization = 0;
+
+    /**
+     * Filter by additional organization (M:N relation)
+     */
+    protected int $additionalOrganization = 0;
 
     /**
      * Filter by academic rank
@@ -37,6 +42,11 @@ class PersonDemand extends AbstractDemand
      * Filter by academic title
      */
     protected int $academicTitle = 0;
+
+    /**
+     * Filter by person type (internal, visiting, etc.)
+     */
+    protected int $personType = 0;
 
     /**
      * Filter by academic status (true = only academic staff, false = only non-academic)
@@ -57,14 +67,25 @@ class PersonDemand extends AbstractDemand
     // Organization
     // =========================================================================
 
-    public function getOrganization(): int
+    public function getPrimaryOrganization(): int
     {
-        return $this->organization;
+        return $this->primaryOrganization;
     }
 
-    public function setOrganization(int $organization): self
+    public function setPrimaryOrganization(int $primaryOrganization): self
     {
-        $this->organization = $organization;
+        $this->primaryOrganization = $primaryOrganization;
+        return $this;
+    }
+
+    public function getAdditionalOrganization(): int
+    {
+        return $this->additionalOrganization;
+    }
+
+    public function setAdditionalOrganization(int $additionalOrganization): self
+    {
+        $this->additionalOrganization = $additionalOrganization;
         return $this;
     }
 
@@ -95,6 +116,21 @@ class PersonDemand extends AbstractDemand
     public function setAcademicTitle(int $academicTitle): self
     {
         $this->academicTitle = $academicTitle;
+        return $this;
+    }
+
+    // =========================================================================
+    // Person Type
+    // =========================================================================
+
+    public function getPersonType(): int
+    {
+        return $this->personType;
+    }
+
+    public function setPersonType(int $personType): self
+    {
+        $this->personType = $personType;
         return $this;
     }
 
@@ -149,9 +185,11 @@ class PersonDemand extends AbstractDemand
 
     public function hasFilters(): bool
     {
-        return $this->organization > 0
+        return $this->primaryOrganization > 0
+            || $this->additionalOrganization > 0
             || $this->academicRank > 0
             || $this->academicTitle > 0
+            || $this->personType > 0
             || $this->isAcademic !== null
             || !empty($this->staffStatus)
             || $this->backendUser > 0;
@@ -161,14 +199,20 @@ class PersonDemand extends AbstractDemand
     {
         $filters = [];
         
-        if ($this->organization > 0) {
-            $filters['primaryOrganization'] = $this->organization;
+        if ($this->primaryOrganization > 0) {
+            $filters['primaryOrganization'] = $this->primaryOrganization;
+        }
+        if ($this->additionalOrganization > 0) {
+            $filters['additionalOrganizations'] = $this->additionalOrganization; // M:N relation
         }
         if ($this->academicRank > 0) {
             $filters['academicRank'] = $this->academicRank;
         }
         if ($this->academicTitle > 0) {
             $filters['academicTitle'] = $this->academicTitle;
+        }
+        if ($this->personType > 0) {
+            $filters['personType'] = $this->personType;
         }
         if ($this->isAcademic !== null) {
             $filters['isAcademic'] = $this->isAcademic;

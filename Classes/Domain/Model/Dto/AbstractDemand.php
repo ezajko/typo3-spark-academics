@@ -44,6 +44,12 @@ abstract class AbstractDemand
      */
     protected int $offset = 0;
 
+    /**
+     * Selected UIDs for explicit item selection (from FlexForm select fields)
+     * @var int[]
+     */
+    protected array $selectedUids = [];
+
     // =========================================================================
     // Search
     // =========================================================================
@@ -109,6 +115,32 @@ abstract class AbstractDemand
     {
         $this->offset = $offset;
         return $this;
+    }
+
+    // =========================================================================
+    // Selected UIDs (explicit item selection)
+    // =========================================================================
+
+    /**
+     * @return int[]
+     */
+    public function getSelectedUids(): array
+    {
+        return $this->selectedUids;
+    }
+
+    /**
+     * @param int[] $selectedUids
+     */
+    public function setSelectedUids(array $selectedUids): self
+    {
+        $this->selectedUids = array_filter(array_map('intval', $selectedUids));
+        return $this;
+    }
+
+    public function hasSelectedUids(): bool
+    {
+        return !empty($this->selectedUids);
     }
 
     // =========================================================================

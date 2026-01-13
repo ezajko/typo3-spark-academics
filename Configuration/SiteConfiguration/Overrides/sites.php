@@ -13,123 +13,143 @@ declare(strict_types=1);
 
 defined('TYPO3') || die();
 
+/**
+ * Spark Academics Site Configuration
+ * 
+ * Naming Convention:
+ * - sparkAcademic_{entityType}_detail_pid   - Detail page PID
+ * - sparkAcademic_{entityType}_storage_pid  - Storage folder PID
+ * - sparkAcademic_{entityType}_permission_groups - Editor group UIDs
+ * - sparkAcademic_users_home_*              - User home folder settings
+ */
 (static function (): void {
-    $ll = 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:';
-
-    $academicPidConfig = [
+    $ll = 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:site.configuration.';
+    
+    // ==========================================================================
+    // 1. Entity Detail/Storage PIDs
+    // ==========================================================================
+    $pidConfig = [
         'type' => 'link',
         'allowedTypes' => ['page'],
         'default' => '',
     ];
-
-    $academicPidFields = [
-        'academic_pid_person_detail',
-        'academic_pid_dept_detail',
-        'academic_pid_lab_detail',
-        'academic_pid_group_detail',
-        'academic_pid_chair_detail',
-        'academic_pid_course_detail',
-        'academic_pid_program_detail',
-        'academic_pid_project_detail',
-        'academic_pid_course_storage',
-        'academic_pid_project_storage',
-        'academic_pid_person_storage',
-        'academic_pid_program_storage',
+    
+    // Detail PIDs
+    $detailPidFields = [
+        'sparkAcademic_person_detail_pid',
+        'sparkAcademic_organization_detail_pid',
+        'sparkAcademic_course_detail_pid',
+        'sparkAcademic_studyprogram_detail_pid',
+        'sparkAcademic_project_detail_pid',
     ];
 
-    foreach ($academicPidFields as $field) {
+    // Storage PIDs
+    $storagePidFields = [
+        'sparkAcademic_person_storage_pid',
+        'sparkAcademic_organization_storage_pid',
+        'sparkAcademic_course_storage_pid',
+        'sparkAcademic_studyprogram_storage_pid',
+        'sparkAcademic_project_storage_pid',
+    ];
+
+    foreach (array_merge($detailPidFields, $storagePidFields) as $field) {
         $GLOBALS['SiteConfiguration']['site']['columns'][$field] = [
-            'label' => $ll . 'site.configuration.' . $field,
-            'config' => $academicPidConfig,
+            'label' => $ll . $field,
+            'config' => $pidConfig,
         ];
-        // Also register for site_language
         $GLOBALS['SiteConfiguration']['site_language']['columns'][$field] = [
-            'label' => $ll . 'site.configuration.' . $field,
-            'config' => $academicPidConfig,
+            'label' => $ll . $field,
+            'config' => $pidConfig,
         ];
     }
-
-    $GLOBALS['SiteConfiguration']['site']['palettes']['sparkAcademicPids'] = [
-        'showitem' => implode(', ', $academicPidFields),
+    
+    $GLOBALS['SiteConfiguration']['site']['palettes']['sparkAcademic_detail_pids'] = [
+        'label' => $ll . 'sparkAcademic_detail_pids',
+        'showitem' => implode(', ', $detailPidFields),
     ];
-    $GLOBALS['SiteConfiguration']['site_language']['palettes']['sparkAcademicPidsLocalized'] = [
-        'label' => $ll . 'site.configuration.academicPids',
-        'showitem' => implode(', ', $academicPidFields),
+    $GLOBALS['SiteConfiguration']['site']['palettes']['sparkAcademic_storage_pids'] = [
+        'label' => $ll . 'sparkAcademic_storage_pids',
+        'showitem' => implode(', ', $storagePidFields),
     ];
 
-    // Add to existing PIDS tab using palette
-    $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] = str_replace(
-        '--palette--;;sparkPids',
-        '--palette--;;sparkPids, --palette--;;sparkAcademicPids',
-        $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem']
-    );
-
-    $GLOBALS['SiteConfiguration']['site_language']['types']['1']['showitem'] = str_replace(
-        '--palette--;;sparkPidsLocalized',
-        '--palette--;;sparkPidsLocalized, --palette--;;sparkAcademicPidsLocalized',
-        $GLOBALS['SiteConfiguration']['site_language']['types']['1']['showitem']
-    );
-
-    // Entity Permission Groups
+    $GLOBALS['SiteConfiguration']['site_language']['palettes']['sparkAcademic_detail_pids'] = [
+        'label' => $ll . 'sparkAcademic_detail_pids',
+        'showitem' => implode(', ', $detailPidFields),
+    ];
+    $GLOBALS['SiteConfiguration']['site_language']['palettes']['sparkAcademic_storage_pids'] = [
+        'label' => $ll . 'sparkAcademic_storage_pids',
+        'showitem' => implode(', ', $storagePidFields),
+    ];
+    
+    // ==========================================================================
+    // 2. Entity Permission Groups
+    // ==========================================================================
     $permissionFields = [
-        'spark_perm_project_groups' => 'Project',
-        'spark_perm_person_groups' => 'Person',
-        'spark_perm_org_groups' => 'Organizational Units (Dept, Chair, Lab, Group)',
-        'spark_perm_study_groups' => 'Study (Course, StudyProgram)',
+        'sparkAcademic_person_permission_groups',
+        'sparkAcademic_organization_permission_groups',
+        'sparkAcademic_course_permission_groups',
+        'sparkAcademic_project_permission_groups',
     ];
-
-    $permissionPaletteItems = [];
-
-    foreach ($permissionFields as $field => $label) {
+    
+    foreach ($permissionFields as $field) {
         $GLOBALS['SiteConfiguration']['site']['columns'][$field] = [
-            'label' => $label . ' Editor Groups (User Group UIDs)',
-            'description' => 'Users in these groups can view ALL ' . $label . ' records.',
+            'label' => $ll . $field,
             'config' => [
                 'type' => 'input',
                 'eval' => 'trim',
+                'placeholder' => '1,2,3',
             ],
         ];
-        $permissionPaletteItems[] = $field;
     }
-
-    $GLOBALS['SiteConfiguration']['site']['palettes']['sparkPermissions'] = [
-        'showitem' => implode(', ', $permissionPaletteItems),
+    
+    $GLOBALS['SiteConfiguration']['site']['palettes']['sparkAcademic_permissions'] = [
+        'label' => $ll . 'sparkAcademic_permissions',
+        'showitem' => implode(', ', $permissionFields),
     ];
-
-    // Add to existing PIDS tab using palette
-    $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] .= ', --div--;Spark Permissions, --palette--;;sparkPermissions';
-
-    // User Home Configuration
+    
+    // ==========================================================================
+    // 3. User Home Configuration
+    // ==========================================================================
     $userHomeFields = [
-        'spark_home_storage_uid' => [
-            'label' => 'User Home: Storage UID (sys_file_storage)',
-            'description' => 'UID of the File Storage where user folders will be created (Default: 1 used for fileadmin)',
-            'config' => [
+        'sparkAcademic_users_home_storage_uid',
+        'sparkAcademic_users_home_base_path',
+    ];
+    
+    foreach ($userHomeFields as $field) {
+        $GLOBALS['SiteConfiguration']['site']['columns'][$field] = [
+            'label' => $ll . $field,
+            'config' => ($field === 'sparkAcademic_users_home_storage_uid') ? [
                 'type' => 'number',
                 'default' => 1,
-            ],
-        ],
-        'spark_home_path' => [
-            'label' => 'User Home: Base Path',
-            'description' => 'Path relative to the storage root (e.g. user_homes/). Must end with /',
-            'config' => [
+            ] : [
                 'type' => 'input',
                 'eval' => 'trim',
                 'default' => 'user_homes/',
-            ]
-        ]
-    ];
-
-    $userHomePaletteItems = [];
-    foreach ($userHomeFields as $field => $config) {
-        $GLOBALS['SiteConfiguration']['site']['columns'][$field] = $config;
-        $userHomePaletteItems[] = $field;
+                'placeholder' => 'user_homes/',
+            ],
+        ];
     }
-
-    $GLOBALS['SiteConfiguration']['site']['palettes']['sparkUserHomes'] = [
-        'showitem' => implode(', ', $userHomePaletteItems),
+    
+    $GLOBALS['SiteConfiguration']['site']['palettes']['sparkAcademic_users_home'] = [
+        'label' => $ll . 'sparkAcademic_users_home',
+        'showitem' => implode(', ', $userHomeFields),
     ];
-
-    $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] .= ', --div--;User Homes, --palette--;;sparkUserHomes';
+    
+    // ==========================================================================
+    // Add "Spark Academics" Tab with all palettes
+    // ==========================================================================
+    $sparkAcademicsTab = ', --div--;' . $ll . 'sparkAcademic_pids_tab'
+        . ', --palette--;;sparkAcademic_detail_pids'
+        . ', --palette--;;sparkAcademic_storage_pids'
+        . ', --palette--;;sparkAcademic_permissions'
+        . ', --palette--;;sparkAcademic_users_home';
+    
+    $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] .= $sparkAcademicsTab;
+    
+    // Add localized PIDs to site_language
+    $GLOBALS['SiteConfiguration']['site_language']['types']['1']['showitem'] .= 
+        ', --div--;' . $ll . 'sparkAcademic_pids_tab'
+        . ', --palette--;;sparkAcademic_detail_pids'
+        . ', --palette--;;sparkAcademic_storage_pids';
 
 })();

@@ -84,7 +84,7 @@ class PersonController extends AbstractBackendController
             $sites = $this->siteFinder->getAllSites();
             foreach ($sites as $site) {
                 $config = $site->getConfiguration();
-                $storagePid = (int)($config['academic_pid_person_storage'] ?? 0);
+                $storagePid = (int)($config['sparkAcademic_person_storage_pid'] ?? 0);
                 if ($storagePid > 0) {
                     return $storagePid;
                 }
@@ -113,7 +113,7 @@ class PersonController extends AbstractBackendController
         }
 
         // Check Permissions first (may add backendUser to filter)
-        $canManage = $this->backendPermissionService->canViewAllRecords('spark_perm_person_groups');
+        $canManage = $this->backendPermissionService->canViewAllRecords('sparkAcademic_person_permission_groups');
         if (!$canManage) {
             $filter['backendUser'] = (int)$currentBeUser['uid'];
         }

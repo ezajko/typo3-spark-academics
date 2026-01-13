@@ -3,10 +3,9 @@
 # for each entity type in the Academic List Plugin (Pi1).
 #
 # Documentation:
-# Use 'addItems' to add new view types to the dropdown.
-# Syntax: Key = Label
-# - Key:   Used in file paths (e.g., Partials/Academic/Entities/Person/List/Key.html)
-# - Label: Visible in the backend dropdown
+# Use 'addItems' to add additional view types to the dropdown.
+# Base item 'Default' is defined in FlexForm, addItems adds Simple/Debug.
+# Each entity has its own unique key: settings.view.viewType.{entity}
 #
 # IMPORTANT: Field names containing dots MUST be escaped with backslash.
 #
@@ -14,23 +13,20 @@
 
 # --------------------------------------------------------------------------
 # View Types Configuration per Entity Sheet
+# Note: Each entity uses a unique key to avoid FlexForm value conflicts
 # --------------------------------------------------------------------------
 
 # Organization ViewTypes (sOrganization sheet)
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sOrganization.settings\.view\.viewType {
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sOrganization.settings\.view\.viewType\.organization {
     addItems {
-        Default = Default (Cards)
-        List = List (Table)
         Simple = Simple
         Debug = Debug
     }
 }
 
 # Person ViewTypes (sPerson sheet)
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sPerson.settings\.view\.viewType {
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sPerson.settings\.view\.viewType\.person {
     addItems {
-        Default = Default (Grid)
-        List = List (Table)
         Card = Card
         Simple = Simple
         Debug = Debug
@@ -38,42 +34,62 @@ TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sPerson.settings\.view\.viewTy
 }
 
 # Course ViewTypes (sCourse sheet)
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sCourse.settings\.view\.viewType {
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sCourse.settings\.view\.viewType\.course {
     addItems {
-        Default = Default (Grid)
-        List = List (Table)
-        Card = Card
         Simple = Simple
         Debug = Debug
     }
 }
 
 # StudyProgram ViewTypes (sStudyProgram sheet)
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sStudyProgram.settings\.view\.viewType {
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sStudyProgram.settings\.view\.viewType\.studyprogram {
     addItems {
-        Default = Default (Grid)
-        List = List (Table)
-        Card = Card
         Simple = Simple
         Debug = Debug
     }
 }
 
 # Project ViewTypes (sProject sheet)
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sProject.settings\.view\.viewType {
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sProject.settings\.view\.viewType\.project {
     addItems {
-        Default = Default (Grid)
         Simple = Simple
         Debug = Debug
     }
 }
 
 # --------------------------------------------------------------------------
-# Detail Plugin (Pi2) - Generally uses Default view
+# Detail Plugin (Pi2) - Uses same unique key structure per entity
 # --------------------------------------------------------------------------
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi2.sDEF.settings\.view\.viewType {
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi2.sOrganization.settings\.view\.viewType\.organization {
     addItems {
-        Default = Default
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi2.sPerson.settings\.view\.viewType\.person {
+    addItems {
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi2.sCourse.settings\.view\.viewType\.course {
+    addItems {
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi2.sStudyProgram.settings\.view\.viewType\.studyprogram {
+    addItems {
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+TCEFORM.tt_content.pi_flexform.sparkacademics_pi2.sProject.settings\.view\.viewType\.project {
+    addItems {
         Simple = Simple
         Debug = Debug
     }

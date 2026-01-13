@@ -3,7 +3,33 @@
 <f:section name="Main">
     <f:if condition="{item}">
         <f:then>
-            <f:variable name="viewType" value="{settings.view.viewType -> f:or(alternative: 'Default')}" />
+            <f:variable name="entityLower" value="{entityType -> f:format.case(mode: 'lower')}" />
+            <!-- Read viewType from entity-specific key -->
+            <f:switch expression="{entityLower}">
+                <f:case value="organization">
+                    <f:variable name="viewType"
+                        value="{settings.view.viewType.organization -> f:or(alternative: 'Default')}" />
+                </f:case>
+                <f:case value="person">
+                    <f:variable name="viewType"
+                        value="{settings.view.viewType.person -> f:or(alternative: 'Default')}" />
+                </f:case>
+                <f:case value="course">
+                    <f:variable name="viewType"
+                        value="{settings.view.viewType.course -> f:or(alternative: 'Default')}" />
+                </f:case>
+                <f:case value="studyprogram">
+                    <f:variable name="viewType"
+                        value="{settings.view.viewType.studyprogram -> f:or(alternative: 'Default')}" />
+                </f:case>
+                <f:case value="project">
+                    <f:variable name="viewType"
+                        value="{settings.view.viewType.project -> f:or(alternative: 'Default')}" />
+                </f:case>
+                <f:defaultCase>
+                    <f:variable name="viewType" value="Default" />
+                </f:defaultCase>
+            </f:switch>
             <f:render partial="Academic/Entities/{entityType}/Show/{viewType}"
                 arguments="{item: item, detailPid: detailPid, settings: settings}" />
         </f:then>

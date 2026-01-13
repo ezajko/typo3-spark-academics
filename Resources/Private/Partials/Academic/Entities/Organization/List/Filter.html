@@ -1,0 +1,47 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<!--
+    Organization Frontend Filter
+    Filter by organization type
+    Author: Ernedin Zajko <ezajko@root.ba>
+-->
+
+<div class="spark-academics-filter mb-4 p-4 bg-light rounded">
+    <f:form action="list" method="post" class="row g-3">
+
+        <!-- Search Field -->
+        <f:if condition="{settings.view.frontendFilter.showSearch}">
+            <div class="col-md-4">
+                <label for="filter-search" class="form-label fw-bold">Search</label>
+                <f:form.textfield name="filter[search]" id="filter-search" value="{filter.search}" class="form-control"
+                    placeholder="Organization name..." />
+            </div>
+        </f:if>
+
+        <!-- Filter Dropdowns -->
+        <f:if condition="{settings.view.frontendFilter.showFilters}">
+            <!-- Organization Type Filter -->
+            <f:if condition="{availableTypes}">
+                <div class="col-md-3">
+                    <label for="filter-type" class="form-label fw-bold">Type</label>
+                    <f:form.select name="filter[organizationType]" id="filter-type" options="{availableTypes}"
+                        optionValueField="uid" optionLabelField="title" prependOptionLabel="-- All --"
+                        prependOptionValue="" value="{filter.organizationType}" class="form-select" />
+                </div>
+            </f:if>
+        </f:if>
+
+        <!-- Submit Button -->
+        <div class="col-md-2 d-flex align-items-end">
+            <f:form.submit value="Filter" class="btn btn-primary w-100" />
+        </div>
+
+        <!-- Reset Button -->
+        <f:if condition="{settings.view.frontendFilter.showReset}">
+            <div class="col-md-auto d-flex align-items-end">
+                <f:link.action action="list" class="btn btn-outline-secondary">Reset</f:link.action>
+            </div>
+        </f:if>
+    </f:form>
+</div>
+
+</html>

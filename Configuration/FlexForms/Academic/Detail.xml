@@ -74,7 +74,7 @@
                     </settings.select.organization>
 
                     <!-- View Type for Organization -->
-                    <settings.view.viewType>
+                    <settings.view.viewType.organization>
                         <label>View Type</label>
                         <config>
                             <type>select</type>
@@ -84,17 +84,9 @@
                                     <label>Default</label>
                                     <value>Default</value>
                                 </numIndex>
-                                <numIndex index="1">
-                                    <label>Simple</label>
-                                    <value>Simple</value>
-                                </numIndex>
-                                <numIndex index="2">
-                                    <label>Debug</label>
-                                    <value>Debug</value>
-                                </numIndex>
                             </items>
                         </config>
-                    </settings.view.viewType>
+                    </settings.view.viewType.organization>
                 </el>
             </ROOT>
         </sOrganization>
@@ -119,7 +111,7 @@
                     </settings.select.person>
 
                     <!-- View Type for Person -->
-                    <settings.view.viewType>
+                    <settings.view.viewType.person>
                         <label>View Type</label>
                         <config>
                             <type>select</type>
@@ -129,17 +121,9 @@
                                     <label>Default</label>
                                     <value>Default</value>
                                 </numIndex>
-                                <numIndex index="1">
-                                    <label>Simple</label>
-                                    <value>Simple</value>
-                                </numIndex>
-                                <numIndex index="2">
-                                    <label>Debug</label>
-                                    <value>Debug</value>
-                                </numIndex>
                             </items>
                         </config>
-                    </settings.view.viewType>
+                    </settings.view.viewType.person>
                 </el>
             </ROOT>
         </sPerson>
@@ -164,7 +148,7 @@
                     </settings.select.course>
 
                     <!-- View Type for Course -->
-                    <settings.view.viewType>
+                    <settings.view.viewType.course>
                         <label>View Type</label>
                         <config>
                             <type>select</type>
@@ -174,17 +158,9 @@
                                     <label>Default</label>
                                     <value>Default</value>
                                 </numIndex>
-                                <numIndex index="1">
-                                    <label>Simple</label>
-                                    <value>Simple</value>
-                                </numIndex>
-                                <numIndex index="2">
-                                    <label>Debug</label>
-                                    <value>Debug</value>
-                                </numIndex>
                             </items>
                         </config>
-                    </settings.view.viewType>
+                    </settings.view.viewType.course>
                 </el>
             </ROOT>
         </sCourse>
@@ -209,7 +185,7 @@
                     </settings.select.studyprogram>
 
                     <!-- View Type for StudyProgram -->
-                    <settings.view.viewType>
+                    <settings.view.viewType.studyprogram>
                         <label>View Type</label>
                         <config>
                             <type>select</type>
@@ -219,17 +195,9 @@
                                     <label>Default</label>
                                     <value>Default</value>
                                 </numIndex>
-                                <numIndex index="1">
-                                    <label>Simple</label>
-                                    <value>Simple</value>
-                                </numIndex>
-                                <numIndex index="2">
-                                    <label>Debug</label>
-                                    <value>Debug</value>
-                                </numIndex>
                             </items>
                         </config>
-                    </settings.view.viewType>
+                    </settings.view.viewType.studyprogram>
                 </el>
             </ROOT>
         </sStudyProgram>
@@ -254,7 +222,7 @@
                     </settings.select.project>
 
                     <!-- View Type for Project -->
-                    <settings.view.viewType>
+                    <settings.view.viewType.project>
                         <label>View Type</label>
                         <config>
                             <type>select</type>
@@ -264,17 +232,9 @@
                                     <label>Default</label>
                                     <value>Default</value>
                                 </numIndex>
-                                <numIndex index="1">
-                                    <label>Simple</label>
-                                    <value>Simple</value>
-                                </numIndex>
-                                <numIndex index="2">
-                                    <label>Debug</label>
-                                    <value>Debug</value>
-                                </numIndex>
                             </items>
                         </config>
-                    </settings.view.viewType>
+                    </settings.view.viewType.project>
                 </el>
             </ROOT>
         </sProject>

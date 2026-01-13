@@ -1,7 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <!--
-    Course Frontend Filter
-    Filter by organization, study cycle, category, scientific field
+    StudyProgram Frontend Filter
+    Filter by organization, study cycle, type, mode, language
     Author: Ernedin Zajko <ezajko@root.ba>
 -->
 
@@ -13,22 +13,12 @@
             <div class="col-md-3">
                 <label for="filter-search" class="form-label fw-bold">Search</label>
                 <f:form.textfield name="filter[search]" id="filter-search" value="{filter.search}" class="form-control"
-                    placeholder="Course title..." />
+                    placeholder="Program title..." />
             </div>
         </f:if>
 
         <!-- Filter Dropdowns -->
         <f:if condition="{settings.view.frontendFilter.showFilters}">
-            <!-- Organization Filter -->
-            <f:if condition="{availableOrganizations}">
-                <div class="col-md-2">
-                    <label for="filter-org" class="form-label fw-bold">Organization</label>
-                    <f:form.select name="filter[organization]" id="filter-org" options="{availableOrganizations}"
-                        optionValueField="uid" optionLabelField="title" prependOptionLabel="-- All --"
-                        prependOptionValue="" value="{filter.organization}" class="form-select" />
-                </div>
-            </f:if>
-
             <!-- Study Cycle Filter -->
             <f:if condition="{availableCycles}">
                 <div class="col-md-2">
@@ -39,13 +29,23 @@
                 </div>
             </f:if>
 
-            <!-- Category Filter -->
-            <f:if condition="{availableCategories}">
+            <!-- Study Type Filter -->
+            <f:if condition="{availableStudyTypes}">
                 <div class="col-md-2">
-                    <label for="filter-category" class="form-label fw-bold">Category</label>
-                    <f:form.select name="filter[courseCategory]" id="filter-category" options="{availableCategories}"
+                    <label for="filter-type" class="form-label fw-bold">Study Type</label>
+                    <f:form.select name="filter[studyType]" id="filter-type" options="{availableStudyTypes}"
                         optionValueField="uid" optionLabelField="title" prependOptionLabel="-- All --"
-                        prependOptionValue="" value="{filter.courseCategory}" class="form-select" />
+                        prependOptionValue="" value="{filter.studyType}" class="form-select" />
+                </div>
+            </f:if>
+
+            <!-- Mode of Study Filter -->
+            <f:if condition="{availableModes}">
+                <div class="col-md-2">
+                    <label for="filter-mode" class="form-label fw-bold">Mode</label>
+                    <f:form.select name="filter[modeOfStudy]" id="filter-mode" options="{availableModes}"
+                        optionValueField="uid" optionLabelField="title" prependOptionLabel="-- All --"
+                        prependOptionValue="" value="{filter.modeOfStudy}" class="form-select" />
                 </div>
             </f:if>
         </f:if>

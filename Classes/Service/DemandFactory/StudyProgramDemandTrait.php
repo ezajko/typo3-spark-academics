@@ -62,6 +62,12 @@ trait StudyProgramDemandTrait
             $demand->setLanguage((int)$filter['language']);
         }
         
+        // Selected Study Programs (explicit selection from FlexForm group field)
+        if (!empty($settings['select']['studyprogram'])) {
+            $selectedUids = $this->parseGroupFieldUids($settings['select']['studyprogram']);
+            $demand->setSelectedUids($selectedUids);
+        }
+        
         return $demand;
     }
 }

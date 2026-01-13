@@ -30,7 +30,7 @@ class BackendPermissionService implements SingletonInterface
      * Checks if the current backend user has privileges to view all records of a specific type.
      * Returns true if user is Admin OR belongs to one of the configured permission groups defined in Site Configuration.
      *
-     * @param string $configKey The configuration key in site settings (e.g., 'spark_perm_project_groups')
+     * @param string $configKey The configuration key in site settings (e.g., 'sparkAcademic_project_permission_groups')
      */
     public function canViewAllRecords(string $configKey): bool
     {

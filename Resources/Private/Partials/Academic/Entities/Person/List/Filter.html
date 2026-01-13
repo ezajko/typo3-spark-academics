@@ -1,51 +1,52 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <!--
-    Course Frontend Filter
-    Filter by organization, study cycle, category, scientific field
+    Person Frontend Filter
+    Provides search and filter controls for Person list
+    Following spark-dms pattern: POST method with filter argument
     Author: Ernedin Zajko <ezajko@root.ba>
 -->
 
 <div class="spark-academics-filter mb-4 p-4 bg-light rounded">
     <f:form action="list" method="post" class="row g-3">
 
-        <!-- Search Field -->
+        <!-- Search Field (conditional) -->
         <f:if condition="{settings.view.frontendFilter.showSearch}">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label for="filter-search" class="form-label fw-bold">Search</label>
                 <f:form.textfield name="filter[search]" id="filter-search" value="{filter.search}" class="form-control"
-                    placeholder="Course title..." />
+                    placeholder="Name, email..." />
             </div>
         </f:if>
 
-        <!-- Filter Dropdowns -->
+        <!-- Filter Dropdowns (conditional) -->
         <f:if condition="{settings.view.frontendFilter.showFilters}">
             <!-- Organization Filter -->
             <f:if condition="{availableOrganizations}">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <label for="filter-org" class="form-label fw-bold">Organization</label>
-                    <f:form.select name="filter[organization]" id="filter-org" options="{availableOrganizations}"
+                    <f:form.select name="filter[primaryOrganization]" id="filter-org" options="{availableOrganizations}"
                         optionValueField="uid" optionLabelField="title" prependOptionLabel="-- All --"
-                        prependOptionValue="" value="{filter.organization}" class="form-select" />
+                        prependOptionValue="" value="{filter.primaryOrganization}" class="form-select" />
                 </div>
             </f:if>
 
-            <!-- Study Cycle Filter -->
-            <f:if condition="{availableCycles}">
+            <!-- Academic Rank Filter -->
+            <f:if condition="{availableRanks}">
                 <div class="col-md-2">
-                    <label for="filter-cycle" class="form-label fw-bold">Study Cycle</label>
-                    <f:form.select name="filter[studyCycle]" id="filter-cycle" options="{availableCycles}"
+                    <label for="filter-rank" class="form-label fw-bold">Rank</label>
+                    <f:form.select name="filter[academicRank]" id="filter-rank" options="{availableRanks}"
                         optionValueField="uid" optionLabelField="title" prependOptionLabel="-- All --"
-                        prependOptionValue="" value="{filter.studyCycle}" class="form-select" />
+                        prependOptionValue="" value="{filter.academicRank}" class="form-select" />
                 </div>
             </f:if>
 
-            <!-- Category Filter -->
-            <f:if condition="{availableCategories}">
+            <!-- Person Type Filter -->
+            <f:if condition="{availablePersonTypes}">
                 <div class="col-md-2">
-                    <label for="filter-category" class="form-label fw-bold">Category</label>
-                    <f:form.select name="filter[courseCategory]" id="filter-category" options="{availableCategories}"
+                    <label for="filter-type" class="form-label fw-bold">Type</label>
+                    <f:form.select name="filter[personType]" id="filter-type" options="{availablePersonTypes}"
                         optionValueField="uid" optionLabelField="title" prependOptionLabel="-- All --"
-                        prependOptionValue="" value="{filter.courseCategory}" class="form-select" />
+                        prependOptionValue="" value="{filter.personType}" class="form-select" />
                 </div>
             </f:if>
         </f:if>
@@ -55,7 +56,7 @@
             <f:form.submit value="Filter" class="btn btn-primary w-100" />
         </div>
 
-        <!-- Reset Button -->
+        <!-- Reset Button (conditional) -->
         <f:if condition="{settings.view.frontendFilter.showReset}">
             <div class="col-md-auto d-flex align-items-end">
                 <f:link.action action="list" class="btn btn-outline-secondary">Reset</f:link.action>

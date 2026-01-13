@@ -7,8 +7,10 @@ orcidClientSecret =
 # cat=orcid; type=string; label=ORCID API Base URL: (Default: https://pub.orcid.org/v3.0)
 orcidApiBaseUrl = https://pub.orcid.org/v3.0
 
-# cat=permissions; type=string; label=Organization Permission Groups: List of BE user group UIDs allowed to manage Organizations (comma separated)
-spark_perm_org_groups = 
-
-# cat=permissions; type=string; label=Study/Course Permission Groups: List of BE user group UIDs allowed to manage Courses/Programs (comma separated)
-spark_perm_study_groups = 
+# NOTE: Permission groups and storage PIDs are now configured in Site Configuration
+# Visit: Sites > [Your Site] > Spark Academics tab
+# Available fields:
+# - sparkAcademic_{entity}_detail_pid - Detail page links
+# - sparkAcademic_{entity}_storage_pid - Storage folders
+# - sparkAcademic_{entity}_permission_groups - BE editor permissions
+# - sparkAcademic_users_home_storage_uid / _base_path - User home folders

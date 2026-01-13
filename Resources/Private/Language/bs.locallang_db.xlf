@@ -40,55 +40,100 @@
                 <source>Academic Rank</source>
                 <target>Akademsko zvanje</target>
             </trans-unit>
+            <trans-unit id="tx_spark_person_type">
+                <source>Person Type</source>
+                <target>Tip osoblja</target>
+            </trans-unit>
 
             <!-- Site Configuration Labels -->
-            <trans-unit id="site.configuration.academicPids">
-                <source>Academic Detail Pages</source>
-                <target>Detaljne stranice akademskih entiteta</target>
+            <trans-unit id="site.configuration.sparkAcademic_pids_tab">
+                <source>Spark Academics</source>
+                <target>Spark Academics</target>
             </trans-unit>
-            <trans-unit id="site.configuration.academic_pid_person_detail">
+            <trans-unit id="site.configuration.sparkAcademic_detail_pids">
+                <source>Detail Page PIDs</source>
+                <target>PID-ovi detaljnih stranica</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.sparkAcademic_storage_pids">
+                <source>Storage Folder PIDs</source>
+                <target>PID-ovi foldera za pohranu</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.sparkAcademic_permissions">
+                <source>Backend Editor Permissions</source>
+                <target>Permisije backend editora</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.sparkAcademic_users_home">
+                <source>User Home Folders</source>
+                <target>Korisnički početni folderi</target>
+            </trans-unit>
+
+            <!-- Field Labels -->
+            <trans-unit id="site.configuration.sparkAcademic_person_detail_pid">
                 <source>Person Detail Page</source>
                 <target>Stranica detalja osobe</target>
             </trans-unit>
-            <trans-unit id="site.configuration.academic_pid_dept_detail">
-                <source>Department Detail Page</source>
-                <target>Stranica detalja odsjeka</target>
+            <trans-unit id="site.configuration.sparkAcademic_organization_detail_pid">
+                <source>Organization Detail Page</source>
+                <target>Stranica detalja organizacije</target>
             </trans-unit>
-            <trans-unit id="site.configuration.academic_pid_lab_detail">
-                <source>Research Lab Detail Page</source>
-                <target>Stranica detalja laboratorija</target>
-            </trans-unit>
-            <trans-unit id="site.configuration.academic_pid_group_detail">
-                <source>Research Group Detail Page</source>
-                <target>Stranica detalja istraživačke grupe</target>
-            </trans-unit>
-            <trans-unit id="site.configuration.academic_pid_chair_detail">
-                <source>Chair Detail Page</source>
-                <target>Stranica detalja katedre</target>
-            </trans-unit>
-            <trans-unit id="site.configuration.academic_pid_course_detail">
+            <trans-unit id="site.configuration.sparkAcademic_course_detail_pid">
                 <source>Course Detail Page</source>
                 <target>Stranica detalja predmeta</target>
             </trans-unit>
-            <trans-unit id="site.configuration.academic_pid_program_detail">
+            <trans-unit id="site.configuration.sparkAcademic_studyprogram_detail_pid">
                 <source>Study Program Detail Page</source>
                 <target>Stranica detalja studijskog programa</target>
             </trans-unit>
-            <trans-unit id="site.configuration.academic_pid_project_detail">
+            <trans-unit id="site.configuration.sparkAcademic_project_detail_pid">
                 <source>Project Detail Page</source>
                 <target>Stranica detalja projekta</target>
             </trans-unit>
-            <trans-unit id="site.configuration.academic_pid_course_storage">
-                <source>Course Storage Page</source>
-                <target>Stranica za pohranu predmeta</target>
+
+            <trans-unit id="site.configuration.sparkAcademic_person_storage_pid">
+                <source>Person Storage Folder</source>
+                <target>Folder za pohranu osoba</target>
             </trans-unit>
-            <trans-unit id="site.configuration.academic_pid_project_storage">
-                <source>Project Storage Page</source>
-                <target>Stranica za pohranu projekata</target>
+            <trans-unit id="site.configuration.sparkAcademic_organization_storage_pid">
+                <source>Organization Storage Folder</source>
+                <target>Folder za pohranu organizacija</target>
             </trans-unit>
-            <trans-unit id="site.configuration.academic_pid_person_storage">
-                <source>Person Storage Page</source>
-                <target>Stranica za pohranu osoba</target>
+            <trans-unit id="site.configuration.sparkAcademic_course_storage_pid">
+                <source>Course Storage Folder</source>
+                <target>Folder za pohranu predmeta</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.sparkAcademic_studyprogram_storage_pid">
+                <source>Study Program Storage Folder</source>
+                <target>Folder za pohranu studijskih programa</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.sparkAcademic_project_storage_pid">
+                <source>Project Storage Folder</source>
+                <target>Folder za pohranu projekata</target>
+            </trans-unit>
+
+            <trans-unit id="site.configuration.sparkAcademic_person_permission_groups">
+                <source>Person Editor Groups</source>
+                <target>Grupe editora osoba</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.sparkAcademic_organization_permission_groups">
+                <source>Organization Editor Groups</source>
+                <target>Grupe editora organizacija</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.sparkAcademic_course_permission_groups">
+                <source>Course &amp; Program Editor Groups</source>
+                <target>Grupe editora predmeta i programa</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.sparkAcademic_project_permission_groups">
+                <source>Project Editor Groups</source>
+                <target>Grupe editora projekata</target>
+            </trans-unit>
+
+            <trans-unit id="site.configuration.sparkAcademic_users_home_storage_uid">
+                <source>File Storage UID</source>
+                <target>UID skladišta datoteka</target>
+            </trans-unit>
+            <trans-unit id="site.configuration.sparkAcademic_users_home_base_path">
+                <source>Base Path</source>
+                <target>Bazična putanja</target>
             </trans-unit>
         </body>
     </file>

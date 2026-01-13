@@ -75,6 +75,12 @@ trait ProjectDemandTrait
             $demand->setBackendUser((int)$filter['backendUser']);
         }
         
+        // Selected Projects (explicit selection from FlexForm group field)
+        if (!empty($settings['select']['project'])) {
+            $selectedUids = $this->parseGroupFieldUids($settings['select']['project']);
+            $demand->setSelectedUids($selectedUids);
+        }
+        
         return $demand;
     }
 }

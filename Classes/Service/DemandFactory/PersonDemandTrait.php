@@ -37,9 +37,14 @@ trait PersonDemandTrait
         // Merge settings filter with request filter (request takes priority)
         $filter = array_merge($settings['filter'] ?? [], $requestFilter);
         
-        // Organization filter
-        if (!empty($filter['organization'])) {
-            $demand->setOrganization((int)$filter['organization']);
+        // Primary Organization filter
+        if (!empty($filter['primaryOrganization'])) {
+            $demand->setPrimaryOrganization((int)$filter['primaryOrganization']);
+        }
+        
+        // Additional Organization filter (M:N relation)
+        if (!empty($filter['additionalOrganization'])) {
+            $demand->setAdditionalOrganization((int)$filter['additionalOrganization']);
         }
         
         // Academic Rank filter
@@ -50,6 +55,11 @@ trait PersonDemandTrait
         // Academic Title filter
         if (!empty($filter['academicTitle'])) {
             $demand->setAcademicTitle((int)$filter['academicTitle']);
+        }
+        
+        // Person Type filter (internal, visiting, guest, etc.)
+        if (!empty($filter['personType'])) {
+            $demand->setPersonType((int)$filter['personType']);
         }
         
         // Is Academic filter
@@ -65,6 +75,13 @@ trait PersonDemandTrait
         // Backend User filter (for permission-based filtering)
         if (!empty($filter['backendUser'])) {
             $demand->setBackendUser((int)$filter['backendUser']);
+        }
+        
+        // Selected Persons (explicit selection from FlexForm group field)
+        // Format: "tx_spark_person_1,tx_spark_person_2" or "1,2"
+        if (!empty($settings['select']['person'])) {
+            $selectedUids = $this->parseGroupFieldUids($settings['select']['person']);
+            $demand->setSelectedUids($selectedUids);
         }
         
         return $demand;

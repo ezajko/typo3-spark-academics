@@ -53,6 +53,9 @@ class Person extends AbstractEntity
     /** @var AcademicRank|null Academic rank (e.g., Full Professor, Associate Professor) */
     protected ?AcademicRank $academicRank = null;
 
+    /** @var PersonType|null Person type (internal, visiting, guest, etc.) */
+    protected ?PersonType $personType = null;
+
     // =========================================================================
     // Biography & Media
     // =========================================================================
@@ -293,6 +296,16 @@ class Person extends AbstractEntity
     public function setAcademicRank(?AcademicRank $academicRank): void
     {
         $this->academicRank = $academicRank;
+    }
+
+    public function getPersonType(): ?PersonType
+    {
+        return $this->personType;
+    }
+
+    public function setPersonType(?PersonType $personType): void
+    {
+        $this->personType = $personType;
     }
 
     // =========================================================================

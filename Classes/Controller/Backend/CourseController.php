@@ -30,7 +30,7 @@ use TYPO3\CMS\Core\Site\SiteFinder;
 
 /**
  * Backend controller for Course entity management
- * Uses spark_perm_study_groups for permission checks
+ * Uses sparkAcademic_course_permission_groups for permission checks
  * 
  * @author Ernedin Zajko <ezajko@root.ba>
  */
@@ -82,7 +82,7 @@ class CourseController extends AbstractBackendController
             $sites = $this->siteFinder->getAllSites();
             foreach ($sites as $site) {
                 $config = $site->getConfiguration();
-                $storagePid = (int)($config['academic_pid_course_storage'] ?? 0);
+                $storagePid = (int)($config['sparkAcademic_course_storage_pid'] ?? 0);
                 if ($storagePid > 0) {
                     return $storagePid;
                 }
@@ -94,8 +94,8 @@ class CourseController extends AbstractBackendController
 
     public function listAction(): ResponseInterface
     {
-        // Study entities use spark_perm_study_groups
-        $canManage = $this->backendPermissionService->canViewAllRecords('spark_perm_study_groups');
+        // Course entities use sparkAcademic_course_permission_groups
+        $canManage = $this->backendPermissionService->canViewAllRecords('sparkAcademic_course_permission_groups');
 
         // Get filter from request
         $queryParams = $this->request->getQueryParams();

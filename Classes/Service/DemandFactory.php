@@ -102,6 +102,37 @@ class DemandFactory
     }
 
     /**
+     * Parse UIDs from FlexForm group field value
+     * 
+     * Group fields in TYPO3 store values as "table_uid,table_uid" or just "uid,uid"
+     * This method extracts the UIDs from such strings.
+     * 
+     * @param string $value The group field value (e.g., "tx_spark_person_1,tx_spark_person_2" or "1,2")
+     * @return int[] Array of UIDs
+     */
+    protected function parseGroupFieldUids(string $value): array
+    {
+        if (empty($value)) {
+            return [];
+        }
+        
+        $uids = [];
+        $parts = explode(',', $value);
+        
+        foreach ($parts as $part) {
+            $part = trim($part);
+            // Extract UID - could be "table_uid" or just "uid"
+            if (preg_match('/_(\d+)$/', $part, $matches)) {
+                $uids[] = (int)$matches[1];
+            } elseif (is_numeric($part)) {
+                $uids[] = (int)$part;
+            }
+        }
+        
+        return array_filter($uids);
+    }
+
+    /**
      * Get list of supported entity types
      * 
      * @return array<string> List of entity type names

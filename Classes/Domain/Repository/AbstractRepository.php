@@ -80,6 +80,11 @@ abstract class AbstractRepository extends Repository
         $query = $this->createQuery();
         $constraints = [];
 
+        // If specific UIDs are selected, filter by those first (takes priority)
+        if ($demand->hasSelectedUids()) {
+            $constraints[] = $query->in('uid', $demand->getSelectedUids());
+        }
+
         // Apply filter properties from demand
         if ($demand->hasFilters()) {
             $filters = $demand->getFilterProperties();

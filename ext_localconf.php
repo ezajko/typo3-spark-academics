@@ -37,9 +37,21 @@ defined('TYPO3') or die();
 );
 
 // Configure excluded parameters for cHash calculation to allow GET filters without 404
-$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1';
+// Exclude entire plugin namespace and all filter subparameters
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1[filter]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1[filter][search]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1[filter][primaryOrganization]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1[filter][additionalOrganization]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1[filter][academicRank]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1[filter][academicTitle]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1[filter][organization]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1[filter][projectStatus]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1[filter][projectType]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1[filter][studyCycle]';
 $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1[__referrer]';
 $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1[__trustedProperties]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_sparkacademics_pi1[currentPage]';
 
 // Disable 404 on cHash error to allow Filter GET requests with unmapped Route arguments
 $GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFoundOnCHashError'] = false;
+

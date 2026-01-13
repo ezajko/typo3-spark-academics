@@ -94,11 +94,11 @@ class HomeFolderService
     {
         $sites = $this->siteFinder->getAllSites();
         foreach ($sites as $site) {
-            $storageUid = $site->getAttribute('spark_home_storage_uid');
+            $storageUid = $site->getAttribute('sparkAcademic_users_home_storage_uid');
             if ($storageUid) {
                 return [
                     'storageUid' => $storageUid,
-                    'basePath' => $site->getAttribute('spark_home_path') ?? 'user_homes/',
+                    'basePath' => $site->getAttribute('sparkAcademic_users_home_base_path') ?? 'user_homes/',
                 ];
             }
         }

@@ -1,59 +1,77 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <!--
-    Project Filter Partial
-    Filtering form for projects (Search, Status, Type, Program, Field)
+    Project Frontend Filter
+    Filter by status, type, funding program, organization
+    Author: Ernedin Zajko <ezajko@root.ba>
 -->
-<div class="project-filter card border-0 bg-light mb-4">
-    <div class="card-body">
-        <f:form action="listFiltered" controller="Academic" extensionName="SparkAcademics" pluginName="Pi1" method="get"
-            name="filter" object="{filter}" ignoreProtection="true">
-            <div class="row g-3">
-                <!-- Search -->
-                <div class="col-md-4">
-                    <label class="form-label small text-muted">Search</label>
-                    <f:form.textfield property="search" class="form-control" placeholder="Search keywords..." />
-                </div>
 
-                <!-- Status -->
-                <div class="col-md-2">
-                    <label class="form-label small text-muted">Status</label>
-                    <f:form.select property="status" options="{availableStatuses}" optionLabelField="title"
-                        optionValueField="uid" class="form-select" prependOptionLabel="All Statuses"
-                        prependOptionValue="" />
-                </div>
+<div class="spark-academics-filter mb-4 p-4 bg-light rounded">
+    <f:form action="list" method="post" class="row g-3">
 
-                <!-- Type -->
-                <div class="col-md-3">
-                    <label class="form-label small text-muted">Project Type</label>
-                    <f:form.select property="type" options="{availableTypes}" optionLabelField="title"
-                        optionValueField="uid" class="form-select" prependOptionLabel="All Types"
-                        prependOptionValue="" />
-                </div>
-
-                <!-- Funding -->
-                <div class="col-md-3">
-                    <label class="form-label small text-muted">Funding Program</label>
-                    <f:form.select property="program" options="{availablePrograms}" optionLabelField="title"
-                        optionValueField="uid" class="form-select" prependOptionLabel="All Programs"
-                        prependOptionValue="" />
-                </div>
-
-                <!-- Scientific Field -->
-                <div class="col-md-10">
-                    <label class="form-label small text-muted">Scientific Field</label>
-                    <f:form.select property="field" options="{availableFields}" optionLabelField="title"
-                        optionValueField="uid" class="form-select" prependOptionLabel="All Fields"
-                        prependOptionValue="" />
-                </div>
-
-                <!-- Submit -->
-                <div class="col-md-2 d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-filter me-1"></i>
-                        Filter</button>
-                </div>
+        <!-- Search Field -->
+        <f:if condition="{settings.view.frontendFilter.showSearch}">
+            <div class="col-md-3">
+                <label for="filter-search" class="form-label fw-bold">Search</label>
+                <f:form.textfield name="filter[search]" id="filter-search" value="{filter.search}" class="form-control"
+                    placeholder="Project title..." />
             </div>
-        </f:form>
-    </div>
+        </f:if>
+
+        <!-- Filter Dropdowns -->
+        <f:if condition="{settings.view.frontendFilter.showFilters}">
+            <!-- Project Status Filter -->
+            <f:if condition="{availableStatuses}">
+                <div class="col-md-2">
+                    <label for="filter-status" class="form-label fw-bold">Status</label>
+                    <f:form.select name="filter[projectStatus]" id="filter-status" options="{availableStatuses}"
+                        optionValueField="uid" optionLabelField="title" prependOptionLabel="-- All --"
+                        prependOptionValue="" value="{filter.projectStatus}" class="form-select" />
+                </div>
+            </f:if>
+
+            <!-- Project Type Filter -->
+            <f:if condition="{availableTypes}">
+                <div class="col-md-2">
+                    <label for="filter-type" class="form-label fw-bold">Type</label>
+                    <f:form.select name="filter[projectType]" id="filter-type" options="{availableTypes}"
+                        optionValueField="uid" optionLabelField="title" prependOptionLabel="-- All --"
+                        prependOptionValue="" value="{filter.projectType}" class="form-select" />
+                </div>
+            </f:if>
+
+            <!-- Funding Program Filter -->
+            <f:if condition="{availablePrograms}">
+                <div class="col-md-2">
+                    <label for="filter-program" class="form-label fw-bold">Funding</label>
+                    <f:form.select name="filter[fundingProgram]" id="filter-program" options="{availablePrograms}"
+                        optionValueField="uid" optionLabelField="title" prependOptionLabel="-- All --"
+                        prependOptionValue="" value="{filter.fundingProgram}" class="form-select" />
+                </div>
+            </f:if>
+
+            <!-- Organization Filter -->
+            <f:if condition="{availableOrganizations}">
+                <div class="col-md-2">
+                    <label for="filter-org" class="form-label fw-bold">Organization</label>
+                    <f:form.select name="filter[organization]" id="filter-org" options="{availableOrganizations}"
+                        optionValueField="uid" optionLabelField="title" prependOptionLabel="-- All --"
+                        prependOptionValue="" value="{filter.organization}" class="form-select" />
+                </div>
+            </f:if>
+        </f:if>
+
+        <!-- Submit Button -->
+        <div class="col-md-2 d-flex align-items-end">
+            <f:form.submit value="Filter" class="btn btn-primary w-100" />
+        </div>
+
+        <!-- Reset Button -->
+        <f:if condition="{settings.view.frontendFilter.showReset}">
+            <div class="col-md-auto d-flex align-items-end">
+                <f:link.action action="list" class="btn btn-outline-secondary">Reset</f:link.action>
+            </div>
+        </f:if>
+    </f:form>
 </div>
 
 </html>

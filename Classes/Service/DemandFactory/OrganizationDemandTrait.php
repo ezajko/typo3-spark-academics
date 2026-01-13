@@ -47,6 +47,12 @@ trait OrganizationDemandTrait
             $demand->setParent((int)($filter['parentOrganization'] ?? $filter['parent']));
         }
         
+        // Selected Organizations (explicit selection from FlexForm group field)
+        if (!empty($settings['select']['organization'])) {
+            $selectedUids = $this->parseGroupFieldUids($settings['select']['organization']);
+            $demand->setSelectedUids($selectedUids);
+        }
+        
         return $demand;
     }
 }

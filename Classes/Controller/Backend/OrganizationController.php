@@ -97,7 +97,7 @@ class OrganizationController extends AbstractBackendController
             : [];
 
         // Permission check for "new record" button
-        $canCreate = $this->backendPermissionService->hasPermission('spark_perm_org_groups');
+        $canCreate = $this->backendPermissionService->hasPermission('sparkAcademic_organization_permission_groups');
         
         // Assign filter options
         $this->additionalViewVariables = [

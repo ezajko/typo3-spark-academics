@@ -135,6 +135,16 @@
                         </config>
                     </settings.view.frontendFilter.showSearch>
 
+                    <!-- Show Filter Dropdowns -->
+                    <settings.view.frontendFilter.showFilters>
+                        <label>Show Filter Dropdowns</label>
+                        <displayCond>FIELD:sFrontendFilter.settings.view.frontendFilter.enabled:=:1</displayCond>
+                        <config>
+                            <type>check</type>
+                            <default>1</default>
+                        </config>
+                    </settings.view.frontendFilter.showFilters>
+
                     <!-- Show Reset Button -->
                     <settings.view.frontendFilter.showReset>
                         <label>Show Reset Button</label>
@@ -156,31 +166,19 @@
                 <type>array</type>
                 <el>
                     <!-- View Type for Organization -->
-                    <settings.view.viewType>
+                    <settings.view.viewType.organization>
                         <label>View Type</label>
                         <config>
                             <type>select</type>
                             <renderType>selectSingle</renderType>
                             <items>
                                 <numIndex index="0">
-                                    <label>Default (Cards)</label>
+                                    <label>Default</label>
                                     <value>Default</value>
-                                </numIndex>
-                                <numIndex index="1">
-                                    <label>List (Table)</label>
-                                    <value>List</value>
-                                </numIndex>
-                                <numIndex index="2">
-                                    <label>Simple</label>
-                                    <value>Simple</value>
-                                </numIndex>
-                                <numIndex index="3">
-                                    <label>Debug</label>
-                                    <value>Debug</value>
                                 </numIndex>
                             </items>
                         </config>
-                    </settings.view.viewType>
+                    </settings.view.viewType.organization>
 
                     <settings.filter.organizationType>
                         <label>Filter by Type</label>
@@ -220,51 +218,53 @@
                 <type>array</type>
                 <el>
                     <!-- View Type for Person -->
-                    <settings.view.viewType>
+                    <settings.view.viewType.person>
                         <label>View Type</label>
                         <config>
                             <type>select</type>
                             <renderType>selectSingle</renderType>
                             <items>
                                 <numIndex index="0">
-                                    <label>Default (Grid)</label>
+                                    <label>Default</label>
                                     <value>Default</value>
-                                </numIndex>
-                                <numIndex index="1">
-                                    <label>List (Table)</label>
-                                    <value>List</value>
-                                </numIndex>
-                                <numIndex index="2">
-                                    <label>Card</label>
-                                    <value>Card</value>
-                                </numIndex>
-                                <numIndex index="3">
-                                    <label>Simple</label>
-                                    <value>Simple</value>
-                                </numIndex>
-                                <numIndex index="4">
-                                    <label>Debug</label>
-                                    <value>Debug</value>
                                 </numIndex>
                             </items>
                         </config>
-                    </settings.view.viewType>
+                    </settings.view.viewType.person>
 
-                    <settings.filter.organization>
-                        <label>Filter by Organization</label>
+                    <!-- Filter by Primary Organization -->
+                    <settings.filter.primaryOrganization>
+                        <label>Filter by Primary Organization</label>
                         <config>
                             <type>select</type>
                             <renderType>selectSingle</renderType>
                             <foreign_table>tx_spark_organization</foreign_table>
                             <items>
                                 <numIndex index="0">
-                                    <label>-- All Organizations --</label>
+                                    <label>-- All --</label>
                                     <value>0</value>
                                 </numIndex>
                             </items>
                             <minitems>0</minitems>
                         </config>
-                    </settings.filter.organization>
+                    </settings.filter.primaryOrganization>
+
+                    <!-- Filter by Additional Organizations -->
+                    <settings.filter.additionalOrganization>
+                        <label>Filter by Additional Organization</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <foreign_table>tx_spark_organization</foreign_table>
+                            <items>
+                                <numIndex index="0">
+                                    <label>-- All --</label>
+                                    <value>0</value>
+                                </numIndex>
+                            </items>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.filter.additionalOrganization>
 
                     <settings.filter.academicRank>
                         <label>Filter by Rank</label>
@@ -304,35 +304,19 @@
                 <type>array</type>
                 <el>
                     <!-- View Type for Course -->
-                    <settings.view.viewType>
+                    <settings.view.viewType.course>
                         <label>View Type</label>
                         <config>
                             <type>select</type>
                             <renderType>selectSingle</renderType>
                             <items>
                                 <numIndex index="0">
-                                    <label>Default (Grid)</label>
+                                    <label>Default</label>
                                     <value>Default</value>
-                                </numIndex>
-                                <numIndex index="1">
-                                    <label>List (Table)</label>
-                                    <value>List</value>
-                                </numIndex>
-                                <numIndex index="2">
-                                    <label>Card</label>
-                                    <value>Card</value>
-                                </numIndex>
-                                <numIndex index="3">
-                                    <label>Simple</label>
-                                    <value>Simple</value>
-                                </numIndex>
-                                <numIndex index="4">
-                                    <label>Debug</label>
-                                    <value>Debug</value>
                                 </numIndex>
                             </items>
                         </config>
-                    </settings.view.viewType>
+                    </settings.view.viewType.course>
 
                     <settings.filter.organization>
                         <label>Filter by Organization</label>
@@ -404,35 +388,19 @@
                 <type>array</type>
                 <el>
                     <!-- View Type for StudyProgram -->
-                    <settings.view.viewType>
+                    <settings.view.viewType.studyprogram>
                         <label>View Type</label>
                         <config>
                             <type>select</type>
                             <renderType>selectSingle</renderType>
                             <items>
                                 <numIndex index="0">
-                                    <label>Default (Grid)</label>
+                                    <label>Default</label>
                                     <value>Default</value>
-                                </numIndex>
-                                <numIndex index="1">
-                                    <label>List (Table)</label>
-                                    <value>List</value>
-                                </numIndex>
-                                <numIndex index="2">
-                                    <label>Card</label>
-                                    <value>Card</value>
-                                </numIndex>
-                                <numIndex index="3">
-                                    <label>Simple</label>
-                                    <value>Simple</value>
-                                </numIndex>
-                                <numIndex index="4">
-                                    <label>Debug</label>
-                                    <value>Debug</value>
                                 </numIndex>
                             </items>
                         </config>
-                    </settings.view.viewType>
+                    </settings.view.viewType.studyprogram>
 
                     <settings.filter.organization>
                         <label>Filter by Organization</label>
@@ -488,27 +456,19 @@
                 <type>array</type>
                 <el>
                     <!-- View Type for Project -->
-                    <settings.view.viewType>
+                    <settings.view.viewType.project>
                         <label>View Type</label>
                         <config>
                             <type>select</type>
                             <renderType>selectSingle</renderType>
                             <items>
                                 <numIndex index="0">
-                                    <label>Default (Grid)</label>
+                                    <label>Default</label>
                                     <value>Default</value>
-                                </numIndex>
-                                <numIndex index="1">
-                                    <label>Simple</label>
-                                    <value>Simple</value>
-                                </numIndex>
-                                <numIndex index="2">
-                                    <label>Debug</label>
-                                    <value>Debug</value>
                                 </numIndex>
                             </items>
                         </config>
-                    </settings.view.viewType>
+                    </settings.view.viewType.project>
 
                     <settings.filter.projectStatus>
                         <label>Filter by Status</label>

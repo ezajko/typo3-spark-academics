@@ -630,7 +630,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_academics_domain_model_study_program',
-                'MM' => 'tx_academics_domain_model_person_studyprogram_mm',
+                'MM' => 'tx_academics_domain_model_person_study_program_mm',
                 'MM_opposite_field' => 'persons',
                 'size' => 10,
                 'maxitems' => 99,

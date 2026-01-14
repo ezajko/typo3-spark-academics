@@ -133,7 +133,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_academics_domain_model_course',
-                'MM' => 'tx_academics_domain_model_coursegroup_course_mm',
+                'MM' => 'tx_academics_domain_model_course_group_course_mm',
                 'size' => 10,
                 'maxitems' => 99,
             ],

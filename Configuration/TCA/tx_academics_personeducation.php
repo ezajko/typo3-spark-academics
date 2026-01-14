@@ -10,7 +10,7 @@
  */
 
 /**
- * TCA configuration for tx_spark_person_education table
+ * TCA configuration for tx_academics_domain_model_person_education table
  * IRRE child table for Person education records (degrees, qualifications)
  *
  * @author Ernedin Zajko <ezajko@root.ba>

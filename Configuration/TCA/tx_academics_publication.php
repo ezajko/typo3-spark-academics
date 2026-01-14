@@ -10,11 +10,11 @@
  */
 
 /**
- * TCA configuration for tx_spark_publication
+ * TCA configuration for tx_academics_domain_model_publication
  */
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:academics/Resources/Private/Language/locallang_db.xlf:tx_spark_publication',
+        'title' => 'LLL:EXT:academics/Resources/Private/Language/locallang_db.xlf:tx_academics_domain_model_publication',
         'label' => 'title',
         'label_alt' => 'publication_year',
         'label_alt_force' => true,
@@ -80,8 +80,8 @@ return [
                 'items' => [
                     ['label' => '', 'value' => 0],
                 ],
-                'foreign_table' => 'tx_academics_domain_model_domain_model_publication',
-                'foreign_table_where' => 'AND tx_spark_publication.pid=###CURRENT_PID### AND tx_spark_publication.sys_language_uid IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_publication',
+                'foreign_table_where' => 'AND tx_academics_domain_model_publication.pid=###CURRENT_PID### AND tx_academics_domain_model_publication.sys_language_uid IN (-1,0)',
             ],
         ],
         'l10n_diffsource' => [
@@ -258,8 +258,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_domain_model_domain_model_person',
-                'MM' => 'tx_academics_domain_model_domain_model_person_publication_mm',
+                'foreign_table' => 'tx_academics_domain_model_person',
+                'MM' => 'tx_academics_domain_model_person_publication_mm',
                 'MM_opposite_field' => 'publications', // Will add this to Person TCA
                 'size' => 10,
                 'autoSizeMax' => 30,

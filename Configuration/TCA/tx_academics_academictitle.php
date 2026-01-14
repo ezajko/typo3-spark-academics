@@ -66,8 +66,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_domain_model_domain_model_academic_title',
-                'foreign_table_where' => 'AND {#tx_spark_academic_title}.{#pid}=###CURRENT_PID### AND {#tx_spark_academic_title}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_academic_title',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_academic_title}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_academic_title}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],

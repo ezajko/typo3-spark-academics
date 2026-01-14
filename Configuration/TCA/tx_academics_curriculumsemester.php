@@ -60,8 +60,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_domain_model_domain_model_curriculum_semester',
-                'foreign_table_where' => 'AND {#tx_spark_curriculum_semester}.{#pid}=###CURRENT_PID### AND {#tx_spark_curriculum_semester}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_curriculum_semester',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_curriculum_semester}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_curriculum_semester}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -109,7 +109,7 @@ return [
             'label' => 'Course Groups (Slots)',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_academics_domain_model_domain_model_course_group',
+                'foreign_table' => 'tx_academics_domain_model_course_group',
                 'foreign_field' => 'curriculum_semester',
                 'appearance' => [
                     'collapseAll' => true,

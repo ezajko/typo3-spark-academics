@@ -10,7 +10,7 @@
  */
 
 /**
- * TCA configuration for tx_spark_person_mentoring table
+ * TCA configuration for tx_academics_domain_model_person_mentoring table
  * IRRE child table for Person mentoring records (mentored students)
  *
  * @author Ernedin Zajko <ezajko@root.ba>

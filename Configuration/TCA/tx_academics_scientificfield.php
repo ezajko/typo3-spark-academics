@@ -71,8 +71,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_domain_model_domain_model_scientific_field',
-                'foreign_table_where' => 'AND {#tx_spark_scientific_field}.{#pid}=###CURRENT_PID### AND {#tx_spark_scientific_field}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_scientific_field',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_scientific_field}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_scientific_field}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -140,8 +140,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_academics_domain_model_domain_model_scientific_field',
-                'foreign_table_where' => 'AND {#tx_spark_scientific_field}.{#level} < ###REC_FIELD_level### ORDER BY code, title',
+                'foreign_table' => 'tx_academics_domain_model_scientific_field',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_scientific_field}.{#level} < ###REC_FIELD_level### ORDER BY code, title',
                 'items' => [
                     ['-- No parent (Top level) --', 0],
                 ],
@@ -153,7 +153,7 @@ return [
             'label' => 'Sub-fields',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_academics_domain_model_domain_model_scientific_field',
+                'foreign_table' => 'tx_academics_domain_model_scientific_field',
                 'foreign_field' => 'parent',
                 'maxitems' => 9999,
                 'appearance' => [

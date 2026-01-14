@@ -10,7 +10,7 @@
  */
 
 /**
- * TCA configuration for tx_spark_person table
+ * TCA configuration for tx_academics_domain_model_person table
  * Represents academic personnel with their profiles, affiliations, and contact information.
  *
  * @author Ernedin Zajko <ezajko@root.ba>
@@ -116,8 +116,8 @@ return [
                 'items' => [
                     ['label' => '', 'value' => 0],
                 ],
-                'foreign_table' => 'tx_academics_domain_model_domain_model_person',
-                'foreign_table_where' => 'AND tx_spark_person.pid=###CURRENT_PID### AND tx_spark_person.sys_language_uid IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_person',
+                'foreign_table_where' => 'AND tx_academics_domain_model_person.pid=###CURRENT_PID### AND tx_academics_domain_model_person.sys_language_uid IN (-1,0)',
             ],
         ],
         'l10n_diffsource' => [
@@ -215,11 +215,11 @@ return [
         'academic_title' => [
             'exclude' => true,
             'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang_db.xlf:tx_spark_academic_title',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang_db.xlf:tx_academics_domain_model_academic_title',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_academics_domain_model_domain_model_academic_title',
+                'foreign_table' => 'tx_academics_domain_model_academic_title',
                 'items' => [
                     ['', 0],
                 ],
@@ -229,11 +229,11 @@ return [
         'academic_rank' => [
             'exclude' => true,
             'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang_db.xlf:tx_spark_academic_rank',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang_db.xlf:tx_academics_domain_model_academic_rank',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_academics_domain_model_domain_model_academic_rank',
+                'foreign_table' => 'tx_academics_domain_model_academic_rank',
                 'items' => [
                     ['', 0],
                 ],
@@ -248,7 +248,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_academics_domain_model_domain_model_person_type',
+                'foreign_table' => 'tx_academics_domain_model_person_type',
                 'items' => [
                     ['', 0],
                 ],
@@ -356,7 +356,7 @@ return [
             'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:person.education',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_academics_domain_model_domain_model_person_education',
+                'foreign_table' => 'tx_academics_domain_model_person_education',
                 'foreign_field' => 'person',
                 'appearance' => [
                     'collapseAll' => true,
@@ -373,7 +373,7 @@ return [
             'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:person.mentoring',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_academics_domain_model_domain_model_person_mentoring',
+                'foreign_table' => 'tx_academics_domain_model_person_mentoring',
                 'foreign_field' => 'person',
                 'appearance' => [
                     'collapseAll' => true,
@@ -528,7 +528,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'be_users',
-                'MM' => 'tx_academics_domain_model_domain_model_person_beuser_mm',
+                'MM' => 'tx_academics_domain_model_person_beuser_mm',
                 'size' => 5,
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,
@@ -546,8 +546,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_academics_domain_model_domain_model_organization',
-                'foreign_table_where' => 'AND {#tx_spark_organization}.{#sys_language_uid} IN (-1,0) ORDER BY title',
+                'foreign_table' => 'tx_academics_domain_model_organization',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_organization}.{#sys_language_uid} IN (-1,0) ORDER BY title',
                 'items' => [['-- Select Organization --', 0]],
             ],
         ],
@@ -557,9 +557,9 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_domain_model_domain_model_organization',
-                'foreign_table_where' => 'AND {#tx_spark_organization}.{#sys_language_uid} IN (-1,0) ORDER BY title',
-                'MM' => 'tx_academics_domain_model_domain_model_person_organization_mm',
+                'foreign_table' => 'tx_academics_domain_model_organization',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_organization}.{#sys_language_uid} IN (-1,0) ORDER BY title',
+                'MM' => 'tx_academics_domain_model_person_organization_mm',
                 'size' => 10,
                 'minitems' => 0,
                 'maxitems' => 99,
@@ -614,8 +614,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_domain_model_domain_model_course',
-                'MM' => 'tx_academics_domain_model_domain_model_person_course_mm',
+                'foreign_table' => 'tx_academics_domain_model_course',
+                'MM' => 'tx_academics_domain_model_person_course_mm',
                 'MM_opposite_field' => 'persons',
                 'size' => 10,
                 'maxitems' => 99,
@@ -629,8 +629,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_domain_model_domain_model_study_program',
-                'MM' => 'tx_academics_domain_model_domain_model_person_studyprogram_mm',
+                'foreign_table' => 'tx_academics_domain_model_study_program',
+                'MM' => 'tx_academics_domain_model_person_studyprogram_mm',
                 'MM_opposite_field' => 'persons',
                 'size' => 10,
                 'maxitems' => 99,
@@ -644,8 +644,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_domain_model_domain_model_project',
-                'MM' => 'tx_academics_domain_model_domain_model_person_project_mm',
+                'foreign_table' => 'tx_academics_domain_model_project',
+                'MM' => 'tx_academics_domain_model_person_project_mm',
                 'MM_opposite_field' => 'persons',
                 'size' => 10,
                 'maxitems' => 99,
@@ -658,9 +658,9 @@ return [
             'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:person.publications',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_academics_domain_model_domain_model_publication',
+                'foreign_table' => 'tx_academics_domain_model_publication',
                 'foreign_field' => 'authors', // Wait, authors is M:N, inline needs MM table adjustment or different config
-                'MM' => 'tx_academics_domain_model_domain_model_person_publication_mm',
+                'MM' => 'tx_academics_domain_model_person_publication_mm',
                 'appearance' => [
                     'collapseAll' => true,
                     'expandSingle' => true,

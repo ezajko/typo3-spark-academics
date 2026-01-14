@@ -10,7 +10,7 @@
  */
 
 /**
- * Faker configuration for tx_spark_person TCA
+ * Faker configuration for tx_academics_domain_model_person TCA
  * Enables fake data generation using georgringer/faker extension
  *
  * @author Ernedin Zajko <ezajko@root.ba>

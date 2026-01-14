@@ -115,23 +115,23 @@ class GenerateTestCoursesCommand extends Command
         ]);
         
         $faker = FakerFactory::create('en_US');
-        $courseConnection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_academics_course');
-        $syllabusConnection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_academics_course_syllabus');
+        $courseConnection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_academics_domain_model_course');
+        $syllabusConnection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_academics_domain_model_course_syllabus');
         
         $io->progressStart($count);
         
         for ($i = 0; $i < $count; $i++) {
             // Create Course
             $course = $this->generateCourse($faker, $lookups, $pid, $i);
-            $courseConnection->insert('tx_academics_course', $course);
-            $courseUid = (int)$courseConnection->lastInsertId('tx_academics_course');
+            $courseConnection->insert('tx_academics_domain_model_course', $course);
+            $courseUid = (int)$courseConnection->lastInsertId('tx_academics_domain_model_course');
             
             // Create 1-3 Syllabus versions
             $numSyllabi = $faker->numberBetween(1, 3);
             for ($s = 0; $s < $numSyllabi; $s++) {
                 $syllabus = $this->generateSyllabus($faker, $lookups, $pid, $courseUid, $s);
-                $syllabusConnection->insert('tx_academics_course_syllabus', $syllabus);
-                $syllabusUid = (int)$syllabusConnection->lastInsertId('tx_academics_course_syllabus');
+                $syllabusConnection->insert('tx_academics_domain_model_course_syllabus', $syllabus);
+                $syllabusUid = (int)$syllabusConnection->lastInsertId('tx_academics_domain_model_course_syllabus');
                 
                 // Add M:N relations for SDG and Teaching Methods
                 $this->addSdgRelations($syllabusUid, $lookups['sdgs'], $faker);
@@ -139,7 +139,7 @@ class GenerateTestCoursesCommand extends Command
             }
             
             // Update syllabi count on course
-            $courseConnection->update('tx_academics_course', ['syllabi' => $numSyllabi], ['uid' => $courseUid]);
+            $courseConnection->update('tx_academics_domain_model_course', ['syllabi' => $numSyllabi], ['uid' => $courseUid]);
             
             $io->progressAdvance();
         }
@@ -157,36 +157,36 @@ class GenerateTestCoursesCommand extends Command
     {
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
         
-        $categories = $connectionPool->getConnectionForTable('tx_academics_course_category')
-            ->select(['uid'], 'tx_academics_course_category', ['deleted' => 0])
+        $categories = $connectionPool->getConnectionForTable('tx_academics_domain_model_course_category')
+            ->select(['uid'], 'tx_academics_domain_model_course_category', ['deleted' => 0])
             ->fetchAllAssociative();
         
-        $cycles = $connectionPool->getConnectionForTable('tx_academics_study_cycle')
-            ->select(['uid'], 'tx_academics_study_cycle', ['deleted' => 0])
+        $cycles = $connectionPool->getConnectionForTable('tx_academics_domain_model_study_cycle')
+            ->select(['uid'], 'tx_academics_domain_model_study_cycle', ['deleted' => 0])
             ->fetchAllAssociative();
         
-        $statuses = $connectionPool->getConnectionForTable('tx_academics_course_status')
-            ->select(['uid'], 'tx_academics_course_status', ['deleted' => 0])
+        $statuses = $connectionPool->getConnectionForTable('tx_academics_domain_model_course_status')
+            ->select(['uid'], 'tx_academics_domain_model_course_status', ['deleted' => 0])
             ->fetchAllAssociative();
         
-        $methods = $connectionPool->getConnectionForTable('tx_academics_teaching_method')
-            ->select(['uid'], 'tx_academics_teaching_method', ['deleted' => 0])
+        $methods = $connectionPool->getConnectionForTable('tx_academics_domain_model_teaching_method')
+            ->select(['uid'], 'tx_academics_domain_model_teaching_method', ['deleted' => 0])
             ->fetchAllAssociative();
         
-        $languages = $connectionPool->getConnectionForTable('tx_academics_language')
-            ->select(['uid'], 'tx_academics_language', ['deleted' => 0])
+        $languages = $connectionPool->getConnectionForTable('tx_academics_domain_model_language')
+            ->select(['uid'], 'tx_academics_domain_model_language', ['deleted' => 0])
             ->fetchAllAssociative();
         
-        $sdgs = $connectionPool->getConnectionForTable('tx_academics_sdg')
-            ->select(['uid'], 'tx_academics_sdg', ['deleted' => 0])
+        $sdgs = $connectionPool->getConnectionForTable('tx_academics_domain_model_sdg')
+            ->select(['uid'], 'tx_academics_domain_model_sdg', ['deleted' => 0])
             ->fetchAllAssociative();
         
-        $fields = $connectionPool->getConnectionForTable('tx_academics_scientific_field')
-            ->select(['uid'], 'tx_academics_scientific_field', ['deleted' => 0])
+        $fields = $connectionPool->getConnectionForTable('tx_academics_domain_model_scientific_field')
+            ->select(['uid'], 'tx_academics_domain_model_scientific_field', ['deleted' => 0])
             ->fetchAllAssociative();
         
-        $organizations = $connectionPool->getConnectionForTable('tx_academics_organization')
-            ->select(['uid'], 'tx_academics_organization', ['deleted' => 0])
+        $organizations = $connectionPool->getConnectionForTable('tx_academics_domain_model_organization')
+            ->select(['uid'], 'tx_academics_domain_model_organization', ['deleted' => 0])
             ->fetchAllAssociative();
         
         return [
@@ -304,14 +304,14 @@ class GenerateTestCoursesCommand extends Command
         }
         
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getConnectionForTable('tx_academics_coursesyllabus_sdg_mm');
+            ->getConnectionForTable('tx_academics_domain_model_coursesyllabus_sdg_mm');
         
         // Add 1-4 random SDG goals
         $numSdgs = $faker->numberBetween(1, 4);
         $selectedSdgs = $faker->randomElements($sdgUids, min($numSdgs, count($sdgUids)));
         
         foreach ($selectedSdgs as $sorting => $sdgUid) {
-            $connection->insert('tx_academics_coursesyllabus_sdg_mm', [
+            $connection->insert('tx_academics_domain_model_coursesyllabus_sdg_mm', [
                 'uid_local' => $syllabusUid,
                 'uid_foreign' => $sdgUid,
                 'sorting' => $sorting,
@@ -321,9 +321,9 @@ class GenerateTestCoursesCommand extends Command
         
         // Update syllabus sdg_goals count
         $syllabusConnection = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getConnectionForTable('tx_academics_course_syllabus');
+            ->getConnectionForTable('tx_academics_domain_model_course_syllabus');
         $syllabusConnection->update(
-            'tx_academics_course_syllabus',
+            'tx_academics_domain_model_course_syllabus',
             ['sdg_goals' => count($selectedSdgs)],
             ['uid' => $syllabusUid]
         );
@@ -339,14 +339,14 @@ class GenerateTestCoursesCommand extends Command
         }
         
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getConnectionForTable('tx_academics_coursesyllabus_teachingmethod_mm');
+            ->getConnectionForTable('tx_academics_domain_model_coursesyllabus_teachingmethod_mm');
         
         // Add 2-5 random teaching methods
         $numMethods = $faker->numberBetween(2, 5);
         $selectedMethods = $faker->randomElements($methodUids, min($numMethods, count($methodUids)));
         
         foreach ($selectedMethods as $sorting => $methodUid) {
-            $connection->insert('tx_academics_coursesyllabus_teachingmethod_mm', [
+            $connection->insert('tx_academics_domain_model_coursesyllabus_teachingmethod_mm', [
                 'uid_local' => $syllabusUid,
                 'uid_foreign' => $methodUid,
                 'sorting' => $sorting,
@@ -356,9 +356,9 @@ class GenerateTestCoursesCommand extends Command
         
         // Update syllabus teaching_methods count
         $syllabusConnection = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getConnectionForTable('tx_academics_course_syllabus');
+            ->getConnectionForTable('tx_academics_domain_model_course_syllabus');
         $syllabusConnection->update(
-            'tx_academics_course_syllabus',
+            'tx_academics_domain_model_course_syllabus',
             ['teaching_methods' => count($selectedMethods)],
             ['uid' => $syllabusUid]
         );

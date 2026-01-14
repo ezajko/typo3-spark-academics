@@ -67,7 +67,7 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_person_type',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_person_type',
                 'foreign_table_where' => 'AND {#tx_spark_person_type}.{#pid}=###CURRENT_PID### AND {#tx_spark_person_type}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],

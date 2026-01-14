@@ -25,10 +25,10 @@ use GeorgRinger\Faker\Property\PhoneNumber;
 use GeorgRinger\Faker\Property\Url;
 
 // Enable faker for the table
-$GLOBALS['TCA']['tx_academics_department']['ctrl']['faker'] = true;
+$GLOBALS['TCA']['tx_academics_domain_model_department']['ctrl']['faker'] = true;
 
 // Configure faker options for individual fields
-$GLOBALS['TCA']['tx_academics_department']['columns']['title']['faker'] = RandomElement::getSettings([
+$GLOBALS['TCA']['tx_academics_domain_model_department']['columns']['title']['faker'] = RandomElement::getSettings([
     'array' => [
         'Odsjek za automatiku i elektroniku',
         'Odsjek za elektroenergetiku',
@@ -38,17 +38,17 @@ $GLOBALS['TCA']['tx_academics_department']['columns']['title']['faker'] = Random
     ],
 ]);
 
-$GLOBALS['TCA']['tx_academics_department']['columns']['acronym']['faker'] = RandomElement::getSettings([
+$GLOBALS['TCA']['tx_academics_domain_model_department']['columns']['acronym']['faker'] = RandomElement::getSettings([
     'array' => ['AiE', 'EEN', 'RI', 'TK', 'MF'],
 ]);
 
-$GLOBALS['TCA']['tx_academics_department']['columns']['description']['faker'] = Text::getSettings([
+$GLOBALS['TCA']['tx_academics_domain_model_department']['columns']['description']['faker'] = Text::getSettings([
     'min' => 100,
     'max' => 300,
 ]);
 
-$GLOBALS['TCA']['tx_academics_department']['columns']['email']['faker'] = SafeEmail::getSettings();
+$GLOBALS['TCA']['tx_academics_domain_model_department']['columns']['email']['faker'] = SafeEmail::getSettings();
 
-$GLOBALS['TCA']['tx_academics_department']['columns']['phone']['faker'] = PhoneNumber::getSettings();
+$GLOBALS['TCA']['tx_academics_domain_model_department']['columns']['phone']['faker'] = PhoneNumber::getSettings();
 
-$GLOBALS['TCA']['tx_academics_department']['columns']['website']['faker'] = Url::getSettings();
+$GLOBALS['TCA']['tx_academics_domain_model_department']['columns']['website']['faker'] = Url::getSettings();

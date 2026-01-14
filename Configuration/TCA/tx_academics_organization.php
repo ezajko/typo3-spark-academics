@@ -69,7 +69,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [['label' => '', 'value' => 0]],
-                'foreign_table' => 'tx_academics_organization',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_organization',
                 'foreign_table_where' => 'AND {#tx_spark_organization}.{#pid}=###CURRENT_PID### AND {#tx_spark_organization}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
@@ -134,7 +134,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_academics_organization_type',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_organization_type',
                 'foreign_table_where' => 'AND {#tx_spark_organization_type}.{#sys_language_uid} IN (-1,0) ORDER BY title',
                 'items' => [['-- Select Type --', 0]],
             ],
@@ -145,7 +145,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectTree',
-                'foreign_table' => 'tx_academics_organization',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_organization',
                 'foreign_table_where' => 'AND {#tx_spark_organization}.{#sys_language_uid} IN (-1,0) ORDER BY title',
                 'treeConfig' => [
                     'parentField' => 'parent',
@@ -167,7 +167,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_academics_person',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_person',
                 'foreign_table_where' => 'ORDER BY last_name, first_name',
                 'items' => [['-- Select Person --', 0]],
             ],
@@ -327,7 +327,7 @@ return [
             'label' => 'Primary Members',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_academics_person',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_person',
                 'foreign_field' => 'primary_organization',
                 'maxitems' => 9999,
                 'appearance' => [
@@ -345,8 +345,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_person',
-                'MM' => 'tx_academics_person_organization_mm',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_person',
+                'MM' => 'tx_academics_domain_model_domain_model_person_organization_mm',
                 'MM_opposite_field' => 'additional_organizations',
                 'size' => 10,
                 'maxitems' => 9999,
@@ -358,7 +358,7 @@ return [
             'label' => 'Courses',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_academics_course',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_course',
                 'foreign_field' => 'organization',
                 'maxitems' => 9999,
                 'appearance' => [
@@ -375,8 +375,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_project',
-                'MM' => 'tx_academics_project_organization_mm',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_project',
+                'MM' => 'tx_academics_domain_model_domain_model_project_organization_mm',
                 'MM_opposite_field' => 'organizations',
                 'size' => 10,
                 'maxitems' => 9999,

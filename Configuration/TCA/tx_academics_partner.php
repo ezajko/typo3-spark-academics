@@ -57,7 +57,7 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_partner',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_partner',
                 'foreign_table_where' => 'AND {#tx_spark_partner}.{#pid}=###CURRENT_PID### AND {#tx_spark_partner}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],

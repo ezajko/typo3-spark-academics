@@ -30,36 +30,36 @@ use GeorgRinger\Faker\Property\Words;
 use GeorgRinger\Faker\Property\Username;
 
 // Enable faker for the table
-$GLOBALS['TCA']['tx_academics_person']['ctrl']['faker'] = true;
+$GLOBALS['TCA']['tx_academics_domain_model_person']['ctrl']['faker'] = true;
 
 // =========================================================================
 // Basic Information
 // =========================================================================
-$GLOBALS['TCA']['tx_academics_person']['columns']['first_name']['faker'] = FirstName::getSettings();
-$GLOBALS['TCA']['tx_academics_person']['columns']['last_name']['faker'] = LastName::getSettings();
-$GLOBALS['TCA']['tx_academics_person']['columns']['gender']['faker'] = RandomElement::getSettings([
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['first_name']['faker'] = FirstName::getSettings();
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['last_name']['faker'] = LastName::getSettings();
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['gender']['faker'] = RandomElement::getSettings([
     'array' => [1, 2],
 ]);
 
 // =========================================================================
 // Academic Affiliation - with correct PIDs
 // =========================================================================
-$GLOBALS['TCA']['tx_academics_person']['columns']['primary_department']['faker'] = Relation::getSettings([
-    'table' => 'tx_academics_department',
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['primary_department']['faker'] = Relation::getSettings([
+    'table' => 'tx_academics_domain_model_department',
     'pid' => 179,
     'min' => 1,
     'max' => 1,
 ]);
 
-$GLOBALS['TCA']['tx_academics_person']['columns']['academic_title']['faker'] = Relation::getSettings([
-    'table' => 'tx_academics_academic_title',
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['academic_title']['faker'] = Relation::getSettings([
+    'table' => 'tx_academics_domain_model_academic_title',
     'pid' => 194,
     'min' => 1,
     'max' => 1,
 ]);
 
-$GLOBALS['TCA']['tx_academics_person']['columns']['academic_rank']['faker'] = Relation::getSettings([
-    'table' => 'tx_academics_academic_rank',
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['academic_rank']['faker'] = Relation::getSettings([
+    'table' => 'tx_academics_domain_model_academic_rank',
     'pid' => 193,
     'min' => 1,
     'max' => 1,
@@ -68,29 +68,29 @@ $GLOBALS['TCA']['tx_academics_person']['columns']['academic_rank']['faker'] = Re
 // =========================================================================
 // Biography & Contact
 // =========================================================================
-$GLOBALS['TCA']['tx_academics_person']['columns']['biography']['faker'] = Text::getSettings([
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['biography']['faker'] = Text::getSettings([
     'min' => 200,
     'max' => 500,
 ]);
 
-$GLOBALS['TCA']['tx_academics_person']['columns']['contact_office']['faker'] = RandomElement::getSettings([
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['contact_office']['faker'] = RandomElement::getSettings([
     'array' => ['A-101', 'A-202', 'B-105', 'B-210', 'C-301', 'C-415', 'D-120', 'D-225'],
 ]);
 
-$GLOBALS['TCA']['tx_academics_person']['columns']['phone_office']['faker'] = PhoneNumber::getSettings();
-$GLOBALS['TCA']['tx_academics_person']['columns']['phone_mobile']['faker'] = PhoneNumber::getSettings();
-$GLOBALS['TCA']['tx_academics_person']['columns']['contact_email']['faker'] = SafeEmail::getSettings();
-$GLOBALS['TCA']['tx_academics_person']['columns']['contact_website']['faker'] = Url::getSettings();
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['phone_office']['faker'] = PhoneNumber::getSettings();
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['phone_mobile']['faker'] = PhoneNumber::getSettings();
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['contact_email']['faker'] = SafeEmail::getSettings();
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['contact_website']['faker'] = Url::getSettings();
 
 // =========================================================================
 // Research & Teaching
 // =========================================================================
-$GLOBALS['TCA']['tx_academics_person']['columns']['research_interests']['faker'] = Words::getSettings([
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['research_interests']['faker'] = Words::getSettings([
     'min' => 5,
     'max' => 15,
 ]);
 
-$GLOBALS['TCA']['tx_academics_person']['columns']['consultation_hours']['faker'] = RandomElement::getSettings([
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['consultation_hours']['faker'] = RandomElement::getSettings([
     'array' => [
         'Ponedjeljak 10:00-12:00',
         'Utorak 14:00-16:00',
@@ -105,12 +105,12 @@ $GLOBALS['TCA']['tx_academics_person']['columns']['consultation_hours']['faker']
 // =========================================================================
 // Academic Profiles
 // =========================================================================
-$GLOBALS['TCA']['tx_academics_person']['columns']['profile_github']['faker'] = Username::getSettings();
-$GLOBALS['TCA']['tx_academics_person']['columns']['profile_google_scholar']['faker'] = Url::getSettings();
-$GLOBALS['TCA']['tx_academics_person']['columns']['profile_research_gate']['faker'] = Url::getSettings();
-$GLOBALS['TCA']['tx_academics_person']['columns']['profile_linkedin']['faker'] = Url::getSettings();
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['profile_github']['faker'] = Username::getSettings();
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['profile_google_scholar']['faker'] = Url::getSettings();
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['profile_research_gate']['faker'] = Url::getSettings();
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['profile_linkedin']['faker'] = Url::getSettings();
 
-$GLOBALS['TCA']['tx_academics_person']['columns']['profile_orcid']['faker'] = RandomElement::getSettings([
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['profile_orcid']['faker'] = RandomElement::getSettings([
     'array' => [
         '0000-0001-2345-6789',
         '0000-0002-3456-7890',
@@ -120,7 +120,7 @@ $GLOBALS['TCA']['tx_academics_person']['columns']['profile_orcid']['faker'] = Ra
     ],
 ]);
 
-$GLOBALS['TCA']['tx_academics_person']['columns']['scopus_id']['faker'] = RandomElement::getSettings([
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['scopus_id']['faker'] = RandomElement::getSettings([
     'array' => [
         '12345678901',
         '23456789012',
@@ -130,7 +130,7 @@ $GLOBALS['TCA']['tx_academics_person']['columns']['scopus_id']['faker'] = Random
     ],
 ]);
 
-$GLOBALS['TCA']['tx_academics_person']['columns']['researcher_id']['faker'] = RandomElement::getSettings([
+$GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['researcher_id']['faker'] = RandomElement::getSettings([
     'array' => [
         'A-1234-2018',
         'B-2345-2019',

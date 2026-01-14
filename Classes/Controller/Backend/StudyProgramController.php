@@ -60,7 +60,7 @@ class StudyProgramController extends AbstractBackendController
         $this->demandFactory = $demandFactory;
         $this->organizationRepository = $organizationRepository;
         $this->studyCycleRepository = $studyCycleRepository;
-        $this->tableName = 'tx_academics_study_program';
+        $this->tableName = 'tx_academics_domain_model_study_program';
     }
 
     protected function getTemplatePath(): string

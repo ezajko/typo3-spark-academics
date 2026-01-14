@@ -60,7 +60,7 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_curriculum',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_curriculum',
                 'foreign_table_where' => 'AND {#tx_spark_curriculum}.{#pid}=###CURRENT_PID### AND {#tx_spark_curriculum}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
@@ -134,7 +134,7 @@ return [
             'label' => 'Semesters',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_academics_curriculum_semester',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_curriculum_semester',
                 'foreign_field' => 'curriculum',
                 'foreign_sortby' => 'sorting',
                 'appearance' => [

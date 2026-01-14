@@ -60,7 +60,7 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_course_group',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_course_group',
                 'foreign_table_where' => 'AND {#tx_spark_course_group}.{#pid}=###CURRENT_PID### AND {#tx_spark_course_group}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
@@ -132,8 +132,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_course',
-                'MM' => 'tx_academics_coursegroup_course_mm',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_course',
+                'MM' => 'tx_academics_domain_model_domain_model_coursegroup_course_mm',
                 'size' => 10,
                 'maxitems' => 99,
             ],

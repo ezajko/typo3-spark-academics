@@ -66,7 +66,7 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_funding_program',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_funding_program',
                 'foreign_table_where' => 'AND {#tx_spark_funding_program}.{#pid}=###CURRENT_PID### AND {#tx_spark_funding_program}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],

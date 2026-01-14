@@ -11,7 +11,7 @@
 
 defined('TYPO3') or die();
 
-$t = 'tx_academics_organization_type';
+$t = 'tx_academics_domain_model_domain_model_organization_type';
 if (isset($GLOBALS['TCA'][$t])) {
     // Enable Faker for the table
     $GLOBALS['TCA'][$t]['ctrl']['faker'] = true;

@@ -57,7 +57,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [['label' => '', 'value' => 0]],
-                'foreign_table' => 'tx_academics_project_person',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_project_person',
                 'foreign_table_where' => 'AND {#tx_spark_project_person}.{#pid}=###CURRENT_PID### AND {#tx_spark_project_person}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
@@ -95,7 +95,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_academics_person',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_person',
                 'foreign_table_where' => 'ORDER BY last_name, first_name',
                 'items' => [['-- Select Person --', 0]],
                 'minitems' => 1,

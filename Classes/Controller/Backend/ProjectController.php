@@ -67,7 +67,7 @@ class ProjectController extends AbstractBackendController
         $this->iconFactory = $iconFactory;
         $this->siteFinder = $siteFinder;
         $this->demandFactory = $demandFactory;
-        $this->tableName = 'tx_academics_project';
+        $this->tableName = 'tx_academics_domain_model_project';
     }
 
     protected function getTemplatePath(): string
@@ -181,7 +181,7 @@ class ProjectController extends AbstractBackendController
         
         $newLink = $this->backendUriBuilder->buildUriFromRoute('record_edit', [
             'edit' => [
-                'tx_academics_project' => [
+                'tx_academics_domain_model_project' => [
                     $storagePid => 'new'
                 ]
             ],
@@ -198,26 +198,26 @@ class ProjectController extends AbstractBackendController
 
     protected function getStatuses(): array
     {
-        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_project_status');
-        return $q->select('*')->from('tx_academics_project_status')->executeQuery()->fetchAllAssociative();
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_project_status');
+        return $q->select('*')->from('tx_academics_domain_model_project_status')->executeQuery()->fetchAllAssociative();
     }
 
     protected function getTypes(): array
     {
         // Simple fetch or use repository
-        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_project_type');
-        return $q->select('*')->from('tx_academics_project_type')->executeQuery()->fetchAllAssociative();
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_project_type');
+        return $q->select('*')->from('tx_academics_domain_model_project_type')->executeQuery()->fetchAllAssociative();
     }
 
     protected function getFundingPrograms(): array
     {
-        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_funding_program');
-        return $q->select('*')->from('tx_academics_funding_program')->executeQuery()->fetchAllAssociative();
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_funding_program');
+        return $q->select('*')->from('tx_academics_domain_model_funding_program')->executeQuery()->fetchAllAssociative();
     }
 
     protected function getScientificFields(): array
     {
-        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_scientific_field');
-        return $q->select('*')->from('tx_academics_scientific_field')->where($q->expr()->eq('level', $q->createNamedParameter(2)))->executeQuery()->fetchAllAssociative();
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_scientific_field');
+        return $q->select('*')->from('tx_academics_domain_model_scientific_field')->where($q->expr()->eq('level', $q->createNamedParameter(2)))->executeQuery()->fetchAllAssociative();
     }
 }

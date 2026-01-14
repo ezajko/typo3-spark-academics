@@ -68,7 +68,7 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_study_program',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_study_program',
                 'foreign_table_where' => 'AND {#tx_spark_study_program}.{#pid}=###CURRENT_PID### AND {#tx_spark_study_program}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
@@ -171,8 +171,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_department',
-                'MM' => 'tx_academics_studyprogram_department_mm',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_department',
+                'MM' => 'tx_academics_domain_model_domain_model_studyprogram_department_mm',
                 'size' => 5,
                 'maxitems' => 99,
                 'default' => 0,
@@ -185,8 +185,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_chair',
-                'MM' => 'tx_academics_studyprogram_chair_mm',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_chair',
+                'MM' => 'tx_academics_domain_model_domain_model_studyprogram_chair_mm',
                 'size' => 5,
                 'maxitems' => 99,
                 'default' => 0,
@@ -199,7 +199,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_academics_study_cycle',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_study_cycle',
                 'items' => [['label' => '-- Select --', 'value' => 0]],
                 'default' => 0,
             ],
@@ -211,7 +211,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectTree',
-                'foreign_table' => 'tx_academics_scientific_field',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_scientific_field',
                 'foreign_table_where' => 'ORDER BY tx_spark_scientific_field.sorting',
                 'treeConfig' => [
                     'parentField' => 'parent',
@@ -232,8 +232,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_study_type',
-                'MM' => 'tx_academics_studyprogram_studytype_mm',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_study_type',
+                'MM' => 'tx_academics_domain_model_domain_model_studyprogram_studytype_mm',
                 'size' => 5,
                 'maxitems' => 99,
                 'default' => 0,
@@ -246,8 +246,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_mode_of_study',
-                'MM' => 'tx_academics_studyprogram_modeofstudy_mm',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_mode_of_study',
+                'MM' => 'tx_academics_domain_model_domain_model_studyprogram_modeofstudy_mm',
                 'size' => 5,
                 'maxitems' => 99,
                 'default' => 0,
@@ -260,8 +260,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_language',
-                'MM' => 'tx_academics_studyprogram_language_mm',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_language',
+                'MM' => 'tx_academics_domain_model_domain_model_studyprogram_language_mm',
                 'size' => 5,
                 'maxitems' => 99,
                 'default' => 0,
@@ -284,7 +284,7 @@ return [
             'label' => 'Curricula',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_academics_curriculum',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_curriculum',
                 'foreign_field' => 'study_program',
                 'appearance' => [
                     'collapseAll' => true,
@@ -360,7 +360,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'be_users',
-                'MM' => 'tx_academics_studyprogram_beuser_mm',
+                'MM' => 'tx_academics_domain_model_domain_model_studyprogram_beuser_mm',
                 'size' => 5,
                 'maxitems' => 99,
             ],
@@ -372,8 +372,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_person',
-                'MM' => 'tx_academics_person_studyprogram_mm',
+                'foreign_table' => 'tx_academics_domain_model_domain_model_person',
+                'MM' => 'tx_academics_domain_model_domain_model_person_studyprogram_mm',
                 'size' => 10,
                 'maxitems' => 9999,
             ],

@@ -269,7 +269,7 @@ class SeedCommand extends Command
             ['code' => '5.9', 'title' => 'Other Social Sciences', 'level' => 2],
         ];
         
-        return $this->insertRecords($io, 'tx_academics_scientific_field', $data, $pid, $force, 'code');
+        return $this->insertRecords($io, 'tx_academics_domain_model_scientific_field', $data, $pid, $force, 'code');
     }
 
     /**
@@ -294,7 +294,7 @@ class SeedCommand extends Command
             ['title' => 'Research Advisor', 'abbreviation' => 'Res. Adv.', 'sorting' => 15],
         ];
         
-        return $this->insertRecords($io, 'tx_academics_academic_rank', $data, $pid, $force, 'title');
+        return $this->insertRecords($io, 'tx_academics_domain_model_academic_rank', $data, $pid, $force, 'title');
     }
 
     /**
@@ -316,7 +316,7 @@ class SeedCommand extends Command
             ['title' => 'Academician', 'abbreviation' => 'Acad.', 'abbreviation_after' => '', 'sorting' => 5],
         ];
         
-        return $this->insertRecords($io, 'tx_academics_academic_title', $data, $pid, $force, 'title');
+        return $this->insertRecords($io, 'tx_academics_domain_model_academic_title', $data, $pid, $force, 'title');
     }
 
     /**
@@ -336,7 +336,7 @@ class SeedCommand extends Command
             ['title' => 'Suspended', 'description' => 'Project suspended'],
         ];
         
-        return $this->insertRecords($io, 'tx_academics_project_status', $data, $pid, $force, 'title');
+        return $this->insertRecords($io, 'tx_academics_domain_model_project_status', $data, $pid, $force, 'title');
     }
 
     /**
@@ -356,7 +356,7 @@ class SeedCommand extends Command
             ['title' => 'Innovation Project', 'description' => 'Innovation project'],
         ];
         
-        return $this->insertRecords($io, 'tx_academics_project_type', $data, $pid, $force, 'title');
+        return $this->insertRecords($io, 'tx_academics_domain_model_project_type', $data, $pid, $force, 'title');
     }
 
     /**
@@ -380,7 +380,7 @@ class SeedCommand extends Command
             ['title' => 'Internal Funding', 'description' => 'Internal / Self-funded'],
         ];
         
-        return $this->insertRecords($io, 'tx_academics_funding_program', $data, $pid, $force, 'title');
+        return $this->insertRecords($io, 'tx_academics_domain_model_funding_program', $data, $pid, $force, 'title');
     }
 
     /**
@@ -410,7 +410,7 @@ class SeedCommand extends Command
             ['number' => 17, 'title' => 'Partnerships for the Goals', 'description' => 'Strengthen global partnerships for sustainable development'],
         ];
         
-        return $this->insertRecords($io, 'tx_academics_sdg', $data, $pid, $force, 'number');
+        return $this->insertRecords($io, 'tx_academics_domain_model_sdg', $data, $pid, $force, 'number');
     }
 
     /**
@@ -428,7 +428,7 @@ class SeedCommand extends Command
             ['title' => 'Practical Course', 'code' => 'E', 'description' => 'Practice/internship course', 'sorting' => 50],
         ];
         
-        return $this->insertRecords($io, 'tx_academics_course_category', $data, $pid, $force, 'code');
+        return $this->insertRecords($io, 'tx_academics_domain_model_course_category', $data, $pid, $force, 'code');
     }
 
     /**
@@ -444,7 +444,7 @@ class SeedCommand extends Command
             ['title' => 'Third Cycle (Doctoral)', 'level' => 3, 'description' => 'Doctoral studies, 180 ECTS'],
         ];
         
-        return $this->insertRecords($io, 'tx_academics_study_cycle', $data, $pid, $force, 'level');
+        return $this->insertRecords($io, 'tx_academics_domain_model_study_cycle', $data, $pid, $force, 'level');
     }
 
     /**
@@ -461,7 +461,7 @@ class SeedCommand extends Command
             ['title' => 'Draft', 'code' => 'draft', 'sorting' => 5],
         ];
         
-        return $this->insertRecords($io, 'tx_academics_course_status', $data, $pid, $force, 'code');
+        return $this->insertRecords($io, 'tx_academics_domain_model_course_status', $data, $pid, $force, 'code');
     }
 
     /**
@@ -484,7 +484,7 @@ class SeedCommand extends Command
             ['title' => 'Workshops', 'description' => 'Interactive hands-on workshops', 'sorting' => 100],
         ];
         
-        return $this->insertRecords($io, 'tx_academics_teaching_method', $data, $pid, $force, 'title');
+        return $this->insertRecords($io, 'tx_academics_domain_model_teaching_method', $data, $pid, $force, 'title');
     }
 
     /**
@@ -505,7 +505,7 @@ class SeedCommand extends Command
             ['title' => 'Arabic', 'code' => 'ar', 'sorting' => 80],
         ];
         
-        return $this->insertRecords($io, 'tx_academics_language', $data, $pid, $force, 'code');
+        return $this->insertRecords($io, 'tx_academics_domain_model_language', $data, $pid, $force, 'code');
     }
 
     /**
@@ -522,7 +522,7 @@ class SeedCommand extends Command
             ['title' => 'Specialist', 'description' => 'Specialist study program', 'sorting' => 40],
         ];
 
-        return $this->insertRecords($io, 'tx_academics_study_type', $data, $pid, $force, 'title');
+        return $this->insertRecords($io, 'tx_academics_domain_model_study_type', $data, $pid, $force, 'title');
     }
 
     /**
@@ -538,7 +538,7 @@ class SeedCommand extends Command
             ['title' => 'Distance Learning', 'description' => 'Distance learning / E-learning', 'sorting' => 30],
         ];
 
-        return $this->insertRecords($io, 'tx_academics_mode_of_study', $data, $pid, $force, 'title');
+        return $this->insertRecords($io, 'tx_academics_domain_model_mode_of_study', $data, $pid, $force, 'title');
     }
 
     /**

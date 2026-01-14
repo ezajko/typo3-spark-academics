@@ -108,14 +108,14 @@ class GenerateTestProjectsCommand extends Command
         ]);
         
         $faker = FakerFactory::create('en_US');
-        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_academics_project');
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_academics_domain_model_project');
         
         $io->progressStart($count);
         
         for ($i = 0; $i < $count; $i++) {
             $project = $this->generateProject($faker, $lookups, $pid);
-            $connection->insert('tx_academics_project', $project);
-            $projectUid = (int)$connection->lastInsertId('tx_academics_project');
+            $connection->insert('tx_academics_domain_model_project', $project);
+            $projectUid = (int)$connection->lastInsertId('tx_academics_domain_model_project');
             
             // Add M:N relation to scientific fields
             $this->addScientificFieldRelations($projectUid, $lookups['fields'], $faker);
@@ -136,20 +136,20 @@ class GenerateTestProjectsCommand extends Command
     {
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
         
-        $statuses = $connectionPool->getConnectionForTable('tx_academics_project_status')
-            ->select(['uid'], 'tx_academics_project_status', ['deleted' => 0])
+        $statuses = $connectionPool->getConnectionForTable('tx_academics_domain_model_project_status')
+            ->select(['uid'], 'tx_academics_domain_model_project_status', ['deleted' => 0])
             ->fetchAllAssociative();
         
-        $types = $connectionPool->getConnectionForTable('tx_academics_project_type')
-            ->select(['uid'], 'tx_academics_project_type', ['deleted' => 0])
+        $types = $connectionPool->getConnectionForTable('tx_academics_domain_model_project_type')
+            ->select(['uid'], 'tx_academics_domain_model_project_type', ['deleted' => 0])
             ->fetchAllAssociative();
         
-        $programs = $connectionPool->getConnectionForTable('tx_academics_funding_program')
-            ->select(['uid'], 'tx_academics_funding_program', ['deleted' => 0])
+        $programs = $connectionPool->getConnectionForTable('tx_academics_domain_model_funding_program')
+            ->select(['uid'], 'tx_academics_domain_model_funding_program', ['deleted' => 0])
             ->fetchAllAssociative();
         
-        $fields = $connectionPool->getConnectionForTable('tx_academics_scientific_field')
-            ->select(['uid'], 'tx_academics_scientific_field', ['deleted' => 0, 'level' => 2])
+        $fields = $connectionPool->getConnectionForTable('tx_academics_domain_model_scientific_field')
+            ->select(['uid'], 'tx_academics_domain_model_scientific_field', ['deleted' => 0, 'level' => 2])
             ->fetchAllAssociative();
         
         return [
@@ -220,14 +220,14 @@ class GenerateTestProjectsCommand extends Command
         }
         
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getConnectionForTable('tx_academics_project_scientific_field_mm');
+            ->getConnectionForTable('tx_academics_domain_model_project_scientific_field_mm');
         
         // Add 1-3 random scientific fields
         $numFields = $faker->numberBetween(1, 3);
         $selectedFields = $faker->randomElements($fieldUids, min($numFields, count($fieldUids)));
         
         foreach ($selectedFields as $sorting => $fieldUid) {
-            $connection->insert('tx_academics_project_scientific_field_mm', [
+            $connection->insert('tx_academics_domain_model_project_scientific_field_mm', [
                 'uid_local' => $projectUid,
                 'uid_foreign' => $fieldUid,
                 'sorting' => $sorting,
@@ -237,9 +237,9 @@ class GenerateTestProjectsCommand extends Command
         
         // Update project scientific_fields count
         $projectConnection = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getConnectionForTable('tx_academics_project');
+            ->getConnectionForTable('tx_academics_domain_model_project');
         $projectConnection->update(
-            'tx_academics_project',
+            'tx_academics_domain_model_project',
             ['scientific_fields' => count($selectedFields)],
             ['uid' => $projectUid]
         );

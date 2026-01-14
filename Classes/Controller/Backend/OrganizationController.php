@@ -28,7 +28,7 @@ class OrganizationController extends AbstractBackendController
 {
     protected ?OrganizationRepository $organizationRepository = null;
     protected ?OrganizationTypeRepository $organizationTypeRepository = null;
-    protected \RootBa\SparkCore\Service\BackendPermissionService $backendPermissionService;
+    protected \EtfUnsa\SparkCore\Service\BackendPermissionService $backendPermissionService;
     protected string $tableName = 'tx_academics_organization';
 
     public function __construct(
@@ -46,7 +46,7 @@ class OrganizationController extends AbstractBackendController
         $this->repository = $organizationRepository;
     }
 
-    public function injectBackendPermissionService(\RootBa\SparkCore\Service\BackendPermissionService $backendPermissionService): void
+    public function injectBackendPermissionService(\EtfUnsa\SparkCore\Service\BackendPermissionService $backendPermissionService): void
     {
         $this->backendPermissionService = $backendPermissionService;
     }

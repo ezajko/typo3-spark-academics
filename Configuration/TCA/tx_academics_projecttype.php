@@ -32,7 +32,7 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields' => 'title,abbreviation,description',
-        'iconfile' => 'EXT:spark_academics/Resources/Public/Icons/Extension.svg',
+        'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
         'default_sortby' => 'sorting ASC',
     ],
     'types' => [

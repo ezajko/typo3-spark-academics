@@ -29,7 +29,7 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields' => 'title',
-        'iconfile' => 'EXT:spark_academics/Resources/Public/Icons/Extension.svg',
+        'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
         'hideTable' => true, // Hide from root list, accessed via IRRE
     ],
     'types' => [

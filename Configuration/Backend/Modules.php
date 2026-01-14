@@ -11,7 +11,7 @@
 
 return [
     'academic' => [
-        'labels' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf:academic_category',
+        'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:academic_category',
         'iconIdentifier' => 'content-user',
         'position' => ['before' => 'site'],
         'access' => 'user',
@@ -23,7 +23,7 @@ return [
         'access' => 'user',
         'workspaces' => '*',
         'path' => '/module/academic/spark-academics-person',
-        'labels' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf:person',
+        'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:person',
         'extensionName' => 'SparkAcademics',
         'controllerActions' => [
             \EtfUnsa\SparkAcademics\Controller\Backend\PersonController::class => [
@@ -36,7 +36,7 @@ return [
         'access' => 'user',
         'workspaces' => '*',
         'path' => '/module/academic/spark-academics-organization',
-        'labels' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf:organization',
+        'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:organization',
         'extensionName' => 'SparkAcademics',
         'controllerActions' => [
             \EtfUnsa\SparkAcademics\Controller\Backend\OrganizationController::class => [
@@ -49,7 +49,7 @@ return [
         'access' => 'user',
         'workspaces' => '*',
         'path' => '/module/academic/spark-academics-course',
-        'labels' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf:course',
+        'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:course',
         'extensionName' => 'SparkAcademics',
         'controllerActions' => [
             \EtfUnsa\SparkAcademics\Controller\Backend\CourseController::class => [
@@ -62,7 +62,7 @@ return [
         'access' => 'user',
         'workspaces' => '*',
         'path' => '/module/academic/spark-academics-program',
-        'labels' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf:program',
+        'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:program',
         'extensionName' => 'SparkAcademics',
         'controllerActions' => [
             \EtfUnsa\SparkAcademics\Controller\Backend\StudyProgramController::class => [
@@ -75,7 +75,7 @@ return [
         'access' => 'user',
         'workspaces' => '*',
         'path' => '/module/academic/spark-academics-project',
-        'labels' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_mod.xlf:project',
+        'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:project',
         'extensionName' => 'SparkAcademics',
         'controllerActions' => [
             \EtfUnsa\SparkAcademics\Controller\Backend\ProjectController::class => [

@@ -23,7 +23,7 @@ defined('TYPO3') || die();
  * - sparkAcademic_users_home_*              - User home folder settings
  */
 (static function (): void {
-    $ll = 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:site.configuration.';
+    $ll = 'LLL:EXT:academics/Resources/Private/Language/locallang_db.xlf:site.configuration.';
     
     // ==========================================================================
     // 1. Entity Detail/Storage PIDs

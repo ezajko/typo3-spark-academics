@@ -18,7 +18,7 @@
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.education',
+        'title' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:person.education',
         'label' => 'qualification',
         'label_alt' => 'institution, year',
         'label_alt_force' => true,
@@ -65,23 +65,23 @@ return [
         ],
         'degree_type' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.degree_type',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:education.degree_type',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.degree_type.bachelor', 'bachelor'],
-                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.degree_type.master', 'master'],
-                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.degree_type.phd', 'phd'],
-                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.degree_type.postdoc', 'postdoc'],
-                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.degree_type.other', 'other'],
+                    ['LLL:EXT:academics/Resources/Private/Language/locallang.xlf:education.degree_type.bachelor', 'bachelor'],
+                    ['LLL:EXT:academics/Resources/Private/Language/locallang.xlf:education.degree_type.master', 'master'],
+                    ['LLL:EXT:academics/Resources/Private/Language/locallang.xlf:education.degree_type.phd', 'phd'],
+                    ['LLL:EXT:academics/Resources/Private/Language/locallang.xlf:education.degree_type.postdoc', 'postdoc'],
+                    ['LLL:EXT:academics/Resources/Private/Language/locallang.xlf:education.degree_type.other', 'other'],
                 ],
                 'default' => 'bachelor',
             ],
         ],
         'qualification' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.qualification',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:education.qualification',
             'config' => [
                 'type' => 'input',
                 'size' => 50,
@@ -91,7 +91,7 @@ return [
         ],
         'institution' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.institution',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:education.institution',
             'config' => [
                 'type' => 'input',
                 'size' => 50,
@@ -101,7 +101,7 @@ return [
         ],
         'year' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.year',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:education.year',
             'config' => [
                 'type' => 'input',
                 'size' => 10,
@@ -110,7 +110,7 @@ return [
         ],
         'field_of_study' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.field_of_study',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:education.field_of_study',
             'config' => [
                 'type' => 'input',
                 'size' => 50,
@@ -119,7 +119,7 @@ return [
         ],
         'thesis_title' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:education.thesis_title',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:education.thesis_title',
             'config' => [
                 'type' => 'input',
                 'size' => 50,

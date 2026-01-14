@@ -21,7 +21,7 @@ $pluginSignature = 'sparkacademics_pi1';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
     $pluginSignature,
-    'FILE:EXT:spark_academics/Configuration/FlexForms/Academic/List.xml'
+    'FILE:EXT:academics/Configuration/FlexForms/Academic/List.xml'
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
@@ -34,5 +34,5 @@ $pluginSignature = 'sparkacademics_pi2';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
     $pluginSignature,
-    'FILE:EXT:spark_academics/Configuration/FlexForms/Academic/Detail.xml'
+    'FILE:EXT:academics/Configuration/FlexForms/Academic/Detail.xml'
 );

@@ -14,7 +14,7 @@
  */
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang_db.xlf:tx_spark_publication',
+        'title' => 'LLL:EXT:academics/Resources/Private/Language/locallang_db.xlf:tx_spark_publication',
         'label' => 'title',
         'label_alt' => 'publication_year',
         'label_alt_force' => true,

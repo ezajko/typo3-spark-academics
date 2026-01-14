@@ -18,7 +18,7 @@
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.mentoring',
+        'title' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:person.mentoring',
         'label' => 'student_name',
         'label_alt' => 'thesis_type, year',
         'label_alt_force' => true,
@@ -61,7 +61,7 @@ return [
         ],
         'student_name' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:mentoring.student_name',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:mentoring.student_name',
             'config' => [
                 'type' => 'input',
                 'size' => 40,
@@ -71,22 +71,22 @@ return [
         ],
         'thesis_type' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:mentoring.thesis_type',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:mentoring.thesis_type',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:mentoring.thesis_type.bachelor', 'bachelor'],
-                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:mentoring.thesis_type.master', 'master'],
-                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:mentoring.thesis_type.phd', 'phd'],
-                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:mentoring.thesis_type.other', 'other'],
+                    ['LLL:EXT:academics/Resources/Private/Language/locallang.xlf:mentoring.thesis_type.bachelor', 'bachelor'],
+                    ['LLL:EXT:academics/Resources/Private/Language/locallang.xlf:mentoring.thesis_type.master', 'master'],
+                    ['LLL:EXT:academics/Resources/Private/Language/locallang.xlf:mentoring.thesis_type.phd', 'phd'],
+                    ['LLL:EXT:academics/Resources/Private/Language/locallang.xlf:mentoring.thesis_type.other', 'other'],
                 ],
                 'default' => 'bachelor',
             ],
         ],
         'thesis_title' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:mentoring.thesis_title',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:mentoring.thesis_title',
             'config' => [
                 'type' => 'input',
                 'size' => 50,
@@ -95,7 +95,7 @@ return [
         ],
         'year' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:mentoring.year',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:mentoring.year',
             'config' => [
                 'type' => 'input',
                 'size' => 10,
@@ -104,21 +104,21 @@ return [
         ],
         'role' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:mentoring.role',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:mentoring.role',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:mentoring.role.mentor', 'mentor'],
-                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:mentoring.role.comentor', 'comentor'],
-                    ['LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:mentoring.role.committee', 'committee'],
+                    ['LLL:EXT:academics/Resources/Private/Language/locallang.xlf:mentoring.role.mentor', 'mentor'],
+                    ['LLL:EXT:academics/Resources/Private/Language/locallang.xlf:mentoring.role.comentor', 'comentor'],
+                    ['LLL:EXT:academics/Resources/Private/Language/locallang.xlf:mentoring.role.committee', 'committee'],
                 ],
                 'default' => 'mentor',
             ],
         ],
         'notes' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:mentoring.notes',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:mentoring.notes',
             'config' => [
                 'type' => 'text',
                 'cols' => 40,

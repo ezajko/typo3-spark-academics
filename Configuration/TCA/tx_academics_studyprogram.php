@@ -29,7 +29,7 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'title,acronym,uuid',
-        'iconfile' => 'EXT:spark_academics/Resources/Public/Icons/Extension.svg',
+        'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
     ],
     'types' => [
         '1' => [

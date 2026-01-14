@@ -1,0 +1,60 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<div class="table-fit">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <f:translate key="tx_spark_study_program.title" default="Title" />
+                </th>
+                <th>Cycle</th>
+                <th>Organizations</th>
+                <th class="col-control"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <f:for each="{items}" as="item">
+                <tr>
+                    <td>
+                        <b>{item.item.title}</b><br>
+                        <span class="text-muted">{item.item.acronym}</span>
+                    </td>
+                    <td>
+                        <f:if condition="{item.item.studyCycle}">
+                            <span class="badge bg-info">{item.item.studyCycle.title}</span>
+                        </f:if>
+                    </td>
+                    <td>
+                        <f:if condition="{item.item.organizations}">
+                            <f:for each="{item.item.organizations}" as="org" iteration="i">
+                                <span class="badge bg-secondary">{org.title}</span>{f:if(condition: '!{i.isLast}',
+                                then: ' ')}
+                            </f:for>
+                        </f:if>
+                    </td>
+                    <td class="col-control">
+                        <div class="btn-group" role="group">
+                            <a href="{item.editUrl}" class="btn btn-default btn-sm" title="Edit">
+                                <core:icon identifier="actions-open" />
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </f:for>
+            <f:if condition="{items -> f:count()} == 0">
+                <tr>
+                    <td colspan="4" class="text-center text-muted py-4">
+                        <core:icon identifier="actions-search" size="medium" /><br>
+                        No study programs found.
+                    </td>
+                </tr>
+            </f:if>
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination -->
+<f:render partial="Backend/Pagination" arguments="{_all}" />
+
+</html>

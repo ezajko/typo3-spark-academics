@@ -39,7 +39,10 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'first_name,last_name',
-        'iconfile' => 'EXT:core/Resources/Public/Icons/T3Icons/content/content-user.svg'
+        'iconfile' => 'EXT:core/Resources/Public/Icons/T3Icons/content/content-user.svg',
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'types' => [
         '1' => [

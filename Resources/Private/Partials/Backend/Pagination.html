@@ -1,0 +1,62 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:if condition="{paginator.numberOfPages} > 1">
+    <nav class="mb-4" aria-label="Pagination">
+        <ul class="pagination pagination-sm justify-content-center">
+            <f:comment><!-- Previous --></f:comment>
+            <f:if condition="{pagination.previousPageNumber}">
+                <li class="page-item">
+                    <f:link.action action="list"
+                        arguments="{filter: filter, sort: sort, direction: direction, page: pagination.previousPageNumber}"
+                        class="page-link">
+                        <core:icon identifier="actions-chevron-left" size="small" />
+                        <f:translate key="LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:previous"
+                            default="Prev" />
+                    </f:link.action>
+                </li>
+            </f:if>
+
+            <f:comment><!-- Page Numbers --></f:comment>
+            <f:for each="{pagination.allPageNumbers}" as="pageNumber">
+                <f:if condition="{pageNumber} == {currentPage}">
+                    <f:then>
+                        <li class="page-item active">
+                            <span class="page-link">{pageNumber}</span>
+                        </li>
+                    </f:then>
+                    <f:else>
+                        <li class="page-item">
+                            <f:link.action action="list"
+                                arguments="{filter: filter, sort: sort, direction: direction, page: pageNumber}"
+                                class="page-link">
+                                {pageNumber}
+                            </f:link.action>
+                        </li>
+                    </f:else>
+                </f:if>
+            </f:for>
+
+            <f:comment><!-- Next --></f:comment>
+            <f:if condition="{pagination.nextPageNumber}">
+                <li class="page-item">
+                    <f:link.action action="list"
+                        arguments="{filter: filter, sort: sort, direction: direction, page: pagination.nextPageNumber}"
+                        class="page-link">
+                        <f:translate key="LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:next"
+                            default="Next" />
+                        <core:icon identifier="actions-chevron-right" size="small" />
+                    </f:link.action>
+                </li>
+            </f:if>
+        </ul>
+    </nav>
+    <p class="text-muted text-center">
+        <small>
+            Showing {items -> f:count()} of {totalItems} items
+            (Page {currentPage} of {paginator.numberOfPages})
+        </small>
+    </p>
+</f:if>
+
+</html>

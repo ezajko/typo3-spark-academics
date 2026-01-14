@@ -30,6 +30,9 @@ return [
         ],
         'searchFields' => 'title,acronym,uuid',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'types' => [
         '1' => [

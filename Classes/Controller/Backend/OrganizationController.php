@@ -15,9 +15,13 @@ namespace RootBa\Academics\Controller\Backend;
 
 use RootBa\Academics\Domain\Repository\OrganizationRepository;
 use RootBa\Academics\Domain\Repository\OrganizationTypeRepository;
+use RootBa\Academics\Service\DemandFactory;
+use RootBa\Academics\Service\BackendPermissionService;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
+use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Site\SiteFinder;
 
 /**
  * Backend controller for Organization entities
@@ -28,85 +32,67 @@ class OrganizationController extends AbstractBackendController
 {
     protected ?OrganizationRepository $organizationRepository = null;
     protected ?OrganizationTypeRepository $organizationTypeRepository = null;
-    protected \EtfUnsa\SparkCore\Service\BackendPermissionService $backendPermissionService;
-    protected string $tableName = 'tx_academics_domain_model_organization';
-
+    protected DemandFactory $demandFactory;
+    
     public function __construct(
+        OrganizationRepository $organizationRepository,
+        OrganizationTypeRepository $organizationTypeRepository,
+        BackendPermissionService $backendPermissionService,
         ModuleTemplateFactory $moduleTemplateFactory,
         UriBuilder $backendUriBuilder,
-        OrganizationTypeRepository $organizationTypeRepository
+        IconFactory $iconFactory,
+        SiteFinder $siteFinder,
+        DemandFactory $demandFactory
     ) {
-        parent::__construct($moduleTemplateFactory, $backendUriBuilder);
-        $this->organizationTypeRepository = $organizationTypeRepository;
-    }
-
-    public function injectOrganizationRepository(OrganizationRepository $organizationRepository): void
-    {
+        parent::__construct(
+            $moduleTemplateFactory, 
+            $backendUriBuilder,
+            $backendPermissionService,
+            $iconFactory,
+            $siteFinder
+        );
         $this->organizationRepository = $organizationRepository;
+        $this->organizationTypeRepository = $organizationTypeRepository;
+        $this->demandFactory = $demandFactory;
         $this->repository = $organizationRepository;
+
+        $this->tableName = 'tx_academics_domain_model_organization';
+        $this->permissionGroup = 'sparkAcademic_organization_permission_groups';
+        $this->storagePidConfigKey = 'sparkAcademic_organization_storage_pid';
+        $this->newRecordLabel = 'Create New Organization';
     }
 
-    public function injectBackendPermissionService(\EtfUnsa\SparkCore\Service\BackendPermissionService $backendPermissionService): void
-    {
-        $this->backendPermissionService = $backendPermissionService;
-    }
+
 
     protected function getTemplatePath(): string
     {
         return 'Backend/Organization/List';
     }
 
-    /**
-     * Find organization items based on current filter
-     * 
-     * @param array $currentBeUser Current backend user data
-     * @return iterable Organization entities
-     */
-    protected function findItems(array $currentBeUser)
+    protected function findItems(array $currentBeUser, bool $canManage = true)
     {
-        $filter = $this->request->hasArgument('filter') 
-            ? $this->request->getArgument('filter') 
-            : [];
-
-        // Create OrganizationDemand and apply filters
-        $demand = new \RootBa\Academics\Domain\Model\Dto\OrganizationDemand();
+        $queryParams = $this->request->getQueryParams();
+        $postParams = $this->request->getParsedBody() ?? [];
         
-        if (!empty($filter['search'])) {
-            $demand->setSearch($filter['search']);
-        }
-        if (!empty($filter['type'])) {
-            $demand->setType((int)$filter['type']);
-        }
-        if (!empty($filter['parent'])) {
-            $demand->setParent((int)$filter['parent']);
-        }
-        
-        // Use findByDemand if any filters are active, otherwise findAll
-        if ($demand->hasSearch() || $demand->hasFilters()) {
-            return $this->organizationRepository->findByDemand($demand);
-        }
+        $filter = $postParams['filter'] ?? $queryParams['filter'] ?? [];
+        $sort = $queryParams['sort'] ?? 'title';
+        $direction = $queryParams['direction'] ?? 'asc';
 
-        return $this->organizationRepository->findAll();
+        $this->additionalViewVariables['filter'] = $filter;
+        $this->additionalViewVariables['sort'] = $sort;
+        $this->additionalViewVariables['direction'] = $direction;
+
+        $demand = $this->demandFactory->createOrganizationDemand([], $filter);
+        
+        $orderings = [$sort => $direction === 'asc' ? \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING : \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING];
+        $demand->setOrderings($orderings);
+
+        return $this->repository->findByDemand($demand);
     }
 
-    public function listAction(): ResponseInterface
+    protected function prepareAction(): void
     {
-        // Get filter value
-        $filter = $this->request->hasArgument('filter') 
-            ? $this->request->getArgument('filter') 
-            : [];
-
-        // Permission check for "new record" button
-        $canCreate = $this->backendPermissionService->hasPermission('sparkAcademic_organization_permission_groups');
-        
-        // Assign filter options
-        $this->additionalViewVariables = [
-            'canCreate' => $canCreate,
-            'filter' => $filter,
-            'availableTypes' => $this->organizationTypeRepository->findAll(),
-            'availableParents' => $this->organizationRepository->findAll(),
-        ];
-        
-        return parent::listAction();
+        $this->additionalViewVariables['availableTypes'] = $this->organizationTypeRepository->findAll();
+        $this->additionalViewVariables['availableParents'] = $this->organizationRepository->findAll();
     }
 }

@@ -32,6 +32,9 @@ return [
         'searchFields' => 'title,acronym,description',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
         'faker' => true,
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'types' => [
         '1' => [

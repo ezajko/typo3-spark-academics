@@ -17,12 +17,12 @@ return [
         'access' => 'user',
         'workspaces' => '*',
     ],
-    'spark_academics_person' => [
+    'academics_person' => [
         'parent' => 'academic',
         'position' => ['top'],
         'access' => 'user',
         'workspaces' => '*',
-        'path' => '/module/academic/spark-academics-person',
+        'path' => '/module/academic/academics-person',
         'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:person',
         'extensionName' => 'Academics',
         'controllerActions' => [
@@ -31,11 +31,11 @@ return [
             ],
         ],
     ],
-    'spark_academics_organization' => [
+    'academics_organization' => [
         'parent' => 'academic',
         'access' => 'user',
         'workspaces' => '*',
-        'path' => '/module/academic/spark-academics-organization',
+        'path' => '/module/academic/academics-organization',
         'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:organization',
         'extensionName' => 'Academics',
         'controllerActions' => [
@@ -44,11 +44,11 @@ return [
             ],
         ],
     ],
-    'spark_academics_course' => [
+    'academics_course' => [
         'parent' => 'academic',
         'access' => 'user',
         'workspaces' => '*',
-        'path' => '/module/academic/spark-academics-course',
+        'path' => '/module/academic/academics-course',
         'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:course',
         'extensionName' => 'Academics',
         'controllerActions' => [
@@ -57,11 +57,11 @@ return [
             ],
         ],
     ],
-    'spark_academics_program' => [
+    'academics_program' => [
         'parent' => 'academic',
         'access' => 'user',
         'workspaces' => '*',
-        'path' => '/module/academic/spark-academics-program',
+        'path' => '/module/academic/academics-program',
         'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:program',
         'extensionName' => 'Academics',
         'controllerActions' => [
@@ -70,11 +70,11 @@ return [
             ],
         ],
     ],
-    'spark_academics_project' => [
+    'academics_project' => [
         'parent' => 'academic',
         'access' => 'user',
         'workspaces' => '*',
-        'path' => '/module/academic/spark-academics-project',
+        'path' => '/module/academic/academics-project',
         'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:project',
         'extensionName' => 'Academics',
         'controllerActions' => [

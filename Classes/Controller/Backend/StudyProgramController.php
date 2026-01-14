@@ -52,15 +52,22 @@ class StudyProgramController extends AbstractBackendController
         OrganizationRepository $organizationRepository,
         StudyCycleRepository $studyCycleRepository
     ) {
-        parent::__construct($moduleTemplateFactory, $backendUriBuilder);
+        parent::__construct(
+            $moduleTemplateFactory, 
+            $backendUriBuilder,
+            $backendPermissionService,
+            $iconFactory,
+            $siteFinder
+        );
         $this->repository = $studyProgramRepository;
-        $this->backendPermissionService = $backendPermissionService;
-        $this->iconFactory = $iconFactory;
-        $this->siteFinder = $siteFinder;
         $this->demandFactory = $demandFactory;
         $this->organizationRepository = $organizationRepository;
         $this->studyCycleRepository = $studyCycleRepository;
+        
         $this->tableName = 'tx_academics_domain_model_study_program';
+        $this->permissionGroup = 'sparkAcademic_course_permission_groups';
+        $this->storagePidConfigKey = 'sparkAcademic_studyprogram_storage_pid';
+        $this->newRecordLabel = 'Create New Study Program';
     }
 
     protected function getTemplatePath(): string
@@ -68,95 +75,38 @@ class StudyProgramController extends AbstractBackendController
         return 'Backend/StudyProgram/List';
     }
 
-    protected function getStoragePid(): int
+    protected function findItems(array $currentBeUser, bool $canManage = true)
     {
-        try {
-            $sites = $this->siteFinder->getAllSites();
-            foreach ($sites as $site) {
-                $config = $site->getConfiguration();
-                $storagePid = (int)($config['sparkAcademic_studyprogram_storage_pid'] ?? 0);
-                if ($storagePid > 0) {
-                    return $storagePid;
-                }
-            }
-        } catch (\Exception $e) {
-        }
-        return 0;
-    }
-
-    public function listAction(): ResponseInterface
-    {
-        // StudyProgram entities use sparkAcademic_course_permission_groups
-        $canManage = $this->backendPermissionService->canViewAllRecords('sparkAcademic_course_permission_groups');
-
-        // Get filter from request
         $queryParams = $this->request->getQueryParams();
         $postParams = $this->request->getParsedBody() ?? [];
+        
         $filter = $postParams['filter'] ?? $queryParams['filter'] ?? [];
+        $sort = $queryParams['sort'] ?? 'title';
+        $direction = $queryParams['direction'] ?? 'asc';
 
         // Build Demand object using DemandFactory
         $demand = $this->demandFactory->createStudyProgramDemand([], $filter);
-
-        // Execute Query
-        $items = $this->repository->findByDemand($demand);
-
-        $userItems = [];
-        foreach ($items as $item) {
-            $userItems[] = [
-                'item' => $item,
-                'editUrl' => $this->getEditUrl($item)
-            ];
-        }
-
-        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         
-        if ($canManage) {
-            $this->addDocHeaderButtons($moduleTemplate);
-        }
+        $orderings = [$sort => $direction === 'asc' ? \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING : \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING];
+        $demand->setOrderings($orderings);
 
-        $moduleTemplate->assign('items', $userItems);
-        $moduleTemplate->assign('filter', $filter);
-        $moduleTemplate->assign('canManage', $canManage);
-        
+        // Pass variables to view
+        $this->additionalViewVariables['filter'] = $filter;
+        $this->additionalViewVariables['sort'] = $sort;
+        $this->additionalViewVariables['direction'] = $direction;
+
+        return $this->repository->findByDemand($demand);
+    }
+
+    protected function prepareAction(): void
+    {
         // Assign options for filters - Organization (unified, replaces department/chair)
         $orgQuery = $this->organizationRepository->createQuery();
         $orgQuery->getQuerySettings()->setRespectStoragePage(false);
-        $moduleTemplate->assign('availableOrganizations', $orgQuery->execute());
+        $this->additionalViewVariables['availableOrganizations'] = $orgQuery->execute();
 
         $cycleQuery = $this->studyCycleRepository->createQuery();
         $cycleQuery->getQuerySettings()->setRespectStoragePage(false);
-        $moduleTemplate->assign('availableCycle', $cycleQuery->execute());
-
-        $moduleTemplate->assignMultiple($this->additionalViewVariables);
-
-        return $moduleTemplate->renderResponse($this->getTemplatePath());
-    }
-
-    protected function addDocHeaderButtons(\TYPO3\CMS\Backend\Template\ModuleTemplate $moduleTemplate): void
-    {
-        $buttonBar = $moduleTemplate->getDocHeaderComponent()->getButtonBar();
-        
-        $storagePid = $this->getStoragePid();
-        if ($storagePid === 0) {
-            $storagePid = (int)($this->request->getQueryParams()['id'] ?? 0);
-        }
-        
-        $newIcon = $this->iconFactory->getIcon('actions-add', Icon::SIZE_SMALL);
-        
-        $newLink = $this->backendUriBuilder->buildUriFromRoute('record_edit', [
-            'edit' => [
-                $this->tableName => [
-                    $storagePid => 'new'
-                ]
-            ],
-            'returnUrl' => (string)$this->backendUriBuilder->buildUriFromRoute($this->request->getAttribute('module')->getIdentifier())
-        ]);
-        
-        $newButton = $buttonBar->makeLinkButton()
-            ->setHref($newLink)
-            ->setTitle('Create New Study Program')
-            ->setIcon($newIcon);
-        
-        $buttonBar->addButton($newButton, ButtonBar::BUTTON_POSITION_LEFT);
+        $this->additionalViewVariables['availableCycle'] = $cycleQuery->execute();
     }
 }

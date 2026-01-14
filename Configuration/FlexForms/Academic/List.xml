@@ -282,6 +282,22 @@
                         </config>
                     </settings.filter.academicRank>
 
+                    <settings.filter.personType>
+                        <label>Filter by Type</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <foreign_table>tx_academics_domain_model_persontype</foreign_table>
+                            <items>
+                                <numIndex index="0">
+                                    <label>-- All Types --</label>
+                                    <value>0</value>
+                                </numIndex>
+                            </items>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.filter.personType>
+
                     <settings.select.person>
                         <label>Select Specific Persons</label>
                         <config>

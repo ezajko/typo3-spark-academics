@@ -24,9 +24,9 @@ return [
         'workspaces' => '*',
         'path' => '/module/academic/spark-academics-person',
         'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:person',
-        'extensionName' => 'SparkAcademics',
+        'extensionName' => 'Academics',
         'controllerActions' => [
-            \EtfUnsa\SparkAcademics\Controller\Backend\PersonController::class => [
+            \RootBa\Academics\Controller\Backend\PersonController::class => [
                 'list', 'edit', 'update'
             ],
         ],
@@ -37,9 +37,9 @@ return [
         'workspaces' => '*',
         'path' => '/module/academic/spark-academics-organization',
         'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:organization',
-        'extensionName' => 'SparkAcademics',
+        'extensionName' => 'Academics',
         'controllerActions' => [
-            \EtfUnsa\SparkAcademics\Controller\Backend\OrganizationController::class => [
+            \RootBa\Academics\Controller\Backend\OrganizationController::class => [
                 'list', 'edit', 'update'
             ],
         ],
@@ -50,9 +50,9 @@ return [
         'workspaces' => '*',
         'path' => '/module/academic/spark-academics-course',
         'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:course',
-        'extensionName' => 'SparkAcademics',
+        'extensionName' => 'Academics',
         'controllerActions' => [
-            \EtfUnsa\SparkAcademics\Controller\Backend\CourseController::class => [
+            \RootBa\Academics\Controller\Backend\CourseController::class => [
                 'list', 'edit', 'update'
             ],
         ],
@@ -63,9 +63,9 @@ return [
         'workspaces' => '*',
         'path' => '/module/academic/spark-academics-program',
         'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:program',
-        'extensionName' => 'SparkAcademics',
+        'extensionName' => 'Academics',
         'controllerActions' => [
-            \EtfUnsa\SparkAcademics\Controller\Backend\StudyProgramController::class => [
+            \RootBa\Academics\Controller\Backend\StudyProgramController::class => [
                 'list', 'edit', 'update'
             ],
         ],
@@ -76,9 +76,9 @@ return [
         'workspaces' => '*',
         'path' => '/module/academic/spark-academics-project',
         'labels' => 'LLL:EXT:academics/Resources/Private/Language/locallang_mod.xlf:project',
-        'extensionName' => 'SparkAcademics',
+        'extensionName' => 'Academics',
         'controllerActions' => [
-            \EtfUnsa\SparkAcademics\Controller\Backend\ProjectController::class => [
+            \RootBa\Academics\Controller\Backend\ProjectController::class => [
                 'list', 'edit', 'update'
             ],
         ],

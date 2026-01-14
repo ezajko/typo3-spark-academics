@@ -11,28 +11,55 @@
 
 defined('TYPO3') or die();
 
+// Register List Plugin as dedicated CType (TYPO3 13+ standard)
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'SparkAcademics',
-    'Pi1',
-    'Academic Profiles',
-    'content-user'
-);
-$pluginSignature = 'sparkacademics_pi1';
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    $pluginSignature,
-    'FILE:EXT:academics/Configuration/FlexForms/Academic/List.xml'
+    'Academics',
+    'List',
+    'Academic Profiles: List',
+    'content-user',
+    'academics', // Group identifier for New Content Element Wizard
+    'Academic Profiles listing plugin for displaying persons, organizations, courses, projects, and study programs.'
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'SparkAcademics',
-    'Pi2',
-    'Academic Profiles: Detail',
-    'content-user'
-);
-$pluginSignature = 'sparkacademics_pi2';
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+// Get the generated CType for FlexForm registration
+$pluginSignature = 'academics_list';
+$GLOBALS['TCA']['tt_content']['types'][$pluginSignature]['showitem'] = '
+    --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
+        --palette--;;general,
+        header;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_formlabel,
+        pi_flexform,
+    --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
+        --palette--;;hidden,
+        --palette--;;access,
+';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    $pluginSignature,
-    'FILE:EXT:academics/Configuration/FlexForms/Academic/Detail.xml'
+    '*',
+    'FILE:EXT:academics/Configuration/FlexForms/Academic/List.xml',
+    $pluginSignature
+);
+
+// Register Show Plugin as dedicated CType
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'Academics',
+    'Show',
+    'Academic Profiles: Detail',
+    'content-user',
+    'academics',
+    'Academic Profiles detail view for displaying single entity details.'
+);
+
+$pluginSignature = 'academics_show';
+$GLOBALS['TCA']['tt_content']['types'][$pluginSignature]['showitem'] = '
+    --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
+        --palette--;;general,
+        header;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_formlabel,
+        pi_flexform,
+    --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
+        --palette--;;hidden,
+        --palette--;;access,
+';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    '*',
+    'FILE:EXT:academics/Configuration/FlexForms/Academic/Detail.xml',
+    $pluginSignature
 );

@@ -1,0 +1,89 @@
+
+plugin.tx_academics_list {
+    # Settings structure for FlexForm override
+    settings {
+        # Entity type selection (default, overridden by FlexForm)
+        entityType = Organization
+        
+        # Detail Page default (matches FlexForm settings.detailPid, not settings.view.detailPid)
+        detailPid = 
+        
+        # View settings
+        view {
+            # viewType intentionally empty - populated by FlexForm as array (settings.view.viewType.organization)
+            # Defining it as empty block ensures it is treated as array
+            viewType {
+            }
+            
+            pagination {
+                # Maximum total items to display (0 = unlimited)
+                limit = 0
+                # Items per page (0 = show all without pagination)
+                itemsPerPage = 10
+            }
+            
+            # Frontend Filter settings
+            frontendFilter {
+                enabled = 0
+                layout = inline
+                showSearch = 1
+                showFilters = 1
+                showReset = 1
+            }
+        }
+        
+        # Filter settings (populated by FlexForm)
+        filter {
+            organization = 0
+            organizationType = 0
+            academicRank = 0
+            studyCycle = 0
+            courseCategory = 0
+            projectStatus = 0
+            projectType = 0
+            fundingProgram = 0
+            
+            # Additional filters
+            primaryOrganization = 0
+            additionalOrganization = 0
+        }
+        
+        # Selection settings (populated by FlexForm)
+        select {
+            organization =
+            person =
+            course =
+            studyprogram =
+            project =
+        }
+    }
+}
+
+plugin.tx_academics_show {
+    # Unify namespace so Show (Detail) can read List arguments
+    view.pluginNamespace = tx_academics_list
+    
+    # Settings structure for FlexForm override
+    settings {
+        # Entity type selection
+        entityType = Organization
+        # List Page default
+        listPid = 
+        
+        # View settings
+        view {
+            # viewType intentionally empty
+            viewType {
+            }
+        }
+        
+        # Selection settings (populated by FlexForm)
+        select {
+            organization =
+            person =
+            course =
+            studyprogram =
+            project =
+        }
+    }
+}

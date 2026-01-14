@@ -177,7 +177,7 @@
                         <label>Select Study Program</label>
                         <config>
                             <type>group</type>
-                            <allowed>tx_academics_domain_model_study_program</allowed>
+                            <allowed>tx_academics_domain_model_studyprogram</allowed>
                             <size>1</size>
                             <maxitems>1</maxitems>
                             <minitems>0</minitems>

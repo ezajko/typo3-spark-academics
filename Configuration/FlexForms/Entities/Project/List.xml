@@ -12,7 +12,7 @@
                 <config>
                     <type>select</type>
                     <renderType>selectSingle</renderType>
-                    <foreign_table>tx_academics_domain_model_project_status</foreign_table>
+                    <foreign_table>tx_academics_domain_model_projectstatus</foreign_table>
                     <items>
                         <numIndex index="0">
                             <label>-- All Statuses --</label>
@@ -27,7 +27,7 @@
                 <config>
                     <type>select</type>
                     <renderType>selectSingle</renderType>
-                    <foreign_table>tx_academics_domain_model_project_type</foreign_table>
+                    <foreign_table>tx_academics_domain_model_projecttype</foreign_table>
                     <items>
                         <numIndex index="0">
                             <label>-- All Types --</label>
@@ -42,7 +42,7 @@
                 <config>
                     <type>select</type>
                     <renderType>selectSingle</renderType>
-                    <foreign_table>tx_academics_domain_model_funding_program</foreign_table>
+                    <foreign_table>tx_academics_domain_model_fundingprogram</foreign_table>
                     <items>
                         <numIndex index="0">
                             <label>-- All Programs --</label>

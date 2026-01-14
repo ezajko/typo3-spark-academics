@@ -17,7 +17,7 @@
 # --------------------------------------------------------------------------
 
 # Organization ViewTypes (sOrganization sheet)
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sOrganization.settings\.view\.viewType\.organization {
+TCEFORM.tt_content.pi_flexform.academics_list.sOrganization.settings\.view\.viewType\.organization {
     addItems {
         Simple = Simple
         Debug = Debug
@@ -25,7 +25,7 @@ TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sOrganization.settings\.view\.
 }
 
 # Person ViewTypes (sPerson sheet)
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sPerson.settings\.view\.viewType\.person {
+TCEFORM.tt_content.pi_flexform.academics_list.sPerson.settings\.view\.viewType\.person {
     addItems {
         Card = Card
         Simple = Simple
@@ -34,7 +34,7 @@ TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sPerson.settings\.view\.viewTy
 }
 
 # Course ViewTypes (sCourse sheet)
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sCourse.settings\.view\.viewType\.course {
+TCEFORM.tt_content.pi_flexform.academics_list.sCourse.settings\.view\.viewType\.course {
     addItems {
         Simple = Simple
         Debug = Debug
@@ -42,7 +42,7 @@ TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sCourse.settings\.view\.viewTy
 }
 
 # StudyProgram ViewTypes (sStudyProgram sheet)
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sStudyProgram.settings\.view\.viewType\.studyprogram {
+TCEFORM.tt_content.pi_flexform.academics_list.sStudyProgram.settings\.view\.viewType\.studyprogram {
     addItems {
         Simple = Simple
         Debug = Debug
@@ -50,7 +50,7 @@ TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sStudyProgram.settings\.view\.
 }
 
 # Project ViewTypes (sProject sheet)
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sProject.settings\.view\.viewType\.project {
+TCEFORM.tt_content.pi_flexform.academics_list.sProject.settings\.view\.viewType\.project {
     addItems {
         Simple = Simple
         Debug = Debug
@@ -60,35 +60,102 @@ TCEFORM.tt_content.pi_flexform.sparkacademics_pi1.sProject.settings\.view\.viewT
 # --------------------------------------------------------------------------
 # Detail Plugin (Pi2) - Uses same unique key structure per entity
 # --------------------------------------------------------------------------
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi2.sOrganization.settings\.view\.viewType\.organization {
+TCEFORM.tt_content.pi_flexform.academics_show.sOrganization.settings\.view\.viewType\.organization {
     addItems {
         Simple = Simple
         Debug = Debug
     }
 }
 
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi2.sPerson.settings\.view\.viewType\.person {
+TCEFORM.tt_content.pi_flexform.academics_show.sPerson.settings\.view\.viewType\.person {
     addItems {
         Simple = Simple
         Debug = Debug
     }
 }
 
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi2.sCourse.settings\.view\.viewType\.course {
+TCEFORM.tt_content.pi_flexform.academics_show.sCourse.settings\.view\.viewType\.course {
     addItems {
         Simple = Simple
         Debug = Debug
     }
 }
 
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi2.sStudyProgram.settings\.view\.viewType\.studyprogram {
+TCEFORM.tt_content.pi_flexform.academics_show.sStudyProgram.settings\.view\.viewType\.studyprogram {
     addItems {
         Simple = Simple
         Debug = Debug
     }
 }
 
-TCEFORM.tt_content.pi_flexform.sparkacademics_pi2.sProject.settings\.view\.viewType\.project {
+TCEFORM.tt_content.pi_flexform.academics_show.sProject.settings\.view\.viewType\.project {
+    addItems {
+        Simple = Simple
+        Debug = Debug
+    }
+    addItems {
+        Card = Card
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+# Course ViewTypes (sCourse sheet)
+TCEFORM.tt_content.pi_flexform.academics_list.sCourse.settings\.view\.viewType\.course {
+    addItems {
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+# StudyProgram ViewTypes (sStudyProgram sheet)
+TCEFORM.tt_content.pi_flexform.academics_list.sStudyProgram.settings\.view\.viewType\.studyprogram {
+    addItems {
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+# Project ViewTypes (sProject sheet)
+TCEFORM.tt_content.pi_flexform.academics_list.sProject.settings\.view\.viewType\.project {
+    addItems {
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+# --------------------------------------------------------------------------
+# Detail Plugin (Pi2) - Uses same unique key structure per entity
+# --------------------------------------------------------------------------
+TCEFORM.tt_content.pi_flexform.academics_show.sOrganization.settings\.view\.viewType\.organization {
+    addItems {
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+TCEFORM.tt_content.pi_flexform.academics_show.sPerson.settings\.view\.viewType\.person {
+    addItems {
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+TCEFORM.tt_content.pi_flexform.academics_show.sCourse.settings\.view\.viewType\.course {
+    addItems {
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+TCEFORM.tt_content.pi_flexform.academics_show.sStudyProgram.settings\.view\.viewType\.studyprogram {
+    addItems {
+        Simple = Simple
+        Debug = Debug
+    }
+}
+
+TCEFORM.tt_content.pi_flexform.academics_show.sProject.settings\.view\.viewType\.project {
     addItems {
         Simple = Simple
         Debug = Debug

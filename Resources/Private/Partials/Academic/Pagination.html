@@ -8,8 +8,8 @@
             <f:if condition="{pagination.previousPageNumber}">
                 <f:then>
                     <li class="page-item">
-                        <f:link.action action="listFiltered" controller="Academic" extensionName="SparkAcademics"
-                            pluginName="Pi1" arguments="{currentPage: pagination.previousPageNumber, filter: filter}"
+                        <f:link.action action="listFiltered" controller="Academic" extensionName="Academics"
+                            pluginName="List" arguments="{currentPage: pagination.previousPageNumber, filter: filter}"
                             class="page-link" title="{f:translate(key: 'pagination.previous', default: 'Previous')}">
                             <i class="bi bi-chevron-left"></i>
                         </f:link.action>
@@ -25,8 +25,8 @@
             <!-- Pages -->
             <f:for each="{pagination.allPageNumbers}" as="page">
                 <li class="page-item {f:if(condition: '{page} == {paginator.currentPageNumber}', then: 'active')}">
-                    <f:link.action action="listFiltered" controller="Academic" extensionName="SparkAcademics"
-                        pluginName="Pi1" arguments="{currentPage: page, filter: filter}" class="page-link">
+                    <f:link.action action="listFiltered" controller="Academic" extensionName="Academics"
+                        pluginName="List" arguments="{currentPage: page, filter: filter}" class="page-link">
                         {page}
                     </f:link.action>
                 </li>
@@ -36,8 +36,8 @@
             <f:if condition="{pagination.nextPageNumber}">
                 <f:then>
                     <li class="page-item">
-                        <f:link.action action="listFiltered" controller="Academic" extensionName="SparkAcademics"
-                            pluginName="Pi1" arguments="{currentPage: pagination.nextPageNumber, filter: filter}"
+                        <f:link.action action="listFiltered" controller="Academic" extensionName="Academics"
+                            pluginName="List" arguments="{currentPage: pagination.nextPageNumber, filter: filter}"
                             class="page-link" title="{f:translate(key: 'pagination.next', default: 'Next')}">
                             <i class="bi bi-chevron-right"></i>
                         </f:link.action>

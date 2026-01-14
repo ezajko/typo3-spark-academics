@@ -66,7 +66,7 @@
                         <label>Select Organization</label>
                         <config>
                             <type>group</type>
-                            <allowed>tx_spark_organization</allowed>
+                            <allowed>tx_academics_organization</allowed>
                             <size>1</size>
                             <maxitems>1</maxitems>
                             <minitems>0</minitems>
@@ -103,7 +103,7 @@
                         <label>Select Person</label>
                         <config>
                             <type>group</type>
-                            <allowed>tx_spark_person</allowed>
+                            <allowed>tx_academics_person</allowed>
                             <size>1</size>
                             <maxitems>1</maxitems>
                             <minitems>0</minitems>
@@ -140,7 +140,7 @@
                         <label>Select Course</label>
                         <config>
                             <type>group</type>
-                            <allowed>tx_spark_course</allowed>
+                            <allowed>tx_academics_course</allowed>
                             <size>1</size>
                             <maxitems>1</maxitems>
                             <minitems>0</minitems>
@@ -177,7 +177,7 @@
                         <label>Select Study Program</label>
                         <config>
                             <type>group</type>
-                            <allowed>tx_spark_study_program</allowed>
+                            <allowed>tx_academics_study_program</allowed>
                             <size>1</size>
                             <maxitems>1</maxitems>
                             <minitems>0</minitems>
@@ -214,7 +214,7 @@
                         <label>Select Project</label>
                         <config>
                             <type>group</type>
-                            <allowed>tx_spark_project</allowed>
+                            <allowed>tx_academics_project</allowed>
                             <size>1</size>
                             <maxitems>1</maxitems>
                             <minitems>0</minitems>

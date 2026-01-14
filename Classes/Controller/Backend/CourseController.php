@@ -68,7 +68,7 @@ class CourseController extends AbstractBackendController
         $this->studyCycleRepository = $studyCycleRepository;
         $this->scientificFieldRepository = $scientificFieldRepository;
         $this->organizationRepository = $organizationRepository;
-        $this->tableName = 'tx_spark_course';
+        $this->tableName = 'tx_academics_course';
     }
 
     protected function getTemplatePath(): string

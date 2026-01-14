@@ -80,7 +80,7 @@ return [
                 'items' => [
                     ['label' => '', 'value' => 0],
                 ],
-                'foreign_table' => 'tx_spark_publication',
+                'foreign_table' => 'tx_academics_publication',
                 'foreign_table_where' => 'AND tx_spark_publication.pid=###CURRENT_PID### AND tx_spark_publication.sys_language_uid IN (-1,0)',
             ],
         ],
@@ -258,8 +258,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_spark_person',
-                'MM' => 'tx_spark_person_publication_mm',
+                'foreign_table' => 'tx_academics_person',
+                'MM' => 'tx_academics_person_publication_mm',
                 'MM_opposite_field' => 'publications', // Will add this to Person TCA
                 'size' => 10,
                 'autoSizeMax' => 30,

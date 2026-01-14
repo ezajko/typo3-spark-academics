@@ -66,7 +66,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [['label' => '', 'value' => 0]],
-                'foreign_table' => 'tx_spark_course_category',
+                'foreign_table' => 'tx_academics_course_category',
                 'foreign_table_where' => 'AND {#tx_spark_course_category}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],

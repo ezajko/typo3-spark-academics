@@ -79,7 +79,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [['label' => '', 'value' => 0]],
-                'foreign_table' => 'tx_spark_course',
+                'foreign_table' => 'tx_academics_course',
                 'foreign_table_where' => 'AND {#tx_spark_course}.{#pid}=###CURRENT_PID### AND {#tx_spark_course}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
@@ -185,7 +185,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_spark_organization',
+                'foreign_table' => 'tx_academics_organization',
                 'foreign_table_where' => 'AND {#tx_spark_organization}.{#sys_language_uid} IN (-1,0) ORDER BY title',
                 'items' => [['label' => '-- Select --', 'value' => 0]],
                 'minitems' => 0,
@@ -199,7 +199,7 @@ return [
             'label' => 'Syllabi (Verzije silabusa)',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_spark_course_syllabus',
+                'foreign_table' => 'tx_academics_course_syllabus',
                 'foreign_field' => 'course',
                 'foreign_sortby' => 'sorting',
                 'maxitems' => 99,
@@ -220,7 +220,7 @@ return [
             'label' => 'Similar External Courses',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_spark_external_course',
+                'foreign_table' => 'tx_academics_external_course',
                 'foreign_field' => 'course',
                 'foreign_sortby' => 'sorting',
                 'maxitems' => 99,
@@ -244,7 +244,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'be_users',
-                'MM' => 'tx_spark_course_beuser_mm',
+                'MM' => 'tx_academics_course_beuser_mm',
                 'size' => 5,
                 'maxitems' => 99,
             ],
@@ -257,7 +257,7 @@ return [
             'label' => 'Associated People',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_spark_course_person',
+                'foreign_table' => 'tx_academics_course_person',
                 'foreign_field' => 'course',
                 'foreign_sortby' => 'sorting',
                 'maxitems' => 99,

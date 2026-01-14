@@ -82,18 +82,18 @@ class GenerateTestStudyProgramsCommand extends Command
 
         $faker = FakerFactory::create('en_US');
         $connPool = GeneralUtility::makeInstance(ConnectionPool::class);
-        $programConn = $connPool->getConnectionForTable('tx_spark_study_program');
-        $curriculumConn = $connPool->getConnectionForTable('tx_spark_curriculum');
-        $semesterConn = $connPool->getConnectionForTable('tx_spark_curriculum_semester');
-        $groupConn = $connPool->getConnectionForTable('tx_spark_course_group');
+        $programConn = $connPool->getConnectionForTable('tx_academics_study_program');
+        $curriculumConn = $connPool->getConnectionForTable('tx_academics_curriculum');
+        $semesterConn = $connPool->getConnectionForTable('tx_academics_curriculum_semester');
+        $groupConn = $connPool->getConnectionForTable('tx_academics_course_group');
         
         $io->progressStart($count);
         
         for ($i = 0; $i < $count; $i++) {
             // 1. Create Study Program
             $program = $this->generateStudyProgram($faker, $lookups, $pid);
-            $programConn->insert('tx_spark_study_program', $program);
-            $programUid = (int)$programConn->lastInsertId('tx_spark_study_program');
+            $programConn->insert('tx_academics_study_program', $program);
+            $programUid = (int)$programConn->lastInsertId('tx_academics_study_program');
             
             // Add Relations (Multi-select)
             $this->addRelations($programUid, 'organization', $lookups['organizations'], 1, 3, $faker);
@@ -112,8 +112,8 @@ class GenerateTestStudyProgramsCommand extends Command
                 'tstamp' => time(),
                 'crdate' => time(),
             ];
-            $curriculumConn->insert('tx_spark_curriculum', $curriculum);
-            $curriculumUid = (int)$curriculumConn->lastInsertId('tx_spark_curriculum');
+            $curriculumConn->insert('tx_academics_curriculum', $curriculum);
+            $curriculumUid = (int)$curriculumConn->lastInsertId('tx_academics_curriculum');
 
             // 3. Create Semesters (e.g. 2 semesters)
             for ($sem = 1; $sem <= 2; $sem++) {
@@ -125,8 +125,8 @@ class GenerateTestStudyProgramsCommand extends Command
                     'tstamp' => time(),
                     'crdate' => time(),
                 ];
-                $semesterConn->insert('tx_spark_curriculum_semester', $semester);
-                $semesterUid = (int)$semesterConn->lastInsertId('tx_spark_curriculum_semester');
+                $semesterConn->insert('tx_academics_curriculum_semester', $semester);
+                $semesterUid = (int)$semesterConn->lastInsertId('tx_academics_curriculum_semester');
 
                 // 4. Create Course Groups (Slots)
                 
@@ -141,8 +141,8 @@ class GenerateTestStudyProgramsCommand extends Command
                     'tstamp' => time(),
                     'crdate' => time(),
                 ];
-                $groupConn->insert('tx_spark_course_group', $groupM);
-                $groupMUid = (int)$groupConn->lastInsertId('tx_spark_course_group');
+                $groupConn->insert('tx_academics_course_group', $groupM);
+                $groupMUid = (int)$groupConn->lastInsertId('tx_academics_course_group');
                 // Assign 3-5 random courses
                 $this->addCourseRelations($groupMUid, $lookups['courses'], 3, 5, $faker);
 
@@ -157,8 +157,8 @@ class GenerateTestStudyProgramsCommand extends Command
                     'tstamp' => time(),
                     'crdate' => time(),
                 ];
-                $groupConn->insert('tx_spark_course_group', $groupE);
-                $groupEUid = (int)$groupConn->lastInsertId('tx_spark_course_group');
+                $groupConn->insert('tx_academics_course_group', $groupE);
+                $groupEUid = (int)$groupConn->lastInsertId('tx_academics_course_group');
                 // Assign 2-4 random courses
                 $this->addCourseRelations($groupEUid, $lookups['courses'], 2, 4, $faker);
             }
@@ -184,13 +184,13 @@ class GenerateTestStudyProgramsCommand extends Command
         );
 
         return [
-            'organizations' => $fetchUids('tx_spark_organization'),
-            'cycles' => $fetchUids('tx_spark_study_cycle'),
-            'fields' => $fetchUids('tx_spark_scientific_field'),
-            'languages' => $fetchUids('tx_spark_language'),
-            'study_types' => $fetchUids('tx_spark_study_type'),
-            'modes_of_study' => $fetchUids('tx_spark_mode_of_study'),
-            'courses' => $fetchUids('tx_spark_course'),
+            'organizations' => $fetchUids('tx_academics_organization'),
+            'cycles' => $fetchUids('tx_academics_study_cycle'),
+            'fields' => $fetchUids('tx_academics_scientific_field'),
+            'languages' => $fetchUids('tx_academics_language'),
+            'study_types' => $fetchUids('tx_academics_study_type'),
+            'modes_of_study' => $fetchUids('tx_academics_mode_of_study'),
+            'courses' => $fetchUids('tx_academics_course'),
         ];
     }
 
@@ -222,7 +222,7 @@ class GenerateTestStudyProgramsCommand extends Command
             return;
         }
         
-        $tableName = 'tx_spark_studyprogram_' . $type . '_mm';
+        $tableName = 'tx_academics_studyprogram_' . $type . '_mm';
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($tableName);
         
         $count = $faker->numberBetween($min, $max);
@@ -244,13 +244,13 @@ class GenerateTestStudyProgramsCommand extends Command
             return;
         }
 
-        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_spark_coursegroup_course_mm');
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_academics_coursegroup_course_mm');
         
         $count = $faker->numberBetween($min, $max);
         $selected = $faker->randomElements($courseUids, min($count, count($courseUids)));
 
         foreach ($selected as $sorting => $foreignUid) {
-            $connection->insert('tx_spark_coursegroup_course_mm', [
+            $connection->insert('tx_academics_coursegroup_course_mm', [
                 'uid_local' => $groupUid,
                 'uid_foreign' => $foreignUid,
                 'sorting' => $sorting,

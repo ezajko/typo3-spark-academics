@@ -4,54 +4,54 @@ services:
     autoconfigure: true
     public: false
 
-  EtfUnsa\SparkAcademics\:
+  RootBa\Academics\:
     resource: '../Classes/*'
     exclude: '../Classes/Domain/Model/*'
 
   # Backend Controllers must be public
-  EtfUnsa\SparkAcademics\Controller\Backend\PersonController:
+  RootBa\Academics\Controller\Backend\PersonController:
     public: true
-  EtfUnsa\SparkAcademics\Controller\Backend\OrganizationController:
+  RootBa\Academics\Controller\Backend\OrganizationController:
     public: true
-  EtfUnsa\SparkAcademics\Controller\Backend\CourseController:
+  RootBa\Academics\Controller\Backend\CourseController:
     public: true
-  EtfUnsa\SparkAcademics\Controller\Backend\StudyProgramController:
+  RootBa\Academics\Controller\Backend\StudyProgramController:
     public: true
-  EtfUnsa\SparkAcademics\Controller\Backend\ProjectController:
+  RootBa\Academics\Controller\Backend\ProjectController:
     public: true
 
   # Console Commands
-  EtfUnsa\SparkAcademics\Command\SeedCommand:
+  RootBa\Academics\Command\SeedCommand:
     tags:
       - name: console.command
         command: 'academics:seed'
         description: 'Seed lookup tables with initial data'
 
-  EtfUnsa\SparkAcademics\Command\GenerateTestProjectsCommand:
+  RootBa\Academics\Command\GenerateTestProjectsCommand:
     tags:
       - name: console.command
         command: 'academics:generate-projects'
         description: 'Generate test projects with faker data'
 
-  EtfUnsa\SparkAcademics\Command\GenerateTestCoursesCommand:
+  RootBa\Academics\Command\GenerateTestCoursesCommand:
     tags:
       - name: console.command
         command: 'academics:generate-courses'
         description: 'Generate test courses with syllabi for testing purposes'
 
-  EtfUnsa\SparkAcademics\Command\GenerateTestStudyProgramsCommand:
+  RootBa\Academics\Command\GenerateTestStudyProgramsCommand:
       tags:
           - name: console.command
             command: 'academics:generate-programs'
             description: 'Generate test Study Programs with nested curriculum structure'
 
-  EtfUnsa\SparkAcademics\Command\SyncOrcidCommand:
+  RootBa\Academics\Command\SyncOrcidCommand:
     tags:
       - name: console.command
         command: 'academics:sync-orcid'
         description: 'Syncs publications from ORCID for all Persons with an ORCID ID'
 
-  EtfUnsa\SparkAcademics\Command\GenerateHomeFoldersCommand:
+  RootBa\Academics\Command\GenerateHomeFoldersCommand:
     tags:
       - name: console.command
         command: 'academics:generate-home-folders'
@@ -59,7 +59,7 @@ services:
 
 
   # Event Listeners
-  EtfUnsa\SparkAcademics\EventListener\BackendUserEventListener:
+  RootBa\Academics\EventListener\BackendUserEventListener:
     tags:
       - name: event.listener
         identifier: 'spark-academics-beuser-creation'

@@ -67,7 +67,7 @@ class PersonController extends AbstractBackendController
         $this->iconFactory = $iconFactory;
         $this->siteFinder = $siteFinder;
         $this->demandFactory = $demandFactory;
-        $this->tableName = 'tx_spark_person';
+        $this->tableName = 'tx_academics_person';
     }
 
     protected function getTemplatePath(): string
@@ -177,7 +177,7 @@ class PersonController extends AbstractBackendController
         
         $newLink = $this->backendUriBuilder->buildUriFromRoute('record_edit', [
             'edit' => [
-                'tx_spark_person' => [
+                'tx_academics_person' => [
                     $storagePid => 'new'
                 ]
             ],
@@ -194,19 +194,19 @@ class PersonController extends AbstractBackendController
 
     protected function getOrganizations(): array
     {
-        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_spark_organization');
-        return $q->select('uid', 'title')->from('tx_spark_organization')->orderBy('title')->executeQuery()->fetchAllAssociative();
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_organization');
+        return $q->select('uid', 'title')->from('tx_academics_organization')->orderBy('title')->executeQuery()->fetchAllAssociative();
     }
 
     protected function getRanks(): array
     {
-        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_spark_academic_rank');
-        return $q->select('uid', 'title')->from('tx_spark_academic_rank')->orderBy('sorting')->executeQuery()->fetchAllAssociative();
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_academic_rank');
+        return $q->select('uid', 'title')->from('tx_academics_academic_rank')->orderBy('sorting')->executeQuery()->fetchAllAssociative();
     }
 
     protected function getTitles(): array
     {
-        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_spark_academic_title');
-        return $q->select('uid', 'title')->from('tx_spark_academic_title')->orderBy('sorting')->executeQuery()->fetchAllAssociative();
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_academic_title');
+        return $q->select('uid', 'title')->from('tx_academics_academic_title')->orderBy('sorting')->executeQuery()->fetchAllAssociative();
     }
 }

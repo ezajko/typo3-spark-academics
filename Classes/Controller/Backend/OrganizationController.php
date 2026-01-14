@@ -29,7 +29,7 @@ class OrganizationController extends AbstractBackendController
     protected ?OrganizationRepository $organizationRepository = null;
     protected ?OrganizationTypeRepository $organizationTypeRepository = null;
     protected \RootBa\SparkCore\Service\BackendPermissionService $backendPermissionService;
-    protected string $tableName = 'tx_spark_organization';
+    protected string $tableName = 'tx_academics_organization';
 
     public function __construct(
         ModuleTemplateFactory $moduleTemplateFactory,

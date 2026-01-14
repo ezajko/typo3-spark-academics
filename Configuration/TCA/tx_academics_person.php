@@ -116,7 +116,7 @@ return [
                 'items' => [
                     ['label' => '', 'value' => 0],
                 ],
-                'foreign_table' => 'tx_spark_person',
+                'foreign_table' => 'tx_academics_person',
                 'foreign_table_where' => 'AND tx_spark_person.pid=###CURRENT_PID### AND tx_spark_person.sys_language_uid IN (-1,0)',
             ],
         ],
@@ -219,7 +219,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_spark_academic_title',
+                'foreign_table' => 'tx_academics_academic_title',
                 'items' => [
                     ['', 0],
                 ],
@@ -233,7 +233,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_spark_academic_rank',
+                'foreign_table' => 'tx_academics_academic_rank',
                 'items' => [
                     ['', 0],
                 ],
@@ -248,7 +248,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_spark_person_type',
+                'foreign_table' => 'tx_academics_person_type',
                 'items' => [
                     ['', 0],
                 ],
@@ -356,7 +356,7 @@ return [
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.education',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_spark_person_education',
+                'foreign_table' => 'tx_academics_person_education',
                 'foreign_field' => 'person',
                 'appearance' => [
                     'collapseAll' => true,
@@ -373,7 +373,7 @@ return [
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.mentoring',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_spark_person_mentoring',
+                'foreign_table' => 'tx_academics_person_mentoring',
                 'foreign_field' => 'person',
                 'appearance' => [
                     'collapseAll' => true,
@@ -528,7 +528,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'be_users',
-                'MM' => 'tx_spark_person_beuser_mm',
+                'MM' => 'tx_academics_person_beuser_mm',
                 'size' => 5,
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,
@@ -546,7 +546,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_spark_organization',
+                'foreign_table' => 'tx_academics_organization',
                 'foreign_table_where' => 'AND {#tx_spark_organization}.{#sys_language_uid} IN (-1,0) ORDER BY title',
                 'items' => [['-- Select Organization --', 0]],
             ],
@@ -557,9 +557,9 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_spark_organization',
+                'foreign_table' => 'tx_academics_organization',
                 'foreign_table_where' => 'AND {#tx_spark_organization}.{#sys_language_uid} IN (-1,0) ORDER BY title',
-                'MM' => 'tx_spark_person_organization_mm',
+                'MM' => 'tx_academics_person_organization_mm',
                 'size' => 10,
                 'minitems' => 0,
                 'maxitems' => 99,
@@ -614,8 +614,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_spark_course',
-                'MM' => 'tx_spark_person_course_mm',
+                'foreign_table' => 'tx_academics_course',
+                'MM' => 'tx_academics_person_course_mm',
                 'MM_opposite_field' => 'persons',
                 'size' => 10,
                 'maxitems' => 99,
@@ -629,8 +629,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_spark_study_program',
-                'MM' => 'tx_spark_person_studyprogram_mm',
+                'foreign_table' => 'tx_academics_study_program',
+                'MM' => 'tx_academics_person_studyprogram_mm',
                 'MM_opposite_field' => 'persons',
                 'size' => 10,
                 'maxitems' => 99,
@@ -644,8 +644,8 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_spark_project',
-                'MM' => 'tx_spark_person_project_mm',
+                'foreign_table' => 'tx_academics_project',
+                'MM' => 'tx_academics_person_project_mm',
                 'MM_opposite_field' => 'persons',
                 'size' => 10,
                 'maxitems' => 99,
@@ -658,9 +658,9 @@ return [
             'label' => 'LLL:EXT:spark_academics/Resources/Private/Language/locallang.xlf:person.publications',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_spark_publication',
+                'foreign_table' => 'tx_academics_publication',
                 'foreign_field' => 'authors', // Wait, authors is M:N, inline needs MM table adjustment or different config
-                'MM' => 'tx_spark_person_publication_mm',
+                'MM' => 'tx_academics_person_publication_mm',
                 'appearance' => [
                     'collapseAll' => true,
                     'expandSingle' => true,

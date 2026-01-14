@@ -25,6 +25,6 @@ class OrganizationRepository extends AbstractRepository
 
     /** @var array<string, string> Default ordering */
     protected $defaultOrderings = [
-        'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+        'title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
     ];
 }

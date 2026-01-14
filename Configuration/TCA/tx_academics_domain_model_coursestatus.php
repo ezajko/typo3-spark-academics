@@ -9,38 +9,47 @@
  * (c) Ernedin Zajko <ezajko@root.ba>
  */
 
+/**
+ * TCA Configuration for Course Status
+ * Status values: Active, Inactive, Archived, In Development
+ * 
+ * @author Ernedin Zajko <ezajko@root.ba>
+ */
+
 defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'Organization Type',
+        'title' => 'Course Status',
         'label' => 'title',
+        'label_alt' => 'code',
+        'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'default_sortby' => 'ORDER BY title ASC',
+        'sortby' => 'sorting',
+        'sortby' => 'sorting',
         'versioningWS' => true,
+        'rootLevel' => -1,
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
         'delete' => 'deleted',
         'enablecolumns' => [
             'disabled' => 'hidden',
-            'starttime' => 'starttime',
-            'endtime' => 'endtime',
         ],
-        'searchFields' => 'title,type',
+        'searchFields' => 'title,code',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
-        'faker' => true,
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'types' => [
         '1' => [
             'showitem' => '
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
-                    title, type,
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+                --div--;General,
+                    hidden, title, code,
+                --div--;Language,
                     sys_language_uid, l10n_parent, l10n_diffsource,
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
-                    hidden, starttime, endtime,
             ',
         ],
     ],
@@ -57,8 +66,8 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [['label' => '', 'value' => 0]],
-                'foreign_table' => 'tx_academics_domain_model_organization_type',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_organization_type}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_organization_type}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_coursestatus',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_coursestatus}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -74,39 +83,25 @@ return [
                 'items' => [['label' => '', 'invertStateDisplay' => true]],
             ],
         ],
-        'starttime' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
-            'config' => [
-                'type' => 'datetime',
-                'default' => 0,
-            ],
-        ],
-        'endtime' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
-            'config' => [
-                'type' => 'datetime',
-                'default' => 0,
-                'range' => ['upper' => 2147483647],
-            ],
-        ],
         'title' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => 'Title',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required',
+                'max' => 100,
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
-        'type' => [
+        'code' => [
             'exclude' => true,
-            'label' => 'Internal Key (e.g. "department", "chair")',
+            'label' => 'Code',
             'config' => [
                 'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim,slug',
+                'size' => 10,
+                'max' => 20,
+                'eval' => 'trim',
             ],
         ],
     ],

@@ -9,13 +9,20 @@
  * (c) Ernedin Zajko <ezajko@root.ba>
  */
 
+/**
+ * TCA Configuration for AcademicRank
+ * Represents academic/scientific ranks (Asistent, Docent, Professor)
+ * 
+ * @author Ernedin Zajko <ezajko@root.ba>
+ */
+
 defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'Course Group (Slot)',
+        'title' => 'Academic Rank',
         'label' => 'title',
-        'label_alt' => 'type',
+        'label_alt' => 'abbreviation',
         'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -28,18 +35,18 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title',
+        'searchFields' => 'title,abbreviation,title_en,description',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
-        'hideTable' => true, // Hide from root list, accessed via IRRE
+        'default_sortby' => 'sorting ASC',
     ],
     'types' => [
         '1' => [
             'showitem' => '
                 --div--;General,
                     sys_language_uid, l10n_parent, l10n_diffsource, hidden,
-                    title, type, required_counts, color,
-                --div--;Courses,
-                    courses
+                    title, abbreviation, title_en,
+                --div--;Details,
+                    description,
             ',
         ],
     ],
@@ -53,15 +60,14 @@ return [
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_domain_model_course_group',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_course_group}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_course_group}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_academicrank',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_academicrank}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_academicrank}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -87,61 +93,47 @@ return [
         ],
         'title' => [
             'exclude' => false,
-            'label' => 'Group Title (e.g. Mandatory, Electives A)',
+            'label' => 'Title (Local)',
+            'description' => 'Full title in local language (e.g., "Redovni profesor")',
             'config' => [
                 'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim,required'
+                'size' => 50,
+                'max' => 255,
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
-        'type' => [
-            'exclude' => false,
-            'label' => 'Type',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'items' => [
-                    ['Mandatory (All required)', 'mandatory'],
-                    ['Elective (Choose N)', 'elective'],
-                ],
-                'default' => 'mandatory'
-            ],
-        ],
-        'required_counts' => [
+        'abbreviation' => [
             'exclude' => true,
-            'label' => 'Required Selection Count (0 = All)',
+            'label' => 'Abbreviation',
+            'description' => 'Short form (e.g., "prof.", "doc.", "v.prof.")',
             'config' => [
                 'type' => 'input',
-                'size' => 4,
-                'eval' => 'int',
-                'default' => 0
-            ]
-        ],
-        'color' => [
-            'exclude' => true,
-            'label' => 'Color Label (Optional)',
-            'config' => [
-                'type' => 'input',
-                'renderType' => 'colorpicker',
-                'size' => 10,
-            ]
-        ],
-        'courses' => [
-            'exclude' => true,
-            'label' => 'Courses',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_domain_model_course',
-                'MM' => 'tx_academics_domain_model_course_group_course_mm',
-                'size' => 10,
-                'maxitems' => 99,
+                'size' => 20,
+                'max' => 50,
+                'eval' => 'trim',
             ],
         ],
-        'curriculum_semester' => [
-             'config' => [
-                'type' => 'passthrough',
-             ],
+        'title_en' => [
+            'exclude' => true,
+            'label' => 'Title (English)',
+            'description' => 'English title (e.g., "Full Professor")',
+            'config' => [
+                'type' => 'input',
+                'size' => 50,
+                'max' => 255,
+                'eval' => 'trim',
+            ],
+        ],
+        'description' => [
+            'exclude' => true,
+            'label' => 'Description',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 5,
+                'eval' => 'trim',
+            ],
         ],
     ],
 ];

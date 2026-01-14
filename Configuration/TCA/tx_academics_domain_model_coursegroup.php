@@ -9,20 +9,13 @@
  * (c) Ernedin Zajko <ezajko@root.ba>
  */
 
-/**
- * TCA Configuration for AcademicTitle
- * Represents academic titles/degrees (Dr., Prof., Mr., BSc, MSc, PhD)
- * 
- * @author Ernedin Zajko <ezajko@root.ba>
- */
-
 defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'Academic Title',
+        'title' => 'Course Group (Slot)',
         'label' => 'title',
-        'label_alt' => 'abbreviation',
+        'label_alt' => 'type',
         'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -35,18 +28,18 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,abbreviation,abbreviation_after,title_en,description',
+        'searchFields' => 'title',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
-        'default_sortby' => 'sorting ASC',
+        'hideTable' => true, // Hide from root list, accessed via IRRE
     ],
     'types' => [
         '1' => [
             'showitem' => '
                 --div--;General,
                     sys_language_uid, l10n_parent, l10n_diffsource, hidden,
-                    title, abbreviation, abbreviation_after, title_en,
-                --div--;Details,
-                    description,
+                    title, type, required_counts, color,
+                --div--;Courses,
+                    courses
             ',
         ],
     ],
@@ -60,14 +53,15 @@ return [
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_domain_model_academic_title',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_academic_title}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_academic_title}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_coursegroup',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_coursegroup}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_coursegroup}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -93,58 +87,61 @@ return [
         ],
         'title' => [
             'exclude' => false,
-            'label' => 'Title (Local)',
-            'description' => 'Full title in local language (e.g., "Doktor nauka")',
+            'label' => 'Group Title (e.g. Mandatory, Electives A)',
             'config' => [
                 'type' => 'input',
-                'size' => 50,
-                'max' => 255,
-                'eval' => 'trim',
-                'required' => true,
+                'size' => 30,
+                'eval' => 'trim,required'
             ],
         ],
-        'abbreviation' => [
+        'type' => [
+            'exclude' => false,
+            'label' => 'Type',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['Mandatory (All required)', 'mandatory'],
+                    ['Elective (Choose N)', 'elective'],
+                ],
+                'default' => 'mandatory'
+            ],
+        ],
+        'required_counts' => [
             'exclude' => true,
-            'label' => 'Abbreviation (Before Name)',
-            'description' => 'Prefix placed before name (e.g., "Dr.", "Prof. dr.")',
+            'label' => 'Required Selection Count (0 = All)',
             'config' => [
                 'type' => 'input',
-                'size' => 20,
-                'max' => 50,
-                'eval' => 'trim',
-            ],
+                'size' => 4,
+                'eval' => 'int',
+                'default' => 0
+            ]
         ],
-        'abbreviation_after' => [
+        'color' => [
             'exclude' => true,
-            'label' => 'Abbreviation (After Name)',
-            'description' => 'Suffix placed after name (e.g., "PhD", "MSc", "BSc")',
+            'label' => 'Color Label (Optional)',
             'config' => [
                 'type' => 'input',
-                'size' => 20,
-                'max' => 50,
-                'eval' => 'trim',
+                'renderType' => 'colorpicker',
+                'size' => 10,
+            ]
+        ],
+        'courses' => [
+            'exclude' => true,
+            'label' => 'Courses',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_academics_domain_model_course',
+                'MM' => 'tx_academics_domain_model_coursegroupcourse_mm',
+                'size' => 10,
+                'maxitems' => 99,
             ],
         ],
-        'title_en' => [
-            'exclude' => true,
-            'label' => 'Title (English)',
-            'description' => 'English title (e.g., "Doctor of Philosophy")',
-            'config' => [
-                'type' => 'input',
-                'size' => 50,
-                'max' => 255,
-                'eval' => 'trim',
-            ],
-        ],
-        'description' => [
-            'exclude' => true,
-            'label' => 'Description',
-            'config' => [
-                'type' => 'text',
-                'cols' => 40,
-                'rows' => 5,
-                'eval' => 'trim',
-            ],
+        'curriculum_semester' => [
+             'config' => [
+                'type' => 'passthrough',
+             ],
         ],
     ],
 ];

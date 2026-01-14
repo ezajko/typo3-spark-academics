@@ -10,7 +10,7 @@
  */
 
 /**
- * TCA configuration for tx_academics_domain_model_person_mentoring table
+ * TCA configuration for tx_academics_domain_model_personmentoring table
  * IRRE child table for Person mentoring records (mentored students)
  *
  * @author Ernedin Zajko <ezajko@root.ba>
@@ -25,6 +25,8 @@ return [
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
+        'sortby' => 'sorting',
+        'default_sortby' => 'ORDER BY year DESC',
         'hideTable' => true,
         // Localization support
         'languageField' => 'sys_language_uid',

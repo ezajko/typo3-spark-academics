@@ -9,13 +9,20 @@
  * (c) Ernedin Zajko <ezajko@root.ba>
  */
 
+/**
+ * TCA Configuration for PersonType
+ * Represents staff types (internal, visiting professor, guest, etc.)
+ * 
+ * @author Ernedin Zajko <ezajko@root.ba>
+ */
+
 defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'Curriculum (Version)',
+        'title' => 'Person Type',
         'label' => 'title',
-        'label_alt' => 'year',
+        'label_alt' => 'abbreviation',
         'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -28,18 +35,19 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,uuid,note',
+        'searchFields' => 'title,abbreviation,title_en,description',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
-        'hideTable' => true, 
+        'default_sortby' => 'sorting ASC',
     ],
     'types' => [
         '1' => [
             'showitem' => '
                 --div--;General,
-                    sys_language_uid, l10n_parent, l10n_diffsource, hidden, is_active,
-                    title, year, uuid, note,
-                --div--;Semesters,
-                    semesters
+                    sys_language_uid, l10n_parent, l10n_diffsource, hidden,
+                    title, abbreviation, title_en,
+                    is_external,
+                --div--;Details,
+                    description,
             ',
         ],
     ],
@@ -53,15 +61,14 @@ return [
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_domain_model_curriculum',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_curriculum}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_curriculum}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_persontype',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_persontype}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_persontype}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -85,76 +92,59 @@ return [
                 ],
             ],
         ],
-        'is_active' => [
+        'title' => [
+            'exclude' => false,
+            'label' => 'Title (Local)',
+            'description' => 'Full title in local language (e.g., "Gostujući profesor")',
+            'config' => [
+                'type' => 'input',
+                'size' => 50,
+                'max' => 255,
+                'eval' => 'trim',
+                'required' => true,
+            ],
+        ],
+        'abbreviation' => [
             'exclude' => true,
-            'label' => 'Active',
+            'label' => 'Abbreviation',
+            'description' => 'Short form (e.g., "VP", "GL")',
+            'config' => [
+                'type' => 'input',
+                'size' => 20,
+                'max' => 50,
+                'eval' => 'trim',
+            ],
+        ],
+        'title_en' => [
+            'exclude' => true,
+            'label' => 'Title (English)',
+            'description' => 'English title (e.g., "Visiting Professor")',
+            'config' => [
+                'type' => 'input',
+                'size' => 50,
+                'max' => 255,
+                'eval' => 'trim',
+            ],
+        ],
+        'is_external' => [
+            'exclude' => true,
+            'label' => 'Is External',
+            'description' => 'Check if this type represents external staff (visiting, guest, etc.)',
             'config' => [
                 'type' => 'check',
                 'renderType' => 'checkboxToggle',
+                'default' => 0,
             ],
         ],
-        'title' => [
-            'exclude' => false,
-            'label' => 'Title (e.g. 2024/2025 Revised)',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim,required'
-            ],
-        ],
-        'year' => [
-            'exclude' => false,
-            'label' => 'Year adopted',
-            'config' => [
-                'type' => 'input',
-                'size' => 4,
-                'eval' => 'int,required',
-                'default' => 2024
-            ],
-        ],
-        'uuid' => [
+        'description' => [
             'exclude' => true,
-            'label' => 'UUID',
-            'config' => [
-                'type' => 'uuid',
-            ],
-        ],
-        'note' => [
-            'exclude' => true,
-            'label' => 'Note',
+            'label' => 'Description',
             'config' => [
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 5,
                 'eval' => 'trim',
             ],
-        ],
-        'semesters' => [
-            'exclude' => true,
-            'label' => 'Semesters',
-            'config' => [
-                'type' => 'inline',
-                'foreign_table' => 'tx_academics_domain_model_curriculumsemester',
-                'foreign_field' => 'curriculum',
-                'foreign_sortby' => 'sorting',
-                'appearance' => [
-                    'collapseAll' => true,
-                    'expandSingle' => true,
-                    'levelLinksPosition' => 'top',
-                    'showSynchronizationLink' => true,
-                    'showPossibleLocalizationRecords' => true,
-                    'showAllLocalizationLink' => true,
-                    'enabledControls' => [
-                        'info' => false,
-                    ],
-                    'useSortable' => true,
-                ]
-            ],
-        ],
-        'study_program' => [
-             'config' => [
-                'type' => 'passthrough',
-             ],
         ],
     ],
 ];

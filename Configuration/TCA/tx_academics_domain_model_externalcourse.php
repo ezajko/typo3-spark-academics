@@ -9,12 +9,21 @@
  * (c) Ernedin Zajko <ezajko@root.ba>
  */
 
+/**
+ * TCA Configuration for External Course
+ * Similar courses from other institutions
+ * 
+ * @author Ernedin Zajko <ezajko@root.ba>
+ */
+
 defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'Study Type',
+        'title' => 'External Course',
         'label' => 'title',
+        'label_alt' => 'institution',
+        'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'sortby' => 'sorting',
@@ -26,16 +35,19 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,description',
+        'searchFields' => 'title,institution,description',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
-        'rootLevel' => -1,
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'types' => [
         '1' => [
             'showitem' => '
                 --div--;General,
-                    sys_language_uid, l10n_parent, l10n_diffsource, hidden,
-                    title, description,
+                    hidden, title, institution, url, description,
+                --div--;Language,
+                    sys_language_uid, l10n_parent, l10n_diffsource,
             ',
         ],
     ],
@@ -43,9 +55,7 @@ return [
         'sys_language_uid' => [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => [
-                'type' => 'language',
-            ],
+            'config' => ['type' => 'language'],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -53,18 +63,14 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => [
-                    ['', 0],
-                ],
-                'foreign_table' => 'tx_academics_domain_model_study_type',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_study_type}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_study_type}.{#sys_language_uid} IN (-1,0)',
+                'items' => [['label' => '', 'value' => 0]],
+                'foreign_table' => 'tx_academics_domain_model_externalcourse',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_externalcourse}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
         'l10n_diffsource' => [
-            'config' => [
-                'type' => 'passthrough',
-            ],
+            'config' => ['type' => 'passthrough'],
         ],
         'hidden' => [
             'exclude' => true,
@@ -72,22 +78,37 @@ return [
             'config' => [
                 'type' => 'check',
                 'renderType' => 'checkboxToggle',
-                'items' => [
-                    [
-                        0 => '',
-                        1 => '',
-                        'invertStateDisplay' => true
-                    ]
-                ],
+                'items' => [['label' => '', 'invertStateDisplay' => true]],
             ],
         ],
         'title' => [
             'exclude' => false,
-            'label' => 'Title',
+            'label' => 'Course Title',
             'config' => [
                 'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim,required'
+                'size' => 50,
+                'max' => 255,
+                'eval' => 'trim',
+                'required' => true,
+            ],
+        ],
+        'institution' => [
+            'exclude' => false,
+            'label' => 'Institution',
+            'config' => [
+                'type' => 'input',
+                'size' => 50,
+                'max' => 255,
+                'eval' => 'trim',
+                'required' => true,
+            ],
+        ],
+        'url' => [
+            'exclude' => true,
+            'label' => 'URL',
+            'config' => [
+                'type' => 'link',
+                'allowedTypes' => ['url'],
             ],
         ],
         'description' => [
@@ -96,9 +117,13 @@ return [
             'config' => [
                 'type' => 'text',
                 'cols' => 40,
-                'rows' => 15,
+                'rows' => 5,
                 'eval' => 'trim',
             ],
+        ],
+        // Parent course reference for IRRE inline
+        'course' => [
+            'config' => ['type' => 'passthrough'],
         ],
     ],
 ];

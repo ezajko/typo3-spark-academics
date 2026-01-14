@@ -10,8 +10,8 @@
  */
 
 /**
- * TCA Configuration for Teaching Method
- * Methods: Lectures, Lab work, E-learning, Project-based, etc.
+ * TCA Configuration for Course Category
+ * Difficulty levels: Fundamentals, Intermediate, Advanced, Specialized
  * 
  * @author Ernedin Zajko <ezajko@root.ba>
  */
@@ -20,8 +20,10 @@ defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'Teaching Method',
+        'title' => 'Course Category',
         'label' => 'title',
+        'label_alt' => 'code',
+        'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'sortby' => 'sorting',
@@ -35,7 +37,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,description',
+        'searchFields' => 'title,code',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
         'security' => [
             'ignorePageTypeRestriction' => true,
@@ -45,7 +47,7 @@ return [
         '1' => [
             'showitem' => '
                 --div--;General,
-                    hidden, title, description,
+                    hidden, title, code, description,
                 --div--;Language,
                     sys_language_uid, l10n_parent, l10n_diffsource,
             ',
@@ -64,8 +66,8 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [['label' => '', 'value' => 0]],
-                'foreign_table' => 'tx_academics_domain_model_teaching_method',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_teaching_method}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_coursecategory',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_coursecategory}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -90,6 +92,16 @@ return [
                 'max' => 100,
                 'eval' => 'trim',
                 'required' => true,
+            ],
+        ],
+        'code' => [
+            'exclude' => true,
+            'label' => 'Code',
+            'config' => [
+                'type' => 'input',
+                'size' => 10,
+                'max' => 20,
+                'eval' => 'trim',
             ],
         ],
         'description' => [

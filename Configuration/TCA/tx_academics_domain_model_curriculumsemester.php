@@ -9,19 +9,13 @@
  * (c) Ernedin Zajko <ezajko@root.ba>
  */
 
-/**
- * TCA Configuration for ProjectStatus
- * 
- * @author Ernedin Zajko <ezajko@root.ba>
- */
-
 defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'Project Status',
+        'title' => 'Semester',
         'label' => 'title',
-        'label_alt' => 'abbreviation',
+        'label_alt' => 'semester_number',
         'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -34,16 +28,18 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,abbreviation,description',
+        'searchFields' => 'title',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
-        'default_sortby' => 'sorting ASC',
+        'hideTable' => true, 
     ],
     'types' => [
         '1' => [
             'showitem' => '
                 --div--;General,
                     sys_language_uid, l10n_parent, l10n_diffsource, hidden,
-                    title, abbreviation, description,
+                    title, semester_number,
+                --div--;Course Groups (Slots),
+                    course_groups
             ',
         ],
     ],
@@ -64,8 +60,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_domain_model_project_status',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_project_status}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_project_status}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_curriculumsemester',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_curriculumsemester}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_curriculumsemester}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -91,34 +87,47 @@ return [
         ],
         'title' => [
             'exclude' => false,
-            'label' => 'Title',
+            'label' => 'Title (e.g. Semester 1)',
             'config' => [
                 'type' => 'input',
-                'size' => 50,
-                'max' => 255,
-                'eval' => 'trim',
-                'required' => true,
+                'size' => 30,
+                'eval' => 'trim,required'
             ],
         ],
-        'abbreviation' => [
-            'exclude' => true,
-            'label' => 'Abbreviation',
+        'semester_number' => [
+            'exclude' => false,
+            'label' => 'Semester Number',
             'config' => [
                 'type' => 'input',
-                'size' => 20,
-                'max' => 50,
-                'eval' => 'trim',
+                'size' => 4,
+                'eval' => 'int,required',
+                'default' => 1
             ],
         ],
-        'description' => [
+        'course_groups' => [
             'exclude' => true,
-            'label' => 'Description',
+            'label' => 'Course Groups (Slots)',
             'config' => [
-                'type' => 'text',
-                'cols' => 40,
-                'rows' => 5,
-                'eval' => 'trim',
+                'type' => 'inline',
+                'foreign_table' => 'tx_academics_domain_model_coursegroup',
+                'foreign_field' => 'curriculum_semester',
+                'appearance' => [
+                    'collapseAll' => true,
+                    'expandSingle' => true,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => true,
+                    'showPossibleLocalizationRecords' => true,
+                    'showAllLocalizationLink' => true,
+                    'enabledControls' => [
+                        'info' => false,
+                    ],
+                ]
             ],
+        ],
+        'curriculum' => [
+             'config' => [
+                'type' => 'passthrough',
+             ],
         ],
     ],
 ];

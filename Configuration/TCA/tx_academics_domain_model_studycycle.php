@@ -9,18 +9,27 @@
  * (c) Ernedin Zajko <ezajko@root.ba>
  */
 
+/**
+ * TCA Configuration for Study Cycle
+ * Bologna cycles: I (BSc), II (MSc), III (PhD)
+ * 
+ * @author Ernedin Zajko <ezajko@root.ba>
+ */
+
 defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'Project Staff',
-        'label' => 'person',
-        'label_alt' => 'role',
+        'title' => 'Study Cycle',
+        'label' => 'title',
+        'label_alt' => 'level',
         'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'sortby' => 'sorting',
+        'sortby' => 'level',
+        'sortby' => 'level',
         'versioningWS' => true,
+        'rootLevel' => -1,
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
@@ -28,20 +37,20 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'role',
+        'searchFields' => 'title',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
-        'hideTable' => true,
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'types' => [
         '1' => [
             'showitem' => '
-                --palette--;;general,
-            '
-        ],
-    ],
-    'palettes' => [
-        'general' => [
-            'showitem' => 'person, --linebreak--, role, hidden',
+                --div--;General,
+                    hidden, level, title, description,
+                --div--;Language,
+                    sys_language_uid, l10n_parent, l10n_diffsource,
+            ',
         ],
     ],
     'columns' => [
@@ -57,8 +66,8 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [['label' => '', 'value' => 0]],
-                'foreign_table' => 'tx_academics_domain_model_project_person',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_project_person}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_project_person}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_studycycle',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_studycycle}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -74,36 +83,39 @@ return [
                 'items' => [['label' => '', 'invertStateDisplay' => true]],
             ],
         ],
-        'role' => [
-            'exclude' => true,
-            'label' => 'Role/Status',
+        'level' => [
+            'exclude' => false,
+            'label' => 'Cycle Level',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['-- Select Role --', ''],
-                    ['Coordinator', 'coordinator'],
-                    ['Researcher', 'researcher'],
-                    ['Partner', 'partner'],
-                    ['Administrative', 'administrative'],
+                    ['label' => 'I Cycle (Bachelor)', 'value' => 1],
+                    ['label' => 'II Cycle (Master)', 'value' => 2],
+                    ['label' => 'III Cycle (Doctorate)', 'value' => 3],
                 ],
+                'default' => 1,
             ],
         ],
-        'person' => [
+        'title' => [
+            'exclude' => false,
+            'label' => 'Title',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'max' => 100,
+                'eval' => 'trim',
+                'required' => true,
+            ],
+        ],
+        'description' => [
             'exclude' => true,
-            'label' => 'Person',
+            'label' => 'Description',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_academics_domain_model_person',
-                'foreign_table_where' => 'ORDER BY last_name, first_name',
-                'items' => [['-- Select Person --', 0]],
-                'minitems' => 1,
-            ],
-        ],
-        'project' => [
-            'config' => [
-                'type' => 'passthrough',
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 3,
+                'eval' => 'trim',
             ],
         ],
     ],

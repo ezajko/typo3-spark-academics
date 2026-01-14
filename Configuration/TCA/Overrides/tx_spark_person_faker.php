@@ -52,14 +52,14 @@ $GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['primary_departme
 ]);
 
 $GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['academic_title']['faker'] = Relation::getSettings([
-    'table' => 'tx_academics_domain_model_academic_title',
+    'table' => 'tx_academics_domain_model_academictitle',
     'pid' => 194,
     'min' => 1,
     'max' => 1,
 ]);
 
 $GLOBALS['TCA']['tx_academics_domain_model_person']['columns']['academic_rank']['faker'] = Relation::getSettings([
-    'table' => 'tx_academics_domain_model_academic_rank',
+    'table' => 'tx_academics_domain_model_academicrank',
     'pid' => 193,
     'min' => 1,
     'max' => 1,

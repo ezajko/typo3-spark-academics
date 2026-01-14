@@ -10,8 +10,8 @@
  */
 
 /**
- * TCA Configuration for AcademicRank
- * Represents academic/scientific ranks (Asistent, Docent, Professor)
+ * TCA Configuration for Teaching Method
+ * Methods: Lectures, Lab work, E-learning, Project-based, etc.
  * 
  * @author Ernedin Zajko <ezajko@root.ba>
  */
@@ -20,14 +20,14 @@ defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'Academic Rank',
+        'title' => 'Teaching Method',
         'label' => 'title',
-        'label_alt' => 'abbreviation',
-        'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'sortby' => 'sorting',
+        'sortby' => 'sorting',
         'versioningWS' => true,
+        'rootLevel' => -1,
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
@@ -35,18 +35,19 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,abbreviation,title_en,description',
+        'searchFields' => 'title,description',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
-        'default_sortby' => 'sorting ASC',
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'types' => [
         '1' => [
             'showitem' => '
                 --div--;General,
-                    sys_language_uid, l10n_parent, l10n_diffsource, hidden,
-                    title, abbreviation, title_en,
-                --div--;Details,
-                    description,
+                    hidden, title, description,
+                --div--;Language,
+                    sys_language_uid, l10n_parent, l10n_diffsource,
             ',
         ],
     ],
@@ -54,27 +55,22 @@ return [
         'sys_language_uid' => [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => [
-                'type' => 'language',
-            ],
+            'config' => ['type' => 'language'],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => [
-                    ['', 0],
-                ],
-                'foreign_table' => 'tx_academics_domain_model_academic_rank',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_academic_rank}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_academic_rank}.{#sys_language_uid} IN (-1,0)',
+                'items' => [['label' => '', 'value' => 0]],
+                'foreign_table' => 'tx_academics_domain_model_teachingmethod',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_teachingmethod}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
         'l10n_diffsource' => [
-            'config' => [
-                'type' => 'passthrough',
-            ],
+            'config' => ['type' => 'passthrough'],
         ],
         'hidden' => [
             'exclude' => true,
@@ -82,47 +78,18 @@ return [
             'config' => [
                 'type' => 'check',
                 'renderType' => 'checkboxToggle',
-                'items' => [
-                    [
-                        0 => '',
-                        1 => '',
-                        'invertStateDisplay' => true
-                    ]
-                ],
+                'items' => [['label' => '', 'invertStateDisplay' => true]],
             ],
         ],
         'title' => [
             'exclude' => false,
-            'label' => 'Title (Local)',
-            'description' => 'Full title in local language (e.g., "Redovni profesor")',
+            'label' => 'Title',
             'config' => [
                 'type' => 'input',
-                'size' => 50,
-                'max' => 255,
+                'size' => 30,
+                'max' => 100,
                 'eval' => 'trim',
                 'required' => true,
-            ],
-        ],
-        'abbreviation' => [
-            'exclude' => true,
-            'label' => 'Abbreviation',
-            'description' => 'Short form (e.g., "prof.", "doc.", "v.prof.")',
-            'config' => [
-                'type' => 'input',
-                'size' => 20,
-                'max' => 50,
-                'eval' => 'trim',
-            ],
-        ],
-        'title_en' => [
-            'exclude' => true,
-            'label' => 'Title (English)',
-            'description' => 'English title (e.g., "Full Professor")',
-            'config' => [
-                'type' => 'input',
-                'size' => 50,
-                'max' => 255,
-                'eval' => 'trim',
             ],
         ],
         'description' => [
@@ -131,7 +98,7 @@ return [
             'config' => [
                 'type' => 'text',
                 'cols' => 40,
-                'rows' => 5,
+                'rows' => 3,
                 'eval' => 'trim',
             ],
         ],

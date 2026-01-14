@@ -9,27 +9,18 @@
  * (c) Ernedin Zajko <ezajko@root.ba>
  */
 
-/**
- * TCA Configuration for Course Category
- * Difficulty levels: Fundamentals, Intermediate, Advanced, Specialized
- * 
- * @author Ernedin Zajko <ezajko@root.ba>
- */
-
 defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'Course Category',
-        'label' => 'title',
-        'label_alt' => 'code',
+        'title' => 'Course Staff',
+        'label' => 'person',
+        'label_alt' => 'role',
         'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'sortby' => 'sorting',
-        'sortby' => 'sorting',
         'versioningWS' => true,
-        'rootLevel' => -1,
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
@@ -37,20 +28,20 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,code',
+        'searchFields' => 'role',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
-        'security' => [
-            'ignorePageTypeRestriction' => true,
-        ],
+        'hideTable' => true, // Hide from root list, only visible inline
     ],
     'types' => [
         '1' => [
             'showitem' => '
-                --div--;General,
-                    hidden, title, code, description,
-                --div--;Language,
-                    sys_language_uid, l10n_parent, l10n_diffsource,
-            ',
+                --palette--;;general,
+            '
+        ],
+    ],
+    'palettes' => [
+        'general' => [
+            'showitem' => 'person, --linebreak--, role, hidden',
         ],
     ],
     'columns' => [
@@ -66,8 +57,8 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [['label' => '', 'value' => 0]],
-                'foreign_table' => 'tx_academics_domain_model_course_category',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_course_category}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_courseperson',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_courseperson}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_courseperson}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -83,35 +74,35 @@ return [
                 'items' => [['label' => '', 'invertStateDisplay' => true]],
             ],
         ],
-        'title' => [
-            'exclude' => false,
-            'label' => 'Title',
+        'role' => [
+            'exclude' => true,
+            'label' => 'Role/Status',
             'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'max' => 100,
-                'eval' => 'trim',
-                'required' => true,
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['-- Select Role --', ''],
+                    ['Lecturer (Nastavnik)', 'lecturer'],
+                    ['Assistant (Saradnik)', 'assistant'],
+                    ['Demonstrator', 'demonstrator'],
+                ],
             ],
         ],
-        'code' => [
+        'person' => [
             'exclude' => true,
-            'label' => 'Code',
+            'label' => 'Person',
             'config' => [
-                'type' => 'input',
-                'size' => 10,
-                'max' => 20,
-                'eval' => 'trim',
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_academics_domain_model_person',
+                'foreign_table_where' => 'ORDER BY last_name, first_name',
+                'items' => [['-- Select Person --', 0]],
+                'minitems' => 1,
             ],
         ],
-        'description' => [
-            'exclude' => true,
-            'label' => 'Description',
+        'course' => [
             'config' => [
-                'type' => 'text',
-                'cols' => 40,
-                'rows' => 3,
-                'eval' => 'trim',
+                'type' => 'passthrough',
             ],
         ],
     ],

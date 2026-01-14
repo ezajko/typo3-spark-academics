@@ -26,6 +26,8 @@ return [
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
         'delete' => 'deleted',
+        'sortby' => 'sorting',
+        'default_sortby' => 'ORDER BY title ASC',
         'enablecolumns' => [
             'disabled' => 'hidden',
             'starttime' => 'starttime',
@@ -259,7 +261,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_academics_domain_model_person',
-                'MM' => 'tx_academics_domain_model_person_publication_mm',
+                'MM' => 'tx_academics_domain_model_personpublication_mm',
                 'MM_opposite_field' => 'publications', // Will add this to Person TCA
                 'size' => 10,
                 'autoSizeMax' => 30,

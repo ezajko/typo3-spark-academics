@@ -10,8 +10,8 @@
  */
 
 /**
- * TCA Configuration for PersonType
- * Represents staff types (internal, visiting professor, guest, etc.)
+ * TCA Configuration for AcademicTitle
+ * Represents academic titles/degrees (Dr., Prof., Mr., BSc, MSc, PhD)
  * 
  * @author Ernedin Zajko <ezajko@root.ba>
  */
@@ -20,7 +20,7 @@ defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'Person Type',
+        'title' => 'Academic Title',
         'label' => 'title',
         'label_alt' => 'abbreviation',
         'label_alt_force' => true,
@@ -35,7 +35,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,abbreviation,title_en,description',
+        'searchFields' => 'title,abbreviation,abbreviation_after,title_en,description',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
         'default_sortby' => 'sorting ASC',
     ],
@@ -44,8 +44,7 @@ return [
             'showitem' => '
                 --div--;General,
                     sys_language_uid, l10n_parent, l10n_diffsource, hidden,
-                    title, abbreviation, title_en,
-                    is_external,
+                    title, abbreviation, abbreviation_after, title_en,
                 --div--;Details,
                     description,
             ',
@@ -67,8 +66,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_domain_model_person_type',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_person_type}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_person_type}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_academictitle',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_academictitle}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_academictitle}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -95,7 +94,7 @@ return [
         'title' => [
             'exclude' => false,
             'label' => 'Title (Local)',
-            'description' => 'Full title in local language (e.g., "Gostujući profesor")',
+            'description' => 'Full title in local language (e.g., "Doktor nauka")',
             'config' => [
                 'type' => 'input',
                 'size' => 50,
@@ -106,8 +105,19 @@ return [
         ],
         'abbreviation' => [
             'exclude' => true,
-            'label' => 'Abbreviation',
-            'description' => 'Short form (e.g., "VP", "GL")',
+            'label' => 'Abbreviation (Before Name)',
+            'description' => 'Prefix placed before name (e.g., "Dr.", "Prof. dr.")',
+            'config' => [
+                'type' => 'input',
+                'size' => 20,
+                'max' => 50,
+                'eval' => 'trim',
+            ],
+        ],
+        'abbreviation_after' => [
+            'exclude' => true,
+            'label' => 'Abbreviation (After Name)',
+            'description' => 'Suffix placed after name (e.g., "PhD", "MSc", "BSc")',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -118,22 +128,12 @@ return [
         'title_en' => [
             'exclude' => true,
             'label' => 'Title (English)',
-            'description' => 'English title (e.g., "Visiting Professor")',
+            'description' => 'English title (e.g., "Doctor of Philosophy")',
             'config' => [
                 'type' => 'input',
                 'size' => 50,
                 'max' => 255,
                 'eval' => 'trim',
-            ],
-        ],
-        'is_external' => [
-            'exclude' => true,
-            'label' => 'Is External',
-            'description' => 'Check if this type represents external staff (visiting, guest, etc.)',
-            'config' => [
-                'type' => 'check',
-                'renderType' => 'checkboxToggle',
-                'default' => 0,
             ],
         ],
         'description' => [

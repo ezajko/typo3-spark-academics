@@ -10,8 +10,7 @@
  */
 
 /**
- * TCA Configuration for Course Status
- * Status values: Active, Inactive, Archived, In Development
+ * TCA Configuration for ProjectStatus
  * 
  * @author Ernedin Zajko <ezajko@root.ba>
  */
@@ -20,16 +19,14 @@ defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'Course Status',
+        'title' => 'Project Status',
         'label' => 'title',
-        'label_alt' => 'code',
+        'label_alt' => 'abbreviation',
         'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'sortby' => 'sorting',
-        'sortby' => 'sorting',
         'versioningWS' => true,
-        'rootLevel' => -1,
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
@@ -37,19 +34,16 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,code',
+        'searchFields' => 'title,abbreviation,description',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
-        'security' => [
-            'ignorePageTypeRestriction' => true,
-        ],
+        'default_sortby' => 'sorting ASC',
     ],
     'types' => [
         '1' => [
             'showitem' => '
                 --div--;General,
-                    hidden, title, code,
-                --div--;Language,
-                    sys_language_uid, l10n_parent, l10n_diffsource,
+                    sys_language_uid, l10n_parent, l10n_diffsource, hidden,
+                    title, abbreviation, description,
             ',
         ],
     ],
@@ -57,7 +51,9 @@ return [
         'sys_language_uid' => [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => ['type' => 'language'],
+            'config' => [
+                'type' => 'language',
+            ],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -65,14 +61,18 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => [['label' => '', 'value' => 0]],
-                'foreign_table' => 'tx_academics_domain_model_course_status',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_course_status}.{#sys_language_uid} IN (-1,0)',
+                'items' => [
+                    ['', 0],
+                ],
+                'foreign_table' => 'tx_academics_domain_model_projectstatus',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_projectstatus}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_projectstatus}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
         'l10n_diffsource' => [
-            'config' => ['type' => 'passthrough'],
+            'config' => [
+                'type' => 'passthrough',
+            ],
         ],
         'hidden' => [
             'exclude' => true,
@@ -80,7 +80,13 @@ return [
             'config' => [
                 'type' => 'check',
                 'renderType' => 'checkboxToggle',
-                'items' => [['label' => '', 'invertStateDisplay' => true]],
+                'items' => [
+                    [
+                        0 => '',
+                        1 => '',
+                        'invertStateDisplay' => true
+                    ]
+                ],
             ],
         ],
         'title' => [
@@ -88,19 +94,29 @@ return [
             'label' => 'Title',
             'config' => [
                 'type' => 'input',
-                'size' => 30,
-                'max' => 100,
+                'size' => 50,
+                'max' => 255,
                 'eval' => 'trim',
                 'required' => true,
             ],
         ],
-        'code' => [
+        'abbreviation' => [
             'exclude' => true,
-            'label' => 'Code',
+            'label' => 'Abbreviation',
             'config' => [
                 'type' => 'input',
-                'size' => 10,
-                'max' => 20,
+                'size' => 20,
+                'max' => 50,
+                'eval' => 'trim',
+            ],
+        ],
+        'description' => [
+            'exclude' => true,
+            'label' => 'Description',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 5,
                 'eval' => 'trim',
             ],
         ],

@@ -28,7 +28,7 @@ if (isset($GLOBALS['TCA'][$t])) {
     $GLOBALS['TCA'][$t]['columns']['room']['faker'] = \GeorgRinger\Faker\Property\Text::getSettings(['from' => 5, 'to' => 10]);
     // type relation - use Relation property to pick from existing organization_type records
     $GLOBALS['TCA'][$t]['columns']['type']['faker'] = \GeorgRinger\Faker\Property\Relation::getSettings([
-        'table' => 'tx_academics_domain_model_organization_type',
+        'table' => 'tx_academics_domain_model_organizationtype',
         'pid' => 'current',
         'min' => 1,
         'max' => 1

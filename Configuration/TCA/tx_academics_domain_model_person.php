@@ -22,7 +22,7 @@ return [
         'label' => 'last_name',
         'label_alt' => 'first_name',
         'label_alt_force' => true,
-        'label_userFunc' => \EtfUnsa\SparkAcademics\UserFunc\UserLabelService::class . '->getPersonLabel',
+        'label_userFunc' => \RootBa\Academics\UserFunc\UserLabelService::class . '->getPersonLabel',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -31,6 +31,7 @@ return [
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
         'delete' => 'deleted',
+        'sortby' => 'sorting',
         'default_sortby' => 'ORDER BY last_name ASC, first_name ASC',
         'enablecolumns' => [
             'disabled' => 'hidden',
@@ -215,11 +216,11 @@ return [
         'academic_title' => [
             'exclude' => true,
             'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang_db.xlf:tx_academics_domain_model_academic_title',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang_db.xlf:tx_academics_domain_model_academictitle',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_academics_domain_model_academic_title',
+                'foreign_table' => 'tx_academics_domain_model_academictitle',
                 'items' => [
                     ['', 0],
                 ],
@@ -229,11 +230,11 @@ return [
         'academic_rank' => [
             'exclude' => true,
             'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang_db.xlf:tx_academics_domain_model_academic_rank',
+            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang_db.xlf:tx_academics_domain_model_academicrank',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_academics_domain_model_academic_rank',
+                'foreign_table' => 'tx_academics_domain_model_academicrank',
                 'items' => [
                     ['', 0],
                 ],
@@ -248,7 +249,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_academics_domain_model_person_type',
+                'foreign_table' => 'tx_academics_domain_model_persontype',
                 'items' => [
                     ['', 0],
                 ],
@@ -356,7 +357,7 @@ return [
             'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:person.education',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_academics_domain_model_person_education',
+                'foreign_table' => 'tx_academics_domain_model_personeducation',
                 'foreign_field' => 'person',
                 'appearance' => [
                     'collapseAll' => true,
@@ -373,7 +374,7 @@ return [
             'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:person.mentoring',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_academics_domain_model_person_mentoring',
+                'foreign_table' => 'tx_academics_domain_model_personmentoring',
                 'foreign_field' => 'person',
                 'appearance' => [
                     'collapseAll' => true,
@@ -559,7 +560,7 @@ return [
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_academics_domain_model_organization',
                 'foreign_table_where' => 'AND {#tx_academics_domain_model_organization}.{#sys_language_uid} IN (-1,0) ORDER BY title',
-                'MM' => 'tx_academics_domain_model_person_organization_mm',
+                'MM' => 'tx_academics_domain_model_personorganization_mm',
                 'size' => 10,
                 'minitems' => 0,
                 'maxitems' => 99,
@@ -607,50 +608,13 @@ return [
                 'default' => 'active',
             ],
         ],
+        // Note: Courses and Projects are managed from the Course/Project side via CoursePerson/ProjectPerson
+        // These are shown for reference only, not editable from Person
         'courses' => [
-            'exclude' => true,
-            'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:person.courses',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_domain_model_course',
-                'MM' => 'tx_academics_domain_model_person_course_mm',
-                'MM_opposite_field' => 'persons',
-                'size' => 10,
-                'maxitems' => 99,
-                'readOnly' => 1,
-            ],
-        ],
-        'study_programs' => [
-            'exclude' => true,
-            'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:person.study_programs',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_domain_model_study_program',
-                'MM' => 'tx_academics_domain_model_person_study_program_mm',
-                'MM_opposite_field' => 'persons',
-                'size' => 10,
-                'maxitems' => 99,
-                'readOnly' => 1,
-            ],
+            'config' => ['type' => 'passthrough'],
         ],
         'projects' => [
-            'exclude' => true,
-            'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:academics/Resources/Private/Language/locallang.xlf:person.projects',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_academics_domain_model_project',
-                'MM' => 'tx_academics_domain_model_person_project_mm',
-                'MM_opposite_field' => 'persons',
-                'size' => 10,
-                'maxitems' => 99,
-                'readOnly' => 1,
-            ],
+            'config' => ['type' => 'passthrough'],
         ],
         'publications' => [
             'exclude' => true,
@@ -660,7 +624,7 @@ return [
                 'type' => 'inline',
                 'foreign_table' => 'tx_academics_domain_model_publication',
                 'foreign_field' => 'authors', // Wait, authors is M:N, inline needs MM table adjustment or different config
-                'MM' => 'tx_academics_domain_model_person_publication_mm',
+                'MM' => 'tx_academics_domain_model_personpublication_mm',
                 'appearance' => [
                     'collapseAll' => true,
                     'expandSingle' => true,

@@ -200,13 +200,13 @@ class PersonController extends AbstractBackendController
 
     protected function getRanks(): array
     {
-        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_academic_rank');
-        return $q->select('uid', 'title')->from('tx_academics_domain_model_academic_rank')->orderBy('sorting')->executeQuery()->fetchAllAssociative();
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_academicrank');
+        return $q->select('uid', 'title')->from('tx_academics_domain_model_academicrank')->orderBy('sorting')->executeQuery()->fetchAllAssociative();
     }
 
     protected function getTitles(): array
     {
-        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_academic_title');
-        return $q->select('uid', 'title')->from('tx_academics_domain_model_academic_title')->orderBy('sorting')->executeQuery()->fetchAllAssociative();
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_academictitle');
+        return $q->select('uid', 'title')->from('tx_academics_domain_model_academictitle')->orderBy('sorting')->executeQuery()->fetchAllAssociative();
     }
 }

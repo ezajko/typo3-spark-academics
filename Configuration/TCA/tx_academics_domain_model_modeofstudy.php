@@ -9,20 +9,12 @@
  * (c) Ernedin Zajko <ezajko@root.ba>
  */
 
-/**
- * TCA Configuration for FundingProgram
- * 
- * @author Ernedin Zajko <ezajko@root.ba>
- */
-
 defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'Funding Program',
+        'title' => 'Mode of Study',
         'label' => 'title',
-        'label_alt' => 'abbreviation',
-        'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'sortby' => 'sorting',
@@ -34,18 +26,16 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,abbreviation,description',
+        'searchFields' => 'title,description',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
-        'default_sortby' => 'sorting ASC',
+        'rootLevel' => -1,
     ],
     'types' => [
         '1' => [
             'showitem' => '
                 --div--;General,
                     sys_language_uid, l10n_parent, l10n_diffsource, hidden,
-                    title, abbreviation, description, website,
-                --div--;Media,
-                    logo,
+                    title, description,
             ',
         ],
     ],
@@ -66,8 +56,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_domain_model_funding_program',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_funding_program}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_funding_program}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_modeofstudy',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_modeofstudy}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_modeofstudy}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -96,21 +86,8 @@ return [
             'label' => 'Title',
             'config' => [
                 'type' => 'input',
-                'size' => 50,
-                'max' => 255,
-                'eval' => 'trim',
-                'required' => true,
-            ],
-        ],
-        'abbreviation' => [
-            'exclude' => true,
-            'label' => 'Abbreviation',
-            'description' => 'Short form (e.g., "HE" for Horizon Europe)',
-            'config' => [
-                'type' => 'input',
-                'size' => 20,
-                'max' => 50,
-                'eval' => 'trim',
+                'size' => 30,
+                'eval' => 'trim,required'
             ],
         ],
         'description' => [
@@ -119,25 +96,8 @@ return [
             'config' => [
                 'type' => 'text',
                 'cols' => 40,
-                'rows' => 5,
+                'rows' => 15,
                 'eval' => 'trim',
-            ],
-        ],
-        'website' => [
-            'exclude' => true,
-            'label' => 'Website',
-            'config' => [
-                'type' => 'input',
-                'renderType' => 'inputLink',
-            ],
-        ],
-        'logo' => [
-            'exclude' => true,
-            'label' => 'Logo',
-            'config' => [
-                'type' => 'file',
-                'allowed' => 'common-image-types',
-                'maxitems' => 1,
             ],
         ],
     ],

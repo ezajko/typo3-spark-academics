@@ -13,10 +13,8 @@ defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'Semester',
+        'title' => 'Study Type',
         'label' => 'title',
-        'label_alt' => 'semester_number',
-        'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'sortby' => 'sorting',
@@ -28,18 +26,16 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title',
+        'searchFields' => 'title,description',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
-        'hideTable' => true, 
+        'rootLevel' => -1,
     ],
     'types' => [
         '1' => [
             'showitem' => '
                 --div--;General,
                     sys_language_uid, l10n_parent, l10n_diffsource, hidden,
-                    title, semester_number,
-                --div--;Course Groups (Slots),
-                    course_groups
+                    title, description,
             ',
         ],
     ],
@@ -60,8 +56,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_academics_domain_model_curriculum_semester',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_curriculum_semester}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_curriculum_semester}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_academics_domain_model_studytype',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_studytype}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_studytype}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
@@ -87,47 +83,22 @@ return [
         ],
         'title' => [
             'exclude' => false,
-            'label' => 'Title (e.g. Semester 1)',
+            'label' => 'Title',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required'
             ],
         ],
-        'semester_number' => [
-            'exclude' => false,
-            'label' => 'Semester Number',
-            'config' => [
-                'type' => 'input',
-                'size' => 4,
-                'eval' => 'int,required',
-                'default' => 1
-            ],
-        ],
-        'course_groups' => [
+        'description' => [
             'exclude' => true,
-            'label' => 'Course Groups (Slots)',
+            'label' => 'Description',
             'config' => [
-                'type' => 'inline',
-                'foreign_table' => 'tx_academics_domain_model_course_group',
-                'foreign_field' => 'curriculum_semester',
-                'appearance' => [
-                    'collapseAll' => true,
-                    'expandSingle' => true,
-                    'levelLinksPosition' => 'top',
-                    'showSynchronizationLink' => true,
-                    'showPossibleLocalizationRecords' => true,
-                    'showAllLocalizationLink' => true,
-                    'enabledControls' => [
-                        'info' => false,
-                    ],
-                ]
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim',
             ],
-        ],
-        'curriculum' => [
-             'config' => [
-                'type' => 'passthrough',
-             ],
         ],
     ],
 ];

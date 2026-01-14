@@ -199,7 +199,7 @@ return [
             'label' => 'Syllabi (Verzije silabusa)',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_academics_domain_model_course_syllabus',
+                'foreign_table' => 'tx_academics_domain_model_coursesyllabus',
                 'foreign_field' => 'course',
                 'foreign_sortby' => 'sorting',
                 'maxitems' => 99,
@@ -220,7 +220,7 @@ return [
             'label' => 'Similar External Courses',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_academics_domain_model_external_course',
+                'foreign_table' => 'tx_academics_domain_model_externalcourse',
                 'foreign_field' => 'course',
                 'foreign_sortby' => 'sorting',
                 'maxitems' => 99,
@@ -257,7 +257,7 @@ return [
             'label' => 'Associated People',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_academics_domain_model_course_person',
+                'foreign_table' => 'tx_academics_domain_model_courseperson',
                 'foreign_field' => 'course',
                 'foreign_sortby' => 'sorting',
                 'maxitems' => 99,

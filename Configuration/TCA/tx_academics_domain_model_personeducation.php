@@ -10,7 +10,7 @@
  */
 
 /**
- * TCA configuration for tx_academics_domain_model_person_education table
+ * TCA configuration for tx_academics_domain_model_personeducation table
  * IRRE child table for Person education records (degrees, qualifications)
  *
  * @author Ernedin Zajko <ezajko@root.ba>
@@ -25,6 +25,8 @@ return [
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
+        'sortby' => 'sorting',
+        'default_sortby' => 'ORDER BY year DESC',
         'hideTable' => true,
         // Localization support
         'languageField' => 'sys_language_uid',

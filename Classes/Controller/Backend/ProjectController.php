@@ -198,26 +198,26 @@ class ProjectController extends AbstractBackendController
 
     protected function getStatuses(): array
     {
-        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_project_status');
-        return $q->select('*')->from('tx_academics_domain_model_project_status')->executeQuery()->fetchAllAssociative();
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_projectstatus');
+        return $q->select('*')->from('tx_academics_domain_model_projectstatus')->executeQuery()->fetchAllAssociative();
     }
 
     protected function getTypes(): array
     {
         // Simple fetch or use repository
-        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_project_type');
-        return $q->select('*')->from('tx_academics_domain_model_project_type')->executeQuery()->fetchAllAssociative();
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_projecttype');
+        return $q->select('*')->from('tx_academics_domain_model_projecttype')->executeQuery()->fetchAllAssociative();
     }
 
     protected function getFundingPrograms(): array
     {
-        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_funding_program');
-        return $q->select('*')->from('tx_academics_domain_model_funding_program')->executeQuery()->fetchAllAssociative();
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_fundingprogram');
+        return $q->select('*')->from('tx_academics_domain_model_fundingprogram')->executeQuery()->fetchAllAssociative();
     }
 
     protected function getScientificFields(): array
     {
-        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_scientific_field');
-        return $q->select('*')->from('tx_academics_domain_model_scientific_field')->where($q->expr()->eq('level', $q->createNamedParameter(2)))->executeQuery()->fetchAllAssociative();
+        $q = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_academics_domain_model_scientificfield');
+        return $q->select('*')->from('tx_academics_domain_model_scientificfield')->where($q->expr()->eq('level', $q->createNamedParameter(2)))->executeQuery()->fetchAllAssociative();
     }
 }

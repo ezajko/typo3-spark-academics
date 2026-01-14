@@ -13,8 +13,10 @@ defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'Mode of Study',
-        'label' => 'title',
+        'title' => 'Project Staff',
+        'label' => 'person',
+        'label_alt' => 'role',
+        'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'sortby' => 'sorting',
@@ -26,26 +28,27 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,description',
+        'searchFields' => 'role',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
-        'rootLevel' => -1,
+        'hideTable' => true,
     ],
     'types' => [
         '1' => [
             'showitem' => '
-                --div--;General,
-                    sys_language_uid, l10n_parent, l10n_diffsource, hidden,
-                    title, description,
-            ',
+                --palette--;;general,
+            '
+        ],
+    ],
+    'palettes' => [
+        'general' => [
+            'showitem' => 'person, --linebreak--, role, hidden',
         ],
     ],
     'columns' => [
         'sys_language_uid' => [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => [
-                'type' => 'language',
-            ],
+            'config' => ['type' => 'language'],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -53,18 +56,14 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => [
-                    ['', 0],
-                ],
-                'foreign_table' => 'tx_academics_domain_model_mode_of_study',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_mode_of_study}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_mode_of_study}.{#sys_language_uid} IN (-1,0)',
+                'items' => [['label' => '', 'value' => 0]],
+                'foreign_table' => 'tx_academics_domain_model_projectperson',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_projectperson}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_projectperson}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
         'l10n_diffsource' => [
-            'config' => [
-                'type' => 'passthrough',
-            ],
+            'config' => ['type' => 'passthrough'],
         ],
         'hidden' => [
             'exclude' => true,
@@ -72,32 +71,39 @@ return [
             'config' => [
                 'type' => 'check',
                 'renderType' => 'checkboxToggle',
+                'items' => [['label' => '', 'invertStateDisplay' => true]],
+            ],
+        ],
+        'role' => [
+            'exclude' => true,
+            'label' => 'Role/Status',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => [
-                    [
-                        0 => '',
-                        1 => '',
-                        'invertStateDisplay' => true
-                    ]
+                    ['-- Select Role --', ''],
+                    ['Coordinator', 'coordinator'],
+                    ['Researcher', 'researcher'],
+                    ['Partner', 'partner'],
+                    ['Administrative', 'administrative'],
                 ],
             ],
         ],
-        'title' => [
-            'exclude' => false,
-            'label' => 'Title',
+        'person' => [
+            'exclude' => true,
+            'label' => 'Person',
             'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim,required'
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_academics_domain_model_person',
+                'foreign_table_where' => 'ORDER BY last_name, first_name',
+                'items' => [['-- Select Person --', 0]],
+                'minitems' => 1,
             ],
         ],
-        'description' => [
-            'exclude' => true,
-            'label' => 'Description',
+        'project' => [
             'config' => [
-                'type' => 'text',
-                'cols' => 40,
-                'rows' => 15,
-                'eval' => 'trim',
+                'type' => 'passthrough',
             ],
         ],
     ],

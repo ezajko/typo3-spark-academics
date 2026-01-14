@@ -10,8 +10,7 @@
  */
 
 /**
- * TCA Configuration for External Course
- * Similar courses from other institutions
+ * TCA Configuration for FundingProgram
  * 
  * @author Ernedin Zajko <ezajko@root.ba>
  */
@@ -20,9 +19,9 @@ defined('TYPO3') or die();
 
 return [
     'ctrl' => [
-        'title' => 'External Course',
+        'title' => 'Funding Program',
         'label' => 'title',
-        'label_alt' => 'institution',
+        'label_alt' => 'abbreviation',
         'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -35,19 +34,18 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'title,institution,description',
+        'searchFields' => 'title,abbreviation,description',
         'iconfile' => 'EXT:academics/Resources/Public/Icons/Extension.svg',
-        'security' => [
-            'ignorePageTypeRestriction' => true,
-        ],
+        'default_sortby' => 'sorting ASC',
     ],
     'types' => [
         '1' => [
             'showitem' => '
                 --div--;General,
-                    hidden, title, institution, url, description,
-                --div--;Language,
-                    sys_language_uid, l10n_parent, l10n_diffsource,
+                    sys_language_uid, l10n_parent, l10n_diffsource, hidden,
+                    title, abbreviation, description, website,
+                --div--;Media,
+                    logo,
             ',
         ],
     ],
@@ -55,7 +53,9 @@ return [
         'sys_language_uid' => [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => ['type' => 'language'],
+            'config' => [
+                'type' => 'language',
+            ],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -63,14 +63,18 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => [['label' => '', 'value' => 0]],
-                'foreign_table' => 'tx_academics_domain_model_external_course',
-                'foreign_table_where' => 'AND {#tx_academics_domain_model_external_course}.{#sys_language_uid} IN (-1,0)',
+                'items' => [
+                    ['', 0],
+                ],
+                'foreign_table' => 'tx_academics_domain_model_fundingprogram',
+                'foreign_table_where' => 'AND {#tx_academics_domain_model_fundingprogram}.{#pid}=###CURRENT_PID### AND {#tx_academics_domain_model_fundingprogram}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
         'l10n_diffsource' => [
-            'config' => ['type' => 'passthrough'],
+            'config' => [
+                'type' => 'passthrough',
+            ],
         ],
         'hidden' => [
             'exclude' => true,
@@ -78,12 +82,18 @@ return [
             'config' => [
                 'type' => 'check',
                 'renderType' => 'checkboxToggle',
-                'items' => [['label' => '', 'invertStateDisplay' => true]],
+                'items' => [
+                    [
+                        0 => '',
+                        1 => '',
+                        'invertStateDisplay' => true
+                    ]
+                ],
             ],
         ],
         'title' => [
             'exclude' => false,
-            'label' => 'Course Title',
+            'label' => 'Title',
             'config' => [
                 'type' => 'input',
                 'size' => 50,
@@ -92,23 +102,15 @@ return [
                 'required' => true,
             ],
         ],
-        'institution' => [
-            'exclude' => false,
-            'label' => 'Institution',
-            'config' => [
-                'type' => 'input',
-                'size' => 50,
-                'max' => 255,
-                'eval' => 'trim',
-                'required' => true,
-            ],
-        ],
-        'url' => [
+        'abbreviation' => [
             'exclude' => true,
-            'label' => 'URL',
+            'label' => 'Abbreviation',
+            'description' => 'Short form (e.g., "HE" for Horizon Europe)',
             'config' => [
-                'type' => 'link',
-                'allowedTypes' => ['url'],
+                'type' => 'input',
+                'size' => 20,
+                'max' => 50,
+                'eval' => 'trim',
             ],
         ],
         'description' => [
@@ -121,9 +123,22 @@ return [
                 'eval' => 'trim',
             ],
         ],
-        // Parent course reference for IRRE inline
-        'course' => [
-            'config' => ['type' => 'passthrough'],
+        'website' => [
+            'exclude' => true,
+            'label' => 'Website',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputLink',
+            ],
+        ],
+        'logo' => [
+            'exclude' => true,
+            'label' => 'Logo',
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'common-image-types',
+                'maxitems' => 1,
+            ],
         ],
     ],
 ];

@@ -57,6 +57,7 @@ TCEFORM.tt_content.pi_flexform.academics_list.sProject.settings\.view\.viewType\
     }
 }
 
+
 # --------------------------------------------------------------------------
 # Detail Plugin (Pi2) - Uses same unique key structure per entity
 # --------------------------------------------------------------------------
@@ -95,69 +96,6 @@ TCEFORM.tt_content.pi_flexform.academics_show.sProject.settings\.view\.viewType\
     }
     addItems {
         Card = Card
-        Simple = Simple
-        Debug = Debug
     }
 }
 
-# Course ViewTypes (sCourse sheet)
-TCEFORM.tt_content.pi_flexform.academics_list.sCourse.settings\.view\.viewType\.course {
-    addItems {
-        Simple = Simple
-        Debug = Debug
-    }
-}
-
-# StudyProgram ViewTypes (sStudyProgram sheet)
-TCEFORM.tt_content.pi_flexform.academics_list.sStudyProgram.settings\.view\.viewType\.studyprogram {
-    addItems {
-        Simple = Simple
-        Debug = Debug
-    }
-}
-
-# Project ViewTypes (sProject sheet)
-TCEFORM.tt_content.pi_flexform.academics_list.sProject.settings\.view\.viewType\.project {
-    addItems {
-        Simple = Simple
-        Debug = Debug
-    }
-}
-
-# --------------------------------------------------------------------------
-# Detail Plugin (Pi2) - Uses same unique key structure per entity
-# --------------------------------------------------------------------------
-TCEFORM.tt_content.pi_flexform.academics_show.sOrganization.settings\.view\.viewType\.organization {
-    addItems {
-        Simple = Simple
-        Debug = Debug
-    }
-}
-
-TCEFORM.tt_content.pi_flexform.academics_show.sPerson.settings\.view\.viewType\.person {
-    addItems {
-        Simple = Simple
-        Debug = Debug
-    }
-}
-
-TCEFORM.tt_content.pi_flexform.academics_show.sCourse.settings\.view\.viewType\.course {
-    addItems {
-        Simple = Simple
-        Debug = Debug
-    }
-}
-
-TCEFORM.tt_content.pi_flexform.academics_show.sStudyProgram.settings\.view\.viewType\.studyprogram {
-    addItems {
-        Simple = Simple
-        Debug = Debug
-    }
-}
-
-TCEFORM.tt_content.pi_flexform.academics_show.sProject.settings\.view\.viewType\.project {
-    addItems {
-        Simple = Simple
-        Debug = Debug
-    }
-}

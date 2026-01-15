@@ -31,7 +31,8 @@
                         <div>
                             <h5 class="card-title mb-0">
                                 <f:link.action action="show" arguments="{project: item}" pageUid="{detailPid}"
-                                    pluginName="Pi2" class="text-decoration-none text-dark">{item.title}</f:link.action>
+                                    pluginName="Show" extensionName="Academics" class="text-decoration-none text-dark">
+                                    {item.title}</f:link.action>
                             </h5>
                             <f:if condition="{item.acronym}">
                                 <span class="text-muted fw-bold">({item.acronym})</span>
@@ -90,8 +91,8 @@
                     </f:if>
 
                     <!-- View Details Button -->
-                    <f:link.action action="show" arguments="{project: item}" pageUid="{detailPid}" pluginName="Pi2"
-                        class="btn btn-sm btn-outline-primary">View Details</f:link.action>
+                    <f:link.action action="show" arguments="{project: item}" pageUid="{detailPid}" pluginName="Show"
+                        extensionName="Academics" class="btn btn-sm btn-outline-primary">View Details</f:link.action>
                 </div>
             </div>
         </div>

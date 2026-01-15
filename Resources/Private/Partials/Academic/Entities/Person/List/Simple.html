@@ -8,8 +8,8 @@
     <f:then>
         <div class="list-group">
             <f:for each="{items}" as="item">
-                <f:link.action action="show" arguments="{person: item}" pageUid="{detailPid}" pluginName="Pi2"
-                    class="list-group-item list-group-item-action d-flex align-items-center">
+                <f:link.action action="show" arguments="{person: item}" pageUid="{detailPid}" pluginName="Show"
+                    extensionName="Academics" class="list-group-item list-group-item-action d-flex align-items-center">
                     <!-- Avatar -->
                     <div class="flex-shrink-0 me-3">
                         <f:if condition="{item.mediaImage}">

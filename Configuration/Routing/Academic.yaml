@@ -1,19 +1,10 @@
 routeEnhancers:
-  SparkAcademics:
+  AcademicsList:
     type: Extbase
-    extension: SparkAcademics
-    plugin: Pi1
+    extension: Academics
+    plugin: List
     routes:
-      - { routePath: '/department/{department}', _controller: 'Academic::show', _arguments: { department: department } }
-      - { routePath: '/lab/{lab}', _controller: 'Academic::show', _arguments: { lab: lab } }
-      - { routePath: '/group/{group}', _controller: 'Academic::show', _arguments: { group: group } }
-      - { routePath: '/chair/{chair}', _controller: 'Academic::show', _arguments: { chair: chair } }
-      - { routePath: '/course/{course}', _controller: 'Academic::show', _arguments: { course: course } }
-      - { routePath: '/program/{program}', _controller: 'Academic::show', _arguments: { program: program } }
-      - { routePath: '/project/{project}', _controller: 'Academic::show', _arguments: { project: project } }
-      - { routePath: '/person/{person}', _controller: 'Academic::show', _arguments: { person: person } }
       - { routePath: '/page-{currentPage}', _controller: 'Academic::list', _arguments: { currentPage: currentPage } }
-      # Filtered List Routing
       - { routePath: '/filtered', _controller: 'Academic::listFiltered' }
       - { routePath: '/filtered/page-{currentPage}', _controller: 'Academic::listFiltered', _arguments: { currentPage: currentPage } }
     defaultController: 'Academic::list'
@@ -22,46 +13,68 @@ routeEnhancers:
     defaults:
       currentPage: 1
     aspects:
-      department:
-        type: PersistedAliasMapper
-        tableName: tx_spark_department
-        routeFieldName: title
-        languageAware: true
-      lab:
-        type: PersistedAliasMapper
-        tableName: tx_spark_research_lab
-        routeFieldName: title
-        languageAware: true
-      group:
-        type: PersistedAliasMapper
-        tableName: tx_spark_research_group
-        routeFieldName: title
-        languageAware: true
-      chair:
-        type: PersistedAliasMapper
-        tableName: tx_spark_chair
-        routeFieldName: title
-        languageAware: true
-      course:
-        type: PersistedAliasMapper
-        tableName: tx_spark_course
-        routeFieldName: title
-        languageAware: true
-      program:
-        type: PersistedAliasMapper
-        tableName: tx_spark_study_program
-        routeFieldName: title
-        languageAware: true
-      project:
-        type: PersistedAliasMapper
-        tableName: tx_spark_project
-        routeFieldName: title
-        languageAware: true
-      person:
-        type: PersistedAliasMapper
-        tableName: tx_spark_person
-        routeFieldName: path
       currentPage:
         type: StaticRangeMapper
         start: '1'
         end: '100'
+
+  AcademicsShow:
+    type: Extbase
+    extension: Academics
+    plugin: Show
+    routes:
+      - { routePath: '/department/{department}', _controller: 'Academic::show', _arguments: { organization: department } }
+      - { routePath: '/lab/{lab}', _controller: 'Academic::show', _arguments: { organization: lab } }
+      - { routePath: '/group/{group}', _controller: 'Academic::show', _arguments: { organization: group } }
+      - { routePath: '/chair/{chair}', _controller: 'Academic::show', _arguments: { organization: chair } }
+      - { routePath: '/organization/{organization}', _controller: 'Academic::show', _arguments: { organization: organization } }
+      - { routePath: '/course/{course}', _controller: 'Academic::show', _arguments: { course: course } }
+      - { routePath: '/program/{program}', _controller: 'Academic::show', _arguments: { studyProgram: program } }
+      - { routePath: '/project/{project}', _controller: 'Academic::show', _arguments: { project: project } }
+      - { routePath: '/person/{person}', _controller: 'Academic::show', _arguments: { person: person } }
+    defaultController: 'Academic::show'
+    aspects:
+      department:
+        type: PersistedAliasMapper
+        tableName: tx_academics_domain_model_organization
+        routeFieldName: title
+        languageAware: true
+      lab:
+        type: PersistedAliasMapper
+        tableName: tx_academics_domain_model_organization
+        routeFieldName: title
+        languageAware: true
+      group:
+        type: PersistedAliasMapper
+        tableName: tx_academics_domain_model_organization
+        routeFieldName: title
+        languageAware: true
+      chair:
+        type: PersistedAliasMapper
+        tableName: tx_academics_domain_model_organization
+        routeFieldName: title
+        languageAware: true
+      organization:
+        type: PersistedAliasMapper
+        tableName: tx_academics_domain_model_organization
+        routeFieldName: title
+        languageAware: true
+      course:
+        type: PersistedAliasMapper
+        tableName: tx_academics_domain_model_course
+        routeFieldName: title
+        languageAware: true
+      program:
+        type: PersistedAliasMapper
+        tableName: tx_academics_domain_model_studyprogram
+        routeFieldName: title
+        languageAware: true
+      project:
+        type: PersistedAliasMapper
+        tableName: tx_academics_domain_model_project
+        routeFieldName: title
+        languageAware: true
+      person:
+        type: PersistedAliasMapper
+        tableName: tx_academics_domain_model_person
+        routeFieldName: email

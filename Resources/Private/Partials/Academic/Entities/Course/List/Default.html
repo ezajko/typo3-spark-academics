@@ -6,7 +6,8 @@
             <div class="card h-100 shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <f:link.action action="show" arguments="{course: course}" pageUid="{detailPid}">
+                        <f:link.action action="show" arguments="{course: course}" pageUid="{detailPid}"
+                            pluginName="Show" extensionName="Academics">
                             {course.title}
                         </f:link.action>
                     </h5>
@@ -30,8 +31,8 @@
                     </f:if>
                 </div>
                 <div class="card-footer bg-transparent border-top-0">
-                    <f:link.action action="show" arguments="{course: course}" pageUid="{detailPid}"
-                        class="btn btn-sm btn-outline-primary stretched-link">
+                    <f:link.action action="show" arguments="{course: course}" pageUid="{detailPid}" pluginName="Show"
+                        extensionName="Academics" class="btn btn-sm btn-outline-primary stretched-link">
                         View Details
                     </f:link.action>
                 </div>

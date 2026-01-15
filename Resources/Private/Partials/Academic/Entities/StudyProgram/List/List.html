@@ -12,7 +12,8 @@
                 <td>{item.uid}</td>
                 <td>{item.title}</td>
                 <td>
-                    <f:link.action action="show" arguments="{program: item}" pageUid="{detailPid}">Show</f:link.action>
+                    <f:link.action action="show" arguments="{studyProgram: item}" pageUid="{detailPid}"
+                        pluginName="Show" extensionName="Academics">Show</f:link.action>
                 </td>
             </tr>
         </f:for>

@@ -26,7 +26,8 @@
                     <f:if condition="{item.parent}">{item.parent.title}</f:if>
                 </td>
                 <td>
-                    <f:link.action action="show" arguments="{organization: item}" pageUid="{detailPid}">Show
+                    <f:link.action action="show" arguments="{organization: item}" pageUid="{detailPid}"
+                        pluginName="Show" extensionName="Academics">Show
                     </f:link.action>
                 </td>
             </tr>

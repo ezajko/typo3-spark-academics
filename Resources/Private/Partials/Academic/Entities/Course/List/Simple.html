@@ -3,7 +3,8 @@
 <ul class="list-group">
     <f:for each="{items}" as="course">
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            <f:link.action action="show" arguments="{course: course}" pageUid="{detailPid}">
+            <f:link.action action="show" arguments="{course: course}" pageUid="{detailPid}" pluginName="Show"
+                extensionName="Academics">
                 {course.code} - {course.title}
             </f:link.action>
             <f:if condition="{course.latestSyllabus}">

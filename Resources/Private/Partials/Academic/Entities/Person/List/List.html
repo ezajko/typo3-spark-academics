@@ -14,7 +14,8 @@
                 <td>{person.firstName} {person.lastName}</td>
                 <td>{person.primaryOrganization.title}</td>
                 <td>
-                    <f:link.action action="show" arguments="{person: person}" pageUid="{detailPid}">Show</f:link.action>
+                    <f:link.action action="show" arguments="{person: person}" pageUid="{detailPid}" pluginName="Show"
+                        extensionName="Academics">Show</f:link.action>
                 </td>
             </tr>
         </f:for>

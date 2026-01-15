@@ -32,72 +32,72 @@
             </trans-unit>
 
             <!-- Site Configuration Labels -->
-            <trans-unit id="site.configuration.sparkAcademic_pids_tab">
+            <trans-unit id="site.configuration.academics_pids_tab">
                 <source>Spark Academics</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_detail_pids">
+            <trans-unit id="site.configuration.academics_detail_pids">
                 <source>Detail Page PIDs</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_storage_pids">
+            <trans-unit id="site.configuration.academics_storage_pids">
                 <source>Storage Folder PIDs</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_permissions">
+            <trans-unit id="site.configuration.academics_permissions">
                 <source>Backend Editor Permissions</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_users_home">
+            <trans-unit id="site.configuration.academics_users_home">
                 <source>User Home Folders</source>
             </trans-unit>
 
             <!-- Field Labels -->
-            <trans-unit id="site.configuration.sparkAcademic_person_detail_pid">
+            <trans-unit id="site.configuration.academics_person_detail_pid">
                 <source>Person Detail Page</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_organization_detail_pid">
+            <trans-unit id="site.configuration.academics_organization_detail_pid">
                 <source>Organization Detail Page</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_course_detail_pid">
+            <trans-unit id="site.configuration.academics_course_detail_pid">
                 <source>Course Detail Page</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_studyprogram_detail_pid">
+            <trans-unit id="site.configuration.academics_studyprogram_detail_pid">
                 <source>Study Program Detail Page</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_project_detail_pid">
+            <trans-unit id="site.configuration.academics_project_detail_pid">
                 <source>Project Detail Page</source>
             </trans-unit>
 
-            <trans-unit id="site.configuration.sparkAcademic_person_storage_pid">
+            <trans-unit id="site.configuration.academics_person_storage_pid">
                 <source>Person Storage Folder</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_organization_storage_pid">
+            <trans-unit id="site.configuration.academics_organization_storage_pid">
                 <source>Organization Storage Folder</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_course_storage_pid">
+            <trans-unit id="site.configuration.academics_course_storage_pid">
                 <source>Course Storage Folder</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_studyprogram_storage_pid">
+            <trans-unit id="site.configuration.academics_studyprogram_storage_pid">
                 <source>Study Program Storage Folder</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_project_storage_pid">
+            <trans-unit id="site.configuration.academics_project_storage_pid">
                 <source>Project Storage Folder</source>
             </trans-unit>
 
-            <trans-unit id="site.configuration.sparkAcademic_person_permission_groups">
+            <trans-unit id="site.configuration.academics_person_permission_groups">
                 <source>Person Editor Groups</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_organization_permission_groups">
+            <trans-unit id="site.configuration.academics_organization_permission_groups">
                 <source>Organization Editor Groups</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_course_permission_groups">
+            <trans-unit id="site.configuration.academics_course_permission_groups">
                 <source>Course &amp; Program Editor Groups</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_project_permission_groups">
+            <trans-unit id="site.configuration.academics_project_permission_groups">
                 <source>Project Editor Groups</source>
             </trans-unit>
 
-            <trans-unit id="site.configuration.sparkAcademic_users_home_storage_uid">
+            <trans-unit id="site.configuration.academics_users_home_storage_uid">
                 <source>File Storage UID</source>
             </trans-unit>
-            <trans-unit id="site.configuration.sparkAcademic_users_home_base_path">
+            <trans-unit id="site.configuration.academics_users_home_base_path">
                 <source>Base Path</source>
             </trans-unit>
         </body>

@@ -450,6 +450,38 @@
                         </config>
                     </settings.filter.studyCycle>
 
+                    <settings.filter.studyType>
+                        <label>Filter by Study Type</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <foreign_table>tx_academics_domain_model_studytype</foreign_table>
+                            <items>
+                                <numIndex index="0">
+                                    <label>-- All Types --</label>
+                                    <value>0</value>
+                                </numIndex>
+                            </items>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.filter.studyType>
+
+                    <settings.filter.modeOfStudy>
+                        <label>Filter by Mode of Study</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <foreign_table>tx_academics_domain_model_modeofstudy</foreign_table>
+                            <items>
+                                <numIndex index="0">
+                                    <label>-- All Modes --</label>
+                                    <value>0</value>
+                                </numIndex>
+                            </items>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.filter.modeOfStudy>
+
                     <settings.select.studyprogram>
                         <label>Select Specific Programs</label>
                         <config>

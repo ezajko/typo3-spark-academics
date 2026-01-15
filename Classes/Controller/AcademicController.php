@@ -178,7 +178,7 @@ class AcademicController extends ActionController
 
         // Assign common view variables
         $this->view->assign('entityType', $entityType);
-        $this->view->assign('detailPid', $this->resolveDetailPid($entityType));
+        $this->view->assign('detailPid', $this->resolveDetailPid($entityType, $settings));
         $this->view->assign('settings', $settings);
 
         return $this->htmlResponse();
@@ -318,7 +318,7 @@ class AcademicController extends ActionController
 
         $this->view->assign('item', $item);
         $this->view->assign('entityType', $entityType);
-        $this->view->assign('detailPid', $this->resolveDetailPid($entityType));
+        $this->view->assign('detailPid', $this->resolveDetailPid($entityType, $this->settings));
         $this->view->assign('settings', $this->settings);
 
         return $this->htmlResponse();
@@ -327,11 +327,13 @@ class AcademicController extends ActionController
     /**
      * Resolve the detail page PID from settings or site configuration
      */
-    protected function resolveDetailPid(string $entityType): int
+    protected function resolveDetailPid(string $entityType, array $settings = []): int
     {
+        $settings = !empty($settings) ? $settings : $this->settings;
+
         // 1. FlexForm override
-        if (!empty($this->settings['detailPid'])) {
-            return (int)$this->settings['detailPid'];
+        if (!empty($settings['detailPid'])) {
+            return (int)$settings['detailPid'];
         }
 
         // 2. Site Configuration / Settings fallback
@@ -339,7 +341,7 @@ class AcademicController extends ActionController
         $site = $this->request->getAttribute('site');
         
         $configSuffix = strtolower($entityType);
-        $fieldName = 'sparkAcademic_' . $configSuffix . '_detail_pid';
+        $fieldName = 'academics_' . $configSuffix . '_detail_pid';
         $pidValue = null;
 
         // Check Site Configuration (config.yaml)

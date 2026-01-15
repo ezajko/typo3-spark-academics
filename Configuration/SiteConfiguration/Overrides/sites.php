@@ -29,27 +29,30 @@ defined('TYPO3') || die();
     // 1. Entity Detail/Storage PIDs
     // ==========================================================================
     $pidConfig = [
-        'type' => 'link',
-        'allowedTypes' => ['page'],
-        'default' => '',
+        'type' => 'group',
+        'allowed' => 'pages',
+        'size' => 1,
+        'maxitems' => 1,
+        'minitems' => 0,
+        'default' => 0,
     ];
     
     // Detail PIDs
     $detailPidFields = [
-        'sparkAcademic_person_detail_pid',
-        'sparkAcademic_organization_detail_pid',
-        'sparkAcademic_course_detail_pid',
-        'sparkAcademic_studyprogram_detail_pid',
-        'sparkAcademic_project_detail_pid',
+        'academics_person_detail_pid',
+        'academics_organization_detail_pid',
+        'academics_course_detail_pid',
+        'academics_studyprogram_detail_pid',
+        'academics_project_detail_pid',
     ];
 
     // Storage PIDs
     $storagePidFields = [
-        'sparkAcademic_person_storage_pid',
-        'sparkAcademic_organization_storage_pid',
-        'sparkAcademic_course_storage_pid',
-        'sparkAcademic_studyprogram_storage_pid',
-        'sparkAcademic_project_storage_pid',
+        'academics_person_storage_pid',
+        'academics_organization_storage_pid',
+        'academics_course_storage_pid',
+        'academics_studyprogram_storage_pid',
+        'academics_project_storage_pid',
     ];
 
     foreach (array_merge($detailPidFields, $storagePidFields) as $field) {
@@ -63,21 +66,21 @@ defined('TYPO3') || die();
         ];
     }
     
-    $GLOBALS['SiteConfiguration']['site']['palettes']['sparkAcademic_detail_pids'] = [
-        'label' => $ll . 'sparkAcademic_detail_pids',
+    $GLOBALS['SiteConfiguration']['site']['palettes']['academics_detail_pids'] = [
+        'label' => $ll . 'academics_detail_pids',
         'showitem' => implode(', ', $detailPidFields),
     ];
-    $GLOBALS['SiteConfiguration']['site']['palettes']['sparkAcademic_storage_pids'] = [
-        'label' => $ll . 'sparkAcademic_storage_pids',
+    $GLOBALS['SiteConfiguration']['site']['palettes']['academics_storage_pids'] = [
+        'label' => $ll . 'academics_storage_pids',
         'showitem' => implode(', ', $storagePidFields),
     ];
 
-    $GLOBALS['SiteConfiguration']['site_language']['palettes']['sparkAcademic_detail_pids'] = [
-        'label' => $ll . 'sparkAcademic_detail_pids',
+    $GLOBALS['SiteConfiguration']['site_language']['palettes']['academics_detail_pids'] = [
+        'label' => $ll . 'academics_detail_pids',
         'showitem' => implode(', ', $detailPidFields),
     ];
-    $GLOBALS['SiteConfiguration']['site_language']['palettes']['sparkAcademic_storage_pids'] = [
-        'label' => $ll . 'sparkAcademic_storage_pids',
+    $GLOBALS['SiteConfiguration']['site_language']['palettes']['academics_storage_pids'] = [
+        'label' => $ll . 'academics_storage_pids',
         'showitem' => implode(', ', $storagePidFields),
     ];
     
@@ -85,10 +88,10 @@ defined('TYPO3') || die();
     // 2. Entity Permission Groups
     // ==========================================================================
     $permissionFields = [
-        'sparkAcademic_person_permission_groups',
-        'sparkAcademic_organization_permission_groups',
-        'sparkAcademic_course_permission_groups',
-        'sparkAcademic_project_permission_groups',
+        'academics_person_permission_groups',
+        'academics_organization_permission_groups',
+        'academics_course_permission_groups',
+        'academics_project_permission_groups',
     ];
     
     foreach ($permissionFields as $field) {
@@ -102,8 +105,8 @@ defined('TYPO3') || die();
         ];
     }
     
-    $GLOBALS['SiteConfiguration']['site']['palettes']['sparkAcademic_permissions'] = [
-        'label' => $ll . 'sparkAcademic_permissions',
+    $GLOBALS['SiteConfiguration']['site']['palettes']['academics_permissions'] = [
+        'label' => $ll . 'academics_permissions',
         'showitem' => implode(', ', $permissionFields),
     ];
     
@@ -111,14 +114,14 @@ defined('TYPO3') || die();
     // 3. User Home Configuration
     // ==========================================================================
     $userHomeFields = [
-        'sparkAcademic_users_home_storage_uid',
-        'sparkAcademic_users_home_base_path',
+        'academics_users_home_storage_uid',
+        'academics_users_home_base_path',
     ];
     
     foreach ($userHomeFields as $field) {
         $GLOBALS['SiteConfiguration']['site']['columns'][$field] = [
             'label' => $ll . $field,
-            'config' => ($field === 'sparkAcademic_users_home_storage_uid') ? [
+            'config' => ($field === 'academics_users_home_storage_uid') ? [
                 'type' => 'number',
                 'default' => 1,
             ] : [
@@ -130,26 +133,26 @@ defined('TYPO3') || die();
         ];
     }
     
-    $GLOBALS['SiteConfiguration']['site']['palettes']['sparkAcademic_users_home'] = [
-        'label' => $ll . 'sparkAcademic_users_home',
+    $GLOBALS['SiteConfiguration']['site']['palettes']['academics_users_home'] = [
+        'label' => $ll . 'academics_users_home',
         'showitem' => implode(', ', $userHomeFields),
     ];
     
     // ==========================================================================
     // Add "Spark Academics" Tab with all palettes
     // ==========================================================================
-    $sparkAcademicsTab = ', --div--;' . $ll . 'sparkAcademic_pids_tab'
-        . ', --palette--;;sparkAcademic_detail_pids'
-        . ', --palette--;;sparkAcademic_storage_pids'
-        . ', --palette--;;sparkAcademic_permissions'
-        . ', --palette--;;sparkAcademic_users_home';
+    $sparkAcademicsTab = ', --div--;' . $ll . 'academics_pids_tab'
+        . ', --palette--;;academics_detail_pids'
+        . ', --palette--;;academics_storage_pids'
+        . ', --palette--;;academics_permissions'
+        . ', --palette--;;academics_users_home';
     
     $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] .= $sparkAcademicsTab;
     
     // Add localized PIDs to site_language
     $GLOBALS['SiteConfiguration']['site_language']['types']['1']['showitem'] .= 
-        ', --div--;' . $ll . 'sparkAcademic_pids_tab'
-        . ', --palette--;;sparkAcademic_detail_pids'
-        . ', --palette--;;sparkAcademic_storage_pids';
+        ', --div--;' . $ll . 'academics_pids_tab'
+        . ', --palette--;;academics_detail_pids'
+        . ', --palette--;;academics_storage_pids';
 
 })();

@@ -23,10 +23,6 @@ routeEnhancers:
     extension: Academics
     plugin: Show
     routes:
-      - { routePath: '/department/{department}', _controller: 'Academic::show', _arguments: { organization: department } }
-      - { routePath: '/lab/{lab}', _controller: 'Academic::show', _arguments: { organization: lab } }
-      - { routePath: '/group/{group}', _controller: 'Academic::show', _arguments: { organization: group } }
-      - { routePath: '/chair/{chair}', _controller: 'Academic::show', _arguments: { organization: chair } }
       - { routePath: '/organization/{organization}', _controller: 'Academic::show', _arguments: { organization: organization } }
       - { routePath: '/course/{course}', _controller: 'Academic::show', _arguments: { course: course } }
       - { routePath: '/program/{program}', _controller: 'Academic::show', _arguments: { studyProgram: program } }
@@ -34,26 +30,6 @@ routeEnhancers:
       - { routePath: '/person/{person}', _controller: 'Academic::show', _arguments: { person: person } }
     defaultController: 'Academic::show'
     aspects:
-      department:
-        type: PersistedAliasMapper
-        tableName: tx_academics_domain_model_organization
-        routeFieldName: title
-        languageAware: true
-      lab:
-        type: PersistedAliasMapper
-        tableName: tx_academics_domain_model_organization
-        routeFieldName: title
-        languageAware: true
-      group:
-        type: PersistedAliasMapper
-        tableName: tx_academics_domain_model_organization
-        routeFieldName: title
-        languageAware: true
-      chair:
-        type: PersistedAliasMapper
-        tableName: tx_academics_domain_model_organization
-        routeFieldName: title
-        languageAware: true
       organization:
         type: PersistedAliasMapper
         tableName: tx_academics_domain_model_organization

@@ -65,8 +65,8 @@ class StudyProgramController extends AbstractBackendController
         $this->studyCycleRepository = $studyCycleRepository;
         
         $this->tableName = 'tx_academics_domain_model_study_program';
-        $this->permissionGroup = 'sparkAcademic_course_permission_groups';
-        $this->storagePidConfigKey = 'sparkAcademic_studyprogram_storage_pid';
+        $this->permissionGroup = 'academics_course_permission_groups';
+        $this->storagePidConfigKey = 'academics_studyprogram_storage_pid';
         $this->newRecordLabel = 'Create New Study Program';
     }
 

@@ -72,8 +72,8 @@ class PersonController extends AbstractBackendController
         $this->demandFactory = $demandFactory;
         
         $this->tableName = 'tx_academics_domain_model_person';
-        $this->permissionGroup = 'sparkAcademic_person_permission_groups';
-        $this->storagePidConfigKey = 'sparkAcademic_person_storage_pid';
+        $this->permissionGroup = 'academics_person_permission_groups';
+        $this->storagePidConfigKey = 'academics_person_storage_pid';
         $this->newRecordLabel = 'Create New Person';
     }
 

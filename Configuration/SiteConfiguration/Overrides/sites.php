@@ -29,11 +29,7 @@ defined('TYPO3') || die();
     // 1. Entity Detail/Storage PIDs
     // ==========================================================================
     $pidConfig = [
-        'type' => 'group',
-        'allowed' => 'pages',
-        'size' => 1,
-        'maxitems' => 1,
-        'minitems' => 0,
+        'type' => 'number',
         'default' => 0,
     ];
     

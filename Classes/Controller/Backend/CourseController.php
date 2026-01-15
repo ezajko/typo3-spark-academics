@@ -73,8 +73,8 @@ class CourseController extends AbstractBackendController
         $this->organizationRepository = $organizationRepository;
         
         $this->tableName = 'tx_academics_domain_model_course';
-        $this->permissionGroup = 'sparkAcademic_course_permission_groups';
-        $this->storagePidConfigKey = 'sparkAcademic_course_storage_pid';
+        $this->permissionGroup = 'academics_course_permission_groups';
+        $this->storagePidConfigKey = 'academics_course_storage_pid';
         $this->newRecordLabel = 'Create New Course';
     }
 

@@ -70,8 +70,8 @@ class ProjectController extends AbstractBackendController
         $this->demandFactory = $demandFactory;
         
         $this->tableName = 'tx_academics_domain_model_project';
-        $this->permissionGroup = 'sparkAcademic_project_permission_groups';
-        $this->storagePidConfigKey = 'sparkAcademic_project_storage_pid';
+        $this->permissionGroup = 'academics_project_permission_groups';
+        $this->storagePidConfigKey = 'academics_project_storage_pid';
         $this->newRecordLabel = 'Create New Project';
     }
 

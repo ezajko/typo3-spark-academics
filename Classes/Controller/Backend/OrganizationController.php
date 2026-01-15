@@ -57,8 +57,8 @@ class OrganizationController extends AbstractBackendController
         $this->repository = $organizationRepository;
 
         $this->tableName = 'tx_academics_domain_model_organization';
-        $this->permissionGroup = 'sparkAcademic_organization_permission_groups';
-        $this->storagePidConfigKey = 'sparkAcademic_organization_storage_pid';
+        $this->permissionGroup = 'academics_organization_permission_groups';
+        $this->storagePidConfigKey = 'academics_organization_storage_pid';
         $this->newRecordLabel = 'Create New Organization';
     }
 

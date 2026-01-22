@@ -23,7 +23,7 @@ Spark Academics is a specialized TYPO3 extension designed for academic instituti
 
 1.  Require the package via Composer:
     ```bash
-    composer require etf-unsa/spark-academics
+    composer require rootba/typo3-academics
     ```
 2.  Activate the extension in TYPO3 Extension Manager.
 3.  Include the static TypoScript template "Spark Academics".

@@ -12,7 +12,7 @@
     "require": {
         "typo3/cms-core": "^13.4 || ^14.0",
         "typo3/cms-beuser": "^13.4 || ^14.0",
-        "rootba/typo3-spark-core": "@dev"
+        "rootba/typo3-spark-core": "^0.2"
     },
     "autoload": {
         "psr-4": {
